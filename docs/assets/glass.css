@@ -1,0 +1,519 @@
+:root {
+  --forest: #113d31;
+  --deep: #08251e;
+  --gold: #f0ca82;
+  --ink: #123329;
+  --muted: #465c51;
+  --paper: #eff4ea;
+  --line: #d1ded3;
+  --white: #fffef7;
+  --glass-edge: rgba(255, 255, 247, .86);
+  --glass-rim: 0 0 0 1px rgba(36, 78, 58, .10), inset 0 1px 0 rgba(255, 255, 255, .88);
+  --glass-shadow: 0 12px 32px rgba(20, 74, 54, .08), var(--glass-rim);
+  --glass-radius: 24px;
+}
+
+html {
+  scroll-padding-block-start: 102px;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 85% 27rem, #d4e8d8 0%, transparent 38%),
+    radial-gradient(ellipse at 8% 49rem, #f5e9ce 0%, transparent 32%),
+    #edf4ec;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline-color: #8b6024;
+}
+
+header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 4;
+  padding-block: 10px;
+  border-bottom: 1px solid #bde5cd26;
+  background: #102f27;
+}
+
+.top {
+  width: min(1340px, calc(100% - 48px));
+  min-height: 60px;
+  gap: clamp(8px, 1.3vw, 18px);
+}
+
+.brand {
+  gap: 12px;
+}
+
+.brand small {
+  color: #e2ede5;
+}
+
+.seal {
+  flex: none;
+  border: 1px solid #f4d99c9e;
+  border-radius: 15px;
+  background: linear-gradient(157deg, #fff6d545, #c9922a0e 65%), #2b473a;
+  box-shadow: inset 0 1px 1px #fffef16b, inset 0 -1px 1px #081d17, 0 5px 14px #03140e60;
+}
+
+#nav {
+  gap: clamp(0px, .4vw, 6px);
+  padding: 4px;
+  border: 1px solid #ebfaed3b;
+  border-radius: 999px;
+  background: linear-gradient(165deg, #deffed27, #c3f2d009 62%), #204237;
+  box-shadow: inset 0 1px 1px #eafff12e, inset 0 -2px 3px #01150f28, 0 5px 15px #03150f35;
+}
+
+#nav a,
+.prayer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .36em;
+}
+
+#nav a {
+  min-height: 40px;
+  padding-inline: clamp(5px, .52vw, 11px);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: #ecf4ec;
+  font-size: clamp(.82rem, 1.07vw, .96rem);
+}
+
+#nav a:hover,
+#nav a:focus-visible,
+#nav a[aria-current] {
+  border-color: #eafaeb40;
+  color: #ffdc9c;
+  background: #d7f2db25;
+}
+
+.prayer-link,
+.menu {
+  min-height: 44px;
+  border: 1px solid #e8c57d71;
+  border-radius: 999px;
+  background: linear-gradient(160deg, #fff5c536, #d9aa5011), #234034;
+  box-shadow: inset 0 1px 0 #ffefbc46, 0 4px 12px #071e1654;
+  color: #ffe0a4;
+  font-weight: 800;
+}
+
+.prayer-link {
+  padding: 5px 11px;
+  font-size: .87rem;
+}
+
+header :focus-visible,
+.hero :focus-visible,
+footer :focus-visible {
+  outline-color: #ffdc9c;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(38px, 5vw, 81px) clamp(84px, 8vw, 124px);
+  background:
+    radial-gradient(ellipse at 73% -5%, #315f4c 0%, transparent 57%),
+    radial-gradient(ellipse at 14% 94%, #416c56 0%, transparent 48%),
+    linear-gradient(145deg, #0b2d24 12%, #0a211c 72%);
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: repeating-linear-gradient(134deg, transparent 0 56px, #eef8dd0b 57px 58px, transparent 59px 96px);
+  mask-image: linear-gradient(70deg, #0008, transparent 73%);
+  content: "";
+  pointer-events: none;
+}
+
+.hero-copy {
+  max-width: 38rem;
+  min-width: 0;
+}
+
+.hero-image {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f7e9ba91;
+  border-radius: clamp(26px, 4vw, 52px);
+  box-shadow: 0 28px 50px #051a148a, 0 0 0 7px #ecf9d923, 0 0 0 8px #fff6ce37;
+}
+
+.hero-image::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #f8f5d62e;
+  border-radius: inherit;
+  background: linear-gradient(152deg, #fffbd23d, transparent 34% 68%, #122f2466);
+  box-shadow: inset 0 1px 1px #fffdf3c2, inset 0 -1px 3px #091f16c2;
+  content: "";
+  pointer-events: none;
+}
+
+.hero .intro {
+  color: #e3f0e5;
+}
+
+.button {
+  border-radius: 999px;
+}
+
+.button:hover {
+  filter: none;
+}
+
+.button.gold {
+  border-color: #fff1c4;
+  background: linear-gradient(158deg, #ffe9ae, #e9b96b);
+  box-shadow: inset 0 1px 0 #fff7dc, 0 9px 23px #110e0b45;
+}
+
+.button.gold:hover {
+  background: linear-gradient(158deg, #fff0c0, #f4c47a);
+}
+
+.button.outline {
+  border-color: #def2e580;
+  background: linear-gradient(158deg, #eaffee2e, #c3f2d111), #214537;
+  box-shadow: inset 0 1px 0 #edfff04d, 0 9px 23px #10151035;
+}
+
+.button.outline:hover {
+  background-color: #305f4d;
+}
+
+.button.green {
+  border-color: #315f49;
+  background: linear-gradient(154deg, #2d674f, #10372c 73%);
+  box-shadow: inset 0 1px 0 #c8ffe354, 0 6px 14px #173f2f24;
+}
+
+.button.green:hover {
+  background: linear-gradient(154deg, #36785b, #174636 73%);
+}
+
+.button:disabled {
+  opacity: .72;
+  cursor: wait;
+}
+
+.prayer,
+.ask-panel,
+.tiles > a,
+.collection .card,
+.collection details,
+.reading-panel,
+.discover-section,
+.source-policy,
+.contact {
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--glass-radius);
+  background-color: #f8fbf5;
+  background-image: linear-gradient(154deg, #fffdfbe8 1%, #f7f9ef42 64%, #cde8d242);
+  box-shadow: var(--glass-shadow);
+}
+
+.prayer {
+  --glass-radius: 29px;
+  box-shadow: 0 18px 45px #123d2929, var(--glass-rim);
+}
+
+.prayer-note,
+.fatwa-library,
+.ask-optional,
+.ask-result,
+.discover-locale,
+.discover-content section {
+  border-color: var(--glass-edge);
+  border-radius: 17px;
+  background: linear-gradient(150deg, #fffefb, #f0f5eade);
+  box-shadow: var(--glass-rim);
+}
+
+.discover-content .discover-shahada {
+  border-color: #eed4a1;
+  background: linear-gradient(150deg, #fffcf3, #f4e6c6);
+}
+
+.times div {
+  border: 1px solid #f8fff6;
+  border-radius: 13px;
+  background: linear-gradient(154deg, #f4faf0, #e2eee2);
+  box-shadow: var(--glass-rim);
+}
+
+select,
+.ask-form input {
+  border-color: #98b4a4;
+  border-radius: 13px;
+  background: #fffef9;
+}
+
+.ask-reset,
+#ask-related-questions button {
+  border: 1px solid #96b19e;
+  border-radius: 999px;
+  background: linear-gradient(155deg, #fffef9, #e7f1e6);
+}
+
+.section-heading,
+.zad-icon-heading {
+  display: flex;
+  align-items: center;
+  gap: .45em;
+}
+
+.section-icon,
+.tiles > a > span:not(.zad-icon, .section-icon, .zad-icon--badge) {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  inline-size: clamp(37px, 4.4vw, 54px);
+  block-size: clamp(37px, 4.4vw, 54px);
+  border: 1px solid #fffef6b5;
+  border-radius: 15px;
+  background: linear-gradient(143deg, #fffdf4, #e7e5cd 68%, #d6e5d1);
+  box-shadow: 0 4px 12px #17453216, 0 0 0 1px #758d7460, inset 0 1px 1px white;
+  color: #315e47;
+}
+
+.tiles > a {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-inline-size: 0;
+  padding: clamp(15px, 2vw, 26px);
+}
+
+.tiles > a:hover {
+  border-color: #fffcf2;
+  background-color: #f7fbed;
+  background-image: linear-gradient(154deg, #fffcea, #e2f1de);
+  box-shadow: 0 16px 32px #164e3521, var(--glass-rim);
+}
+
+.collection {
+  border-color: #aac6b685;
+  background:
+    radial-gradient(ellipse at 15% 22rem, #e5eacf, transparent 58%),
+    radial-gradient(ellipse at 92% 70rem, #d5e9db, transparent 56%),
+    #e4efe5;
+}
+
+.feature {
+  border-color: #b6cbbb;
+}
+
+.source-policy,
+.contact {
+  margin-block: clamp(22px, 4vw, 40px);
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.quote {
+  border-color: #a77d37;
+}
+
+footer {
+  border-top: 1px solid #ddeddd55;
+  background: linear-gradient(150deg, #173e32, #09281f);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  header {
+    background: rgba(10, 35, 29, .87);
+    -webkit-backdrop-filter: blur(19px) saturate(1.4);
+    backdrop-filter: blur(19px) saturate(1.4);
+  }
+
+  .prayer,
+  .ask-panel,
+  .discover-section {
+    background-color: rgba(242, 248, 239, .83);
+    -webkit-backdrop-filter: blur(16px) saturate(1.28);
+    backdrop-filter: blur(16px) saturate(1.28);
+  }
+
+  .tiles > a {
+    background-color: rgba(247, 251, 245, .57);
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1210px) {
+  .top {
+    width: calc(100% - 32px);
+    gap: 8px;
+  }
+
+  .top .brand {
+    gap: 7px;
+  }
+
+  .top .brand small {
+    font-size: .74rem;
+  }
+
+  #nav {
+    gap: 1px;
+  }
+
+  #nav a {
+    gap: .22em;
+    padding-inline: 4px;
+    font-size: .8rem;
+  }
+
+  #nav .zad-icon {
+    --zad-icon-size: .85rem;
+  }
+
+  .prayer-link {
+    padding-inline: 8px;
+    font-size: .8rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .library .tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  #nav {
+    inset-block-start: 100%;
+    gap: 3px;
+    padding: 8px;
+    border-radius: 20px;
+    background: linear-gradient(164deg, #31564a, #15382e);
+    box-shadow: inset 0 1px 0 #eafff12e, 0 14px 30px #06201967;
+  }
+
+  #nav a {
+    min-height: 44px;
+    padding-inline: 9px;
+    border-radius: 12px;
+    font-size: .91rem;
+    white-space: normal;
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #nav {
+      background: linear-gradient(164deg, #31564ae8, #15382ef0);
+      -webkit-backdrop-filter: blur(15px) saturate(1.3);
+      backdrop-filter: blur(15px) saturate(1.3);
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  html {
+    scroll-padding-block-start: 88px;
+  }
+
+  .top {
+    width: calc(100% - 28px);
+    min-height: 54px;
+    gap: 6px;
+  }
+
+  .top .brand {
+    gap: 6px;
+  }
+
+  .prayer-link {
+    padding-inline: 7px;
+    font-size: .77rem;
+  }
+
+  .hero {
+    padding-block: 34px 74px;
+  }
+
+  .hero-grid {
+    row-gap: 25px;
+  }
+
+  .hero-image {
+    box-shadow: 0 18px 34px #051a1470, 0 0 0 4px #ecf9d923, 0 0 0 5px #fff6ce37;
+  }
+
+  .prayer {
+    --glass-radius: 21px;
+  }
+
+  .prayer-head form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    inline-size: 100%;
+    gap: 8px;
+  }
+
+  .prayer-head select {
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  .prayer-head button {
+    padding-inline: 14px;
+    white-space: nowrap;
+  }
+
+  .section-icon {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    scroll-padding-block-start: 139px;
+  }
+
+  .prayer-head form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tiles > a,
+  .button {
+    transition: background-color 170ms ease, box-shadow 170ms ease;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  header,
+  #nav {
+    background: #102f27;
+  }
+
+  .prayer,
+  .ask-panel,
+  .discover-section,
+  .tiles > a {
+    background-color: #f8fbf5;
+  }
+
+  header,
+  #nav,
+  .prayer,
+  .ask-panel,
+  .discover-section {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

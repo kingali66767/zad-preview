@@ -68,8 +68,14 @@ for (const section of zadContent.sections) {
   const feature = element("section", null, "feature");
   feature.id = section.id;
   feature.setAttribute("aria-labelledby", section.id + "-heading");
-  const heading = element("h2", section.title);
+  const heading = element("h2", null, "section-heading");
   heading.id = section.id + "-heading";
+  const badge = element("span", null, "section-icon");
+  badge.setAttribute("aria-hidden", "true");
+  const icon = element("span", null, "zad-icon");
+  icon.dataset.icon = section.id;
+  badge.append(icon);
+  heading.append(badge, document.createTextNode(section.title));
   const isFaq = section.id === "faq";
   const items = element("div", null, isFaq ? "faq-list" : "cards");
   for (const item of section.items) {
@@ -113,6 +119,15 @@ for (const section of zadContent.sections) {
 
 const menu = document.querySelector("#menu");
 const nav = document.querySelector("#nav");
+
+function highlightCurrentSection() {
+  const current = location.hash || "#home";
+  for (const link of nav.querySelectorAll("a")) {
+    if (link.hash === current) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  }
+}
+
 function setMenu(open) {
   menu.setAttribute("aria-expanded", open);
   nav.setAttribute("aria-expanded", open);
@@ -229,7 +244,9 @@ function revealGuideTarget() {
 }
 
 window.addEventListener("hashchange", () => {
+  highlightCurrentSection();
   const target = revealGuideTarget();
   if (target?.closest("#discover-islam")) target.scrollIntoView();
 });
+highlightCurrentSection();
 if (location.hash) revealGuideTarget()?.scrollIntoView();

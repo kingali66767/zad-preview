@@ -1,0 +1,141 @@
+/* Original monochrome icons. Wrappers supply the site's glass finish and color. */
+.zad-icon,
+.tiles .zad-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--zad-icon-size, 1em);
+  block-size: var(--zad-icon-size, 1em);
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: -.13em;
+  pointer-events: none;
+}
+
+.section-icon .zad-icon {
+  --zad-icon-size: 1.35rem;
+}
+
+nav .zad-icon,
+.prayer-link .zad-icon,
+.menu .zad-icon {
+  --zad-icon-size: 1rem;
+}
+
+.zad-icon::before {
+  content: "";
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: currentColor;
+  -webkit-mask: var(--zad-icon-shape, linear-gradient(transparent, transparent)) center / contain no-repeat;
+  mask: var(--zad-icon-shape, linear-gradient(transparent, transparent)) center / contain no-repeat;
+}
+
+@supports not ((mask-image: none) or (-webkit-mask-image: none)) {
+  .zad-icon::before { content: none; }
+}
+
+@media (forced-colors: active) {
+  .zad-icon::before {
+    background-color: CanvasText;
+    forced-color-adjust: none;
+  }
+}
+
+.zad-icon[data-icon="brand"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2 15 6 20 7 18 12 20 17 15 18 12 22 9 18 4 17 6 12 4 7 9 6Z M12 8.5 15.5 12 12 15.5 8.5 12Z'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="home"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11 12 3.5l9 7.5M5.5 9v10.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9 M10 20.5v-5.2a2 2 0 0 1 4 0v5.2'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="prayer"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.7'/%3E%3Cpath d='M12 7v5l3.5 2'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="daily"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 18.5h18 M5.5 21h13 M7.5 15a4.5 4.5 0 0 1 9 0 M12 3v3 M4.4 7.4l2.2 2.2 M19.6 7.4l-2.2 2.2 M3 14h2 M19 14h2'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="library"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.8' y='4.5' width='4.6' height='15' rx='1'/%3E%3Crect x='8.4' y='4.5' width='4.6' height='15' rx='1'/%3E%3Cpath d='M13.1 7.1 16.5 5.7a1 1 0 0 1 1.3.5l3.6 10.9a1 1 0 0 1-.6 1.3l-3.5 1.1a1 1 0 0 1-1.2-.6Z M5.5 8h1.2 M10 8h1.3 M15.9 9.3l1.1-.4'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="worship"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 20.5V10c0-3 3.5-4.1 7-7.5 3.5 3.4 7 4.5 7 7.5v10.5Z M12 9.4c-.9 1.4-2.1 2.8-2.1 4.1a2.1 2.1 0 0 0 4.2 0c0-1.3-1.2-2.7-2.1-4.1Z'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="adhkar"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='5.8' cy='10.5' r='1.3'/%3E%3Ccircle cx='8.3' cy='6.1' r='1.3'/%3E%3Ccircle cx='13.4' cy='5.3' r='1.3'/%3E%3Ccircle cx='17.5' cy='8.2' r='1.3'/%3E%3Ccircle cx='18.4' cy='13.2' r='1.3'/%3E%3Ccircle cx='15.5' cy='17' r='1.3'/%3E%3Cpath d='M7.1 13.5c.5 1.5 1.4 2.7 2.7 3.5l-.9 3.4'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="reading"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='5' width='14' height='16' rx='2'/%3E%3Cpath d='M9 5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1 M8.6 14.1l2.2 2.2 4.8-5'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="quran"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 6c2.7-2.2 5.9-2.7 9-1.5v13.3c-3.1-1.2-6.3-.7-9 1.5-2.7-2.2-5.9-2.7-9-1.5V4.5c3.1-1.2 6.3-.7 9 1.5v13.3 M6 8.5c1.3 0 2.2.2 3.2.7 M6 12c1.3 0 2.2.2 3.2.7 M14.8 9.2c1-.5 1.9-.7 3.2-.7 M14.8 12.7c1-.5 1.9-.7 3.2-.7'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="lessons"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 9.5V5a2 2 0 0 1 2-2h2.5 M5 10h14l-1 4H6Z M9 14v6.5h6V14 M6.5 20.5h11'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="hadith"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='3'/%3E%3Cpath d='M10 9c-1.3 1-2 2.2-2 4h2v-2H8.6 M16 9c-1.3 1-2 2.2-2 4h2v-2h-1.4'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="faq"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5H4.5l1.7-3.3A8.5 8.5 0 1 1 20.5 11.5Z M10 9a2.1 2.1 0 0 1 4 .8c0 1.4-2 1.7-2 3.1 M12 16h.01'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="ask"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15.5 16H8l-4 3v-4.1a3 3 0 0 1-1.5-2.6V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3Z M18.5 9h.5a2.5 2.5 0 0 1 2.5 2.5v7l-3-1 M7.5 10h.01 M10.5 10h.01 M13.5 10h.01'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="media"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4.5' width='18' height='15' rx='3'/%3E%3Cpath d='m10 8.5 5.5 3.5-5.5 3.5Z'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="occasions"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.8' y='5.2' width='16.4' height='15.3' rx='2.4'/%3E%3Cpath d='M8 3v4.5 M16 3v4.5 M4 10h16 M8 14h.01 M12 14h.01 M16 14h.01 M8 17h.01 M12 17h.01'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="belief"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.8c.6 4.5 4.7 8.6 9.2 9.2-4.5.6-8.6 4.7-9.2 9.2-.6-4.5-4.7-8.6-9.2-9.2 4.5-.6 8.6-4.7 9.2-9.2Z'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="seerah"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21.2c3.4-3.9 6.3-7.3 6.3-11a6.3 6.3 0 0 0-12.6 0c0 3.7 2.9 7.1 6.3 11.0Z'/%3E%3Ccircle cx='12' cy='10.2' r='2.1'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="discover-islam"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m15.9 8.1-2.1 5.7-5.7 2.1 2.1-5.7Z'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="sources"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 8h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z M15 8V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6 M10 12h5 M10 16h5'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="contact"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5.5' width='18' height='13' rx='2.7'/%3E%3Cpath d='m4 7 6.7 5.4a2 2 0 0 0 2.6 0L20 7'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="fatwa-library"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 3h8.5l3 3v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M14.5 3.5V7H18 M8.5 14l2 2 4.5-4.6'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="menu"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7h14 M5 12h14 M5 17h14'/%3E%3C/svg%3E");
+}
+
+.zad-icon[data-icon="ai"] {
+  --zad-icon-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.5 4c.4 4 3.6 7.2 7.5 7.6-3.9.4-7.1 3.6-7.5 7.6-.4-4-3.6-7.2-7.5-7.6 3.9-.4 7.1-3.6 7.5-7.6Z M18.5 3v5 M16 5.5h5 M19 15.5v4 M17 17.5h4'/%3E%3C/svg%3E");
+}

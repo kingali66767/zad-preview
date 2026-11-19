@@ -144,7 +144,7 @@ def render_guide(languages):
     )
     content = "".join(render_language(code, locale) for code, locale in languages.items())
     return f'''<details class="discover discover-section" id="discover-islam">
-<summary>{escape(arabic["title"])}</summary>
+<summary><span class="zad-icon" data-icon="discover-islam" aria-hidden="true"></span> {escape(arabic["title"])}</summary>
 <p>دليل لغير المسلمين والمسلمين الجدد، يتناول الشهادتين والوضوء والصلاة.</p>
 <nav class="discover-languages" aria-label="{escape(arabic["language"])}">{switch}</nav>
 {content}</details>'''

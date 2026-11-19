@@ -6,13 +6,15 @@
 <meta name="description" content="زاد، منصة عربية مستقلة للتوعية الدينية. القرآن الكريم والأحاديث الصحيحة والدروس ومواقيت الصلاة.">
 <meta name="theme-color" content="#102c24">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://api.aladhan.com; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.aladhan.com; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>زاد | منصة التوعية الدينية</title>
 <link rel="stylesheet" href="assets/style.css?v=20261119-4">
 <link rel="stylesheet" href="assets/discover.css">
+<link rel="stylesheet" href="assets/section-icons.css?v=20261119-5">
+<link rel="stylesheet" href="assets/glass.css?v=20261119-5">
 <script src="assets/content.js" defer></script>
 <script src="assets/library-content.js" defer></script>
-<script src="assets/site.js" defer></script>
+<script src="assets/site.js?v=20261119-5" defer></script>
 <script src="assets/ask-evidence.js?v=20261119-4" defer></script>
 <script src="assets/fatwa-sources.js?v=20261119-4" defer></script>
 <script src="assets/ask-intents.js?v=20261119-4" defer></script>
@@ -22,12 +24,19 @@
 <a class="skip" href="#main">تجاوز إلى المحتوى</a>
 <header>
 <div class="wrap top">
-<a class="brand" href="#home"><span class="seal" aria-hidden="true">✧</span><span>زاد<small>منصة التوعية الدينية</small></span></a>
-<button id="menu" class="menu" aria-expanded="false" aria-controls="nav" type="button">القائمة</button>
+<a class="brand" href="#home"><span class="seal" aria-hidden="true"><span class="zad-icon" data-icon="brand"></span></span><span>زاد<small>منصة التوعية الدينية</small></span></a>
+<button id="menu" class="menu" aria-expanded="false" aria-controls="nav" type="button"><span class="zad-icon" data-icon="menu" aria-hidden="true"></span>القائمة</button>
 <nav id="nav" aria-label="التنقل الرئيسي" aria-expanded="false">
-<a href="#home">الرئيسية</a><a href="#quran">القرآن الكريم</a><a href="#lessons">الخطب والدروس</a><a href="#hadith">الأحاديث</a><a href="#ask">اسأل زاد</a><a href="#media">المحاضرات</a><a href="#occasions">المناسبات</a><a href="#contact">تواصل معنا</a>
+<a href="#home"><span class="zad-icon" data-icon="home" aria-hidden="true"></span>الرئيسية</a>
+<a href="#quran"><span class="zad-icon" data-icon="quran" aria-hidden="true"></span>القرآن الكريم</a>
+<a href="#lessons"><span class="zad-icon" data-icon="lessons" aria-hidden="true"></span>الخطب والدروس</a>
+<a href="#hadith"><span class="zad-icon" data-icon="hadith" aria-hidden="true"></span>الأحاديث</a>
+<a href="#ask"><span class="zad-icon" data-icon="ask" aria-hidden="true"></span>اسأل زاد</a>
+<a href="#media"><span class="zad-icon" data-icon="media" aria-hidden="true"></span>المحاضرات</a>
+<a href="#occasions"><span class="zad-icon" data-icon="occasions" aria-hidden="true"></span>المناسبات</a>
+<a href="#contact"><span class="zad-icon" data-icon="contact" aria-hidden="true"></span>تواصل معنا</a>
 </nav>
-<a class="prayer-link" href="#prayer">◷ &nbsp; مواقيت الصلاة</a>
+<a class="prayer-link" href="#prayer"><span class="zad-icon" data-icon="prayer" aria-hidden="true"></span>مواقيت الصلاة</a>
 </div>
 </header>
 <main id="main">
@@ -44,7 +53,7 @@
 </section>
 <section class="wrap prayer" id="prayer" aria-labelledby="prayer-heading">
 <div class="prayer-head">
-<div><p class="eyebrow"><span></span> حسب التوقيت المحلي للمدينة</p><h2 id="prayer-heading">مواقيت الصلاة</h2></div>
+<div><p class="eyebrow"><span></span> حسب التوقيت المحلي للمدينة</p><h2 id="prayer-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>مواقيت الصلاة</h2></div>
 <form id="prayer-form"><label>المدينة<select id="city"><option value="riyadh">الرياض، السعودية</option><option value="mecca">مكة المكرمة، السعودية</option><option value="cairo">القاهرة، مصر</option><option value="amman">عمّان، الأردن</option><option value="dubai">دبي، الإمارات</option></select></label><button class="button green" type="submit">عرض المواقيت</button></form>
 </div>
 <div class="times" id="times"></div>
@@ -57,28 +66,28 @@
 </section>
 <section class="wrap daily" id="daily" aria-labelledby="daily-heading">
 <p class="eyebrow"><span></span> زادك اليومي</p>
-<h2 id="daily-heading">أدلة وأدوات للعبادة اليومية</h2>
+<h2 id="daily-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="daily"></span></span>أدلة وأدوات للعبادة اليومية</h2>
 <div class="tiles">
-<a href="#worship"><span aria-hidden="true">◇</span><strong>تعلّم الوضوء والصلاة</strong><small>خطوات مرتبة للمبتدئ مع أدلتها</small></a>
-<a href="#adhkar"><span aria-hidden="true">✧</span><strong>الأذكار اليومية</strong><small>أذكار مختارة للصباح والمساء وبعد الصلاة وقبل النوم</small></a>
-<a href="#reading"><span aria-hidden="true">▤</span><strong>خطة قراءة أسبوعية</strong><small>سبع سور قصيرة مع متابعة تقدمك</small></a>
+<a href="#worship"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="worship"></span></span><strong>تعلّم الوضوء والصلاة</strong><small>خطوات مرتبة للمبتدئ مع أدلتها</small></a>
+<a href="#adhkar"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="adhkar"></span></span><strong>الأذكار اليومية</strong><small>أذكار مختارة للصباح والمساء وبعد الصلاة وقبل النوم</small></a>
+<a href="#reading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="reading"></span></span><strong>خطة قراءة أسبوعية</strong><small>سبع سور قصيرة مع متابعة تقدمك</small></a>
 </div>
 </section>
-<section class="wrap library" id="library">
-<p class="eyebrow"><span></span> مكتبة زاد</p><h2>استكشف أقسام المنصة</h2>
+<section class="wrap library" id="library" aria-labelledby="library-heading">
+<p class="eyebrow"><span></span> مكتبة زاد</p><h2 id="library-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="library"></span></span>استكشف أقسام المنصة</h2>
 <div class="tiles">
-<a href="#quran"><span>▤</span><strong>القرآن الكريم</strong><small>آيات مختارة وفضائل التلاوة</small></a>
-<a href="#lessons"><span>◈</span><strong>الخطب والدروس</strong><small>مواد مكتوبة للقراءة والاستفادة</small></a>
-<a href="#hadith"><span>✧</span><strong>الأحاديث الصحيحة</strong><small>نصوص مختارة مع تخريجها</small></a>
-<a href="#faq"><span>؟</span><strong>أسئلة وأجوبة شرعية</strong><small>إجابات مختصرة مع أدلتها</small></a>
-<a href="#media"><span>▷</span><strong>المحاضرات والتلاوات</strong><small>مواد صوتية ومرئية من مصادرها</small></a>
-<a href="#occasions"><span aria-hidden="true">◷</span><strong>المناسبات الإسلامية</strong><small>مواسم العبادة وأدلتها</small></a>
-<a href="#belief"><span aria-hidden="true">◇</span><strong>العقيدة وأصول الإيمان</strong><small>التوحيد وأركان الإيمان ومعنى الإحسان</small></a>
-<a href="#seerah"><span aria-hidden="true">▤</span><strong>السيرة النبوية</strong><small>من بدء الوحي إلى حجة الوداع</small></a>
+<a href="#quran"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="quran"></span></span><strong>القرآن الكريم</strong><small>آيات مختارة وفضائل التلاوة</small></a>
+<a href="#lessons"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="lessons"></span></span><strong>الخطب والدروس</strong><small>مواد مكتوبة للقراءة والاستفادة</small></a>
+<a href="#hadith"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="hadith"></span></span><strong>الأحاديث الصحيحة</strong><small>نصوص مختارة مع تخريجها</small></a>
+<a href="#faq"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="faq"></span></span><strong>أسئلة وأجوبة شرعية</strong><small>إجابات مختصرة مع أدلتها</small></a>
+<a href="#media"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="media"></span></span><strong>المحاضرات والتلاوات</strong><small>مواد صوتية ومرئية من مصادرها</small></a>
+<a href="#occasions"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span><strong>المناسبات الإسلامية</strong><small>مواسم العبادة وأدلتها</small></a>
+<a href="#belief"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="belief"></span></span><strong>العقيدة وأصول الإيمان</strong><small>التوحيد وأركان الإيمان ومعنى الإحسان</small></a>
+<a href="#seerah"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="seerah"></span></span><strong>السيرة النبوية</strong><small>من بدء الوحي إلى حجة الوداع</small></a>
 </div>
 <!-- discover-guide:start -->
 <details class="discover discover-section" id="discover-islam">
-<summary>تعرّف على الإسلام</summary>
+<summary><span class="zad-icon" data-icon="discover-islam" aria-hidden="true"></span> تعرّف على الإسلام</summary>
 <p>دليل لغير المسلمين والمسلمين الجدد، يتناول الشهادتين والوضوء والصلاة.</p>
 <nav class="discover-languages" aria-label="لغة الدليل"><a href="#discover-ar" lang="ar" dir="rtl">العربية</a> <a href="#discover-en" lang="en" dir="ltr">English</a> <a href="#discover-es" lang="es" dir="ltr">Español</a> <a href="#discover-fr" lang="fr" dir="ltr">Français</a></nav>
 <details class="discover-locale" id="discover-ar" name="discover-language" lang="ar" dir="rtl" open>
@@ -403,7 +412,7 @@
 <section class="wrap ask" id="ask" aria-labelledby="ask-heading">
 <div class="ask-panel">
 <p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
-<h2 id="ask-heading">اسأل زاد</h2>
+<h2 id="ask-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>اسأل زاد</h2>
 <p>اكتب سؤالك بعبارتك. إذا كانت الإجابة تعتمد على تفصيل، سيحدّد لك زاد ما يحتاج إلى توضيح.</p>
 <form id="ask-form" class="ask-form">
 <label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: سجود السهو أو زكاة الفطر"></label>
@@ -422,7 +431,7 @@
 </div>
 </article>
 <details class="fatwa-library" id="fatwa-library">
-<summary>تصفّح فتاوى العلماء</summary>
+<summary><span class="zad-icon" data-icon="fatwa-library" aria-hidden="true"></span> تصفّح فتاوى العلماء</summary>
 <div class="fatwa-filters">
 <label for="fatwa-scholar">العالم<select id="fatwa-scholar"></select></label>
 <label for="fatwa-category">الموضوع<select id="fatwa-category"></select></label>
@@ -431,7 +440,7 @@
 <ul id="fatwa-list"></ul>
 </details>
 <details class="ask-optional">
-<summary>اقتراح مراجع بالذكاء الاصطناعي</summary>
+<summary><span class="zad-icon" data-icon="ai" aria-hidden="true"></span> اقتراح مراجع بالذكاء الاصطناعي</summary>
 <p>ميزة اختيارية لاختيار مراجع مرتبطة بالسؤال من قائمة محددة. يحتاج التنزيل الأول إلى اتصال بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.</p>
 <button class="button green" id="ask-enable" type="button">تشغيل اقتراح المراجع</button>
 <p id="ask-model-status" role="status"></p>
@@ -441,13 +450,13 @@
 </section>
 <div class="collection"><div class="wrap" id="sections"></div></div>
 <section class="wrap source-policy" id="sources" aria-labelledby="sources-heading">
-<h2 id="sources-heading">مصادر المكتبة</h2>
+<h2 id="sources-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="sources"></span></span>مصادر المكتبة</h2>
 <p>تستند المواد إلى القرآن والسنة الصحيحة، وإلى تفاسير وفتاوى من أهل السنة والجماعة. تُرفق بكل مادة إحالة إلى دليلها أو مصدرها، وتُنسب ملخّصات الفتاوى إلى الجهة أو العالم المذكور.</p>
 <div class="references"><a href="https://quran.ksu.edu.sa/tafseer/saadi/sura1-aya1.html">تفسير السعدي</a><a href="https://dorar.net/hadith">الموسوعة الحديثية</a><a href="https://binbaz.org.sa/fatwas/kind/1">مجموع فتاوى ابن باز</a><a href="https://islamqa.info/ar">الإسلام سؤال وجواب</a></div>
 </section>
 <noscript><p class="wrap">فعّل جافاسكربت لعرض المكتبة ومواقيت الصلاة.</p></noscript>
-<section class="wrap contact" id="contact"><div><p class="eyebrow"><span></span> تواصل معنا</p><h2>شاركنا ملاحظاتك</h2><p id="contact-note">عند اقتراح تصحيح، اذكر عنوان المادة والنص المراد مراجعته ورابط المصدر إن وجد. سيظهر زر المراسلة عند إضافة بريد المبادرة.</p><a id="contact-link" class="button green" hidden>راسل زاد عبر البريد</a></div><div class="contact-mark" aria-hidden="true">✧</div></section>
+<section class="wrap contact" id="contact" aria-labelledby="contact-heading"><div><p class="eyebrow"><span></span> تواصل معنا</p><h2 id="contact-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="contact"></span></span>شاركنا ملاحظاتك</h2><p id="contact-note">عند اقتراح تصحيح، اذكر عنوان المادة والنص المراد مراجعته ورابط المصدر إن وجد. سيظهر زر المراسلة عند إضافة بريد المبادرة.</p><a id="contact-link" class="button green" hidden>راسل زاد عبر البريد</a></div></section>
 </main>
-<footer><div class="wrap foot"><a class="brand" href="#home"><span class="seal" aria-hidden="true">✧</span><span>زاد<small>منصة التوعية الدينية</small></span></a><p>مبادرة توعوية مستقلة غير رسمية، وليست تابعة لأي جهة حكومية أو عسكرية.</p></div></footer>
+<footer><div class="wrap foot"><a class="brand" href="#home"><span class="seal" aria-hidden="true"><span class="zad-icon" data-icon="brand"></span></span><span>زاد<small>منصة التوعية الدينية</small></span></a><p>مبادرة توعوية مستقلة غير رسمية، وليست تابعة لأي جهة حكومية أو عسكرية.</p></div></footer>
 </body>
 </html>
