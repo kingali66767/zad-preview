@@ -63,7 +63,7 @@ def without_overflow(page):
     assert widths["content"] <= widths["viewport"], (page.url, widths)
 
 
-def verify_launcher(page):
+def verify_homepage(page):
     hero = page.locator("main .hero")
     expect(hero).to_be_visible()
     expect(page.get_by_role("heading", level=1)).to_have_count(1)
@@ -81,38 +81,34 @@ def verify_launcher(page):
         await image.decode();
         return image.naturalWidth > 0 && image.naturalHeight > 0;
     }"""), "The original hero photograph did not render"
-    expect(hero.locator('a[href="#section-launcher"]')).to_be_visible()
-    expect(hero.locator('a[href="quran/"]')).to_be_visible()
-    expect(page.locator("h2#launcher-heading")).to_be_visible()
-    launcher = page.locator("#section-launcher")
-    cards = launcher.locator("a.launcher-link")
-    assert hero.bounding_box()["y"] < launcher.bounding_box()["y"], "The hero must appear above the cards"
-    expect(cards).to_have_count(len(SECTIONS))
-    links = cards.evaluate_all("cards => cards.map(card => card.href)")
-    addresses = [urlsplit(link) for link in links]
-    assert {address.path.rsplit("/", 2)[-2] for address in addresses} == set(SECTIONS), links
-    assert all(not address.fragment for address in addresses), links
-    expect(page.locator("#sections, " + ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
-    for card in cards.all():
-        expect(card.locator(".zad-icon")).to_be_visible()
-        title = card.locator(".launcher-title")
-        description = card.locator(".launcher-description")
-        expect(title).to_be_visible()
-        expect(description).to_be_visible()
-        title_text = title.inner_text().strip()
-        description_text = description.inner_text().strip()
-        assert re.search(r"[\u0621-\u064a]", title_text), title_text
-        assert re.search(r"[\u0621-\u064a]", description_text), description_text
-        expect(card).to_have_accessible_name(title_text)
-        expect(card).to_have_accessible_description(description_text)
-    width, columns = launcher.evaluate(r"""element => [
-        window.innerWidth, getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length
-    ]""")
-    assert columns == (2 if width <= 680 else 3 if width < 1000 else 4), (width, columns)
+    action = hero.get_by_role("link", name="ابدأ الجولة", exact=True)
+    expect(action).to_be_visible()
+    expect(action).to_have_attribute("href", "#site-tour")
+    expect(page.locator("main a[href]")).to_have_count(1)
+    tour = page.locator("#site-tour")
+    expect(tour.get_by_role("heading", level=2)).to_be_visible()
+    assert hero.bounding_box()["y"] < tour.bounding_box()["y"], "The hero must appear above the tour"
+    items = tour.locator(".site-tour-stops > section")
+    expect(items).to_have_count(3)
+    for item in items.all():
+        expect(item).to_be_visible()
+        heading = item.get_by_role("heading", level=3)
+        body = item.locator("p")
+        expect(heading).to_be_visible()
+        expect(body).to_be_visible()
+        assert all(re.search(r"[\u0621-\u064a]", text.inner_text()) for text in (heading, body))
+    expect(tour.locator("a, button, [role=button], [tabindex]")).to_have_count(0)
+    expect(page.locator("#sections, #section-launcher, .launcher-link, " +
+                        ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
+    links_outside_menu = page.locator("a[href]").evaluate_all(
+        "links => links.filter(link => !link.closest('header #nav')).map(link => link.href)"
+    )
+    destinations = {urljoin(page.url, section + "/") for section in SECTIONS}
+    assert not destinations.intersection(links_outside_menu), links_outside_menu
     without_overflow(page)
 
 
-def verify_home_menu(page):
+def verify_home_menu(page, *, sections=("quran",)):
     home = page.url
     header = page.locator("header.route-header")
     menu = header.get_by_role("button", name="الأقسام", exact=True)
@@ -133,6 +129,7 @@ def verify_home_menu(page):
     without_overflow(page)
     links = nav.get_by_role("link")
     expect(links).to_have_count(len(SECTIONS))
+    expect(nav.locator(".zad-icon")).to_have_count(0)
     assert set(links.evaluate_all("links => links.map(link => link.href)")) == {
         urljoin(home, section + "/") for section in SECTIONS
     }
@@ -140,14 +137,21 @@ def verify_home_menu(page):
     expect(nav).to_be_hidden()
     expect(menu).to_have_attribute("aria-expanded", "false")
     expect(menu).to_be_focused()
-    menu.click()
-    nav.get_by_role("link", name="القرآن الكريم", exact=True).click()
-    expect(page).to_have_url(urljoin(home, "quran/"))
-    expect(page.locator("#quran")).to_be_visible()
-    page.go_back(wait_until="domcontentloaded")
-    expect(page).to_have_url(home)
-    expect(menu).to_be_visible()
-    expect(nav).to_be_hidden()
+    for index, section in enumerate(sections):
+        menu.click()
+        link = nav.locator(f'a[data-section-link="{section}"]')
+        if index == 0:
+            link.press("Enter")
+        else:
+            link.click()
+        expect(page).to_have_url(urljoin(home, section + "/"))
+        expect(page.locator("body")).to_have_attribute("data-page", section)
+        expect(page.locator("main")).to_be_visible()
+        without_overflow(page)
+        page.go_back(wait_until="domcontentloaded")
+        expect(page).to_have_url(home)
+        expect(menu).to_be_visible()
+        expect(nav).to_be_hidden()
     without_overflow(page)
 
 
@@ -168,7 +172,7 @@ def browser_checks(origin, output, live):
             response = page.goto(origin, wait_until="load")
             assert response.status == 200
             assert page.locator("html").get_attribute("dir") == "rtl"
-            verify_launcher(page)
+            verify_homepage(page)
             verify_home_menu(page)
             missing_anchors = page.locator('a[href^="#"]').evaluate_all(
                 "links => links.map(link => link.hash.slice(1)).filter(id => !document.getElementById(id))"
@@ -184,8 +188,7 @@ def browser_checks(origin, output, live):
                     ))
                 assert external_links, "No source links found across the section pages"
                 page.goto(origin)
-            page.locator('#section-launcher a[href="quran/"]').click()
-            expect(page).to_have_url(section_address(origin, "quran"))
+            page.goto(section_address(origin, "quran"))
             expect(page.locator("#sections > section")).to_have_count(1)
             expect(page.locator("#quran")).to_be_visible()
             page.locator("#menu").click()

@@ -156,8 +156,12 @@ if (contactLink && typeof zadContent !== "undefined" && zadContent.contactEmail)
 function redirectLegacySection() {
   if (document.body.dataset.page !== "home") return false;
   const fragment = location.hash.slice(1);
+  if (fragment === "section-launcher") {
+    location.replace("#site-tour");
+    return true;
+  }
   const route = fragment.startsWith("discover-") ? "discover" : fragment;
-  const link = [...document.querySelectorAll("a[data-section-link]")]
+  const link = [...document.querySelectorAll("#nav a[data-section-link]")]
     .find((anchor) => anchor.dataset.sectionLink === route);
   if (!link) return false;
 

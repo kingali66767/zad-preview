@@ -11,7 +11,7 @@ import threading
 from urllib.parse import parse_qs, urljoin, urlsplit
 
 from audit import (Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
-                   verify_home_menu, verify_launcher, without_overflow)
+                   verify_home_menu, verify_homepage, without_overflow)
 from playwright.sync_api import expect, sync_playwright
 
 PUBLIC = "https://kingali66767.github.io/zad-preview/"
@@ -97,7 +97,7 @@ def new_visit(browser, address, check, *, local=False, device=None, init=None, s
 
 
 def verify_sections(page):
-    verify_launcher(page)
+    verify_homepage(page)
     home = page.url
     for ident, expected in {"worship": 8, "adhkar": 22, "quran": 8, "lessons": 7, "hadith": 10,
                             "faq": 11, "media": 7, "occasions": 8, "belief": 5, "seerah": 4}.items():
@@ -111,34 +111,28 @@ def verify_sections(page):
         without_overflow(page)
 
 
-def launcher_transitions(page):
-    verify_launcher(page)
+def homepage_transitions(page):
+    verify_homepage(page)
     home = page.url
-    hero = page.locator("main .hero")
-    hero.locator('a[href="#section-launcher"]').click()
-    expect(page).to_have_url(home + "#section-launcher")
-    expect(page.locator("#section-launcher")).to_be_in_viewport()
-    hero.locator('a[href="quran/"]').click()
-    expect(page).to_have_url(section_address(home, "quran"))
-    expect(page.locator("#quran")).to_be_visible()
-    page.go_back(wait_until="domcontentloaded")
-    expect(page).to_have_url(home + "#section-launcher")
+    page.locator('main .hero a[href="#site-tour"]').click()
+    expect(page).to_have_url(home + "#site-tour")
+    expect(page.locator("#site-tour")).to_be_in_viewport()
     page.go_back(wait_until="domcontentloaded")
     expect(page).to_have_url(home)
-    for index, section in enumerate(SECTIONS):
-        address = section_address(home, section)
-        card = page.locator(f'#section-launcher a[href="{section}/"]')
-        expect(card).to_be_visible()
-        if index == 0:
-            card.press("Enter")
-        else:
-            card.click()
-        expect(page).to_have_url(address)
-        expect(page.locator("main")).to_be_visible()
-        assert page.locator("#section-launcher").count() == 0
-        without_overflow(page)
-        page.go_back(wait_until="domcontentloaded")
-        expect(page).to_have_url(home)
+    verify_home_menu(page, sections=SECTIONS)
+
+
+def legacy_home_links(page):
+    home = page.url
+    page.goto(home + "#section-launcher", wait_until="domcontentloaded")
+    expect(page).to_have_url(home + "#site-tour")
+    expect(page.locator("#site-tour")).to_be_in_viewport()
+    page.goto(home + "#ask", wait_until="domcontentloaded")
+    expect(page).to_have_url(section_address(home, "ask"))
+    expect(page.locator("#ask-submit")).to_be_enabled()
+    page.goto(home + "#discover-fr-wudu", wait_until="domcontentloaded")
+    expect(page).to_have_url(section_address(home, "discover") + "#discover-fr-wudu")
+    expect(page.locator("#discover-fr-wudu")).to_be_visible()
 
 
 def verify_menu(page):
@@ -255,10 +249,10 @@ def public_cases(suite, browser, device):
     def visit(section, check, **options):
         return new_visit(browser, section_address(PUBLIC, section), check, **options)
 
-    suite.run("عام | صورة الواجهة وروابطها وبطاقات الأقسام والتنقل إلى الصفحات المستقلة",
-              lambda: visit("", launcher_transitions, device=device))
-    suite.run("عام | زر الأقسام يسار شعار زاد ويفتح القائمة وينتقل إلى القرآن",
-              lambda: visit("", verify_home_menu, device=device))
+    suite.run("عام | الصورة والجولة التعريفية والتنقل إلى الأقسام الستة عشر من القائمة",
+              lambda: visit("", homepage_transitions, device=device))
+    suite.run("عام | دعم روابط الواجهة القديمة للجولة والأسئلة والدليل",
+              lambda: visit("", legacy_home_links))
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
     suite.run("عام | جميع روابط قائمة الجوال والتنقل بلوحة المفاتيح",
               lambda: visit("quran", verify_menu, device=device))
@@ -277,7 +271,7 @@ def public_cases(suite, browser, device):
                                 lambda p: expect(p.locator("#discover-fr-wudu")).to_be_visible()))
     suite.run("عام | عنوان القسم غير المعروف يبقي الموقع متاحًا",
               lambda: new_visit(browser, PUBLIC + "#unknown-section",
-                                verify_launcher))
+                                verify_homepage))
 
     def address_not_configured(page):
         expect(page.locator("#contact-link")).to_be_hidden()
@@ -650,9 +644,9 @@ def local_cases(suite, browser, origin):
     def run(name, check, *, section="ask", **options):
         suite.run("محلي | " + name, lambda: new_visit(browser, section_address(origin, section), check, local=True, **options))
 
-    run("صورة الواجهة وروابطها وبطاقات الأقسام تفتح الصفحات المستقلة", launcher_transitions, section="")
-    run("زر الأقسام في رأس الصفحة الرئيسية والإغلاق بلوحة المفاتيح والانتقال إلى القرآن",
-        verify_home_menu, section="")
+    run("الصورة والجولة التعريفية والتنقل إلى جميع الأقسام من القائمة",
+        homepage_transitions, section="")
+    run("دعم روابط الواجهة القديمة للجولة والأسئلة والدليل", legacy_home_links, section="")
 
     def unavailable_storage(page):
         page.locator("#reading input").first.check()

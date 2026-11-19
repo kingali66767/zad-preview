@@ -12,24 +12,24 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261119-10"
+REVISION = "20261119-11"
 SECTIONS = {
-    "quran": ("القرآن الكريم", "آيات مختارة وفضائل التلاوة"),
-    "lessons": ("الخطب والدروس", "مواد مكتوبة للقراءة والاستفادة"),
-    "hadith": ("الأحاديث الصحيحة", "نصوص مختارة مع تخريجها"),
-    "faq": ("أسئلة وأجوبة شرعية", "إجابات مختصرة مع أدلتها"),
-    "media": ("المحاضرات والتلاوات", "مواد صوتية ومرئية من مصادرها"),
-    "occasions": ("المناسبات الإسلامية", "مواسم العبادة وأدلتها"),
-    "belief": ("العقيدة وأصول الإيمان", "التوحيد وأركان الإيمان ومعنى الإحسان"),
-    "seerah": ("السيرة النبوية", "من بدء الوحي إلى حجة الوداع"),
-    "ask": ("اسأل زاد", "اسأل بعبارتك واطّلع على المصادر"),
-    "prayer": ("مواقيت الصلاة", "مواقيت الصلاة في المدن السعودية"),
-    "worship": ("الوضوء والصلاة", "خطوات مرتّبة للمبتدئ مع أدلتها"),
-    "adhkar": ("الأذكار اليومية", "أذكار الصباح والمساء وبعد الصلاة"),
-    "reading": ("خطة القراءة", "سبع سور قصيرة مع متابعة تقدّمك"),
-    "discover": ("تعرّف على الإسلام", "دليل للشهادتين والعبادة بأربع لغات"),
-    "sources": ("مصادر المكتبة", "مراجع التفسير والحديث والفتاوى"),
-    "contact": ("تواصل معنا", "اقتراح مواد وتصحيح المحتوى"),
+    "quran": "القرآن الكريم",
+    "lessons": "الخطب والدروس",
+    "hadith": "الأحاديث الصحيحة",
+    "faq": "أسئلة وأجوبة شرعية",
+    "media": "المحاضرات والتلاوات",
+    "occasions": "المناسبات الإسلامية",
+    "belief": "العقيدة وأصول الإيمان",
+    "seerah": "السيرة النبوية",
+    "ask": "اسأل زاد",
+    "prayer": "مواقيت الصلاة",
+    "worship": "الوضوء والصلاة",
+    "adhkar": "الأذكار اليومية",
+    "reading": "خطة القراءة",
+    "discover": "تعرّف على الإسلام",
+    "sources": "مصادر المكتبة",
+    "contact": "تواصل معنا",
 }
 TEMPLATED_SECTIONS = {"ask", "prayer", "sources", "contact"}
 STYLES = ("style.css", "discover.css", "section-icons.css", "glass.css", "sections.css")
@@ -192,27 +192,11 @@ def icon(key):
 
 
 def render_home():
-    hero = (ROOT / "page-templates" / "home-hero.html").read_text(encoding="utf-8").strip()
-    items = []
-    for slug, (title, description) in SECTIONS.items():
-        shape = icon("discover-islam" if slug == "discover" else slug)
-        label = escape(title, quote=True)
-        description_id = f"launcher-{slug}-description"
-        items.append(
-            f'<a class="launcher-link" data-section-link="{slug}" href="{slug}/"'
-            f' aria-label="{label}" aria-describedby="{description_id}">'
-            f'<span class="section-icon" aria-hidden="true">{shape}</span>'
-            f'<strong class="launcher-title">{label}</strong>'
-            f'<span class="launcher-description" id="{description_id}">{escape(description)}</span></a>'
-        )
-    links = "\n".join(items)
-    return f'''{hero}
-<section class="launcher-content" aria-labelledby="launcher-heading">
-<h2 id="launcher-heading" class="section-heading"><span class="section-icon" aria-hidden="true">{icon("library")}</span>استكشف أقسام المنصة</h2>
-<nav class="launcher-nav" id="section-launcher" aria-labelledby="launcher-heading">
-{links}
-</nav>
-</section>'''
+    templates = ROOT / "page-templates"
+    return "\n".join(
+        (templates / f"home-{part}.html").read_text(encoding="utf-8").strip()
+        for part in ("hero", "tour")
+    )
 
 
 def render_header(slug, base):
@@ -225,10 +209,10 @@ def render_header(slug, base):
         brand = f'''<a class="route-back" href="{base}">{icon("home")}<span>الرئيسية</span></a>
 <a class="route-brand" href="{base}" aria-label="زاد، الرئيسية">{icon("brand")}</a>'''
     items = []
-    for route, (title, _) in SECTIONS.items():
-        shape = icon("discover-islam" if route == "discover" else route)
+    for route, title in SECTIONS.items():
+        shape = "" if slug == "home" else icon("discover-islam" if route == "discover" else route)
         selected = ' aria-current="page"' if route == slug else ""
-        items.append(f'<a href="{base}{route}/"{selected}>{shape}<span>{escape(title)}</span></a>')
+        items.append(f'<a href="{base}{route}/" data-section-link="{route}"{selected}>{shape}<span>{escape(title)}</span></a>')
     links = "\n".join(items)
     return f'''{brand}
 <button id="menu" class="menu" aria-expanded="false" aria-controls="nav" type="button">{icon("menu")}<span>الأقسام</span></button>
@@ -241,7 +225,7 @@ def render_page(slug, body):
     is_home = slug == "home"
     base = "" if is_home else "../"
     assets = base + "assets/"
-    title = "زاد | منصة التوعية الدينية" if is_home else f"{SECTIONS[slug][0]} | زاد"
+    title = "زاد | منصة التوعية الدينية" if is_home else f"{SECTIONS[slug]} | زاد"
     styles = "\n".join(f'<link rel="stylesheet" href="{assets}{name}?v={REVISION}">' for name in STYLES)
     scripts = []
     if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug != "discover"):
@@ -305,7 +289,7 @@ def main():
         parser.error("The Arabic default translation is required.")
     docs = ROOT / "docs"
     outputs = {docs / "index.html": render_page("home", render_home())}
-    for slug, (title, _) in SECTIONS.items():
+    for slug, title in SECTIONS.items():
         if slug == "discover":
             body = f'<h1 class="visually-hidden">{escape(title)}</h1>\n' + render_guide(languages)
         elif slug in TEMPLATED_SECTIONS:
