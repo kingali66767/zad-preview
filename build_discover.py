@@ -12,7 +12,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261119-8"
+REVISION = "20261119-9"
 SECTIONS = {
     "quran": ("القرآن الكريم", "آيات مختارة وفضائل التلاوة"),
     "lessons": ("الخطب والدروس", "مواد مكتوبة للقراءة والاستفادة"),
@@ -191,7 +191,8 @@ def icon(key):
     return f'<span class="zad-icon" data-icon="{key}" aria-hidden="true"></span>'
 
 
-def render_launcher():
+def render_home():
+    hero = (ROOT / "page-templates" / "home-hero.html").read_text(encoding="utf-8").strip()
     items = []
     for slug, (title, description) in SECTIONS.items():
         shape = icon("discover-islam" if slug == "discover" else slug)
@@ -205,10 +206,13 @@ def render_launcher():
             f'<span class="launcher-description" id="{description_id}">{escape(description)}</span></a>'
         )
     links = "\n".join(items)
-    return f'''<h1 id="launcher-heading" class="section-heading"><span class="section-icon" aria-hidden="true">{icon("library")}</span>استكشف أقسام المنصة</h1>
+    return f'''{hero}
+<section class="launcher-content" aria-labelledby="launcher-heading">
+<h2 id="launcher-heading" class="section-heading"><span class="section-icon" aria-hidden="true">{icon("library")}</span>استكشف أقسام المنصة</h2>
 <nav class="launcher-nav" id="section-launcher" aria-labelledby="launcher-heading">
 {links}
-</nav>'''
+</nav>
+</section>'''
 
 
 def render_section_navigation(slug, base):
@@ -296,7 +300,7 @@ def main():
     if "ar" not in languages:
         parser.error("The Arabic default translation is required.")
     docs = ROOT / "docs"
-    outputs = {docs / "index.html": render_page("home", render_launcher())}
+    outputs = {docs / "index.html": render_page("home", render_home())}
     for slug, (title, _) in SECTIONS.items():
         if slug == "discover":
             body = f'<h1 class="visually-hidden">{escape(title)}</h1>\n' + render_guide(languages)

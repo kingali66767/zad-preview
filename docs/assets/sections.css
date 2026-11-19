@@ -152,7 +152,18 @@ body[data-page="home"] .route-top { display: flex; }
 
 .launcher-shell {
   flex: 1;
+}
+
+.launcher-shell .hero {
+  padding-block-end: clamp(35px, 5vw, 74px);
+}
+
+.launcher-content,
+.launcher-shell .hero-grid {
   inline-size: min(73rem, calc(100% - 32px));
+}
+
+.launcher-content {
   margin-inline: auto;
   padding-block: clamp(24px, 5vw, 48px) clamp(37px, 6vw, 72px);
 }
@@ -169,6 +180,7 @@ body[data-page="home"] .route-top { display: flex; }
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: stretch;
   gap: clamp(9px, 2vw, 17px);
+  scroll-margin-block-start: clamp(54px, 7vw, 87px);
   padding: 0;
   border: 0;
   background: transparent;

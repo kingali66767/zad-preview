@@ -114,6 +114,17 @@ def verify_sections(page):
 def launcher_transitions(page):
     verify_launcher(page)
     home = page.url
+    hero = page.locator("main .hero")
+    hero.locator('a[href="#section-launcher"]').click()
+    expect(page).to_have_url(home + "#section-launcher")
+    expect(page.locator("#section-launcher")).to_be_in_viewport()
+    hero.locator('a[href="quran/"]').click()
+    expect(page).to_have_url(section_address(home, "quran"))
+    expect(page.locator("#quran")).to_be_visible()
+    page.go_back(wait_until="domcontentloaded")
+    expect(page).to_have_url(home + "#section-launcher")
+    page.go_back(wait_until="domcontentloaded")
+    expect(page).to_have_url(home)
     for index, section in enumerate(SECTIONS):
         address = section_address(home, section)
         card = page.locator(f'#section-launcher a[href="{section}/"]')
@@ -244,7 +255,7 @@ def public_cases(suite, browser, device):
     def visit(section, check, **options):
         return new_visit(browser, section_address(PUBLIC, section), check, **options)
 
-    suite.run("عام | بطاقات الأقسام بعناوينها ووصفها والتنقل إلى الصفحات المستقلة",
+    suite.run("عام | صورة الواجهة وروابطها وبطاقات الأقسام والتنقل إلى الصفحات المستقلة",
               lambda: visit("", launcher_transitions, device=device))
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
     suite.run("عام | جميع روابط قائمة الجوال والتنقل بلوحة المفاتيح",
@@ -637,7 +648,7 @@ def local_cases(suite, browser, origin):
     def run(name, check, *, section="ask", **options):
         suite.run("محلي | " + name, lambda: new_visit(browser, section_address(origin, section), check, local=True, **options))
 
-    run("بطاقات الواجهة تعرض أسماء الأقسام ووصفها وتفتح صفحاتها", launcher_transitions, section="")
+    run("صورة الواجهة وروابطها وبطاقات الأقسام تفتح الصفحات المستقلة", launcher_transitions, section="")
 
     def unavailable_storage(page):
         page.locator("#reading input").first.check()

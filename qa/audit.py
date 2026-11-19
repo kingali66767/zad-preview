@@ -64,14 +64,35 @@ def without_overflow(page):
 
 
 def verify_launcher(page):
+    hero = page.locator("main .hero")
+    expect(hero).to_be_visible()
+    expect(page.get_by_role("heading", level=1)).to_have_count(1)
+    headline = hero.get_by_role("heading", level=1)
+    expect(headline).to_contain_text("زادك من العلم")
+    expect(headline).to_contain_text("ونورك بالمعرفة")
+    photo = hero.locator(".hero-image")
+    expect(photo).to_be_visible()
+    expect(photo).to_have_accessible_name(re.compile("أقواس"))
+    assert photo.evaluate("""async element => {
+        const url = new URL("assets/hero.webp", location.href);
+        if (!getComputedStyle(element).backgroundImage.includes(url.href)) return false;
+        const image = new Image();
+        image.src = url;
+        await image.decode();
+        return image.naturalWidth > 0 && image.naturalHeight > 0;
+    }"""), "The original hero photograph did not render"
+    expect(hero.locator('a[href="#section-launcher"]')).to_be_visible()
+    expect(hero.locator('a[href="quran/"]')).to_be_visible()
+    expect(page.locator("h2#launcher-heading")).to_be_visible()
     launcher = page.locator("#section-launcher")
     cards = launcher.locator("a.launcher-link")
+    assert hero.bounding_box()["y"] < launcher.bounding_box()["y"], "The hero must appear above the cards"
     expect(cards).to_have_count(len(SECTIONS))
     links = cards.evaluate_all("cards => cards.map(card => card.href)")
     addresses = [urlsplit(link) for link in links]
     assert {address.path.rsplit("/", 2)[-2] for address in addresses} == set(SECTIONS), links
     assert all(not address.fragment for address in addresses), links
-    expect(page.locator("#sections, .hero, " + ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
+    expect(page.locator("#sections, " + ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
     for card in cards.all():
         expect(card.locator(".zad-icon")).to_be_visible()
         title = card.locator(".launcher-title")
