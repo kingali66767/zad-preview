@@ -173,7 +173,9 @@ async function loadTimes() {
     if (!response.ok) throw new Error("Prayer API request failed");
     const { data } = await response.json();
     const rows = prayers.map(([key, label]) => {
-      const value = data?.timings?.[key]?.match(/^([01]\d|2[0-3]):[0-5]\d/)?.[0];
+      const rawTime = data?.timings?.[key];
+      const value = typeof rawTime === "string" &&
+        rawTime.trim().match(/^((?:[01]\d|2[0-3]):[0-5]\d)(?: \([A-Za-z0-9+:-]{1,12}\))?$/)?.[1];
       if (!value) throw new Error("Missing or invalid prayer time");
       const row = element("div");
       const time = element("strong", value);

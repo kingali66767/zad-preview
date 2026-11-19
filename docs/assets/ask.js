@@ -32,8 +32,17 @@ modelButton.addEventListener("click", async () => {
   modelButton.disabled = true;
   askStatus.textContent = "جارٍ التحقق من توافق جهازك…";
   const unavailable = "تعذّر تشغيل النموذج. تحقّق من الاتصال ودعم WebGPU، ثم حاول مرة أخرى.";
+  const timeout = Symbol("adapter timeout");
+  let adapterTimer;
   try {
-    const adapter = await navigator.gpu.requestAdapter();
+    const adapter = await Promise.race([
+      navigator.gpu.requestAdapter(),
+      new Promise(resolve => { adapterTimer = setTimeout(() => resolve(timeout), 10000); })
+    ]);
+    if (adapter === timeout) {
+      resetModel("استغرق التحقق من توافق جهازك وقتًا طويلًا. يمكنك إعادة المحاولة.");
+      return;
+    }
     if (!adapter?.features.has("shader-f16")) {
       resetModel("يحتاج هذا النموذج إلى جهاز يدعم WebGPU ودقة ١٦ بت. جرّب متصفحًا أو جهازًا متوافقًا.");
       return;
@@ -69,13 +78,20 @@ modelButton.addEventListener("click", async () => {
     worker.postMessage({ type: "init" });
   } catch {
     resetModel(unavailable);
+  } finally {
+    clearTimeout(adapterTimer);
   }
 });
 
 askForm.addEventListener("submit", event => {
   event.preventDefault();
   const question = askInput.value.trim();
-  if (!question || !modelWorker || askButton.disabled) return;
+  if (!modelWorker || askButton.disabled) return;
+  if (!question) {
+    askStatus.textContent = "اكتب سؤالًا للحصول على إجابة.";
+    askInput.focus();
+    return;
+  }
   askButton.disabled = true;
   askResult.hidden = true;
   askAnswer.textContent = "";
