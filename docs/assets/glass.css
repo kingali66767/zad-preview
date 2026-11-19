@@ -243,6 +243,36 @@ footer :focus-visible {
   box-shadow: var(--glass-rim);
 }
 
+details > summary {
+  position: relative;
+  list-style: none;
+  padding-inline-start: 1.18em;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  position: absolute;
+  inset-block-start: .58em;
+  inset-inline-start: .12em;
+  inline-size: .4em;
+  block-size: .4em;
+  border: solid currentColor;
+  border-width: 1.5px 1.5px 0 0;
+  transform: rotate(225deg);
+  content: "";
+}
+
+details > summary:dir(ltr)::before {
+  transform: rotate(45deg);
+}
+
+details[open] > summary::before {
+  transform: rotate(135deg);
+}
+
 .discover-content .discover-shahada {
   border-color: #eed4a1;
   background: linear-gradient(150deg, #fffcf3, #f4e6c6);
