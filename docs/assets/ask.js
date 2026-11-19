@@ -3,8 +3,10 @@
 const askForm = document.querySelector("#ask-form");
 const askInput = document.querySelector("#ask-input");
 const askButton = document.querySelector("#ask-submit");
+const askReset = document.querySelector("#ask-reset");
 const askStatus = document.querySelector("#ask-status");
 const askResult = document.querySelector("#ask-result");
+const askQuestion = document.querySelector("#ask-question");
 const askTitle = document.querySelector("#ask-answer-heading");
 const askAnswer = document.querySelector("#ask-answer");
 const askSources = document.querySelector("#ask-sources");
@@ -32,15 +34,17 @@ function normalizeQuestion(value) {
 
 const questionIndex = new Map();
 const topicTerms = new Map();
+const followUpIndex = new Map();
 for (const [id, record] of Object.entries(askEvidence)) {
   topicTerms.set(id, record.terms.map(normalizeQuestion));
   for (const language of ["ar", "en", "fr", "es"]) {
-    const [answer, ...questions] = record[language];
+    const [, ...questions] = record[language] || [];
     for (const question of questions) {
-      questionIndex.set(normalizeQuestion(question), {
-        answer, language, sources: record.sources, correction: record.correction
-      });
+      questionIndex.set(normalizeQuestion(question), {id, language});
     }
+  }
+  for (const [topic, questions] of Object.entries(record.followUp || {})) {
+    for (const question of questions) followUpIndex.set(topic + ":" + normalizeQuestion(question), id);
   }
 }
 
@@ -55,6 +59,19 @@ const exactFatwas = new Map(fatwaSources.flatMap(entry =>
 
 const questionIntro = /^(?:(?:السلام عليكم(?: ورحمه الله(?: وبركاته)?)?|لو سمحت(?:م)?|من فضلك(?:م)?|ممكن اعرف|(?:ابغ[يا]|ابي|ودي)(?: اعرف)?|اريد(?: معرفه)?|انا) )+/;
 
+function catalogAnswer(id, language) {
+  const record = askEvidence[id];
+  if (!record?.[language]?.[0]) return;
+  return {
+    id, language,
+    answer: record[language][0],
+    sources: record.localizedSources?.[language] || record.sources,
+    needsDetails: Boolean(record.clarification),
+    status: record.clarification ? "يتغيّر الحكم بحسب تفاصيل المسألة." : "وجدت جوابًا مستندًا إلى المصادر.",
+    title: record.clarification ? "أحتاج إلى توضيح" : record.correction ? "تصحيح موثّق" : "جواب موثّق"
+  };
+}
+
 function reviewedAnswer(key) {
   const request = key.replace(questionIntro, "");
   const fatwa = exactFatwas.get(key) || exactFatwas.get(request);
@@ -68,22 +85,18 @@ function reviewedAnswer(key) {
     };
   }
   const match = questionIndex.get(key) || questionIndex.get(request);
-  if (match) {
-    return {
-      ...match,
-      status: "وجدت جوابًا موثّقًا يطابق السؤال.",
-      title: match.correction ? "تصحيح موثّق" : "جواب موثّق"
-    };
-  }
+  return match && catalogAnswer(match.id, match.language);
 }
 
-function reviewedParts(question) {
-  const questions = question.split(/[؟?،؛;]+|\s+و\s*(?=(?:هل|ما|ماذا|كيف|متى|كم)\s)/)
-    .map(part => part.trim().replace(/^و\s*(?=(?:هل|ما|ماذا|كيف|متى|كم)\s)/, ""))
+// Preserve dependent qualifiers with their question. A compound answer requires
+// a reviewed result for every clause, including any clause after a question mark.
+function questionParts(question) {
+  const start = "(?:هل|ما|ماذا|كيف|متى|كم|ليش|لماذا|إذا|اذا)\\s";
+  const separator = new RegExp("[؟?؛;]+|[،,]\\s*(?=و?\\s*" + start + ")|\\s+و\\s*(?=" + start + ")");
+  const conjunction = new RegExp("^و\\s*(?=" + start + ")");
+  return question.split(separator)
+    .map(part => part.trim().replace(conjunction, ""))
     .filter(Boolean);
-  if (questions.length < 2 || questions.length > 3) return;
-  const parts = questions.map(part => ({question: part, match: reviewedAnswer(normalizeQuestion(part))}));
-  if (parts.every(part => part.match?.language === "ar")) return parts;
 }
 
 function sourceDescription(entry) {
@@ -131,6 +144,10 @@ function includesPhrase(key, phrase) {
   return (" " + key + " ").includes(" " + normalizeQuestion(phrase) + " ");
 }
 
+function requestedScholars(key) {
+  return Object.keys(scholarNames).filter(id => scholarNames[id].some(name => includesPhrase(key, name)));
+}
+
 function relevantFatwas(key, authors) {
   const phrase = " " + key + " ";
   const authorOnly = authors.some(id => scholarNames[id].some(name =>
@@ -139,14 +156,18 @@ function relevantFatwas(key, authors) {
     .map(({entry, terms, title}) => ({
     entry,
     score: key === title ? 1000 : authorOnly ? 1 : terms.reduce((total, term) => (
-      total + (phrase.includes(" " + term + " ") ? term.split(" ").length ** 2 : 0)
+      total + ((term === key || term.includes(" ") && phrase.includes(" " + term + " ")) ? term.split(" ").length ** 2 : 0)
     ), 0)
   })).filter(result => result.score > 0).sort((a, b) => b.score - a.score)
     .slice(0, 5).map(result => result.entry);
 }
 
+let submittedQuestion = "";
+let previousTopic;
+
 function showResult(status, title, sources, answer = "", language = "ar") {
   askStatus.textContent = status;
+  askQuestion.textContent = submittedQuestion;
   askTitle.textContent = title;
   askAnswer.textContent = answer;
   askAnswer.hidden = !answer;
@@ -162,6 +183,34 @@ function showResult(status, title, sources, answer = "", language = "ar") {
     askSources.append(link);
   }
   askResult.hidden = false;
+  askReset.hidden = false;
+}
+
+function showReviewed(match) {
+  showResult(match.status, match.title, match.sources, match.answer, match.language);
+  previousTopic = match.needsDetails ? undefined : match.id;
+}
+
+function showParts(parts) {
+  const sources = [...new Map(parts.flatMap(({match}) => match.sources.map(([label, url]) => [url, label])))]
+    .map(([url, label]) => [label, url]);
+  showResult("وجدت أجوبة موثّقة لأجزاء السؤال.", "أجوبة موثّقة", sources);
+  askAnswer.hidden = false;
+  for (const {question, match} of parts) {
+    const part = document.createElement("section");
+    const heading = document.createElement("h4");
+    const body = document.createElement("p");
+    const citation = document.createElement("small");
+    part.className = "ask-part";
+    part.lang = match.language;
+    part.dir = "auto";
+    heading.textContent = question;
+    body.textContent = match.answer;
+    citation.textContent = match.sources.map(([label]) => label).join(" · ");
+    part.append(heading, body, citation);
+    askAnswer.append(part);
+  }
+  previousTopic = parts.at(-1).match.id;
 }
 
 function relatedTopics(key) {
@@ -174,44 +223,64 @@ function relatedTopics(key) {
     .map(({id}) => ({id, title: askEvidence[id].title}));
 }
 
-function showRelated(topics) {
-  const questions = topics.map(({id}) => askEvidence[id]).filter(record => !record.correction)
-    .slice(0, 3).map(record => record.ar[1]);
+function showRelated(topics, language = "ar") {
+  const questions = topics.map(({id}) => askEvidence[id]).filter(record => record && !record.correction && !record.clarification)
+    .map(record => record[language]?.[1]).filter(Boolean).slice(0, 3);
   for (const question of questions) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "button";
-    button.textContent = question + "؟";
+    const label = question + (language === "ar" ? "؟" : "?");
+    button.textContent = label;
+    button.lang = language;
+    button.dir = "auto";
     button.addEventListener("click", () => {
-      askInput.value = question + "؟";
+      askInput.value = label;
       askForm.requestSubmit();
-      askTitle.focus();
+      if (!askResult.hidden) askTitle.focus();
     });
     askRelatedQuestions.append(button);
   }
   askRelated.hidden = !questions.length;
 }
 
+function showIntent(intent, related = []) {
+  const language = intent.language || "ar";
+  const ids = intent.ids || [];
+  const sources = [...new Map(ids.flatMap(id => {
+    const record = askEvidence[id];
+    return (record?.localizedSources?.[language] || record?.sources || []).map(([label, url]) => [url, label]);
+  }))].map(([url, label]) => [label, url]);
+  const clarification = intent.kind === "clarify";
+  showResult(clarification ? "يتغيّر الجواب بحسب ما تقصده." : "هذه المسألة تحتاج إلى معرفة تفاصيلها.",
+    "أحتاج إلى توضيح", sources.length ? sources.slice(0, 5) : referencesForHelp,
+    intent.prompt, language);
+  if (clarification) showRelated([...new Set([...ids, ...related.map(topic => topic.id)])].map(id => ({id})), language);
+}
+
 function showNoAnswer(topics) {
   showResult("لم أجد جوابًا موثّقًا يطابق هذا السؤال.", "كيف تحدّد سؤالك؟", referencesForHelp,
-    "حدّد المسألة التي تريد معرفة حكمها، مثل وقت العبادة أو طريقتها أو ما يؤثر في صحتها. وإذا كانت المسألة مرتبطة بظروفك الخاصة، فراجع جهة إفتاء للاطلاع على تفاصيلها.");
+    "اذكر العبادة أو المسألة، وحدّد ما تريد معرفته عنها. يمكنك أيضًا اختيار أحد الأسئلة القريبة إن ظهر هنا.");
   showRelated(topics);
 }
 
 let modelWorker;
 let modelReady = false;
-let pendingTopics;
-let timer;
+let pendingLookup;
+let nextLookupId = 0;
+let startupTimer;
+let lookupTimer;
 
 function finishLookup() {
-  clearTimeout(timer);
-  pendingTopics = undefined;
+  clearTimeout(lookupTimer);
+  pendingLookup = undefined;
   askButton.disabled = false;
 }
 
 function resetModel(message) {
-  if (pendingTopics) showNoAnswer(pendingTopics);
+  if (pendingLookup) showNoAnswer(pendingLookup.topics);
   finishLookup();
+  clearTimeout(startupTimer);
   modelWorker?.terminate();
   modelWorker = undefined;
   modelReady = false;
@@ -260,11 +329,11 @@ modelButton.addEventListener("click", async () => {
         const percent = Math.round(100 * Math.min(1, Math.max(0, Number(data.progress) || 0)));
         modelStatus.textContent = "جارٍ تحميل النموذج وإعداده… " + percent + "٪";
       } else if (data.type === "ready" && !modelReady) {
-        clearTimeout(timer);
+        clearTimeout(startupTimer);
         modelReady = true;
         modelStatus.textContent = "اقتراح المراجع بالذكاء الاصطناعي جاهز.";
-      } else if (data.type === "topic" && pendingTopics) {
-        const topics = pendingTopics;
+      } else if (data.type === "topic" && pendingLookup && data.requestId === pendingLookup.id) {
+        const {topics} = pendingLookup;
         const source = topics.some(topic => topic.id === data.id) ? askEvidence[data.id] : null;
         finishLookup();
         if (source) {
@@ -274,11 +343,12 @@ modelButton.addEventListener("click", async () => {
         } else {
           showNoAnswer(topics);
         }
-      } else if (data.type === "error") {
+      } else if (data.type === "error" &&
+          (data.requestId === undefined || data.requestId === pendingLookup?.id)) {
         resetModel(unavailable);
       }
     };
-    timer = setTimeout(() => resetModel("استغرق تحميل النموذج وقتًا طويلًا. يمكنك إعادة المحاولة."), 300000);
+    startupTimer = setTimeout(() => resetModel("استغرق تحميل النموذج وقتًا طويلًا. يمكنك إعادة المحاولة."), 300000);
     worker.postMessage({ type: "init" });
   } catch {
     resetModel(unavailable);
@@ -287,9 +357,63 @@ modelButton.addEventListener("click", async () => {
   }
 });
 
+function exactOrFollowUp(key, topic) {
+  const match = reviewedAnswer(key);
+  if (match) return match;
+  const followUp = followUpIndex.get(topic + ":" + key.replace(questionIntro, ""));
+  if (followUp) return catalogAnswer(followUp, "ar");
+}
+
+function scholarAnswer(key, authors) {
+  if (authors.length !== 1 || authors[0] !== "ibn-baz") return;
+  const suffix = scholarNames["ibn-baz"].flatMap(name =>
+    ["عند", "بحسب", "حسب فتوى", "من"].flatMap(prefix =>
+      [name, "الشيخ " + name].map(author => " " + normalizeQuestion(prefix + " " + author))))
+    .find(ending => key.endsWith(ending));
+  if (!suffix) return;
+  const subject = key.slice(0, -suffix.length);
+  const match = reviewedAnswer(subject);
+  if (match?.sources.length && match.sources.every(([, url]) => url.startsWith("https://binbaz.org.sa/"))) {
+    return match;
+  }
+}
+
+function reviewedParts(questions, topic) {
+  if (questions.length < 2 || questions.length > 3) return;
+  const parts = [];
+  for (const question of questions) {
+    const key = normalizeQuestion(question);
+    if (requestedScholars(key).length) return;
+    const exact = exactOrFollowUp(key, topic);
+    const intent = exact ? undefined : resolveQuestionIntent(question, topic);
+    const match = exact || (intent?.kind === "answer" && catalogAnswer(intent.id, intent.language));
+    if (!match || match.needsDetails) return;
+    parts.push({question, match});
+    topic = match.id;
+  }
+  return parts;
+}
+
+askInput.addEventListener("input", () => {
+  if (!pendingLookup) return;
+  finishLookup();
+  askStatus.textContent = "";
+});
+
+askReset.addEventListener("click", () => {
+  finishLookup();
+  previousTopic = undefined;
+  submittedQuestion = "";
+  askInput.value = "";
+  askStatus.textContent = "";
+  askResult.hidden = true;
+  askReset.hidden = true;
+  askInput.focus();
+});
+
 askForm.addEventListener("submit", event => {
   event.preventDefault();
-  if (pendingTopics) return;
+  if (pendingLookup) return;
   const question = askInput.value.trim();
   const key = normalizeQuestion(question);
   if (!key) {
@@ -298,25 +422,52 @@ askForm.addEventListener("submit", event => {
     askInput.focus();
     return;
   }
-  const match = reviewedAnswer(key);
-  if (match) {
-    showResult(match.status, match.title, match.sources, match.answer, match.language);
-    return;
-  }
-  const parts = reviewedParts(question);
-  if (parts) {
-    const sources = new Map();
-    for (const part of parts) {
-      for (const [label, url] of part.match.sources) sources.set(url, label);
+  submittedQuestion = question;
+  askReset.hidden = false;
+  const topic = previousTopic;
+  previousTopic = undefined;
+  const authors = requestedScholars(key);
+  let intent;
+  if (authors.length) {
+    const match = scholarAnswer(key, authors);
+    if (match) {
+      showReviewed(match);
+      return;
     }
-    const answer = parts.map(part => part.question + "؟\n" + part.match.answer).join("\n\n");
-    showResult("وجدت أجوبة موثّقة لأجزاء السؤال.", "أجوبة موثّقة", [...sources].map(([url, label]) => [label, url]), answer);
-    return;
+  } else {
+    const match = exactOrFollowUp(key, topic);
+    if (match) {
+      showReviewed(match);
+      return;
+    }
+    const questions = questionParts(question);
+    const parts = reviewedParts(questions, topic);
+    if (parts) {
+      showParts(parts);
+      return;
+    }
+    intent = resolveQuestionIntent(question, topic);
+    if (intent?.kind === "answer") {
+      const answer = catalogAnswer(intent.id, intent.language);
+      if (answer && (questions.length === 1 || answer.needsDetails)) {
+        showReviewed(answer);
+        return;
+      }
+    } else if (intent?.kind === "refer") {
+      showIntent(intent);
+      return;
+    }
   }
 
-  const authors = Object.keys(scholarNames).filter(id => scholarNames[id].some(name => includesPhrase(key, name)));
   const topics = authors.length ? [] : relatedTopics(key);
   const references = relevantFatwas(key, authors);
+  if (intent?.kind === "clarify") {
+    const ordinarySources = new Set((intent.ids || []).flatMap(id => (askEvidence[id]?.sources || []).map(([, url]) => url)));
+    if (!references.some(entry => !ordinarySources.has(entry.url))) {
+      showIntent(intent, topics);
+      return;
+    }
+  }
   if (references.length) {
     showResult("وجدت فتاوى مرتبطة بموضوع السؤال.", "نتائج من مواقع العلماء",
       references.map(entry => [entry.title + " · " + sourceDescription(entry), entry.url]),
@@ -336,13 +487,14 @@ askForm.addEventListener("submit", event => {
     return;
   }
 
-  pendingTopics = topics;
+  const requestId = ++nextLookupId;
+  pendingLookup = {id: requestId, topics};
   askButton.disabled = true;
   askResult.hidden = true;
   askStatus.textContent = "جارٍ البحث عن مراجع قد تفيدك…";
-  timer = setTimeout(() => resetModel("استغرق اقتراح المراجع وقتًا طويلًا. يمكنك إعادة المحاولة."), 90000);
+  lookupTimer = setTimeout(() => resetModel("استغرق اقتراح المراجع وقتًا طويلًا. يمكنك إعادة المحاولة."), 90000);
   try {
-    modelWorker.postMessage({ type: "ask", question, topics });
+    modelWorker.postMessage({ type: "ask", requestId, question, topics });
   } catch {
     resetModel("تعذّر اقتراح المراجع. يمكنك إعادة تشغيل النموذج.");
   }

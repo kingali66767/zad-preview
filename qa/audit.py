@@ -215,20 +215,21 @@ def browser_checks(origin, output, live):
         worker_script = """
             self.onmessage = ({data}) => {
               if (data.type === "init") self.postMessage({type:"ready"});
-              else self.postMessage({type:"topic", id:"zakat_charity", answer:"Inert fabricated text"});
+              else self.postMessage({type:"topic", id:"quran_recitation", requestId:data.requestId,
+                                     answer:"Inert fabricated text"});
             };
         """
-        page.route("**/assets/ask-worker.js", lambda route: route.fulfill(content_type="text/javascript", body=worker_script))
+        page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(content_type="text/javascript", body=worker_script))
         page.add_init_script("Object.defineProperty(navigator, 'gpu', {value: {requestAdapter: async () => ({features: new Set(['shader-f16'])})}})")
         page.goto(origin)
         page.locator(".ask-optional summary").click()
         page.locator("#ask-enable").click()
         expect(page.locator("#ask-model-status")).to_contain_text("جاهز")
-        page.locator("#ask-input").fill("هل يمكن دفع الزكاة عن أرضي؟")
+        page.locator("#ask-input").fill("أريد مرجعًا يساعدني على قراءة القرآن باتقان.")
         page.locator("#ask-submit").click()
         expect(page.locator("#ask-status")).to_contain_text("قد تساعدك")
         expect(page.locator("#ask-answer")).to_be_hidden()
-        expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+        expect(page.locator('#ask-sources a[href="https://sunnah.com/muslim:798a"]')).to_be_visible()
         assert "Inert fabricated text" not in page.locator("#ask-result").inner_text()
         assert not page_errors, page_errors
         results.append("AI browser worker suggests a source only and cannot display invented text (simulated model)")
@@ -291,7 +292,7 @@ def browser_checks(origin, output, live):
                 page.locator("#ask-enable").click()
                 try:
                     expect(page.locator("#ask-model-status")).to_contain_text("جاهز", timeout=310000)
-                    page.locator("#ask-input").fill("أريد مرجعًا يساعدني على معرفة مصارف الزكاة.")
+                    page.locator("#ask-input").fill("أريد مرجعًا يساعدني على قراءة القرآن باتقان.")
                     page.locator("#ask-submit").click()
                     expect(page.locator("#ask-result")).to_be_visible(timeout=95000)
                     integration["suggested_sources"] = page.locator("#ask-sources a").evaluate_all("links => links.map(link => link.href)")

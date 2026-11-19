@@ -1,11 +1,29 @@
 // Each answer is a short summary of the named sources. Direct matches use complete question variants.
 const hajjRitesSource = ["ابن باز · ما هي أنساك الحج؟", "https://binbaz.org.sa/fatwas/7201/ما-هي-انساك-الحج"];
 const ramadanUmrahSource = ["ابن باز · عدم إجزاء العمرة في رمضان عن الحج", "https://binbaz.org.sa/fatwas/6252/عدم-اجزاء-العمرة-في-رمضان-عن-الحج"];
+const becomingMuslimSource = ["ابن باز · الأمور التي يُدخل بها في الإسلام", "https://binbaz.org.sa/fatwas/1263/الامور-التي-يدخل-بها-في-الاسلام"];
+const wipingCountSource = ["ابن باز · عدد المسح على الخفين", "https://binbaz.org.sa/fatwas/7784/عدد-المسح-على-الخفين"];
 
 const footwearTerms = ["الخفين", "الخف", "الجوربين", "الجوارب", "الشراب"];
 const khuffQuestions = forms => forms.flatMap(form => footwearTerms.map(term => form + " " + term));
 
 const askEvidence = {
+  newcomer_start: {
+    title: "الدخول في الإسلام · Becoming Muslim",
+    terms: ["الدخول في الإسلام", "أدخل الإسلام", "اعتناق الإسلام", "أعتنق الإسلام", "كيف أسلم", "become muslim", "convert to islam", "devenir musulman", "convertirse al islam"],
+    sources: [
+      ["دليل زاد · الشهادتان والخطوات الأولى", "#discover-ar-shahada"], becomingMuslimSource
+    ],
+    localizedSources: {
+      en: [["Zad guide · The Shahada and first steps", "#discover-en-shahada"], becomingMuslimSource],
+      fr: [["Guide Zad · La chahada et les premiers pas", "#discover-fr-shahada"], becomingMuslimSource],
+      es: [["Guía de Zad · La shahada y los primeros pasos", "#discover-es-shahada"], becomingMuslimSource]
+    },
+    ar: ["إن اخترت اعتناق الإسلام، فانطق بالشهادتين عن فهم وصدق: أشهد أن لا إله إلا الله، وأشهد أن محمدًا رسول الله. ثم ابدأ بتعلّم الوضوء والصلوات الخمس. يشرح دليل زاد معنى الشهادتين والخطوات الأولى بعدهما.", "كيف أدخل الإسلام", "كيف أصبح مسلمًا", "كيف أعتنق الإسلام", "أنا غير مسلم وأريد الدخول في الإسلام، كيف أبدأ"],
+    en: ["If you choose to become Muslim, say the testimony of faith sincerely and with understanding: I bear witness that none is worthy of worship except God, and I bear witness that Muhammad is the Messenger of God. Then begin learning how to perform wudu and the five daily prayers. The linked guide walks you through the first steps.", "how do i become muslim", "how can i convert to islam"],
+    fr: ["Si vous choisissez d’embrasser l’islam, prononcez l’attestation de foi avec sincérité et en comprenant son sens : j’atteste que nul ne mérite d’être adoré en dehors de Dieu et que Muhammad est le messager de Dieu. Commencez ensuite à apprendre les ablutions et les cinq prières quotidiennes. Le guide présente les premières étapes.", "comment devenir musulman", "comment me convertir à l’islam"],
+    es: ["Si decides abrazar el islam, pronuncia el testimonio de fe con sinceridad y comprensión: doy testimonio de que solo Dios merece ser adorado y de que Muhammad es Su mensajero. Después, empieza a aprender la ablución y las cinco oraciones diarias. La guía presenta los primeros pasos.", "cómo me convierto al islam", "cómo puedo hacerme musulmán"]
+  },
   shahada: {
     title: "معنى الشهادتين · Testimony of faith",
     terms: ["الشهادتين", "الشهادة", "شهادة", "shahada", "shahadah", "chahada"],
@@ -53,6 +71,19 @@ const askEvidence = {
     fr: ["Le hajj a lieu en dhou al-hijja, avec la station à Arafat le neuvième jour. La omra peut se faire pendant le Ramadan et comporte la récompense d’un hajj. L’obligation du hajj demeure.", "peut on faire le hajj pendant le ramadan", "le hajj a t il lieu pendant le ramadan"],
     es: ["El hach se realiza en Dhul-Hiyya, con la estancia en Arafat el noveno día. Se puede hacer la umra en Ramadán y obtener la recompensa de un hach. La obligación de realizar el hach sigue vigente.", "se puede hacer el hach en ramadán", "puedo hacer el hach en ramadán"]
   },
+  hajj_vow: {
+    title: "نذر الحج وصيغته · Wording of a vow to perform Hajj",
+    clarification: true,
+    terms: ["نذرت أن أحج", "نذرت أحج", "نذر الحج", "نذرت الحج", "vowed to perform hajj", "vow to perform hajj", "vœu de faire le hajj", "voto de realizar el hach"],
+    sources: [
+      ["ابن باز · الفرق بين النذر بالشيء ومجرد النية به", "https://binbaz.org.sa/fatwas/10786/الفرق-بين-النذر-بالشيء-ومجرد-النية-به"],
+      hajjRitesSource
+    ],
+    ar: ["ما صيغة النذر التي تلفّظت بها؟ وهل حددت وقتًا أو علّقته على شرط؟ اذكر اللفظ كما قلته عند سؤال جهة إفتاء، لأن الحكم يتوقف على هذه التفاصيل. وإذا قصدت وقت المناسك نفسها، فهي في ذي الحجة.", "نذرت أن أحج في رمضان هل يلزمني", "نذرت أحج في رمضان هل يلزمني الوفاء بالنذر", "نذرت الحج فما الحكم"],
+    en: ["What exact words did you say? Did you set a time or attach a condition? Give that wording to a qualified scholar so they can advise on your case. The Hajj rites take place in Dhul-Hijjah.", "i vowed to perform hajj in ramadan what should i do"],
+    fr: ["Quels mots exacts avez-vous prononcés ? Avez-vous fixé une date ou posé une condition ? Donnez ces précisions à une personne qualifiée avant de tirer une conclusion sur votre cas. Les rites du hajj ont lieu en dhou al-hijja.", "j’ai fait le vœu de faire le hajj pendant le ramadan que dois je faire"],
+    es: ["¿Qué palabras exactas pronunciaste? ¿Fijaste una fecha o pusiste alguna condición? Explica estos detalles a una persona cualificada para que valore tu caso. Los ritos del hach se realizan en Dhul-Hiyya.", "hice un voto de realizar el hach en ramadán qué hago"]
+  },
   ramadan_umrah: {
     title: "فضل العمرة في رمضان · Umrah in Ramadan",
     terms: ["العمرة في رمضان", "عمرة رمضان", "العمرة", "والعمرة", "اعتمر", "umrah", "omra", "umra"],
@@ -61,6 +92,25 @@ const askEvidence = {
     en: ["Umrah can be performed during Ramadan. The cited hadith promises the reward of a Hajj. Ibn Baz explains that obligatory Hajj still has to be performed.", "can i perform umrah in ramadan", "what is the reward for umrah in ramadan"],
     fr: ["La omra peut se faire pendant le Ramadan. Le hadith cité lui attribue la récompense d’un hajj. Ibn Baz explique que l’obligation du hajj demeure.", "peut on faire la omra pendant le ramadan"],
     es: ["Se puede hacer la umra durante Ramadán. El hadiz citado le atribuye la recompensa de un hach. Ibn Baz explica que sigue la obligación de realizar el hach.", "puedo hacer la umra en ramadán", "se puede hacer la umra en ramadán"]
+  },
+  ramadan_umrah_last_ten: {
+    title: "العمرة في العشر الأواخر · Umrah in the last ten of Ramadan",
+    terms: ["العمرة في العشر الأواخر", "عمرة العشر الأواخر", "أعتمر في العشر الأواخر", "umrah in the last ten", "omra pendant les dix derniers", "umra en los últimos diez"],
+    sources: [
+      ["ابن باز · أفضل أوقات العمرة", "https://binbaz.org.sa/fatwas/9552/افضل-اوقات-العمرة"],
+      ramadanUmrahSource
+    ],
+    followUp: {
+      ramadan_umrah: [
+        "طيب وإذا كان في العشر الأواخر", "طيب في العشر الأواخر", "طيب وإذا كانت في العشر الأواخر",
+        "وإذا كان في العشر الأواخر", "وإذا كانت في العشر الأواخر", "وإذا اعتمرت في العشر الأواخر",
+        "وهل في العشر الأواخر", "في العشر الأواخر", "ماذا عن العشر الأواخر"
+      ]
+    },
+    ar: ["تجوز العمرة في العشر الأواخر من رمضان، ورجّح الشيخ ابن باز أنها أفضل من العمرة في بقية الشهر. ويشملها فضل العمرة في رمضان، مع بقاء فريضة الحج على من وجبت عليه.", "هل يجوز أداء العمرة في العشر الأواخر من رمضان", "ما فضل العمرة في العشر الأواخر من رمضان", "هل العمرة في العشر الأواخر أفضل"],
+    en: ["You can perform Umrah in the last ten days of Ramadan. Ibn Baz considered this part of the month the best time for it. The reward mentioned for Umrah in Ramadan also applies, and the obligation to perform Hajj still stands.", "can i perform umrah in the last ten days of ramadan"],
+    fr: ["La omra peut se faire pendant les dix derniers jours du Ramadan. Ibn Baz considérait que c’était le meilleur moment du mois pour l’accomplir. Le mérite de la omra du Ramadan s’y applique et l’obligation du hajj demeure.", "peut on faire la omra pendant les dix derniers jours du ramadan"],
+    es: ["Se puede hacer la umra en los últimos diez días de Ramadán. Ibn Baz consideraba que era el mejor momento del mes para hacerla. Se aplica el mérito de la umra en Ramadán y sigue vigente la obligación de hacer el hach.", "puedo hacer la umra en los últimos diez días de ramadán"]
   },
   umrah_hajj_obligation: {
     title: "هل تسقط العمرة فريضة الحج؟ · Umrah and the obligation of Hajj",
@@ -86,17 +136,30 @@ const askEvidence = {
     terms: [...khuffQuestions(["المسح على", "أمسح على"]), "الخفين", "الجوربين", "الجوارب", "wipe over socks", "wipe over khuffs"],
     sources: [
       ["ابن باز · كيفية المسح على الجوارب", "https://binbaz.org.sa/fatwas/20314/كيفية-المسح-على-الجوارب"],
-      ["ابن باز · عدد المسح على الخفين", "https://binbaz.org.sa/fatwas/7784/عدد-المسح-على-الخفين"],
+      wipingCountSource,
       ["ابن باز · شروط المسح على الخفين أو الجوربين", "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"]
     ],
     ar: [
       "في الوضوء، إذا لبست الخفين أو الجوربين الساترين على طهارة، امسح بيدك المبللة على أعلى كل قدم فوق الخف أو الجورب مرة واحدة. امسح اليمنى بيدك اليمنى واليسرى بيدك اليسرى، والمسح يكون على الظاهر.",
-      ...khuffQuestions(["كيف أمسح على", "كيف المسح على", "طريقة المسح على", "ما طريقة المسح على", "كيفية المسح على", "ما كيفية المسح على", "صفة المسح على", "ما صفة المسح على", "المسح على"]),
+      ...khuffQuestions(["كيف أمسح على", "كيف المسح على", "طريقة المسح على", "ما طريقة المسح على", "كيفية المسح على", "ما كيفية المسح على", "صفة المسح على", "ما صفة المسح على"]),
       "كيف أمسح عالخفين", "كيف أمسح عالجوارب", "هل المسح على الخفين على الظاهر أم الباطن"
     ],
     en: ["If you put on the covering footwear while ritually pure, wipe once over the top of each foot during wudu. Use your wet right hand for the right foot and your left hand for the left foot.", "how do i wipe over socks during wudu", "how do i wipe over khuffs during wudu"],
     fr: ["Si vous avez enfilé des chaussettes couvrantes en état de pureté rituelle, passez une fois la main humide sur le dessus de chaque pied pendant les ablutions. Utilisez la main droite pour le pied droit, et la gauche pour le pied gauche.", "comment essuyer les chaussettes pendant les ablutions"],
     es: ["Si te pusiste los calcetines que cubren los pies en estado de pureza ritual, pasa una vez la mano húmeda por la parte superior de cada pie al hacer la ablución. Usa la mano derecha para el pie derecho y la izquierda para el izquierdo.", "cómo paso la mano sobre los calcetines durante la ablución"]
+  },
+  khuff_count: {
+    title: "عدد مرات المسح على الخفين · Number of wipes over footwear",
+    terms: khuffQuestions(["عدد مرات المسح على", "كم مرة أمسح على"]),
+    sources: [wipingCountSource],
+    ar: [
+      "بحسب فتوى الشيخ ابن باز، يمسح المتوضئ كل خف مرة واحدة، ولا حاجة إلى تكرار المسح ثلاث مرات.",
+      ...khuffQuestions(["كم مرة أمسح على", "كم عدد مرات المسح على", "عدد مرات المسح على"]),
+      "هل أمسح على الخفين ثلاث مرات", "أمسح على الخفين مرة أو ثلاث"
+    ],
+    en: ["According to Ibn Baz, wipe each khuff once during wudu. There is no need to repeat the wipe three times.", "how many times should i wipe over khuffs", "do i wipe over khuffs three times"],
+    fr: ["Selon Ibn Baz, un passage de la main sur chaque khuff suffit pendant les ablutions. Il est inutile de répéter le geste trois fois.", "combien de fois passer la main sur les khuffs"],
+    es: ["Según Ibn Baz, basta con pasar la mano una vez por cada khuff (calzado que cubre el pie) durante la ablución. No hace falta hacerlo tres veces.", "cuántas veces debo pasar la mano sobre los khuff"]
   },
   khuff_duration: {
     title: "مدة المسح على الخفين والجوارب · Time limit for wiping over footwear",
@@ -156,6 +219,19 @@ const askEvidence = {
     en: ["Zakat is obligatory when its conditions are met and has specified recipients. Voluntary charity is encouraged, even in small amounts.", "what is the difference between zakat and sadaqah", "what is the difference between zakat and charity"],
     fr: ["La zakat est obligatoire lorsque ses conditions sont remplies et concerne des bénéficiaires définis. L’aumône volontaire est encouragée, même si elle est modeste.", "quelle est la différence entre la zakat et l’aumône"],
     es: ["El zakat es obligatorio cuando se cumplen sus condiciones y tiene beneficiarios definidos. Se anima a dar caridad voluntaria incluso en cantidades pequeñas.", "cuál es la diferencia entre el zakat y la caridad"]
+  },
+  zakat_debt_land: {
+    title: "الزكاة مع وجود دين أو أرض · Zakat when debts or land are involved",
+    clarification: true,
+    terms: ["علي دين", "زكاة الأرض", "زكاة الأراضي", "زكاة المال مع وجود دين", "zakat on land", "zakat with debt", "zakat sur un terrain", "zakat sobre un terreno"],
+    sources: [
+      ["ابن باز · حكم إخراج الزكاة إذا كان عليك دين", "https://binbaz.org.sa/fatwas/5726/حكم-اخراج-الزكاة-اذا-كان-عليكم-دين"],
+      ["ابن باز · حكم الزكاة في الأرض غير المعدة للبيع", "https://binbaz.org.sa/fatwas/5808/حكم-الزكاة-في-الارض-غير-المعدة-للبيع"]
+    ],
+    ar: ["هل تقصد زكاة المال الذي عندك مع وجود دين عليك، أم زكاة الأرض نفسها؟ إذا كانت المسألة عن الأرض، فاذكر نوعها وهل هي للتجارة أو للسكن أو للاستعمال. وعند مراجعة جهة إفتاء، وضّح هل الدين عليك أم لك، وما المال الذي تسأل عن زكاته.", "هل تجب علي زكاة المال إذا علي دين وعندي أرض", "هل تجب علي الزكاة إذا علي دين ولدي أرض", "علي دين وعندي أرض كيف أعرف زكاتي"],
+    en: ["Are you asking about zakat on the money you hold while owing a debt, or about zakat on the land itself? If the question concerns land, explain whether it is held for trade, housing, or another use. Tell a qualified scholar what asset you mean and whether you owe the debt or someone owes it to you.", "do i owe zakat if i have a debt and own land"],
+    fr: ["La question porte-t-elle sur la zakat de votre argent alors que vous avez une dette, ou sur celle du terrain lui-même ? Précisez si le terrain est destiné à la revente, à l’habitation ou à un autre usage. Un spécialiste aura besoin de savoir quel bien est concerné et qui doit la dette à qui.", "dois je payer la zakat si j’ai une dette et un terrain"],
+    es: ["¿Preguntas por el zakat del dinero que tienes mientras debes una deuda, o por el del propio terreno? Indica si el terreno se destina a la venta, a la vivienda o a otro uso. Al consultar a un especialista, explica de qué bien se trata y si tú debes el dinero o alguien te lo debe.", "debo pagar el zakat si tengo una deuda y un terreno"]
   },
   after_prayer: {
     title: "التسبيح بعد الصلاة · Remembrance after prayer",

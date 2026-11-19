@@ -17,22 +17,25 @@ PUBLIC = "https://kingali66767.github.io/zad-preview/"
 PRAYER_API = "https://api.aladhan.com/**"
 TIMINGS = {"Fajr": "05:10", "Dhuhr": "12:10", "Asr": "15:10", "Maghrib": "18:10", "Isha": "19:10"}
 COMPATIBLE = "Object.defineProperty(navigator, 'gpu', {value: {requestAdapter: async () => ({features: new Set(['shader-f16'])})}})"
+DIRECT_ANSWER = re.compile("^(?:تصحيح|جواب|أجوبة) موثّق")
+MODEL_QUESTION = "أريد مرجعًا يساعدني على قراءة القرآن باتقان."
 WORKER = """
 self.onmessage = ({data}) => {
+  const send = (message) => self.postMessage({...message, requestId:data.requestId});
   if (data.type === 'init') {
-    self.postMessage({type:'progress', progress:1.5});
-    self.postMessage({type:'ready'});
+    send({type:'progress', progress:1.5});
+    send({type:'ready'});
   } else if (data.question.includes('خطأ')) {
-    self.postMessage({type:'error'});
+    send({type:'error'});
   } else if (data.question.includes('هلوسة')) {
-    self.postMessage({type:'answer', answer:'نص مختلق <مرجع>'});
-    self.postMessage({type:'topic', id:'fake_reference'});
+    send({type:'answer', answer:'نص مختلق <مرجع>'});
+    send({type:'topic', id:'fake_reference'});
   } else if (data.question.includes('خارج المرشحات')) {
-    self.postMessage({type:'topic', id:'ablution'});
+    send({type:'topic', id:'ablution'});
   } else if (data.question.includes('رفض الاقتراح')) {
-    self.postMessage({type:'topic', id:null});
+    send({type:'topic', id:null});
   } else if (!data.question.includes('مهلة')) {
-    self.postMessage({type:'topic', id:data.topics[0].id, answer:'نص مختلق <مرجع>'});
+    send({type:'topic', id:data.topics[0].id, answer:'نص مختلق <مرجع>'});
   }
 };
 """
@@ -257,18 +260,19 @@ def public_cases(suite, browser, device):
         def real_model(page):
             open_model(page)
             expect(page.locator("#ask-model-status")).to_contain_text("جاهز", timeout=310000)
-            ask(page, "أريد مرجعًا يساعدني على معرفة مصارف الزكاة.")
+            ask(page, MODEL_QUESTION)
             expect(page.locator("#ask-status")).to_contain_text("قد تساعدك", timeout=95000)
             expect(page.locator("#ask-answer")).to_be_hidden()
-            expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+            expect(page.locator('#ask-sources a[href="https://sunnah.com/muslim:798a"]')).to_be_visible()
         suite.run("عام | تشغيل Qwen واقتراح مرجع فعلي", lambda: new_visit(browser, PUBLIC, real_model))
     else:
         suite.blocked("عام | تشغيل Qwen واقتراح مرجع فعلي", support)
 
 
 def ask(page, question):
-    page.locator("#ask-input").fill(question)
-    page.locator("#ask-submit").click()
+    field = page.locator("#ask-input")
+    field.fill(question)
+    field.press("Enter")
 
 
 def open_model(page):
@@ -340,11 +344,11 @@ def compound_and_scope(page):
     expect(answer).to_contain_text("حين يذكرها")
 
     ask(page, "كيف أمسح على الخفين، والطبيب منع وصول الماء للجرح؟")
-    expect(page.locator("#ask-answer-heading")).to_have_text("نتائج من مواقع العلماء")
+    expect(page.locator("#ask-answer-heading")).not_to_have_text(DIRECT_ANSWER)
     expect(answer).not_to_contain_text("أعلى كل قدم")
-    expect(page.locator('#ask-sources a[href*="/fatwas/20314/"]')).to_be_visible()
     ask(page, "كم مدة المسح على الجبيرة؟")
-    expect(page.locator("#ask-answer-heading")).to_have_text("كيف تحدّد سؤالك؟")
+    expect(page.locator("#ask-result")).to_be_visible()
+    expect(answer).not_to_contain_text("ثلاثة أيام")
     expect(page.locator('#ask-sources a[href*="/fatwas/12763/"]')).to_have_count(0)
     ask(page, "أبي طريقة المسح على الخفين عند الفوزان")
     expect(page.locator("#ask-answer-heading")).to_have_text("المواقع الرسمية")
@@ -353,7 +357,7 @@ def compound_and_scope(page):
 
 def clarification(page):
     ask(page, "عندي سؤال عن الحج والعمرة في رمضان")
-    expect(page.locator("#ask-answer-heading")).to_have_text("كيف تحدّد سؤالك؟")
+    expect(page.locator("#ask-answer-heading")).not_to_have_text(DIRECT_ANSWER)
     expect(page.get_by_role("button", name="هل يجوز أداء العمرة في رمضان؟")).to_be_visible()
     page.get_by_role("button", name="متى يؤدى الحج؟").press("Enter")
     expect(page.locator("#ask-answer-heading")).to_have_text("جواب موثّق")
@@ -376,12 +380,165 @@ def unsafe_assumptions(page):
         "What is the capital of Iceland?",
     ):
         ask(page, question)
-        expect(page.locator("#ask-answer-heading")).to_have_text(
-            re.compile("^(كيف تحدّد سؤالك؟|نتائج من مواقع العلماء)$"))
-        if page.locator("#ask-sources").get_attribute("class") == "references fatwa-results":
-            expect(page.locator("#ask-answer")).to_contain_text("راجع السؤال والجواب كاملين")
-        else:
-            expect(page.locator('#ask-sources a[href="https://binbaz.org.sa/fatwas"]')).to_be_visible()
+        expect(page.locator("#ask-result")).to_be_visible()
+        expect(page.locator("#ask-answer-heading")).not_to_have_text(DIRECT_ANSWER)
+        expect(page.locator("#ask-answer")).not_to_contain_text("فصومه صحيح")
+        expect(page.locator("#ask-status")).not_to_contain_text("مقتطف")
+
+
+def natural_questions(page):
+    for question, expected, body, source, language in (
+        ("هل الحج ممكن خلال شهر رمضان؟", "تصحيح موثّق", "ذي الحجة", "/fatwas/7201/", "ar"),
+        ("هل اقدر اؤدي مناسك الحج اثناء شهر رمضان؟", "تصحيح موثّق", "ذي الحجة", "/fatwas/7201/", "ar"),
+        ("هل أركان الإسلام ٧؟", "تصحيح موثّق", "أركان الإسلام خمسة", "bukhari:8", "ar"),
+        ("Is it possible to do Hajj during Ramadan?", "تصحيح موثّق", "Dhul-Hijjah", "/fatwas/7201/", "en"),
+        ("مدة المسح فوق الشراب كم ساعة لو أنا مسافر؟", "جواب موثّق", "ثلاثة أيام", "/fatwas/12763/", "ar"),
+        ("أمسح فوق الشراب من تحت ولا من فوق؟", "جواب موثّق", "أعلى كل قدم", "/fatwas/20314/", "ar"),
+    ):
+        ask(page, question)
+        expect(page.locator("#ask-answer-heading")).to_have_text(expected)
+        expect(page.locator("#ask-answer")).to_contain_text(body)
+        expect(page.locator("#ask-answer")).to_have_attribute("lang", language)
+        expect(page.locator(f'#ask-sources a[href*="{source}"]').first).to_be_visible()
+
+
+def independent_question_parts(page):
+    for question, first, second, sources in (
+        ("هل أقدر أحج في رمضان، وإذا اعتمرت فيه هل تكفيني العمرة عن الحج؟",
+         "ذي الحجة", "لا تُجزئ عن فريضة الحج", ("/fatwas/7201/", "/fatwas/6252/")),
+        ("ما طريقة الوضوء، وماذا أفعل إذا نسيت الصلاة؟",
+         "المرفقين", "حين يذكرها", ("bukhari:159", "bukhari:597")),
+    ):
+        ask(page, question)
+        expect(page.locator("#ask-answer-heading")).to_have_text("أجوبة موثّقة")
+        parts = page.locator("#ask-answer .ask-part")
+        expect(parts).to_have_count(2)
+        expect(parts.nth(0)).to_contain_text(first)
+        expect(parts.nth(1)).to_contain_text(second)
+        for source in sources:
+            expect(page.locator(f'#ask-result a[href*="{source}"]').first).to_be_visible()
+    without_overflow(page)
+
+
+def qualified_question_paths(page):
+    heading = page.locator("#ask-answer-heading")
+    answer = page.locator("#ask-answer")
+    ask(page, "نذرت أحج في رمضان، هل يلزمني الوفاء بالنذر؟")
+    expect(heading).not_to_have_text(DIRECT_ANSWER)
+    expect(answer).to_contain_text(re.compile("لفظ|عبارة|صيغة"))
+    expect(answer).not_to_contain_text("لا يُؤدّى الحج في رمضان")
+    ask(page, "هل تجب علي زكاة المال إذا عليّ دين وعندي أرض؟")
+    expect(heading).not_to_have_text(DIRECT_ANSWER)
+    expect(answer).to_contain_text("الأرض")
+    expect(answer).to_contain_text(re.compile("بيع|سكن|تجار|استعمال"))
+    expect(page.locator("#ask-result")).not_to_contain_text("المال المفقود والمنسي")
+    ask(page, "مسحت فوق جورب شفاف لابسه من غير وضوء، هل صلاتي صحيحة؟")
+    expect(page.locator("#ask-result")).to_be_visible()
+    expect(heading).not_to_have_text(DIRECT_ANSWER)
+    expect(answer).not_to_contain_text("أعلى كل قدم")
+
+
+def contextual_follow_up(page):
+    ask(page, "هل يجوز أداء العمرة في رمضان؟")
+    expect(page.locator("#ask-answer")).to_contain_text("تجوز العمرة")
+    ask(page, "طيب وإذا كان في العشر الأواخر؟")
+    expect(page.locator("#ask-answer")).to_contain_text("العمرة")
+    expect(page.locator("#ask-answer")).to_contain_text("العشر الأواخر")
+    expect(page.locator('#ask-sources a[href*="/fatwas/9552/"]')).to_be_visible()
+    ask(page, "ما أركان الإسلام؟")
+    expect(page.locator("#ask-answer")).to_contain_text("الشهادتان")
+    ask(page, "طيب وإذا كان في العشر الأواخر؟")
+    expect(page.locator("#ask-answer")).not_to_contain_text("تجوز العمرة")
+
+
+def new_question_reset(page):
+    ask(page, "هل يجوز أداء العمرة في رمضان؟")
+    expect(page.locator("#ask-question")).to_contain_text("العمرة في رمضان")
+    page.locator("#ask-reset").click()
+    field = page.locator("#ask-input")
+    expect(field).to_have_value("")
+    expect(field).to_be_focused()
+    expect(page.locator("#ask-result")).to_be_hidden()
+    ask(page, "طيب وإذا كان في العشر الأواخر؟")
+    expect(page.locator("#ask-answer")).not_to_contain_text("تجوز العمرة")
+
+
+def newcomer_path(page):
+    ask(page, "أنا غير مسلم وأريد الدخول في الإسلام، كيف أبدأ؟")
+    guide = page.locator('#ask-result a[href^="#discover-"]').first
+    expect(guide).to_be_visible()
+    target = guide.get_attribute("href")
+    guide.click()
+    expect(page).to_have_url(re.compile(re.escape(target) + "$"))
+    expect(page.locator("#discover-islam")).to_have_attribute("open", "")
+    expect(page.locator(target)).to_be_visible()
+
+
+def stale_worker_result(page):
+    open_model(page)
+    expect(page.locator("#ask-model-status")).to_contain_text("جاهز")
+    ask(page, MODEL_QUESTION)
+    expect(page.locator("html")).to_have_attribute("data-qa-worker-pending", "true")
+    second = "ما طريقة الوضوء؟"
+    ask(page, second)
+    expect(page.locator("#ask-answer")).to_contain_text("المرفقين")
+    expect(page.locator("#ask-question")).to_contain_text(second)
+    page.evaluate("() => window.qaAskWorker.postMessage({type:'release'})")
+    expect(page.locator("html")).to_have_attribute("data-qa-worker-replied", "true")
+    expect(page.locator("#ask-answer")).to_contain_text("المرفقين")
+    expect(page.locator("#ask-question")).to_contain_text(second)
+    expect(page.locator('#ask-sources a[href="https://sunnah.com/muslim:798a"]')).to_have_count(0)
+
+
+def hold_worker_reply(page):
+    page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(
+        content_type="text/javascript", body="""
+          let pending;
+          self.onmessage = ({data}) => {
+            if (data.type === 'init') self.postMessage({type:'ready'});
+            if (data.type === 'ask') {
+              pending = data;
+              self.postMessage({type:'qa-pending'});
+            }
+            if (data.type === 'release') self.postMessage(
+              {type:'topic', id:'quran_recitation', requestId:pending.requestId}
+            );
+          };
+        """))
+
+
+WATCH_WORKER = """
+const NativeWorker = window.Worker;
+window.Worker = class extends NativeWorker {
+  constructor(...args) {
+    super(...args);
+    window.qaAskWorker = this;
+    this.addEventListener('message', ({data}) => {
+      if (data.type === 'qa-pending') document.documentElement.dataset.qaWorkerPending = 'true';
+      if (data.type === 'topic') document.documentElement.dataset.qaWorkerReplied = 'true';
+    });
+  }
+};
+"""
+
+
+def revised_answer_cases(suite, browser, address, *, local=False, device=None):
+    label = "محلي" if local else "عام"
+    layout = {"device": device} if device else {"viewport": {"width": 1440, "height": 900}}
+    for test, name in (
+        (natural_questions, "صيغ طبيعية للحج والمسح والأركان بالعربية والإنجليزية"),
+        (independent_question_parts, "إجابتان منفصلتان لسؤالي الحج والعمرة والوضوء والصلاة"),
+        (qualified_question_paths, "استيضاح النذر وغرض الأرض والإحالة الآمنة للحالة الشخصية"),
+        (contextual_follow_up, "متابعة قصيرة مرتبطة بآخر سؤال دون تسرب سياق سابق"),
+        (new_question_reset, "بدء سؤال جديد وإزالة سياق السؤال السابق"),
+        (newcomer_path, "فتح دليل التعرّف على الإسلام من جواب المستخدم الجديد"),
+    ):
+        suite.run(f"{label} | {browser.browser_type.name} | {name}",
+                  lambda: new_visit(browser, address, test, local=local, **layout))
+    if local:
+        suite.run(f"{label} | {browser.browser_type.name} | تجاهل نتيجة العامل المتأخرة بعد إرسال سؤال جديد",
+                  lambda: new_visit(browser, address, stale_worker_result, local=True,
+                                    init=COMPATIBLE + ";\n" + WATCH_WORKER, setup=hold_worker_reply, **layout))
 
 
 def fatwa_filters(page):
@@ -605,12 +762,12 @@ def local_cases(suite, browser, origin):
         init=COMPATIBLE.replace("({features: new Set(['shader-f16'])})", "new Promise(() => {})"))
 
     def fail_worker(page):
-        page.route("**/assets/ask-worker.js", lambda route: route.fulfill(status=503))
+        page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(status=503))
     run("تعذّر تحميل العامل البرمجي", lambda p: reset_check(p, "تعذّر تشغيل"),
         init=COMPATIBLE, setup=fail_worker)
 
     def valid_worker(page):
-        page.route("**/assets/ask-worker.js", lambda route: route.fulfill(
+        page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(
             content_type="text/javascript", body=WORKER))
 
     def start_model(page):
@@ -650,7 +807,11 @@ def local_cases(suite, browser, origin):
                     ask(page, question + "؟")
                     expect(page.locator("#ask-answer")).to_have_attribute("lang", language)
                     expect(page.locator("#ask-answer")).to_have_text(body)
-                    expect(page.locator("#ask-sources a")).to_have_count(len(record["sources"]))
+                    sources = record.get("localizedSources", {}).get(language, record["sources"])
+                    expected_urls = page.evaluate("sources => sources.map(source => new URL(source[1], location.href).href)",
+                                                  sources)
+                    actual_urls = page.locator("#ask-sources a").evaluate_all("links => links.map(link => link.href)")
+                    assert actual_urls == expected_urls, (question, actual_urls)
                     checked += 1
         return {"aliases_checked": checked}
     run("كل صيغ الأسئلة المعتمدة وتطابق لغة الرد ومراجعه", catalog_variants)
@@ -675,15 +836,15 @@ def local_cases(suite, browser, origin):
 
     def model_guard(page):
         start_model(page)
-        for question in ("هلوسة عن الزكاة", "الزكاة خارج المرشحات", "زكاة رفض الاقتراح"):
+        for question in ("هلوسة عن القرآن", "القرآن خارج المرشحات", "القرآن رفض الاقتراح"):
             ask(page, question)
             expect(page.locator("#ask-status")).to_contain_text("لم أجد جوابًا موثّقًا")
-            expect(page.locator("#ask-answer-heading")).to_have_text("كيف تحدّد سؤالك؟")
+            expect(page.locator("#ask-answer-heading")).not_to_have_text(DIRECT_ANSWER)
             assert "نص مختلق" not in page.locator("#ask-result").inner_text()
-        ask(page, "هل أدفع الزكاة على بيتي الذي أسكنه؟")
+        ask(page, MODEL_QUESTION)
         expect(page.locator("#ask-status")).to_contain_text("قد تساعدك هذه المراجع")
         expect(page.locator("#ask-answer")).to_be_hidden()
-        expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+        expect(page.locator('#ask-sources a[href="https://sunnah.com/muslim:798a"]')).to_be_visible()
         assert "نص مختلق" not in page.locator("#ask-result").inner_text()
     run("رفض رد مختلق ومعرّف غير موجود ومرجع خارج المرشحات، وعرض الإحالة فقط",
         model_guard, init=COMPATIBLE, setup=valid_worker)
@@ -691,21 +852,21 @@ def local_cases(suite, browser, origin):
     def answer_timeout(page):
         page.clock.install()
         start_model(page)
-        ask(page, "مهلة الزكاة")
+        ask(page, "مهلة القرآن")
         expect(page.locator("#ask-submit")).to_be_disabled()
         page.clock.fast_forward(91000)
         expect(page.locator("#ask-model-status")).to_contain_text("استغرق اقتراح")
         expect(page.locator("#ask-enable")).to_be_enabled()
         verified_answer(page)
         start_model(page)
-        ask(page, "خطأ الزكاة")
+        ask(page, "خطأ القرآن")
         expect(page.locator("#ask-model-status")).to_contain_text("تعذّر تشغيل")
         verified_answer(page)
     run("انتهاء مهلة اقتراح المرجع، وتعطل النموذج، واستمرار البحث المباشر",
         answer_timeout, init=COMPATIBLE, setup=valid_worker)
 
     def init_timeout(page):
-        page.route("**/assets/ask-worker.js", lambda route: route.fulfill(
+        page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(
             content_type="text/javascript", body="self.onmessage = () => {};"))
         page.clock.install()
         open_model(page)
@@ -724,6 +885,8 @@ def main():
     modes.add_argument("--local-only", action="store_true")
     modes.add_argument("--public-only", action="store_true")
     parser.add_argument("--webkit", action="store_true")
+    parser.add_argument("--answers-only", action="store_true",
+                        help="Run only the restructured question and answer regressions.")
     args = parser.parse_args()
     suite = Suite()
     with Server(("127.0.0.1", 0), partial(Handler, directory=SITE)) as server:
@@ -732,47 +895,51 @@ def main():
         origin = f"http://127.0.0.1:{server.server_port}/"
         try:
             with sync_playwright() as playwright:
+                device = playwright.devices["iPhone 13"]
                 with playwright.chromium.launch(executable_path=os.getenv("ZAD_CHROMIUM", "/usr/bin/chromium")) as browser:
                     if not args.public_only:
-                        local_cases(suite, browser, origin)
+                        if not args.answers_only:
+                            local_cases(suite, browser, origin)
+                        revised_answer_cases(suite, browser, origin, local=True)
                     if not args.local_only:
-                        public_cases(suite, browser, playwright.devices["iPhone 13"])
-                if args.webkit and not args.local_only:
+                        if not args.answers_only:
+                            public_cases(suite, browser, device)
+                        revised_answer_cases(suite, browser, PUBLIC)
+                if args.webkit:
                     try:
                         with playwright.webkit.launch() as browser:
-                            suite.run("عام | فتح الصفحة في WebKit بأبعاد iPhone",
-                                      lambda: new_visit(browser, PUBLIC, verify_sections, device=playwright.devices["iPhone 13"]))
-                            device = playwright.devices["iPhone 13"]
-                            suite.run("عام | اللغات والرجوع في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, guide_history, device=device))
-                            suite.run("عام | الأذكار والفتاوى في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, all_filters, device=device))
-                            suite.run("عام | حفظ خطة القراءة في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, reading_cycle, device=device))
-                            suite.run("عام | مواقيت الرياض الحية في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, lambda p: check_prayer_time(p, "riyadh"), device=device))
-                            suite.run("عام | فهرس الفتاوى وتصفية المصادر في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, fatwa_filters, device=device))
-                            suite.run("عام | المقتطفات والنسبة إلى المصدر في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, fatwa_excerpts, device=device))
-                            suite.run("عام | احترام العالم المطلوب والمعالجة الآمنة في WebKit",
-                                      lambda: new_visit(browser, PUBLIC, fatwa_rank_and_scope, device=device))
-                            suite.run("عام | تصحيح الالتباس ومراجعه على WebKit",
-                                      lambda: new_visit(browser, PUBLIC, corrected_questions, device=device))
-                            suite.run("عام | سؤال المسح على الخفين كما كُتب على الجوال",
-                                      lambda: new_visit(browser, PUBLIC, khuff_answers, device=device))
-                            suite.run("عام | السؤال المركّب والقيود الشخصية على WebKit",
-                                      lambda: new_visit(browser, PUBLIC, compound_and_scope, device=device))
-                            suite.run("عام | اختيار صيغة موثّقة على WebKit",
-                                      lambda: new_visit(browser, PUBLIC, clarification, device=device))
+                            if not args.public_only:
+                                revised_answer_cases(suite, browser, origin, local=True, device=device)
+                            if not args.local_only:
+                                revised_answer_cases(suite, browser, PUBLIC, device=device)
+                            if not args.answers_only and not args.local_only:
+                                webkit_public_cases(suite, browser, device)
                     except Exception as error:
-                        suite.blocked("عام | تشغيل محرك WebKit", str(error)[:1200])
+                        suite.blocked("تشغيل محرك WebKit", str(error)[:1200])
         finally:
             server.shutdown()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(suite.results, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if any(result["status"] == "failed" for result in suite.results):
         raise SystemExit(1)
+
+
+def webkit_public_cases(suite, browser, device):
+    for name, check in (
+        ("فتح الصفحة بأبعاد iPhone", verify_sections),
+        ("اللغات والرجوع", guide_history),
+        ("الأذكار والفتاوى", all_filters),
+        ("حفظ خطة القراءة", reading_cycle),
+        ("مواقيت الرياض الحية", lambda page: check_prayer_time(page, "riyadh")),
+        ("فهرس الفتاوى وتصفية المصادر", fatwa_filters),
+        ("المقتطفات والنسبة إلى المصدر", fatwa_excerpts),
+        ("احترام العالم المطلوب والمعالجة الآمنة", fatwa_rank_and_scope),
+        ("تصحيح الالتباس ومراجعه", corrected_questions),
+        ("سؤال المسح على الخفين كما كُتب على الجوال", khuff_answers),
+        ("السؤال المركّب والقيود الشخصية", compound_and_scope),
+        ("اختيار صيغة موثّقة", clarification),
+    ):
+        suite.run(f"عام | WebKit | {name}", lambda: new_visit(browser, PUBLIC, check, device=device))
 
 
 if __name__ == "__main__":

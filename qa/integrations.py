@@ -147,7 +147,7 @@ self.onmessage = async () => {
 
 def model_dependencies(page):
     script = model_probe_script()
-    page.route("**/assets/ask-worker.js", lambda route: route.fulfill(
+    page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(
         body=script, content_type="text/javascript"))
     outcome = page.evaluate("""() => new Promise(resolve => {
       const url = new URL(document.querySelector('#ask-script').dataset.worker, location.href);

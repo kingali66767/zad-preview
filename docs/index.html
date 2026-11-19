@@ -8,14 +8,15 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://api.aladhan.com; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>زاد | منصة التوعية الدينية</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=20261119-4">
 <link rel="stylesheet" href="assets/discover.css">
 <script src="assets/content.js" defer></script>
 <script src="assets/library-content.js" defer></script>
 <script src="assets/site.js" defer></script>
-<script src="assets/ask-evidence.js?v=20261119-3" defer></script>
-<script src="assets/fatwa-sources.js?v=20261119-3" defer></script>
-<script id="ask-script" data-worker="assets/ask-worker.js" src="assets/ask.js?v=20261119-3" defer></script>
+<script src="assets/ask-evidence.js?v=20261119-4" defer></script>
+<script src="assets/fatwa-sources.js?v=20261119-4" defer></script>
+<script src="assets/ask-intents.js?v=20261119-4" defer></script>
+<script id="ask-script" data-worker="assets/ask-worker.js?v=20261119-4" src="assets/ask.js?v=20261119-4" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">تجاوز إلى المحتوى</a>
@@ -403,15 +404,17 @@
 <div class="ask-panel">
 <p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
 <h2 id="ask-heading">اسأل زاد</h2>
-<p>اكتب سؤالك كما يخطر ببالك، مثل «هل يجوز الحج في رمضان؟».</p>
+<p>اكتب سؤالك بعبارتك. إذا كانت الإجابة تعتمد على تفصيل، سيحدّد لك زاد ما يحتاج إلى توضيح.</p>
 <form id="ask-form" class="ask-form">
 <label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: سجود السهو أو زكاة الفطر"></label>
-<button class="button green" id="ask-submit" type="submit" disabled>ابحث في المصادر</button>
+<button class="button green" id="ask-submit" type="submit" disabled>أرسل السؤال</button>
+<button class="button ask-reset" id="ask-reset" type="button" hidden>سؤال جديد</button>
 </form>
 <p id="ask-status" role="status"></p>
 <article class="card ask-result" id="ask-result" aria-labelledby="ask-answer-heading" hidden>
+<p id="ask-question" dir="auto"></p>
 <h3 id="ask-answer-heading" tabindex="-1"></h3>
-<p id="ask-answer" dir="auto"></p>
+<div id="ask-answer" dir="auto"></div>
 <div class="references" id="ask-sources"></div>
 <div class="ask-related" id="ask-related" hidden>
 <h4>أسئلة موثّقة قريبة</h4>
