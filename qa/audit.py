@@ -12,7 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 from http.client import HTTPConnection
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qs, urljoin, urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -112,6 +112,45 @@ def verify_launcher(page):
     without_overflow(page)
 
 
+def verify_home_menu(page):
+    home = page.url
+    header = page.locator("header.route-header")
+    menu = header.get_by_role("button", name="الأقسام", exact=True)
+    logo = header.locator(".launcher-brand")
+    nav = header.locator("#nav")
+    expect(menu).to_be_visible()
+    expect(logo).to_be_visible()
+    menu_position = menu.bounding_box()
+    logo_position = logo.bounding_box()
+    assert menu_position["x"] + menu_position["width"] <= logo_position["x"], (menu_position, logo_position)
+    assert menu_position["y"] < page.locator("main .hero").bounding_box()["y"]
+    expect(menu).to_have_attribute("aria-controls", "nav")
+    expect(menu).to_have_attribute("aria-expanded", "false")
+    expect(nav).to_be_hidden()
+    menu.press("Enter")
+    expect(menu).to_have_attribute("aria-expanded", "true")
+    expect(nav).to_be_visible()
+    without_overflow(page)
+    links = nav.get_by_role("link")
+    expect(links).to_have_count(len(SECTIONS))
+    assert set(links.evaluate_all("links => links.map(link => link.href)")) == {
+        urljoin(home, section + "/") for section in SECTIONS
+    }
+    page.keyboard.press("Escape")
+    expect(nav).to_be_hidden()
+    expect(menu).to_have_attribute("aria-expanded", "false")
+    expect(menu).to_be_focused()
+    menu.click()
+    nav.get_by_role("link", name="القرآن الكريم", exact=True).click()
+    expect(page).to_have_url(urljoin(home, "quran/"))
+    expect(page.locator("#quran")).to_be_visible()
+    page.go_back(wait_until="domcontentloaded")
+    expect(page).to_have_url(home)
+    expect(menu).to_be_visible()
+    expect(nav).to_be_hidden()
+    without_overflow(page)
+
+
 def browser_checks(origin, output, live):
     results = []
     external_links = set()
@@ -130,6 +169,7 @@ def browser_checks(origin, output, live):
             assert response.status == 200
             assert page.locator("html").get_attribute("dir") == "rtl"
             verify_launcher(page)
+            verify_home_menu(page)
             missing_anchors = page.locator('a[href^="#"]').evaluate_all(
                 "links => links.map(link => link.hash.slice(1)).filter(id => !document.getElementById(id))"
             )
@@ -187,7 +227,7 @@ def browser_checks(origin, output, live):
             if width in (390, 1440):
                 page.goto(origin, wait_until="load")
                 page.screenshot(path=output / f"zad-{width}.png")
-            results.append(f"Homepage {width}px: navigation, RTL, anchors, adhkar and FAQ topic filters, and reading persistence")
+            results.append(f"Homepage {width}px: top-left section menu, navigation, RTL, anchors, topic filters, and reading persistence")
             context.close()
 
         context = browser.new_context(viewport={"width": 390, "height": 844}, reduced_motion="reduce")

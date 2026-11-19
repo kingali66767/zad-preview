@@ -141,7 +141,15 @@ body[data-page="home"] {
     #edf4ec;
 }
 
-body[data-page="home"] .route-top { display: flex; }
+body[data-page="home"] .route-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+body[data-page="home"] .route-top #nav {
+  inset-inline-start: auto;
+}
+
 .launcher-brand {
   display: flex;
   align-items: center;

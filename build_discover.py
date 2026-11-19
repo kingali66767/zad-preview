@@ -12,7 +12,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261119-9"
+REVISION = "20261119-10"
 SECTIONS = {
     "quran": ("القرآن الكريم", "آيات مختارة وفضائل التلاوة"),
     "lessons": ("الخطب والدروس", "مواد مكتوبة للقراءة والاستفادة"),
@@ -215,15 +215,22 @@ def render_home():
 </section>'''
 
 
-def render_section_navigation(slug, base):
+def render_header(slug, base):
+    if slug == "home":
+        brand = (
+            f'<div class="launcher-brand"><span class="route-brand" aria-hidden="true">{icon("brand")}</span>'
+            '<span class="launcher-wordmark">زاد</span></div>'
+        )
+    else:
+        brand = f'''<a class="route-back" href="{base}">{icon("home")}<span>الرئيسية</span></a>
+<a class="route-brand" href="{base}" aria-label="زاد، الرئيسية">{icon("brand")}</a>'''
     items = []
     for route, (title, _) in SECTIONS.items():
         shape = icon("discover-islam" if route == "discover" else route)
         selected = ' aria-current="page"' if route == slug else ""
         items.append(f'<a href="{base}{route}/"{selected}>{shape}<span>{escape(title)}</span></a>')
     links = "\n".join(items)
-    return f'''<a class="route-back" href="{base}">{icon("home")}<span>الرئيسية</span></a>
-<a class="route-brand" href="{base}" aria-label="زاد، الرئيسية">{icon("brand")}</a>
+    return f'''{brand}
 <button id="menu" class="menu" aria-expanded="false" aria-controls="nav" type="button">{icon("menu")}<span>الأقسام</span></button>
 <nav id="nav" aria-label="أقسام زاد" aria-expanded="false">
 {links}
@@ -250,10 +257,7 @@ def render_page(slug, body):
         script_tags.append(f'<script{attributes} src="{assets}{name}?v={REVISION}" defer></script>')
     scripts_markup = "\n".join(script_tags)
     capabilities = {"prayer": "connect-src https://api.aladhan.com; ", "ask": "worker-src 'self'; "}.get(slug, "")
-    if is_home:
-        header = f'<div class="launcher-brand"><span class="route-brand" aria-hidden="true">{icon("brand")}</span><span class="launcher-wordmark">زاد</span></div>'
-    else:
-        header = render_section_navigation(slug, base)
+    header = render_header(slug, base)
     footer = "" if is_home else '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'
     main_class = "launcher-shell" if is_home else "section-main"
     return f'''<!doctype html>
