@@ -1,4 +1,4 @@
-"""Build the inline Discover Islam guide and its legacy redirects."""
+"""Build Zad's section pages, homepage, and guide redirects."""
 
 import argparse
 import json
@@ -12,6 +12,28 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
+REVISION = "20261119-7"
+SECTIONS = {
+    "quran": "القرآن الكريم",
+    "hadith": "الأحاديث الصحيحة",
+    "lessons": "الخطب والدروس",
+    "ask": "اسأل زاد",
+    "prayer": "مواقيت الصلاة",
+    "worship": "الوضوء والصلاة",
+    "adhkar": "الأذكار اليومية",
+    "reading": "خطة القراءة",
+    "media": "المحاضرات والتلاوات",
+    "occasions": "المناسبات الإسلامية",
+    "belief": "العقيدة وأصول الإيمان",
+    "seerah": "السيرة النبوية",
+    "faq": "الأسئلة الشرعية",
+    "discover": "تعرّف على الإسلام",
+    "sources": "مصادر المكتبة",
+    "contact": "تواصل معنا",
+}
+TEMPLATED_SECTIONS = {"ask", "prayer", "sources", "contact"}
+STYLES = ("style.css", "discover.css", "section-icons.css", "glass.css", "sections.css")
+ASK_SCRIPTS = ("ask-evidence.js", "fatwa-sources.js", "ask-intents.js", "ask.js")
 
 
 def link(href, label, attributes=""):
@@ -104,7 +126,7 @@ def render_language(code, data):
 <div class="actions">{link(f"#{prefix}-wudu", wudu["title"], ' class="button green"')}
 {link(f"#{prefix}-prayer-basics", prayer["title"], ' class="button discover-outline"')}
 {link(quran + "1", next_steps["quran"], ' class="button discover-outline"')}
-{link("#worship", next_steps["guide"], ' class="button discover-outline"')}</div>
+{link("../worship/", next_steps["guide"], ' class="button discover-outline"')}</div>
 </section>
 <section id="{prefix}-wudu">
 <h4>{escape(wudu["title"])}</h4>
@@ -143,7 +165,7 @@ def render_guide(languages):
         for code, locale in languages.items()
     )
     content = "".join(render_language(code, locale) for code, locale in languages.items())
-    return f'''<details class="discover discover-section" id="discover-islam">
+    return f'''<details class="wrap discover discover-section" id="discover-islam" open>
 <summary><span class="zad-icon" data-icon="discover-islam" aria-hidden="true"></span> {escape(arabic["title"])}</summary>
 <p>دليل لغير المسلمين والمسلمين الجدد، يتناول الشهادتين والوضوء والصلاة.</p>
 <nav class="discover-languages" aria-label="{escape(arabic["language"])}">{switch}</nav>
@@ -151,7 +173,7 @@ def render_guide(languages):
 
 
 def render_redirect(code, data):
-    destination = f"../../index.html#discover-{code}"
+    destination = f"../#discover-{code}"
     return f'''<!doctype html>
 <html lang="{code}" dir="{data["direction"]}">
 <head>
@@ -162,6 +184,95 @@ def render_redirect(code, data):
 <title>{escape(data["title"])} | Zad</title>
 </head>
 <body><p>{link(destination, data["title"])}</p></body>
+</html>
+'''
+
+def icon(key):
+    return f'<span class="zad-icon" data-icon="{key}" aria-hidden="true"></span>'
+
+
+def render_launcher():
+    items = []
+    for slug, title in SECTIONS.items():
+        shape = icon("discover-islam" if slug == "discover" else slug)
+        label = escape(title, quote=True)
+        items.append(
+            f'<a class="launcher-link" data-section-link="{slug}" href="{slug}/" aria-label="{label}" title="{label}">'
+            f'<span class="section-icon" aria-hidden="true">{shape}</span></a>'
+        )
+    links = "\n".join(items)
+    return f'''<h1 class="visually-hidden">زاد – منصة التوعية الدينية</h1>
+<nav class="launcher-nav" id="section-launcher" aria-label="أقسام زاد">
+{links}
+</nav>'''
+
+
+def render_section_navigation(slug, base):
+    items = []
+    for route, title in SECTIONS.items():
+        shape = icon("discover-islam" if route == "discover" else route)
+        selected = ' aria-current="page"' if route == slug else ""
+        items.append(f'<a href="{base}{route}/"{selected}>{shape}<span>{escape(title)}</span></a>')
+    links = "\n".join(items)
+    return f'''<a class="route-back" href="{base}">{icon("home")}<span>الرئيسية</span></a>
+<a class="route-brand" href="{base}" aria-label="زاد، الرئيسية">{icon("brand")}</a>
+<button id="menu" class="menu" aria-expanded="false" aria-controls="nav" type="button">{icon("menu")}<span>الأقسام</span></button>
+<nav id="nav" aria-label="أقسام زاد" aria-expanded="false">
+{links}
+</nav>'''
+
+
+def render_page(slug, body):
+    is_home = slug == "home"
+    base = "" if is_home else "../"
+    assets = base + "assets/"
+    title = "زاد | منصة التوعية الدينية" if is_home else f"{SECTIONS[slug]} | زاد"
+    styles = "\n".join(f'<link rel="stylesheet" href="{assets}{name}?v={REVISION}">' for name in STYLES)
+    scripts = []
+    if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug != "discover"):
+        scripts.extend(("content.js", "library-content.js"))
+    scripts.append("site.js")
+    if slug == "prayer":
+        scripts.append("prayer.js")
+    if slug == "ask":
+        scripts.extend(ASK_SCRIPTS)
+    script_tags = []
+    for name in scripts:
+        attributes = f' id="ask-script" data-worker="{assets}ask-worker.js?v={REVISION}"' if name == "ask.js" else ""
+        script_tags.append(f'<script{attributes} src="{assets}{name}?v={REVISION}" defer></script>')
+    scripts_markup = "\n".join(script_tags)
+    capabilities = {"prayer": "connect-src https://api.aladhan.com; ", "ask": "worker-src 'self'; "}.get(slug, "")
+    if is_home:
+        header = f'<span class="route-brand launcher-brand" aria-hidden="true">{icon("brand")}</span>'
+    else:
+        header = render_section_navigation(slug, base)
+    footer = "" if is_home else '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'
+    main_class = "launcher-shell" if is_home else "section-main"
+    return f'''<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="زاد، منصة عربية مستقلة للتوعية الدينية. القرآن الكريم والأحاديث الصحيحة والدروس ومواقيت الصلاة.">
+<meta name="theme-color" content="#102c24">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; {capabilities}base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>{escape(title)}</title>
+{styles}
+{scripts_markup}
+</head>
+<body data-page="{slug}">
+<a class="skip" href="#main">تجاوز إلى المحتوى</a>
+<header class="route-header">
+<div class="route-top">
+{header}
+</div>
+</header>
+<main id="main" class="{main_class}">
+{body}
+</main>
+{footer}
+</body>
 </html>
 '''
 
@@ -180,19 +291,19 @@ def main():
         languages[path.stem] = data
     if "ar" not in languages:
         parser.error("The Arabic default translation is required.")
-    home = ROOT / "docs" / "index.html"
-    source = home.read_text(encoding="utf-8")
-    start = "<!-- discover-guide:start -->"
-    end = "<!-- discover-guide:end -->"
-    if source.count(start) != 1 or source.count(end) != 1:
-        parser.error("The homepage needs one pair of guide markers.")
-    before, remainder = source.split(start)
-    _, after = remainder.split(end)
-    updated = f"{before}{start}\n{render_guide(languages)}\n{end}{after}"
-
-    outputs = {home: updated}
+    docs = ROOT / "docs"
+    outputs = {docs / "index.html": render_page("home", render_launcher())}
+    for slug, title in SECTIONS.items():
+        if slug == "discover":
+            body = f'<h1 class="visually-hidden">{escape(title)}</h1>\n' + render_guide(languages)
+        elif slug in TEMPLATED_SECTIONS:
+            body = (ROOT / "page-templates" / f"{slug}.html").read_text(encoding="utf-8").strip()
+        else:
+            body = (f'<div class="wrap" id="sections" data-section="{slug}"></div>\n'
+                    f'<noscript><p class="wrap">{escape(title)} · فعّل جافاسكربت لعرض مواد القسم.</p></noscript>')
+        outputs[docs / slug / "index.html"] = render_page(slug, body)
     for code, data in languages.items():
-        outputs[ROOT / "docs" / "discover" / code / "index.html"] = render_redirect(code, data)
+        outputs[docs / "discover" / code / "index.html"] = render_redirect(code, data)
     for output, page in outputs.items():
         if args.check:
             if not output.is_file() or output.read_text(encoding="utf-8") != page:

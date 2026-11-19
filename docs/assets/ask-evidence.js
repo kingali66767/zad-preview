@@ -12,12 +12,12 @@ const askEvidence = {
     title: "الدخول في الإسلام · Becoming Muslim",
     terms: ["الدخول في الإسلام", "أدخل الإسلام", "اعتناق الإسلام", "أعتنق الإسلام", "كيف أسلم", "become muslim", "convert to islam", "devenir musulman", "convertirse al islam"],
     sources: [
-      ["دليل زاد · الشهادتان والخطوات الأولى", "#discover-ar-shahada"], becomingMuslimSource
+      ["دليل زاد · الشهادتان والخطوات الأولى", "../discover/#discover-ar-shahada"], becomingMuslimSource
     ],
     localizedSources: {
-      en: [["Zad guide · The Shahada and first steps", "#discover-en-shahada"], becomingMuslimSource],
-      fr: [["Guide Zad · La chahada et les premiers pas", "#discover-fr-shahada"], becomingMuslimSource],
-      es: [["Guía de Zad · La shahada y los primeros pasos", "#discover-es-shahada"], becomingMuslimSource]
+      en: [["Zad guide · The Shahada and first steps", "../discover/#discover-en-shahada"], becomingMuslimSource],
+      fr: [["Guide Zad · La chahada et les premiers pas", "../discover/#discover-fr-shahada"], becomingMuslimSource],
+      es: [["Guía de Zad · La shahada y los primeros pasos", "../discover/#discover-es-shahada"], becomingMuslimSource]
     },
     ar: ["إن اخترت اعتناق الإسلام، فانطق بالشهادتين عن فهم وصدق: أشهد أن لا إله إلا الله، وأشهد أن محمدًا رسول الله. ثم ابدأ بتعلّم الوضوء والصلوات الخمس. يشرح دليل زاد معنى الشهادتين والخطوات الأولى بعدهما.", "كيف أدخل الإسلام", "كيف أصبح مسلمًا", "كيف أعتنق الإسلام", "أنا غير مسلم وأريد الدخول في الإسلام، كيف أبدأ"],
     en: ["If you choose to become Muslim, say the testimony of faith sincerely and with understanding: I bear witness that none is worthy of worship except God, and I bear witness that Muhammad is the Messenger of God. Then begin learning how to perform wudu and the five daily prayers. The linked guide walks you through the first steps.", "how do i become muslim", "how can i convert to islam"],

@@ -64,11 +64,11 @@ function readingTracker() {
   return panel;
 }
 
-for (const section of zadContent.sections) {
+function renderSection(section, container) {
   const feature = element("section", null, "feature");
   feature.id = section.id;
   feature.setAttribute("aria-labelledby", section.id + "-heading");
-  const heading = element("h2", null, "section-heading");
+  const heading = element("h1", null, "section-heading");
   heading.id = section.id + "-heading";
   const badge = element("span", null, "section-icon");
   badge.setAttribute("aria-hidden", "true");
@@ -114,139 +114,74 @@ for (const section of zadContent.sections) {
     feature.append(label);
   }
   feature.append(section.id === "reading" ? readingTracker() : items);
-  document.querySelector("#sections").append(feature);
+  container.append(feature);
+}
+
+const sectionContainer = document.querySelector("#sections[data-section]");
+if (sectionContainer && typeof zadContent !== "undefined") {
+  const section = zadContent.sections.find(({ id }) => id === sectionContainer.dataset.section);
+  if (section) renderSection(section, sectionContainer);
+}
+
+function initializeMenu(menu, nav) {
+  function setMenu(open) {
+    menu.setAttribute("aria-expanded", open);
+    nav.setAttribute("aria-expanded", open);
+  }
+
+  menu.addEventListener("click", () => setMenu(menu.getAttribute("aria-expanded") === "false"));
+  nav.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") {
+      setMenu(false);
+      menu.focus();
+    }
+  });
 }
 
 const menu = document.querySelector("#menu");
 const nav = document.querySelector("#nav");
+if (menu && nav) initializeMenu(menu, nav);
 
-function highlightCurrentSection() {
-  const current = location.hash || "#home";
-  for (const link of nav.querySelectorAll("a")) {
-    if (link.hash === current) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
+const contactLink = document.querySelector("#contact-link");
+if (contactLink && typeof zadContent !== "undefined" && zadContent.contactEmail) {
+  contactLink.href = "mailto:" + zadContent.contactEmail;
+  contactLink.hidden = false;
+  const contactNote = document.querySelector("#contact-note");
+  if (contactNote) contactNote.textContent = "أرسل اقتراحًا لمادة جديدة أو نبّهنا إلى تصحيح في المحتوى.";
+}
+
+function redirectLegacySection() {
+  if (document.body.dataset.page !== "home") return false;
+  const fragment = location.hash.slice(1);
+  const route = fragment.startsWith("discover-") ? "discover" : fragment;
+  const link = [...document.querySelectorAll("a[data-section-link]")]
+    .find((anchor) => anchor.dataset.sectionLink === route);
+  if (!link) return false;
+
+  const destination = new URL(link.href);
+  if (route === "discover" && fragment.startsWith("discover-") && fragment !== "discover-islam") {
+    destination.hash = fragment;
   }
+  location.replace(destination);
+  return true;
 }
-
-function setMenu(open) {
-  menu.setAttribute("aria-expanded", open);
-  nav.setAttribute("aria-expanded", open);
-}
-menu.addEventListener("click", () => setMenu(menu.getAttribute("aria-expanded") === "false"));
-nav.addEventListener("click", (event) => {
-  if (event.target.closest("a")) setMenu(false);
-});
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") {
-    setMenu(false);
-    menu.focus();
-  }
-});
-
-if (zadContent.contactEmail) {
-  const link = document.querySelector("#contact-link");
-  link.href = "mailto:" + zadContent.contactEmail;
-  link.hidden = false;
-  document.querySelector("#contact-note").textContent = "أرسل اقتراحًا لمادة جديدة أو نبّهنا إلى تصحيح في المحتوى.";
-}
-
-const cities = {
-  riyadh: { lat: 24.7136, lon: 46.6753, zone: "Asia/Riyadh", method: 4, label: "تقويم أم القرى" },
-  mecca: { lat: 21.3891, lon: 39.8579, zone: "Asia/Riyadh", method: 4, label: "تقويم أم القرى" },
-  cairo: { lat: 30.0444, lon: 31.2357, zone: "Africa/Cairo", method: 5, label: "الهيئة المصرية العامة للمساحة" },
-  amman: { lat: 31.9539, lon: 35.9106, zone: "Asia/Amman", method: 23, label: "وزارة الأوقاف الأردنية" },
-  dubai: { lat: 25.2048, lon: 55.2708, zone: "Asia/Dubai", method: 16, label: "طريقة دبي التجريبية لدى AlAdhan" }
-};
-const prayers = [["Fajr", "الفجر"], ["Dhuhr", "الظهر"], ["Asr", "العصر"], ["Maghrib", "المغرب"], ["Isha", "العشاء"]];
-const form = document.querySelector("#prayer-form");
-const citySelect = document.querySelector("#city");
-const times = document.querySelector("#times");
-const status = document.querySelector("#prayer-status");
-let currentRequest;
-
-function prayerResponseMatches(data, city, date) {
-  const meta = data?.meta;
-  return data?.date?.gregorian?.date === date &&
-    meta?.timezone === city.zone &&
-    meta.method?.id === city.method &&
-    meta.school === "STANDARD" &&
-    Number.isFinite(meta.latitude) && Math.abs(meta.latitude - city.lat) <= 0.001 &&
-    Number.isFinite(meta.longitude) && Math.abs(meta.longitude - city.lon) <= 0.001;
-}
-
-async function loadTimes() {
-  currentRequest?.abort();
-  const request = new AbortController();
-  currentRequest = request;
-  const city = cities[citySelect.value];
-  const cityName = citySelect.selectedOptions[0].textContent;
-  const params = new URLSearchParams({
-    latitude: city.lat, longitude: city.lon, method: city.method, school: 0, timezonestring: city.zone
-  });
-  const today = new Date();
-  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-GB", {
-    timeZone: city.zone, day: "2-digit", month: "2-digit", year: "numeric"
-  }).formatToParts(today).map(({ type, value }) => [type, value]));
-  const date = [parts.day, parts.month, parts.year].join("-");
-  const localDate = new Intl.DateTimeFormat("ar-u-ca-gregory", { timeZone: city.zone, dateStyle: "full" }).format(today);
-  const caption = cityName + " · " + localDate + " · " + city.label + " · العصر وفق حساب الجمهور";
-  times.replaceChildren();
-  status.textContent = "جارٍ تحميل المواقيت · " + caption;
-  const timeout = setTimeout(() => request.abort(), 9000);
-  try {
-    const response = await fetch("https://api.aladhan.com/v1/timings/" + date + "?" + params, { signal: request.signal });
-    if (!response.ok) throw new Error("Prayer API request failed");
-    const { code, data } = await response.json();
-    if (code !== 200 || !prayerResponseMatches(data, city, date)) {
-      throw new Error("Prayer response does not match the selected city and date");
-    }
-    let previousMinutes = -1;
-    const rows = prayers.map(([key, label]) => {
-      const rawTime = data?.timings?.[key];
-      const value = typeof rawTime === "string" &&
-        rawTime.trim().match(/^((?:[01]\d|2[0-3]):[0-5]\d)(?: \([A-Za-z0-9+:-]{1,12}\))?$/)?.[1];
-      if (!value) throw new Error("Missing or invalid prayer time");
-      const minutes = Number(value.slice(0, 2)) * 60 + Number(value.slice(3));
-      if (minutes <= previousMinutes) throw new Error("Prayer times are out of order");
-      previousMinutes = minutes;
-      const row = element("div");
-      const time = element("strong", value);
-      time.dir = "ltr";
-      row.append(element("span", label), time);
-      return row;
-    });
-    if (currentRequest === request) {
-      times.replaceChildren(...rows);
-      status.textContent = caption + " · بنظام ٢٤ ساعة";
-    }
-  } catch {
-    if (currentRequest === request) status.textContent = "تعذر تحميل مواقيت مطابقة للطلب. حاول مجددًا أو راجع التقويم المحلي. · " + caption;
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  loadTimes();
-});
-citySelect.addEventListener("change", loadTimes);
 
 function revealGuideTarget() {
   const target = document.getElementById(location.hash.slice(1));
-  if (!target) return;
-  const guide = target.closest("#discover-islam");
-  if (guide) {
-    guide.open = true;
-    const language = target.closest(".discover-locale");
-    if (language) language.open = true;
-  }
-  return target;
+  const guide = target?.closest("#discover-islam");
+  if (!guide) return;
+  if (guide.matches("details")) guide.open = true;
+  const language = target.closest(".discover-locale");
+  if (language) language.open = true;
+  target.scrollIntoView();
 }
 
-window.addEventListener("hashchange", () => {
-  highlightCurrentSection();
-  const target = revealGuideTarget();
-  if (target?.closest("#discover-islam")) target.scrollIntoView();
-});
-highlightCurrentSection();
-if (location.hash) revealGuideTarget()?.scrollIntoView();
+function handleFragment() {
+  if (location.hash && !redirectLegacySection()) revealGuideTarget();
+}
+
+window.addEventListener("hashchange", handleFragment);
+handleFragment();

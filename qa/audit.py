@@ -18,6 +18,14 @@ from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
+SECTIONS = ("quran", "lessons", "hadith", "faq", "ask", "media", "occasions", "belief", "seerah",
+            "worship", "adhkar", "reading", "prayer", "discover", "sources", "contact")
+SAUDI_CITIES = ("riyadh", "mecca", "medina", "jeddah", "dammam", "khobar", "taif", "buraydah", "hail",
+                "tabuk", "abha", "jazan", "najran", "albaha", "sakaka", "arar", "hofuf")
+
+
+def section_address(origin, section=""):
+    return origin.rstrip("/") + "/" + (section + "/" if section else "")
 
 
 class Server(ThreadingHTTPServer):
@@ -73,8 +81,10 @@ def browser_checks(origin, output, live):
             assert response.status == 200
             without_overflow(page)
             assert page.locator("html").get_attribute("dir") == "rtl"
-            assert page.locator("#sections > section").count() == 11
-            assert page.locator(".hero-image").evaluate("el => getComputedStyle(el).backgroundImage.includes('hero.webp')")
+            launcher = page.locator("#section-launcher a")
+            expect(launcher).to_have_count(len(SECTIONS))
+            assert launcher.evaluate_all("items => items.every(link => link.getAttribute('aria-label') && !link.innerText.trim())")
+            assert page.locator("#sections, #prayer, #ask, .hero").count() == 0
             missing_anchors = page.locator('a[href^="#"]').evaluate_all(
                 "links => links.map(link => link.hash.slice(1)).filter(id => !document.getElementById(id))"
             )
@@ -82,39 +92,45 @@ def browser_checks(origin, output, live):
             assert page.locator('meta[http-equiv="Content-Security-Policy"]').count() == 1
             assert page.locator('meta[name="referrer"]').get_attribute("content") == "no-referrer"
             external_links.update(page.locator('a[href^="https://"]').evaluate_all("links => links.map(link => link.href)"))
-            if width <= 1100:
-                page.locator("#menu").click()
-                expect(page.locator("#nav")).to_be_visible()
-                page.keyboard.press("Escape")
-                expect(page.locator("#menu")).to_be_focused()
-                expect(page.locator("#nav")).to_be_hidden()
-                page.locator("#menu").click()
-            page.locator('#nav a[href="#ask"]').click()
-            expect(page).to_have_url(re.compile("#ask$"))
-            if width <= 1100:
-                expect(page.locator("#nav")).to_be_hidden()
+            page.locator('#section-launcher a[href="quran/"]').click()
+            expect(page).to_have_url(section_address(origin, "quran"))
+            expect(page.locator("#sections > section")).to_have_count(1)
+            expect(page.locator("#quran")).to_be_visible()
+            page.locator("#menu").click()
+            expect(page.locator("#nav")).to_be_visible()
+            page.keyboard.press("Escape")
+            expect(page.locator("#menu")).to_be_focused()
+            expect(page.locator("#nav")).to_be_hidden()
+            page.locator("#menu").click()
+            page.locator('#nav a[href="../ask/"]').click()
+            expect(page).to_have_url(section_address(origin, "ask"))
+            expect(page.locator("#ask-submit")).to_be_enabled()
+            expect(page.locator("#nav")).to_be_hidden()
+            page.goto(section_address(origin, "faq"))
             page.locator("#faq summary").first.click()
             expect(page.locator("#faq details").first).to_have_attribute("open", "")
             page.locator("#faq summary").first.click()
             expect(page.locator("#faq details").first).not_to_have_attribute("open", "")
+            page.goto(section_address(origin, "adhkar"))
             adhkar = page.locator("#adhkar")
             expect(adhkar.locator(".card")).to_have_count(22)
             adhkar.locator("select").select_option(label="بعد الصلاة")
             expect(adhkar.locator(".card:visible")).to_have_count(3)
             adhkar.locator("select").select_option("")
             expect(adhkar.locator(".card:visible")).to_have_count(22)
+            page.goto(section_address(origin, "faq"))
             faq = page.locator("#faq")
             faq.locator("select").select_option(label="الصيام")
             expect(faq.locator("details:visible")).to_have_count(4)
             faq.locator("select").select_option("")
             expect(faq.locator("details:visible")).to_have_count(11)
+            page.goto(section_address(origin, "reading"))
             first_surah = page.locator(".reading-list input").first
             first_surah.check()
             page.reload()
             expect(first_surah).to_be_checked()
             page.locator(".reading-panel button").click()
             expect(first_surah).not_to_be_checked()
-            expect(page.locator("#ask-submit")).to_be_enabled()
             assert not page_errors, page_errors
             if width in (390, 1440):
                 page.goto(origin, wait_until="load")
@@ -129,28 +145,26 @@ def browser_checks(origin, output, live):
         context.route(re.compile(r"^https?://"), lambda route: (
             route.continue_() if route.request.url.startswith(origin + "/") else route.abort()
         ))
-        page.goto(origin)
-        guide = page.locator("#library #discover-islam")
-        expect(guide).not_to_have_attribute("open", "")
-        expect(page.locator("#home a[href*='discover']")).to_have_count(0)
-        guide.locator(":scope > summary").click()
+        guide_url = section_address(origin, "discover")
+        page.goto(guide_url)
+        guide = page.locator("#discover-islam")
         expect(guide).to_have_attribute("open", "")
         for code, direction in (("ar", "rtl"), ("en", "ltr"), ("fr", "ltr"), ("es", "ltr")):
             prefix = f"discover-{code}"
             locale = guide.locator(f"#{prefix}")
             guide.locator(f'.discover-languages a[href="#{prefix}"]').click()
-            expect(page).to_have_url(f"{origin}/#{prefix}")
+            expect(page).to_have_url(f"{guide_url}#{prefix}")
             expect(locale).to_have_attribute("open", "")
             expect(locale).to_have_attribute("lang", code)
             expect(locale).to_have_attribute("dir", direction)
             expect(guide.locator(".discover-locale[open]")).to_have_count(1)
             locale.locator(f'.discover-paths a[href="#{prefix}-shahada"]').click()
-            expect(page).to_have_url(f"{origin}/#{prefix}-shahada")
+            expect(page).to_have_url(f"{guide_url}#{prefix}-shahada")
             expect(locale.locator('.shahada-lines blockquote[lang="ar"][dir="rtl"]')).to_have_count(2)
             expect(locale.locator(".discover-transliteration")).to_have_count(0 if code == "ar" else 2)
             locale.locator(f'.discover-paths a[href="#{prefix}-next"]').click()
             locale.locator(f'#{prefix}-next a[href="#{prefix}-wudu"]').click()
-            expect(page).to_have_url(f"{origin}/#{prefix}-wudu")
+            expect(page).to_have_url(f"{guide_url}#{prefix}-wudu")
             expect(locale.locator(f"#{prefix}-wudu ol li")).to_have_count(6)
             expect(locale.locator(f"#{prefix}-prayer-basics ol li")).to_have_count(3)
             expect(locale.locator(f"#{prefix}-daily-life ul li")).to_have_count(3)
@@ -158,15 +172,16 @@ def browser_checks(origin, output, live):
             expect(locale.locator(f"#{prefix}-faq details").first).to_have_attribute("open", "")
             without_overflow(page)
             results.append(f"Inline guide {code}: same-page navigation, Shahada, wudu, prayer, daily life and FAQ at 390px")
-        page.locator('#discover-es-next a[href="#worship"]').click()
+        page.locator('#discover-es-next a[href="../worship/"]').click()
         expect(page.locator("#worship")).to_be_attached()
-        expect(page).to_have_url(f"{origin}/#worship")
+        expect(page).to_have_url(section_address(origin, "worship"))
         page.goto(origin + "/discover/en/index.html")
-        expect(page).to_have_url(f"{origin}/index.html#discover-en")
+        expect(page).to_have_url(f"{guide_url}#discover-en")
         expect(guide).to_have_attribute("open", "")
         expect(page.locator("#discover-en")).to_have_attribute("open", "")
         page.screenshot(path=output / "zad-discover-en.png")
         results.append("Legacy guide address returns to the inline language panel")
+        page.goto(section_address(origin, "contact"))
         expect(page.locator("#contact-link")).to_be_hidden()
         assert not page_errors, page_errors
 
@@ -197,20 +212,23 @@ def browser_checks(origin, output, live):
         assert inline_blocked, "Document CSP did not block the inline policy test"
         results.append("Chromium enforced CSP and blocked an inert inline script")
 
+        page.goto(section_address(origin, "prayer"))
         page.route("https://api.aladhan.com/**", prayer)
-        for city, method in (("riyadh", "4"), ("mecca", "4"), ("cairo", "5"), ("amman", "23"), ("dubai", "16")):
+        assert page.locator("#city option").evaluate_all("items => items.map(option => option.value)") == list(SAUDI_CITIES)
+        for city in SAUDI_CITIES:
             if city == "riyadh":
                 page.locator('#prayer-form button').click()
             else:
                 page.locator("#city").select_option(city)
             expect(page.locator("#times strong")).to_have_count(5)
-            assert calls[-1]["method"] == [method]
+            assert calls[-1]["method"] == ["4"]
+            assert calls[-1]["timezonestring"] == ["Asia/Riyadh"]
             assert calls[-1]["school"] == ["0"]
         state["fail"] = True
         page.locator('#prayer-form button').click()
         expect(page.locator("#prayer-status")).to_contain_text("تعذر تحميل")
         expect(page.locator("#times strong")).to_have_count(0)
-        results.append("Prayer UI: five cities, parameters, five times and 503 recovery (simulated provider)")
+        results.append("Prayer UI: 17 Saudi cities, parameters, five times and 503 recovery (simulated provider)")
 
         worker_script = """
             self.onmessage = ({data}) => {
@@ -221,7 +239,7 @@ def browser_checks(origin, output, live):
         """
         page.route("**/assets/ask-worker.js*", lambda route: route.fulfill(content_type="text/javascript", body=worker_script))
         page.add_init_script("Object.defineProperty(navigator, 'gpu', {value: {requestAdapter: async () => ({features: new Set(['shader-f16'])})}})")
-        page.goto(origin)
+        page.goto(section_address(origin, "ask"))
         page.locator(".ask-optional summary").click()
         page.locator("#ask-enable").click()
         expect(page.locator("#ask-model-status")).to_contain_text("جاهز")
@@ -240,11 +258,10 @@ def browser_checks(origin, output, live):
             route.continue_() if route.request.url.startswith(origin + "/") else route.abort()
         ))
         page = context.new_page()
-        page.goto(origin, wait_until="domcontentloaded")
-        page.locator("#discover-islam > summary").click()
+        page.goto(guide_url, wait_until="domcontentloaded")
         expect(page.locator("#discover-ar-shahada")).to_be_visible()
         page.locator('#discover-ar .discover-toc a[href="#discover-ar-wudu"]').click()
-        expect(page).to_have_url(f"{origin}/#discover-ar-wudu")
+        expect(page).to_have_url(f"{guide_url}#discover-ar-wudu")
         expect(page.locator("#discover-ar-wudu ol li")).to_have_count(6)
         page.locator("#discover-en > summary").click()
         expect(page.locator("#discover-en-shahada")).to_be_visible()
@@ -259,14 +276,15 @@ def browser_checks(origin, output, live):
                 ))
                 else route.abort()
             ))
-            page.goto(origin, wait_until="domcontentloaded")
+            page.goto(section_address(origin, "quran"), wait_until="domcontentloaded")
             page.evaluate("document.fonts.ready")
             integration["arabic_web_fonts"] = page.evaluate("Array.from(document.fonts).filter(font => font.status === 'loaded').length")
             for width in (320, 390, 1101, 1440):
                 page.set_viewport_size({"width": width, "height": 900})
                 without_overflow(page)
             integration["prayer"] = {}
-            for city in ("riyadh", "mecca", "cairo", "amman", "dubai"):
+            page.goto(section_address(origin, "prayer"))
+            for city in ("riyadh", "mecca", "medina", "jeddah", "dammam"):
                 if city == "riyadh":
                     page.locator("#prayer-form button").click()
                 else:
@@ -276,6 +294,7 @@ def browser_checks(origin, output, live):
                     "times_shown": page.locator("#times strong").count(),
                     "status": page.locator("#prayer-status").inner_text(),
                 }
+            page.goto(section_address(origin, "ask"))
             integration["webgpu"] = page.evaluate("""async () => {
                 try {
                     const adapter = await navigator.gpu?.requestAdapter();

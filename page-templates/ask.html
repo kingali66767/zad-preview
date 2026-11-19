@@ -1,0 +1,39 @@
+<section class="wrap ask" id="ask" aria-labelledby="ask-heading">
+<div class="ask-panel">
+<p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
+<h1 id="ask-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>اسأل زاد</h1>
+<p>اكتب سؤالك بعبارتك. إذا كانت الإجابة تعتمد على تفصيل، سيحدّد لك زاد ما يحتاج إلى توضيح.</p>
+<form id="ask-form" class="ask-form">
+<label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: سجود السهو أو زكاة الفطر"></label>
+<button class="button green" id="ask-submit" type="submit" disabled>أرسل السؤال</button>
+<button class="button ask-reset" id="ask-reset" type="button" hidden>سؤال جديد</button>
+</form>
+<p id="ask-status" role="status"></p>
+<article class="card ask-result" id="ask-result" aria-labelledby="ask-answer-heading" hidden>
+<p id="ask-question" dir="auto"></p>
+<h3 id="ask-answer-heading" tabindex="-1"></h3>
+<div id="ask-answer" dir="auto"></div>
+<div class="references" id="ask-sources"></div>
+<div class="ask-related" id="ask-related" hidden>
+<h4>أسئلة موثّقة قريبة</h4>
+<div id="ask-related-questions"></div>
+</div>
+</article>
+<details class="fatwa-library" id="fatwa-library">
+<summary><span class="zad-icon" data-icon="fatwa-library" aria-hidden="true"></span> تصفّح فتاوى العلماء</summary>
+<div class="fatwa-filters">
+<label for="fatwa-scholar">العالم<select id="fatwa-scholar"></select></label>
+<label for="fatwa-category">الموضوع<select id="fatwa-category"></select></label>
+</div>
+<p id="fatwa-count" role="status"></p>
+<ul id="fatwa-list"></ul>
+</details>
+<details class="ask-optional">
+<summary><span class="zad-icon" data-icon="ai" aria-hidden="true"></span> اقتراح مراجع بالذكاء الاصطناعي</summary>
+<p>ميزة اختيارية لاختيار مراجع مرتبطة بالسؤال من قائمة محددة. يحتاج التنزيل الأول إلى اتصال بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.</p>
+<button class="button green" id="ask-enable" type="button">تشغيل اقتراح المراجع</button>
+<p id="ask-model-status" role="status"></p>
+</details>
+<noscript><p>فعّل جافاسكربت للبحث عن الأجوبة. يمكنك قراءة <a href="../discover/">دليل التعرّف على الإسلام</a> دون جافاسكربت.</p></noscript>
+</div>
+</section>

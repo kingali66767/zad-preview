@@ -8,9 +8,9 @@ import os
 from pathlib import Path
 import re
 import threading
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qs, urljoin, urlsplit
 
-from audit import Handler, Server, SITE, prayer_payload, without_overflow
+from audit import Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address, without_overflow
 from playwright.sync_api import expect, sync_playwright
 
 PUBLIC = "https://kingali66767.github.io/zad-preview/"
@@ -76,7 +76,8 @@ def new_visit(browser, address, check, *, local=False, device=None, init=None, s
     context = browser.new_context(**settings)
     try:
         if local:
-            intercept(context, address.split("#")[0])
+            url = urlsplit(address)
+            intercept(context, f"{url.scheme}://{url.netloc}/")
         page = context.new_page()
         page.set_default_timeout(5000)
         errors = []
@@ -94,27 +95,65 @@ def new_visit(browser, address, check, *, local=False, device=None, init=None, s
         context.close()
 
 
+def verify_launcher(page):
+    links = page.locator("#section-launcher a")
+    expect(links).to_have_count(len(SECTIONS))
+    attributes = links.evaluate_all("""links => links.map(link => ({
+        url: link.href, label: link.getAttribute('aria-label'), text: link.innerText.trim()
+    }))""")
+    assert {urlsplit(item["url"]).path.rsplit("/", 2)[-2] for item in attributes} == set(SECTIONS)
+    assert all(item["label"] and not item["text"] and not urlsplit(item["url"]).fragment
+               for item in attributes), attributes
+    without_overflow(page)
+
+
 def verify_sections(page):
+    verify_launcher(page)
+    home = page.url
     for ident, expected in {"worship": 8, "adhkar": 22, "quran": 8, "lessons": 7, "hadith": 10,
                             "faq": 11, "media": 7, "occasions": 8, "belief": 5, "seerah": 4}.items():
+        page.goto(section_address(home, ident), wait_until="domcontentloaded")
         selector = ":scope > .faq-list > details" if ident == "faq" else ":scope > .cards > article"
         expect(page.locator(f"#{ident}").locator(selector)).to_have_count(expected)
-    assert page.locator("#sections").evaluate("""root => Array.from(root.querySelectorAll('article.card, .faq-list > details'))
-        .every(item => item.querySelector('.references a[href^="https://"]'))""")
-    ids = page.locator("[id]").evaluate_all("items => items.map(item => item.id)")
-    assert len(ids) == len(set(ids)), "Duplicate DOM IDs"
-    without_overflow(page)
+        assert page.locator(f"#{ident}").evaluate("""root => Array.from(root.querySelectorAll('article.card, .faq-list > details'))
+            .every(item => item.querySelector('.references a[href^="https://"]'))""")
+        ids = page.locator("[id]").evaluate_all("items => items.map(item => item.id)")
+        assert len(ids) == len(set(ids)), "Duplicate DOM IDs"
+        without_overflow(page)
+
+
+def launcher_transitions(page):
+    verify_launcher(page)
+    home = page.url
+    for section in SECTIONS:
+        address = section_address(home, section)
+        icon = page.locator(f'#section-launcher a[href="{section}/"]')
+        expect(icon).to_be_visible()
+        icon.click()
+        expect(page).to_have_url(address)
+        expect(page.locator("main")).to_be_visible()
+        assert page.locator("#section-launcher").count() == 0
+        without_overflow(page)
+        page.go_back(wait_until="domcontentloaded")
+        expect(page).to_have_url(home)
 
 
 def verify_menu(page):
     menu = page.locator("#menu")
     page.keyboard.press("Tab")
     expect(page.locator(".skip")).to_be_focused()
-    for url in page.locator("#nav a").evaluate_all("items => Array.from(items, a => a.hash)"):
+    links = page.locator("#nav a").evaluate_all("links => links.map(link => link.href)")
+    locations = [urlsplit(link) for link in links]
+    assert all(not target.fragment for target in locations), links
+    assert set(target.path.rsplit("/", 2)[-2] for target in locations) >= set(SECTIONS)
+    for url in links:
         menu.click()
-        page.locator(f'#nav a[href="{url}"]').click()
-        expect(page).to_have_url(re.compile(re.escape(url) + "$"))
-        expect(page.locator(url)).to_be_visible()
+        href = page.locator("#nav a").evaluate_all("(links, target) => links.find(link => link.href === target).getAttribute('href')", url)
+        page.locator(f'#nav a[href="{href}"]').click()
+        expect(page).to_have_url(url)
+        expect(page.locator("main")).to_be_visible()
+        if not menu.is_visible():
+            return
         expect(menu).to_have_attribute("aria-expanded", "false")
     menu.click()
     page.keyboard.press("Escape")
@@ -123,7 +162,9 @@ def verify_menu(page):
 
 
 def all_filters(page):
+    origin = page.url
     for section, total, categories in (("adhkar", 22, 6), ("faq", 11, 4)):
+        page.goto(section_address(origin, section), wait_until="domcontentloaded")
         button = page.locator(f"#{section} select")
         selector = f"#{section} .card" if section == "adhkar" else f"#{section} .faq-list > details"
         choices = button.locator("option").evaluate_all("items => Array.from(items, o => o.value).filter(Boolean)")
@@ -165,8 +206,8 @@ def reading_cycle(page):
 
 def guide_history(page):
     guide = page.locator("#discover-islam")
-    expect(guide).not_to_have_attribute("open", "")
-    guide.locator(":scope > summary").click()
+    expect(guide).to_have_attribute("open", "")
+    address = page.url.split("#")[0]
     for code, direction in (("ar", "rtl"), ("en", "ltr"), ("fr", "ltr"), ("es", "ltr")):
         prefix = f"discover-{code}"
         guide.locator(f'.discover-languages a[href="#{prefix}"]').click()
@@ -174,7 +215,7 @@ def guide_history(page):
         expect(guide.locator(".discover-locale[open]")).to_have_count(1)
         expect(guide.locator(f"#{prefix}-wudu ol li")).to_have_count(6)
         guide.locator(f'#{prefix} a[href="#{prefix}-shahada"]').first.click()
-        expect(page).to_have_url(PUBLIC + f"#{prefix}-shahada")
+        expect(page).to_have_url(address + f"#{prefix}-shahada")
         expect(guide.locator(f"#{prefix}-shahada blockquote")).to_have_count(2)
         without_overflow(page)
     page.go_back()
@@ -194,7 +235,7 @@ def check_prayer_time(page, city):
         page.locator("#city").select_option(city)
     expect(page.locator("#times strong")).to_have_count(5, timeout=12000)
     value = page.locator("#prayer-status").inner_text()
-    assert city in ("riyadh", "mecca") and "أم القرى" in value or city not in ("riyadh", "mecca")
+    assert "أم القرى" in value
     assert "بنظام ٢٤ ساعة" in value
     values = page.locator("#times strong").all_text_contents()
     assert all(re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", value) for value in values)
@@ -208,17 +249,21 @@ def capture_model_support(page):
 
 
 def public_cases(suite, browser, device):
+    def visit(section, check, **options):
+        return new_visit(browser, section_address(PUBLIC, section), check, **options)
+
+    suite.run("عام | شبكة الأيقونات والتنقل عبر الصفحات المستقلة", lambda: visit("", launcher_transitions, device=device))
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
     suite.run("عام | جميع روابط قائمة الجوال والتنقل بلوحة المفاتيح",
-              lambda: new_visit(browser, PUBLIC, verify_menu, device=device))
+              lambda: visit("quran", verify_menu, device=device))
     suite.run("عام | جميع مرشحات الأذكار والفتاوى وفتح كل سؤال", lambda: new_visit(browser, PUBLIC, all_filters))
-    suite.run("عام | إكمال جميع السور والحفظ والتراجع وإعادة الضبط", lambda: new_visit(browser, PUBLIC, reading_cycle))
-    suite.run("عام | اللغات الأربع ورجوع المتصفح وإعادة التحميل", lambda: new_visit(browser, PUBLIC, guide_history, device=device))
+    suite.run("عام | إكمال جميع السور والحفظ والتراجع وإعادة الضبط", lambda: visit("reading", reading_cycle))
+    suite.run("عام | اللغات الأربع ورجوع المتصفح وإعادة التحميل", lambda: visit("discover", guide_history, device=device))
 
     def old_addresses(page):
         for code in ("ar", "en", "fr", "es"):
             page.goto(PUBLIC + f"discover/{code}/index.html")
-            expect(page).to_have_url(PUBLIC + f"index.html#discover-{code}")
+            expect(page).to_have_url(section_address(PUBLIC, "discover") + f"#discover-{code}")
             expect(page.locator(f"#discover-{code}")).to_have_attribute("open", "")
     suite.run("عام | تحويل الروابط القديمة لجميع اللغات", lambda: new_visit(browser, PUBLIC, old_addresses))
     suite.run("عام | فتح عنوان فرعي مباشر بالفرنسية",
@@ -226,36 +271,36 @@ def public_cases(suite, browser, device):
                                 lambda p: expect(p.locator("#discover-fr-wudu")).to_be_visible()))
     suite.run("عام | عنوان القسم غير المعروف يبقي الموقع متاحًا",
               lambda: new_visit(browser, PUBLIC + "#unknown-section",
-                                lambda p: expect(p.locator("#quran")).to_be_visible()))
+                                verify_launcher))
 
     def address_not_configured(page):
         expect(page.locator("#contact-link")).to_be_hidden()
         expect(page.locator("#contact-note")).to_contain_text("بريد المبادرة")
-    suite.run("عام | التواصل قبل إعداد البريد", lambda: new_visit(browser, PUBLIC, address_not_configured))
+    suite.run("عام | التواصل قبل إعداد البريد", lambda: visit("contact", address_not_configured))
 
-    for city in ("riyadh", "mecca", "cairo", "amman", "dubai"):
+    for city in ("riyadh", "mecca", "medina", "jeddah", "dammam"):
         suite.run(f"عام | مواقيت حية للمدينة {city}",
-                  lambda city=city: new_visit(browser, PUBLIC, lambda p: check_prayer_time(p, city)))
+                  lambda city=city: visit("prayer", lambda p: check_prayer_time(p, city)))
 
     suite.run("عام | جواب موثّق ورابط محدد دون تشغيل نموذج",
-              lambda: new_visit(browser, PUBLIC, verified_answer))
+              lambda: visit("ask", verified_answer))
     suite.run("عام | تصحيح موعد الحج وعدد الأركان مع المصادر",
-              lambda: new_visit(browser, PUBLIC, corrected_questions))
+              lambda: visit("ask", corrected_questions))
     suite.run("عام | طريقة المسح ومدته وشروطه مع المصادر",
-              lambda: new_visit(browser, PUBLIC, khuff_answers))
+              lambda: visit("ask", khuff_answers))
     suite.run("عام | فصل أجزاء السؤال الموثّقة وحفظ قيود المسألة الخاصة",
-              lambda: new_visit(browser, PUBLIC, compound_and_scope))
+              lambda: visit("ask", compound_and_scope))
     suite.run("عام | سؤال غير محدد والانتقال إلى جواب موثّق",
-              lambda: new_visit(browser, PUBLIC, clarification))
+              lambda: visit("ask", clarification))
     suite.run("عام | مسائل شخصية وأسئلة خارج المطابقة",
-              lambda: new_visit(browser, PUBLIC, unsafe_assumptions))
+              lambda: visit("ask", unsafe_assumptions))
     suite.run("عام | فتاوى أصلية وتصفية حسب العالم والموضوع",
-              lambda: new_visit(browser, PUBLIC, fatwa_filters))
+              lambda: visit("ask", fatwa_filters))
     suite.run("عام | المقتطفات المطابقة وعزوها إلى الفتوى الأصلية",
-              lambda: new_visit(browser, PUBLIC, fatwa_excerpts))
+              lambda: visit("ask", fatwa_excerpts))
     suite.run("عام | احترام اسم العالم وحالة المرجع غير المتاح",
-              lambda: new_visit(browser, PUBLIC, fatwa_rank_and_scope))
-    support = new_visit(browser, PUBLIC, capture_model_support)
+              lambda: visit("ask", fatwa_rank_and_scope))
+    support = visit("ask", capture_model_support)
     if support["shader_f16"]:
         def real_model(page):
             open_model(page)
@@ -264,7 +309,7 @@ def public_cases(suite, browser, device):
             expect(page.locator("#ask-status")).to_contain_text("قد تساعدك", timeout=95000)
             expect(page.locator("#ask-answer")).to_be_hidden()
             expect(page.locator('#ask-sources a[href="https://sunnah.com/muslim:798a"]')).to_be_visible()
-        suite.run("عام | تشغيل Qwen واقتراح مرجع فعلي", lambda: new_visit(browser, PUBLIC, real_model))
+        suite.run("عام | تشغيل Qwen واقتراح مرجع فعلي", lambda: visit("ask", real_model))
     else:
         suite.blocked("عام | تشغيل Qwen واقتراح مرجع فعلي", support)
 
@@ -465,13 +510,13 @@ def new_question_reset(page):
 
 def newcomer_path(page):
     ask(page, "أنا غير مسلم وأريد الدخول في الإسلام، كيف أبدأ؟")
-    guide = page.locator('#ask-result a[href^="#discover-"]').first
+    guide = page.locator('#ask-result a[href*="discover/#discover-"]').first
     expect(guide).to_be_visible()
-    target = guide.get_attribute("href")
+    target = guide.evaluate("link => link.href")
     guide.click()
-    expect(page).to_have_url(re.compile(re.escape(target) + "$"))
+    expect(page).to_have_url(target)
     expect(page.locator("#discover-islam")).to_have_attribute("open", "")
-    expect(page.locator(target)).to_be_visible()
+    expect(page.locator("#" + urlsplit(target).fragment)).to_be_visible()
 
 
 def stale_worker_result(page):
@@ -534,10 +579,10 @@ def revised_answer_cases(suite, browser, address, *, local=False, device=None):
         (newcomer_path, "فتح دليل التعرّف على الإسلام من جواب المستخدم الجديد"),
     ):
         suite.run(f"{label} | {browser.browser_type.name} | {name}",
-                  lambda: new_visit(browser, address, test, local=local, **layout))
+                  lambda: new_visit(browser, section_address(address, "ask"), test, local=local, **layout))
     if local:
         suite.run(f"{label} | {browser.browser_type.name} | تجاهل نتيجة العامل المتأخرة بعد إرسال سؤال جديد",
-                  lambda: new_visit(browser, address, stale_worker_result, local=True,
+                  lambda: new_visit(browser, section_address(address, "ask"), stale_worker_result, local=True,
                                     init=COMPATIBLE + ";\n" + WATCH_WORKER, setup=hold_worker_reply, **layout))
 
 
@@ -596,43 +641,44 @@ def fatwa_rank_and_scope(page):
 
 
 def local_cases(suite, browser, origin):
-    def run(name, check, **options):
-        suite.run("محلي | " + name, lambda: new_visit(browser, origin, check, local=True, **options))
+    def run(name, check, *, section="ask", **options):
+        suite.run("محلي | " + name, lambda: new_visit(browser, section_address(origin, section), check, local=True, **options))
+
+    run("الواجهة تعرض أيقونات فقط وتفتح جميع الأقسام", launcher_transitions, section="")
 
     def unavailable_storage(page):
         page.locator("#reading input").first.check()
         expect(page.locator(".reading-progress")).to_contain_text("تعذّر حفظ")
         page.reload()
         expect(page.locator("#reading input:checked")).to_have_count(0)
-    run("تعطيل التخزين المحلي ثم إعادة التحميل", unavailable_storage,
+    run("تعطيل التخزين المحلي ثم إعادة التحميل", unavailable_storage, section="reading",
         init="""Object.defineProperty(window, 'localStorage', {get(){throw new DOMException('not available','SecurityError')}})""")
     run("بيانات التقدّم المحفوظة تالفة",
-        lambda p: expect(p.locator("#reading input:checked")).to_have_count(0),
+        lambda p: expect(p.locator("#reading input:checked")).to_have_count(0), section="reading",
         init="""localStorage.setItem('zad-reading-v1', '{invalid')""")
     run("بيانات التقدّم المحفوظة مختلطة أو مكررة",
-        lambda p: expect(p.locator("#reading input:checked")).to_have_count(1),
+        lambda p: expect(p.locator("#reading input:checked")).to_have_count(1), section="reading",
         init="""localStorage.setItem('zad-reading-v1', JSON.stringify([0,0,88,"1",-1,null]))""")
 
     def no_js(page):
-        page.locator("#discover-islam > summary").click()
         expect(page.locator("#discover-ar-wudu")).to_be_visible()
         missing = page.locator("noscript a[href^='#']").evaluate_all(
             "links => links.map(a => a.hash.slice(1)).filter(id => !document.getElementById(id))"
         )
         assert not missing, f"Broken fallback links: {missing}"
-    run("إرشادات تعطيل JavaScript وروابط الدليل", no_js, java_script_enabled=False)
+    run("إرشادات تعطيل JavaScript وروابط الدليل", no_js, section="discover", java_script_enabled=False)
     run("عرض متاح مع منع الخطوط الخارجية وعرض 320 بكسل",
-        verify_sections, viewport={"width": 320, "height": 750})
+        verify_sections, section="", viewport={"width": 320, "height": 750})
 
     def mocked_contact(page):
         def contact(route):
             source = (SITE / "assets/content.js").read_text().replace('contactEmail: ""', 'contactEmail: "zad@example.invalid"')
             route.fulfill(body=source, content_type="text/javascript")
-        page.route("**/assets/content.js", contact)
+        page.route("**/assets/content.js*", contact)
 
     run("زر التواصل عند إعداد بريد اختباري",
         lambda page: expect(page.locator("#contact-link")).to_have_attribute("href", "mailto:zad@example.invalid"),
-        setup=mocked_contact)
+        section="contact", setup=mocked_contact)
 
     failures = {
         "انقطاع طلب AlAdhan": lambda route: route.abort("internetdisconnected"),
@@ -676,40 +722,41 @@ def local_cases(suite, browser, origin):
             expect(page.locator("#prayer-status")).to_contain_text("تعذر تحميل")
             expect(page.locator("#times strong")).to_have_count(0)
             check_prayer_time(page, "riyadh")
-        run(name + " ثم نجاح الإعادة", prayer_failure)
+        run(name + " ثم نجاح الإعادة", prayer_failure, section="prayer")
 
     def supported_time_suffix(page):
         page.route(PRAYER_API, lambda route: route.fulfill(
             json=prayer_payload(route.request.url, TIMINGS | {"Fajr": "05:10 (+03:00)"})))
         check_prayer_time(page, "riyadh")
         expect(page.locator("#times strong").first).to_have_text("05:10")
-    run("قبول وقت صالح مع لاحقة المنطقة الزمنية", supported_time_suffix)
+    run("قبول وقت صالح مع لاحقة المنطقة الزمنية", supported_time_suffix, section="prayer")
 
     def timezone_dates(page):
         calls = []
         def respond(route):
             calls.append(urlsplit(route.request.url))
             route.fulfill(json=prayer_payload(route.request.url, TIMINGS))
-        page.clock.set_fixed_time(datetime(2026, 1, 1, 21, 30, tzinfo=timezone.utc))
+        page.clock.set_fixed_time(datetime(2026, 1, 1, 20, 59, tzinfo=timezone.utc))
         page.route(PRAYER_API, respond)
         check_prayer_time(page, "riyadh")
-        check_prayer_time(page, "cairo")
-        assert [call.path.split("/")[-1] for call in calls] == ["02-01-2026", "01-01-2026"]
-        assert [parse_qs(call.query)["timezonestring"][0] for call in calls] == ["Asia/Riyadh", "Africa/Cairo"]
-    run("اختلاف تاريخ مدينتين قرب منتصف الليل", timezone_dates)
+        page.clock.set_fixed_time(datetime(2026, 1, 1, 21, 1, tzinfo=timezone.utc))
+        check_prayer_time(page, "mecca")
+        assert [call.path.split("/")[-1] for call in calls] == ["01-01-2026", "02-01-2026"]
+        assert [parse_qs(call.query)["timezonestring"][0] for call in calls] == ["Asia/Riyadh", "Asia/Riyadh"]
+    run("تغيّر التاريخ عند منتصف الليل بتوقيت السعودية", timezone_dates, section="prayer")
 
     def prayer_race(page):
         page.locator("#prayer-form button").click()
         page.wait_for_function("window.zadPrayerRequests.length === 1")
-        page.locator("#city").select_option("cairo")
+        page.locator("#city").select_option("mecca")
         page.wait_for_function("window.zadPrayerRequests.length === 2")
         assert page.evaluate("window.zadPrayerRequests[0].signal.aborted")
         page.evaluate("(times) => window.zadPrayerRequests[1].reply(times)", TIMINGS)
         expect(page.locator("#times strong").first).to_have_text("05:10")
         page.evaluate("(times) => window.zadPrayerRequests[0].reply(times)", TIMINGS | {"Fajr": "04:00"})
         expect(page.locator("#times strong").first).to_have_text("05:10")
-        expect(page.locator("#prayer-status")).to_contain_text("القاهرة")
-    run("تبديل المدينة أثناء الطلب مع وصول النتيجة القديمة لاحقًا", prayer_race, init="""
+        expect(page.locator("#prayer-status")).to_contain_text("مكة المكرمة")
+    run("تبديل المدينة أثناء الطلب مع وصول النتيجة القديمة لاحقًا", prayer_race, section="prayer", init="""
         window.zadPrayerRequests=[];
         window.fetch=(url,{signal})=>new Promise(resolve=>{
             const request=new URL(url);
@@ -730,7 +777,7 @@ def local_cases(suite, browser, origin):
         page.clock.fast_forward(9100)
         expect(page.locator("#prayer-status")).to_contain_text("تعذر تحميل")
         expect(page.locator("#times strong")).to_have_count(0)
-    run("مهلة تسع ثوان عند تعليق خدمة المواقيت", prayer_timeout, init="""
+    run("مهلة تسع ثوان عند تعليق خدمة المواقيت", prayer_timeout, section="prayer", init="""
         window.fetch=(_,{signal})=>new Promise((_,reject)=>signal.addEventListener(
           'abort',()=>reject(new DOMException('aborted','AbortError')), {once:true}));
     """)
@@ -925,21 +972,21 @@ def main():
 
 
 def webkit_public_cases(suite, browser, device):
-    for name, check in (
-        ("فتح الصفحة بأبعاد iPhone", verify_sections),
-        ("اللغات والرجوع", guide_history),
-        ("الأذكار والفتاوى", all_filters),
-        ("حفظ خطة القراءة", reading_cycle),
-        ("مواقيت الرياض الحية", lambda page: check_prayer_time(page, "riyadh")),
-        ("فهرس الفتاوى وتصفية المصادر", fatwa_filters),
-        ("المقتطفات والنسبة إلى المصدر", fatwa_excerpts),
-        ("احترام العالم المطلوب والمعالجة الآمنة", fatwa_rank_and_scope),
-        ("تصحيح الالتباس ومراجعه", corrected_questions),
-        ("سؤال المسح على الخفين كما كُتب على الجوال", khuff_answers),
-        ("السؤال المركّب والقيود الشخصية", compound_and_scope),
-        ("اختيار صيغة موثّقة", clarification),
+    for name, section, check in (
+        ("فتح الصفحة بأبعاد iPhone", "", verify_sections),
+        ("اللغات والرجوع", "discover", guide_history),
+        ("الأذكار والفتاوى", "", all_filters),
+        ("حفظ خطة القراءة", "reading", reading_cycle),
+        ("مواقيت الرياض الحية", "prayer", lambda page: check_prayer_time(page, "riyadh")),
+        ("فهرس الفتاوى وتصفية المصادر", "ask", fatwa_filters),
+        ("المقتطفات والنسبة إلى المصدر", "ask", fatwa_excerpts),
+        ("احترام العالم المطلوب والمعالجة الآمنة", "ask", fatwa_rank_and_scope),
+        ("تصحيح الالتباس ومراجعه", "ask", corrected_questions),
+        ("سؤال المسح على الخفين كما كُتب على الجوال", "ask", khuff_answers),
+        ("السؤال المركّب والقيود الشخصية", "ask", compound_and_scope),
+        ("اختيار صيغة موثّقة", "ask", clarification),
     ):
-        suite.run(f"عام | WebKit | {name}", lambda: new_visit(browser, PUBLIC, check, device=device))
+        suite.run(f"عام | WebKit | {name}", lambda: new_visit(browser, section_address(PUBLIC, section), check, device=device))
 
 
 if __name__ == "__main__":

@@ -7,16 +7,16 @@ from pathlib import Path
 import re
 from urllib.parse import parse_qs, urlsplit
 
-from audit import SITE, without_overflow
+from audit import SITE, section_address, without_overflow
 from playwright.sync_api import expect, sync_playwright
 from scenarios import PUBLIC, Suite, new_visit, verified_answer
 
 CITIES = {
     "riyadh": (24.7136, 46.6753, "Asia/Riyadh", 4),
     "mecca": (21.3891, 39.8579, "Asia/Riyadh", 4),
-    "cairo": (30.0444, 31.2357, "Africa/Cairo", 5),
-    "amman": (31.9539, 35.9106, "Asia/Amman", 23),
-    "dubai": (25.2048, 55.2708, "Asia/Dubai", 16),
+    "medina": (24.4539, 39.6142, "Asia/Riyadh", 4),
+    "jeddah": (21.4858, 39.1925, "Asia/Riyadh", 4),
+    "dammam": (26.4207, 50.0888, "Asia/Riyadh", 4),
 }
 PRAYERS = ("Fajr", "Dhuhr", "Asr", "Maghrib", "Isha")
 
@@ -46,9 +46,7 @@ def prayer_contract(page):
         assert abs(meta["latitude"] - lat) <= 0.001 and abs(meta["longitude"] - lon) <= 0.001
         times = [data["timings"][name][:5] for name in PRAYERS]
         expect(page.locator("#times strong")).to_have_text(times)
-        if city == "dubai":
-            assert "experimental" in meta["method"]["name"].lower()
-            expect(page.locator("#prayer-status")).to_contain_text("التجريبية")
+        expect(page.locator("#prayer-status")).to_contain_text("أم القرى")
         outcomes[city] = {"date": date, "zone": zone, "method": method, "provider": meta["method"]["name"],
                           "times": times, "cors": response.header_value("access-control-allow-origin")}
     return outcomes
@@ -179,23 +177,23 @@ def main():
         with playwright.chromium.launch(executable_path=os.getenv("ZAD_CHROMIUM", "/usr/bin/chromium")) as browser:
             if not args.assets_only:
                 suite.run("Chromium · عقد AlAdhan الحي للمدن الخمس",
-                          lambda: new_visit(browser, PUBLIC, prayer_contract))
+                          lambda: new_visit(browser, section_address(PUBLIC, "prayer"), prayer_contract))
             suite.run("Chromium · تحميل الخطين من Google Fonts",
-                      lambda: new_visit(browser, PUBLIC, web_fonts))
+                      lambda: new_visit(browser, section_address(PUBLIC, "ask"), web_fonts))
             suite.run("Chromium · العمل عند توقف خطوط Google",
-                      lambda: new_visit(browser, PUBLIC, blocked_fonts, viewport={"width": 320, "height": 840},
+                      lambda: new_visit(browser, section_address(PUBLIC, "ask"), blocked_fonts, viewport={"width": 320, "height": 840},
                                         setup=lambda page: page.route(re.compile(r"https://fonts\.(?:googleapis|gstatic)\.com/"), lambda route: route.abort())))
             suite.run("Chromium · استيراد WebLLM وملفات النموذج الخارجية",
-                      lambda: new_visit(browser, PUBLIC, model_dependencies))
+                      lambda: new_visit(browser, section_address(PUBLIC, "ask"), model_dependencies))
         if args.webkit:
             with playwright.webkit.launch() as browser:
                 if not args.assets_only:
                     suite.run("WebKit · عقد AlAdhan الحي للمدن الخمس",
-                              lambda: new_visit(browser, PUBLIC, prayer_contract, device=device))
+                              lambda: new_visit(browser, section_address(PUBLIC, "prayer"), prayer_contract, device=device))
                 suite.run("WebKit · تحميل الخطين من Google Fonts",
-                          lambda: new_visit(browser, PUBLIC, web_fonts, device=device))
+                          lambda: new_visit(browser, section_address(PUBLIC, "ask"), web_fonts, device=device))
                 suite.run("WebKit · استيراد WebLLM وملفات النموذج الخارجية",
-                          lambda: new_visit(browser, PUBLIC, model_dependencies, device=device))
+                          lambda: new_visit(browser, section_address(PUBLIC, "ask"), model_dependencies, device=device))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(suite.results, indent=2, ensure_ascii=False) + "\n")
     if any(row["status"] == "failed" for row in suite.results):
