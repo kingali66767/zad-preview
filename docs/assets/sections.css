@@ -136,43 +136,39 @@ body[data-page] {
 
 body[data-page="home"] {
   background:
-    radial-gradient(ellipse at 84% 12%, #2a5a47 0%, transparent 42%),
-    radial-gradient(ellipse at 12% 70%, #3b5948 0%, transparent 38%),
-    linear-gradient(155deg, #0b271f, #122f27 58%, #0b211c);
+    radial-gradient(ellipse at 95% 8%, #d4e7d9 0%, transparent 50%),
+    radial-gradient(ellipse at 4% 24%, #f6e8cc 0%, transparent 46%),
+    #edf4ec;
 }
 
-body[data-page="home"] .route-header {
-  position: relative;
-  padding-block: clamp(24px, 6vh, 62px) 0;
-  border: 0;
-  background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-body[data-page="home"] .route-top { display: flex; justify-content: center; }
+body[data-page="home"] .route-top { display: flex; }
 .launcher-brand {
-  inline-size: clamp(57px, 17vw, 75px);
-  block-size: clamp(57px, 17vw, 75px);
-  border-radius: clamp(18px, 6vw, 24px);
-  box-shadow: inset 0 1px 1px #fff4d972, inset 0 -1px 0 #0a251c, 0 9px 34px #071a144d;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--gold);
 }
-.launcher-brand .zad-icon { --zad-icon-size: clamp(2.1rem, 8vw, 2.75rem); }
+.launcher-wordmark { font: 700 2.1rem/1 Amiri, Georgia, serif; }
 
 .launcher-shell {
   flex: 1;
-  display: grid;
-  align-content: center;
-  padding: clamp(30px, 5vh, 64px) 0 clamp(37px, 8vh, 85px);
+  inline-size: min(73rem, calc(100% - 32px));
+  margin-inline: auto;
+  padding-block: clamp(24px, 5vw, 48px) clamp(37px, 6vw, 72px);
+}
+
+#launcher-heading {
+  font-size: clamp(1.83rem, 5.5vw, 3.35rem);
+  line-height: 1.16;
+  margin: 0 0 clamp(16px, 3vw, 27px);
 }
 
 #section-launcher {
   position: static;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(11px, 3.2vw, 22px);
-  inline-size: min(27rem, calc(100% - 32px));
-  margin-inline: auto;
+  align-items: stretch;
+  gap: clamp(9px, 2vw, 17px);
   padding: 0;
   border: 0;
   background: transparent;
@@ -180,37 +176,58 @@ body[data-page="home"] .route-top { display: flex; justify-content: center; }
 
 #section-launcher .launcher-link {
   display: grid;
-  place-items: center;
-  aspect-ratio: 1;
-  min-inline-size: 44px;
-  padding: 0;
-  border: 1px solid #eaf5db56;
-  border-radius: clamp(16px, 5vw, 26px);
-  color: #ffe9b9;
-  background: linear-gradient(152deg, #c6e4cf35 0%, #adcfb914 55%, #ecd59705 78%), #203f34;
-  box-shadow: inset 0 1px 1px #f8f8d970, inset 0 -1px 0 #061f1877, 0 8px 20px #001b1363;
+  align-content: start;
+  justify-items: start;
+  min-inline-size: 0;
+  min-block-size: 9.3rem;
+  padding: clamp(12px, 2.2vw, 23px);
+  gap: 5px;
+  border: 1px solid #fffef7db;
+  border-radius: clamp(18px, 4vw, 25px);
+  color: var(--forest);
+  background: linear-gradient(151deg, #fffdfa 0%, #f8fbf2bd 52%, #d6e9d9b5 100%);
+  box-shadow: var(--glass-shadow);
+  white-space: normal;
+  text-decoration: none;
 }
 
 #section-launcher .section-icon {
-  display: grid;
-  place-items: center;
-  inline-size: 100%;
-  block-size: 100%;
-  color: inherit;
-  border: none;
-  background: none;
-  box-shadow: none;
+  inline-size: clamp(35px, 9vw, 42px);
+  block-size: clamp(35px, 9vw, 42px);
+  margin-block-end: 3px;
+  border-radius: 11px;
+  color: #815718;
 }
 
 #section-launcher .zad-icon {
-  --zad-icon-size: clamp(1.45rem, 7vw, 2.35rem);
+  --zad-icon-size: 1.16rem;
+}
+
+.launcher-title {
+  font-size: clamp(1rem, 2.65vw, 1.19rem);
+  font-weight: 800;
+  line-height: 1.43;
+}
+
+.launcher-description {
+  color: var(--muted);
+  font-size: clamp(.91rem, 2.45vw, 1rem);
+  line-height: 1.6;
 }
 
 #section-launcher .launcher-link:is(:focus-visible, :hover, :active) {
-  border-color: #ffe3a6;
-  outline-color: #ffe3a6;
-  color: #fff2d4;
-  background-color: #406957;
+  border-color: #a98242;
+  outline-color: #8b6024;
+  color: var(--forest);
+  background: linear-gradient(151deg, #fffefa, #e9f3e5 72%, #e0eacf);
+}
+
+@media (max-width: 999px) {
+  #section-launcher { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  #section-launcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 360px) {

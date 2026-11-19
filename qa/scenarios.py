@@ -10,7 +10,8 @@ import re
 import threading
 from urllib.parse import parse_qs, urljoin, urlsplit
 
-from audit import Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address, without_overflow
+from audit import (Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
+                   verify_launcher, without_overflow)
 from playwright.sync_api import expect, sync_playwright
 
 PUBLIC = "https://kingali66767.github.io/zad-preview/"
@@ -95,18 +96,6 @@ def new_visit(browser, address, check, *, local=False, device=None, init=None, s
         context.close()
 
 
-def verify_launcher(page):
-    links = page.locator("#section-launcher a")
-    expect(links).to_have_count(len(SECTIONS))
-    attributes = links.evaluate_all("""links => links.map(link => ({
-        url: link.href, label: link.getAttribute('aria-label'), text: link.innerText.trim()
-    }))""")
-    assert {urlsplit(item["url"]).path.rsplit("/", 2)[-2] for item in attributes} == set(SECTIONS)
-    assert all(item["label"] and not item["text"] and not urlsplit(item["url"]).fragment
-               for item in attributes), attributes
-    without_overflow(page)
-
-
 def verify_sections(page):
     verify_launcher(page)
     home = page.url
@@ -125,11 +114,14 @@ def verify_sections(page):
 def launcher_transitions(page):
     verify_launcher(page)
     home = page.url
-    for section in SECTIONS:
+    for index, section in enumerate(SECTIONS):
         address = section_address(home, section)
-        icon = page.locator(f'#section-launcher a[href="{section}/"]')
-        expect(icon).to_be_visible()
-        icon.click()
+        card = page.locator(f'#section-launcher a[href="{section}/"]')
+        expect(card).to_be_visible()
+        if index == 0:
+            card.press("Enter")
+        else:
+            card.click()
         expect(page).to_have_url(address)
         expect(page.locator("main")).to_be_visible()
         assert page.locator("#section-launcher").count() == 0
@@ -252,7 +244,8 @@ def public_cases(suite, browser, device):
     def visit(section, check, **options):
         return new_visit(browser, section_address(PUBLIC, section), check, **options)
 
-    suite.run("عام | شبكة الأيقونات والتنقل عبر الصفحات المستقلة", lambda: visit("", launcher_transitions, device=device))
+    suite.run("عام | بطاقات الأقسام بعناوينها ووصفها والتنقل إلى الصفحات المستقلة",
+              lambda: visit("", launcher_transitions, device=device))
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
     suite.run("عام | جميع روابط قائمة الجوال والتنقل بلوحة المفاتيح",
               lambda: visit("quran", verify_menu, device=device))
@@ -644,7 +637,7 @@ def local_cases(suite, browser, origin):
     def run(name, check, *, section="ask", **options):
         suite.run("محلي | " + name, lambda: new_visit(browser, section_address(origin, section), check, local=True, **options))
 
-    run("الواجهة تعرض أيقونات فقط وتفتح جميع الأقسام", launcher_transitions, section="")
+    run("بطاقات الواجهة تعرض أسماء الأقسام ووصفها وتفتح صفحاتها", launcher_transitions, section="")
 
     def unavailable_storage(page):
         page.locator("#reading input").first.check()

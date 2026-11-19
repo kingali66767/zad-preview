@@ -63,6 +63,34 @@ def without_overflow(page):
     assert widths["content"] <= widths["viewport"], (page.url, widths)
 
 
+def verify_launcher(page):
+    launcher = page.locator("#section-launcher")
+    cards = launcher.locator("a.launcher-link")
+    expect(cards).to_have_count(len(SECTIONS))
+    links = cards.evaluate_all("cards => cards.map(card => card.href)")
+    addresses = [urlsplit(link) for link in links]
+    assert {address.path.rsplit("/", 2)[-2] for address in addresses} == set(SECTIONS), links
+    assert all(not address.fragment for address in addresses), links
+    expect(page.locator("#sections, .hero, " + ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
+    for card in cards.all():
+        expect(card.locator(".zad-icon")).to_be_visible()
+        title = card.locator(".launcher-title")
+        description = card.locator(".launcher-description")
+        expect(title).to_be_visible()
+        expect(description).to_be_visible()
+        title_text = title.inner_text().strip()
+        description_text = description.inner_text().strip()
+        assert re.search(r"[\u0621-\u064a]", title_text), title_text
+        assert re.search(r"[\u0621-\u064a]", description_text), description_text
+        expect(card).to_have_accessible_name(title_text)
+        expect(card).to_have_accessible_description(description_text)
+    width, columns = launcher.evaluate(r"""element => [
+        window.innerWidth, getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length
+    ]""")
+    assert columns == (2 if width <= 680 else 3 if width < 1000 else 4), (width, columns)
+    without_overflow(page)
+
+
 def browser_checks(origin, output, live):
     results = []
     external_links = set()
@@ -79,12 +107,8 @@ def browser_checks(origin, output, live):
             page.on("pageerror", lambda error: page_errors.append(str(error)))
             response = page.goto(origin, wait_until="load")
             assert response.status == 200
-            without_overflow(page)
             assert page.locator("html").get_attribute("dir") == "rtl"
-            launcher = page.locator("#section-launcher a")
-            expect(launcher).to_have_count(len(SECTIONS))
-            assert launcher.evaluate_all("items => items.every(link => link.getAttribute('aria-label') && !link.innerText.trim())")
-            assert page.locator("#sections, #prayer, #ask, .hero").count() == 0
+            verify_launcher(page)
             missing_anchors = page.locator('a[href^="#"]').evaluate_all(
                 "links => links.map(link => link.hash.slice(1)).filter(id => !document.getElementById(id))"
             )

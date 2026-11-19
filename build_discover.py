@@ -12,24 +12,24 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261119-7"
+REVISION = "20261119-8"
 SECTIONS = {
-    "quran": "القرآن الكريم",
-    "hadith": "الأحاديث الصحيحة",
-    "lessons": "الخطب والدروس",
-    "ask": "اسأل زاد",
-    "prayer": "مواقيت الصلاة",
-    "worship": "الوضوء والصلاة",
-    "adhkar": "الأذكار اليومية",
-    "reading": "خطة القراءة",
-    "media": "المحاضرات والتلاوات",
-    "occasions": "المناسبات الإسلامية",
-    "belief": "العقيدة وأصول الإيمان",
-    "seerah": "السيرة النبوية",
-    "faq": "الأسئلة الشرعية",
-    "discover": "تعرّف على الإسلام",
-    "sources": "مصادر المكتبة",
-    "contact": "تواصل معنا",
+    "quran": ("القرآن الكريم", "آيات مختارة وفضائل التلاوة"),
+    "lessons": ("الخطب والدروس", "مواد مكتوبة للقراءة والاستفادة"),
+    "hadith": ("الأحاديث الصحيحة", "نصوص مختارة مع تخريجها"),
+    "faq": ("أسئلة وأجوبة شرعية", "إجابات مختصرة مع أدلتها"),
+    "media": ("المحاضرات والتلاوات", "مواد صوتية ومرئية من مصادرها"),
+    "occasions": ("المناسبات الإسلامية", "مواسم العبادة وأدلتها"),
+    "belief": ("العقيدة وأصول الإيمان", "التوحيد وأركان الإيمان ومعنى الإحسان"),
+    "seerah": ("السيرة النبوية", "من بدء الوحي إلى حجة الوداع"),
+    "ask": ("اسأل زاد", "اسأل بعبارتك واطّلع على المصادر"),
+    "prayer": ("مواقيت الصلاة", "مواقيت الصلاة في المدن السعودية"),
+    "worship": ("الوضوء والصلاة", "خطوات مرتّبة للمبتدئ مع أدلتها"),
+    "adhkar": ("الأذكار اليومية", "أذكار الصباح والمساء وبعد الصلاة"),
+    "reading": ("خطة القراءة", "سبع سور قصيرة مع متابعة تقدّمك"),
+    "discover": ("تعرّف على الإسلام", "دليل للشهادتين والعبادة بأربع لغات"),
+    "sources": ("مصادر المكتبة", "مراجع التفسير والحديث والفتاوى"),
+    "contact": ("تواصل معنا", "اقتراح مواد وتصحيح المحتوى"),
 }
 TEMPLATED_SECTIONS = {"ask", "prayer", "sources", "contact"}
 STYLES = ("style.css", "discover.css", "section-icons.css", "glass.css", "sections.css")
@@ -193,23 +193,27 @@ def icon(key):
 
 def render_launcher():
     items = []
-    for slug, title in SECTIONS.items():
+    for slug, (title, description) in SECTIONS.items():
         shape = icon("discover-islam" if slug == "discover" else slug)
         label = escape(title, quote=True)
+        description_id = f"launcher-{slug}-description"
         items.append(
-            f'<a class="launcher-link" data-section-link="{slug}" href="{slug}/" aria-label="{label}" title="{label}">'
-            f'<span class="section-icon" aria-hidden="true">{shape}</span></a>'
+            f'<a class="launcher-link" data-section-link="{slug}" href="{slug}/"'
+            f' aria-label="{label}" aria-describedby="{description_id}">'
+            f'<span class="section-icon" aria-hidden="true">{shape}</span>'
+            f'<strong class="launcher-title">{label}</strong>'
+            f'<span class="launcher-description" id="{description_id}">{escape(description)}</span></a>'
         )
     links = "\n".join(items)
-    return f'''<h1 class="visually-hidden">زاد – منصة التوعية الدينية</h1>
-<nav class="launcher-nav" id="section-launcher" aria-label="أقسام زاد">
+    return f'''<h1 id="launcher-heading" class="section-heading"><span class="section-icon" aria-hidden="true">{icon("library")}</span>استكشف أقسام المنصة</h1>
+<nav class="launcher-nav" id="section-launcher" aria-labelledby="launcher-heading">
 {links}
 </nav>'''
 
 
 def render_section_navigation(slug, base):
     items = []
-    for route, title in SECTIONS.items():
+    for route, (title, _) in SECTIONS.items():
         shape = icon("discover-islam" if route == "discover" else route)
         selected = ' aria-current="page"' if route == slug else ""
         items.append(f'<a href="{base}{route}/"{selected}>{shape}<span>{escape(title)}</span></a>')
@@ -226,7 +230,7 @@ def render_page(slug, body):
     is_home = slug == "home"
     base = "" if is_home else "../"
     assets = base + "assets/"
-    title = "زاد | منصة التوعية الدينية" if is_home else f"{SECTIONS[slug]} | زاد"
+    title = "زاد | منصة التوعية الدينية" if is_home else f"{SECTIONS[slug][0]} | زاد"
     styles = "\n".join(f'<link rel="stylesheet" href="{assets}{name}?v={REVISION}">' for name in STYLES)
     scripts = []
     if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug != "discover"):
@@ -243,7 +247,7 @@ def render_page(slug, body):
     scripts_markup = "\n".join(script_tags)
     capabilities = {"prayer": "connect-src https://api.aladhan.com; ", "ask": "worker-src 'self'; "}.get(slug, "")
     if is_home:
-        header = f'<span class="route-brand launcher-brand" aria-hidden="true">{icon("brand")}</span>'
+        header = f'<div class="launcher-brand"><span class="route-brand" aria-hidden="true">{icon("brand")}</span><span class="launcher-wordmark">زاد</span></div>'
     else:
         header = render_section_navigation(slug, base)
     footer = "" if is_home else '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'
@@ -293,7 +297,7 @@ def main():
         parser.error("The Arabic default translation is required.")
     docs = ROOT / "docs"
     outputs = {docs / "index.html": render_page("home", render_launcher())}
-    for slug, title in SECTIONS.items():
+    for slug, (title, _) in SECTIONS.items():
         if slug == "discover":
             body = f'<h1 class="visually-hidden">{escape(title)}</h1>\n' + render_guide(languages)
         elif slug in TEMPLATED_SECTIONS:
