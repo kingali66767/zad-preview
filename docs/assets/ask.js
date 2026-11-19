@@ -10,11 +10,15 @@ const askAnswer = document.querySelector("#ask-answer");
 const askSources = document.querySelector("#ask-sources");
 const modelButton = document.querySelector("#ask-enable");
 const modelStatus = document.querySelector("#ask-model-status");
+const fatwaScholar = document.querySelector("#fatwa-scholar");
+const fatwaCategory = document.querySelector("#fatwa-category");
+const fatwaCount = document.querySelector("#fatwa-count");
+const fatwaList = document.querySelector("#fatwa-list");
 
 const referencesForHelp = [
-  ["فتاوى الشيخ ابن باز", "https://binbaz.org.sa/fatwas"],
-  ["الإسلام سؤال وجواب", "https://islamqa.info/ar"],
-  ["الموسوعة الحديثية", "https://dorar.net/hadith"]
+  ["الموقع الرسمي للشيخ ابن باز", "https://binbaz.org.sa/fatwas"],
+  ["الموقع الرسمي للشيخ ابن عثيمين", "https://binothaimeen.net/"],
+  ["الرئاسة العامة للبحوث العلمية والإفتاء", "https://alifta.gov.sa/ar/home"]
 ];
 
 function normalizeQuestion(value) {
@@ -34,12 +38,81 @@ for (const [id, record] of Object.entries(askEvidence)) {
   }
 }
 
+const fatwaIndex = fatwaSources.map(entry => ({
+  entry,
+  terms: entry.tags.map(normalizeQuestion),
+  title: normalizeQuestion(entry.title)
+}));
+const exactFatwas = new Map(fatwaSources.flatMap(entry =>
+  (entry.excerpt?.questions || []).map(question => [normalizeQuestion(question), entry])
+));
+
+function sourceDescription(entry) {
+  const format = entry.format === "audio" ? "تسجيل صوتي" : "فتوى مكتوبة";
+  return fatwaScholars[entry.scholar] + " · " + format;
+}
+
+function browseFatwas() {
+  const items = fatwaSources.filter(entry =>
+    (!fatwaScholar.value || entry.scholar === fatwaScholar.value) &&
+    (!fatwaCategory.value || entry.category === fatwaCategory.value));
+  fatwaList.replaceChildren();
+  for (const entry of items) {
+    const item = document.createElement("li");
+    const source = document.createElement("a");
+    const author = document.createElement("small");
+    source.textContent = entry.title;
+    source.href = entry.url;
+    author.textContent = sourceDescription(entry);
+    item.append(source, author);
+    fatwaList.append(item);
+  }
+  fatwaCount.textContent = items.length
+    ? new Intl.NumberFormat("ar-SA").format(items.length) + " نتيجة من المصادر الأصلية"
+    : "لا توجد فتاوى في هذا الاختيار. يمكنك تغيير العالم أو الموضوع.";
+}
+
+fatwaScholar.add(new Option("جميع العلماء", ""));
+for (const [id, name] of Object.entries(fatwaScholars)) fatwaScholar.add(new Option(name, id));
+fatwaCategory.add(new Option("جميع الموضوعات", ""));
+for (const category of new Set(fatwaSources.map(entry => entry.category))) {
+  fatwaCategory.add(new Option(category, category));
+}
+fatwaScholar.addEventListener("change", browseFatwas);
+fatwaCategory.addEventListener("change", browseFatwas);
+browseFatwas();
+
+const scholarNames = {
+  "ibn-baz": ["ابن باز", "بن باز"],
+  "ibn-uthaymeen": ["ابن عثيمين", "بن عثيمين", "العثيمين"],
+  unlisted: ["الفوزان", "اللحيدان", "الحيدان"]
+};
+
+function includesPhrase(key, phrase) {
+  return (" " + key + " ").includes(" " + normalizeQuestion(phrase) + " ");
+}
+
+function relevantFatwas(key, authors) {
+  const phrase = " " + key + " ";
+  const authorOnly = authors.some(id => scholarNames[id].some(name =>
+    [name, "الشيخ " + name, "فتاوى " + name].some(alias => normalizeQuestion(alias) === key)));
+  return fatwaIndex.filter(({entry}) => !authors.length || authors.includes(entry.scholar))
+    .map(({entry, terms, title}) => ({
+    entry,
+    score: key === title ? 1000 : authorOnly ? 1 : terms.reduce((total, term) => (
+      total + (phrase.includes(" " + term + " ") ? term.split(" ").length ** 2 : 0)
+    ), 0)
+  })).filter(result => result.score > 0).sort((a, b) => b.score - a.score)
+    .slice(0, 5).map(result => result.entry);
+}
+
 function showResult(status, title, sources, answer = "", language = "ar") {
   askStatus.textContent = status;
   askTitle.textContent = title;
   askAnswer.textContent = answer;
   askAnswer.hidden = !answer;
   askAnswer.lang = language;
+  askSources.classList.remove("fatwa-results");
   askSources.replaceChildren();
   for (const [label, url] of sources) {
     const link = document.createElement("a");
@@ -153,9 +226,30 @@ askForm.addEventListener("submit", event => {
     askInput.focus();
     return;
   }
+  const exactFatwa = exactFatwas.get(key);
+  if (exactFatwa) {
+    showResult("مقتطف من فتوى " + fatwaScholars[exactFatwa.scholar], exactFatwa.title,
+      [[exactFatwa.title + " · اقرأ الفتوى كاملة", exactFatwa.url]], exactFatwa.excerpt.text);
+    return;
+  }
   const match = questionIndex.get(key);
   if (match) {
     showResult("وجدت جوابًا موثّقًا يطابق السؤال.", "جواب موثّق", match.sources, match.answer, match.language);
+    return;
+  }
+
+  const authors = Object.keys(scholarNames).filter(id => scholarNames[id].some(name => includesPhrase(key, name)));
+  const references = relevantFatwas(key, authors);
+  if (references.length) {
+    showResult("وجدت فتاوى مرتبطة بموضوع السؤال.", "نتائج من مواقع العلماء",
+      references.map(entry => [entry.title + " · " + sourceDescription(entry), entry.url]),
+      "راجع السؤال والجواب كاملين في المصدر. إذا كانت مسألتك لها ظروف خاصة، فاسأل مختصًا يمكنه معرفة تفاصيلها.");
+    askSources.classList.add("fatwa-results");
+    return;
+  }
+  if (authors.length) {
+    showResult("لم أجد فتوى مطابقة من العالم المذكور في الفهرس.", "المواقع الرسمية",
+      referencesForHelp, "يمكنك تغيير صياغة السؤال أو مراجعة الجهات الرسمية.");
     return;
   }
 

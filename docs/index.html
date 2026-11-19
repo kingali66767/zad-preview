@@ -14,6 +14,7 @@
 <script src="assets/library-content.js" defer></script>
 <script src="assets/site.js" defer></script>
 <script src="assets/ask-evidence.js" defer></script>
+<script src="assets/fatwa-sources.js" defer></script>
 <script id="ask-script" data-worker="assets/ask-worker.js" src="assets/ask.js" defer></script>
 </head>
 <body>
@@ -402,10 +403,10 @@
 <div class="ask-panel">
 <p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
 <h2 id="ask-heading">اسأل زاد</h2>
-<p>ابحث عن جواب موثّق في موضوعات مختارة عن الإسلام. جرّب مثلًا «ما أركان الإسلام؟» أو «كيف أتوضأ؟».</p>
+<p>اكتب سؤالًا أو موضوعًا مثل «سجود السهو» للعثور على الفتوى في موقع صاحبها أو قراءة جواب موثّق.</p>
 <form id="ask-form" class="ask-form">
-<label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: ما الفرق بين الزكاة والصدقة؟"></label>
-<button class="button green" id="ask-submit" type="submit" disabled>ابحث عن جواب</button>
+<label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: سجود السهو أو زكاة الفطر"></label>
+<button class="button green" id="ask-submit" type="submit" disabled>ابحث في المصادر</button>
 </form>
 <p id="ask-status" role="status"></p>
 <article class="card ask-result" id="ask-result" aria-labelledby="ask-answer-heading" hidden>
@@ -413,6 +414,15 @@
 <p id="ask-answer" dir="auto"></p>
 <div class="references" id="ask-sources"></div>
 </article>
+<details class="fatwa-library" id="fatwa-library">
+<summary>تصفّح فتاوى العلماء</summary>
+<div class="fatwa-filters">
+<label for="fatwa-scholar">العالم<select id="fatwa-scholar"></select></label>
+<label for="fatwa-category">الموضوع<select id="fatwa-category"></select></label>
+</div>
+<p id="fatwa-count" role="status"></p>
+<ul id="fatwa-list"></ul>
+</details>
 <details class="ask-optional">
 <summary>اقتراح مراجع بالذكاء الاصطناعي</summary>
 <p>ميزة اختيارية لاختيار مراجع مرتبطة بالسؤال من قائمة محددة. يحتاج التنزيل الأول إلى اتصال بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.</p>

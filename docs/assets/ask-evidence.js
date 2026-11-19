@@ -40,7 +40,7 @@ const askEvidence = {
     title: "الأكل أو الشرب نسيانًا في الصيام · Forgetting during a fast",
     terms: ["الصيام", "الصوم", "صائم", "صمت", "fasting", "fast", "jeûne", "ayuno", "ayunaba"],
     sources: [["صحيح البخاري ١٩٣٣ · Sahih al-Bukhari 1933", "https://sunnah.com/bukhari:1933"]],
-    ar: ["إذا أكل الصائم أو شرب ناسيًا فليتم صومه، كما جاء في حديث أبي هريرة في المصدر.", "ماذا أفعل إذا أكلت ناسيًا وأنا صائم", "إذا شربت ناسيا وأنا صائم ماذا أفعل", "هل يبطل صومي إذا أكلت ناسيا"],
+    ar: ["إذا أكل الصائم أو شرب ناسيًا فليتم صومه، كما جاء في حديث أبي هريرة في المصدر.", "هل يبطل صومي إذا أكلت ناسيا"],
     en: ["The cited hadith tells a fasting person who forgets and eats or drinks to complete the fast.", "what if i forget and eat while fasting", "what if i forget and drink while fasting"],
     fr: ["Le hadith cité demande à la personne qui mange ou boit par oubli de poursuivre son jeûne.", "que faire si je mange par oubli pendant le jeûne"],
     es: ["El hadiz citado indica que quien come o bebe por olvido mientras ayuna debe continuar su ayuno.", "qué hago si comí por olvido mientras ayunaba"]

@@ -238,6 +238,12 @@ def public_cases(suite, browser, device):
               lambda: new_visit(browser, PUBLIC, verified_answer))
     suite.run("عام | ادعاء خاطئ ومسألة شخصية خارج المطابقة",
               lambda: new_visit(browser, PUBLIC, unsafe_assumptions))
+    suite.run("عام | فتاوى أصلية وتصفية حسب العالم والموضوع",
+              lambda: new_visit(browser, PUBLIC, fatwa_filters))
+    suite.run("عام | المقتطفات المطابقة وعزوها إلى الفتوى الأصلية",
+              lambda: new_visit(browser, PUBLIC, fatwa_excerpts))
+    suite.run("عام | احترام اسم العالم وحالة المرجع غير المتاح",
+              lambda: new_visit(browser, PUBLIC, fatwa_rank_and_scope))
     support = new_visit(browser, PUBLIC, capture_model_support)
     if support["shader_f16"]:
         def real_model(page):
@@ -281,9 +287,66 @@ def unsafe_assumptions(page):
         "What is the capital of Iceland?",
     ):
         ask(page, question)
-        expect(page.locator("#ask-status")).to_contain_text("لم أجد جوابًا موثّقًا")
-        expect(page.locator("#ask-answer-heading")).to_have_text("مراجع للرجوع إليها")
-        expect(page.locator('#ask-sources a[href="https://binbaz.org.sa/fatwas"]')).to_be_visible()
+        expect(page.locator("#ask-answer-heading")).to_have_text(
+            re.compile("^(مراجع للرجوع إليها|نتائج من مواقع العلماء)$"))
+        if page.locator("#ask-sources").get_attribute("class") == "references fatwa-results":
+            expect(page.locator("#ask-answer")).to_contain_text("راجع السؤال والجواب كاملين")
+        else:
+            expect(page.locator('#ask-sources a[href="https://binbaz.org.sa/fatwas"]')).to_be_visible()
+
+
+def fatwa_filters(page):
+    library = page.locator("#fatwa-library")
+    library.locator("summary").click()
+    expect(library.locator("#fatwa-list li")).to_have_count(16)
+    expect(library.locator('a[href^="https://binbaz.org.sa/fatwas/"]')).to_have_count(9)
+    expect(library.locator('a[href^="https://binothaimeen.net/"]')).to_have_count(7)
+    library.locator("#fatwa-scholar").select_option("ibn-uthaymeen")
+    expect(library.locator("#fatwa-list li")).to_have_count(7)
+    library.locator("#fatwa-category").select_option("الطهارة")
+    expect(library.locator("#fatwa-list li")).to_have_count(3)
+    library.locator("#fatwa-category").select_option("الحج والعمرة")
+    expect(library.locator("#fatwa-list li")).to_have_count(0)
+    expect(library.locator("#fatwa-count")).to_contain_text("لا توجد فتاوى")
+    library.locator("#fatwa-scholar").select_option("ibn-baz")
+    expect(library.locator("#fatwa-list li")).to_have_count(1)
+    expect(library.locator("#fatwa-list li")).to_contain_text("استيفاء السعي")
+    without_overflow(page)
+
+
+def fatwa_excerpts(page):
+    cases = (
+        ("كم مرة أمسح راسي في الوضوء؟", "2243", "مسحة واحدة"),
+        ("ما كيفية التيمم؟", "1548", "ضربة واحدة"),
+        ("ماذا أفعل إذا أكلت ناسيًا وأنا صائم؟", "6020", "فصومه صحيح"),
+        ("كم مقدار زكاة الفطر؟", "5326", "صاع فقط من قوت البلد"),
+    )
+    for question, article, excerpt in cases:
+        ask(page, question)
+        expect(page.locator("#ask-status")).to_contain_text("الشيخ عبد العزيز بن باز")
+        expect(page.locator("#ask-answer")).to_contain_text(excerpt)
+        expect(page.locator(f'#ask-sources a[href^="https://binbaz.org.sa/fatwas/{article}/"]')).to_be_visible()
+        expect(page.locator("#ask-sources a")).to_have_count(1)
+
+
+def fatwa_rank_and_scope(page):
+    ask(page, "سجود السهو")
+    expect(page.locator("#ask-answer-heading")).to_have_text("نتائج من مواقع العلماء")
+    expect(page.locator('#ask-sources a[href^="https://binbaz.org.sa/fatwas/4190/"]')).to_be_visible()
+    expect(page.locator('#ask-sources a[href^="https://binothaimeen.net/"]')).to_be_visible()
+    ask(page, "فتوى ابن عثيمين عن سجود السهو قبل السلام")
+    expect(page.locator('#ask-sources a[href^="https://binbaz.org.sa/"]')).to_have_count(0)
+    expect(page.locator('#ask-sources a[href^="https://binothaimeen.net/"]')).to_be_visible()
+    ask(page, "الشيخ ابن باز")
+    expect(page.locator('#ask-sources a[href^="https://binbaz.org.sa/fatwas/"]')).to_have_count(5)
+    for question in ("ما مقدار زكاة الفطر عند الفوزان؟", "سجود السهو عند اللحيدان"):
+        ask(page, question)
+        expect(page.locator("#ask-answer-heading")).to_have_text("المواقع الرسمية")
+        expect(page.locator("#ask-status")).to_contain_text("العالم المذكور")
+        expect(page.locator('#ask-sources a[href*="/fatwas/5326/"]')).to_have_count(0)
+    ask(page, "أكلت عمدًا في رمضان وعندي ظرف صحي، ما حكم حالتي؟")
+    expect(page.locator("#ask-status")).not_to_contain_text("مقتطف")
+    expect(page.locator("#ask-answer")).not_to_contain_text("فصومه صحيح")
 
 
 def local_cases(suite, browser, origin):
@@ -504,6 +567,9 @@ def local_cases(suite, browser, origin):
     run("كل صيغ الأسئلة المعتمدة وتطابق لغة الرد ومراجعه", catalog_variants)
 
     run("سؤال مبني على ادعاء خاطئ، وظرف شخصي، وطلب اختلاق حديث", unsafe_assumptions)
+    run("تصفية مصادر الفتاوى حسب العالم والموضوع وإعادة الاختيار", fatwa_filters)
+    run("مقتطفات الفتاوى المطابقة وربطها بالعالم والصفحة الأصلية", fatwa_excerpts)
+    run("ترتيب الفتاوى والتحقق من نسبة الكلام للعالم المطلوب", fatwa_rank_and_scope)
 
     def long_input(page):
         field = page.locator("#ask-input")
@@ -592,6 +658,12 @@ def main():
                                       lambda: new_visit(browser, PUBLIC, reading_cycle, device=device))
                             suite.run("عام | مواقيت الرياض الحية في WebKit",
                                       lambda: new_visit(browser, PUBLIC, lambda p: check_prayer_time(p, "riyadh"), device=device))
+                            suite.run("عام | فهرس الفتاوى وتصفية المصادر في WebKit",
+                                      lambda: new_visit(browser, PUBLIC, fatwa_filters, device=device))
+                            suite.run("عام | المقتطفات والنسبة إلى المصدر في WebKit",
+                                      lambda: new_visit(browser, PUBLIC, fatwa_excerpts, device=device))
+                            suite.run("عام | احترام العالم المطلوب والمعالجة الآمنة في WebKit",
+                                      lambda: new_visit(browser, PUBLIC, fatwa_rank_and_scope, device=device))
                     except Exception as error:
                         suite.blocked("عام | تشغيل محرك WebKit", str(error)[:1200])
         finally:
