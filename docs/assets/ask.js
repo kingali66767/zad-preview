@@ -8,6 +8,8 @@ const askResult = document.querySelector("#ask-result");
 const askTitle = document.querySelector("#ask-answer-heading");
 const askAnswer = document.querySelector("#ask-answer");
 const askSources = document.querySelector("#ask-sources");
+const askRelated = document.querySelector("#ask-related");
+const askRelatedQuestions = document.querySelector("#ask-related-questions");
 const modelButton = document.querySelector("#ask-enable");
 const modelStatus = document.querySelector("#ask-model-status");
 const fatwaScholar = document.querySelector("#fatwa-scholar");
@@ -33,7 +35,9 @@ for (const [id, record] of Object.entries(askEvidence)) {
   for (const language of ["ar", "en", "fr", "es"]) {
     const [answer, ...questions] = record[language];
     for (const question of questions) {
-      questionIndex.set(normalizeQuestion(question), {answer, language, sources: record.sources});
+      questionIndex.set(normalizeQuestion(question), {
+        answer, language, sources: record.sources, correction: record.correction
+      });
     }
   }
 }
@@ -112,6 +116,8 @@ function showResult(status, title, sources, answer = "", language = "ar") {
   askAnswer.textContent = answer;
   askAnswer.hidden = !answer;
   askAnswer.lang = language;
+  askRelated.hidden = true;
+  askRelatedQuestions.replaceChildren();
   askSources.classList.remove("fatwa-results");
   askSources.replaceChildren();
   for (const [label, url] of sources) {
@@ -123,9 +129,38 @@ function showResult(status, title, sources, answer = "", language = "ar") {
   askResult.hidden = false;
 }
 
-function showNoAnswer() {
-  showResult("لم أجد جوابًا موثّقًا يطابق هذا السؤال.", "مراجع للرجوع إليها", referencesForHelp,
-    "يمكنك إعادة صياغة السؤال. إذا كانت المسألة مرتبطة بظروفك الخاصة، فاسأل مختصًا يمكنه الاطلاع على التفاصيل.");
+function relatedTopics(key) {
+  const words = " " + key + " ";
+  return [...topicTerms].map(([id, terms]) => ({
+    id,
+    score: terms.reduce((best, term) => words.includes(" " + term + " ")
+      ? Math.max(best, term.split(" ").length) : best, 0)
+  })).filter(topic => topic.score > 0).sort((a, b) => b.score - a.score)
+    .map(({id}) => ({id, title: askEvidence[id].title}));
+}
+
+function showRelated(topics) {
+  const questions = topics.map(({id}) => askEvidence[id]).filter(record => !record.correction)
+    .slice(0, 3).map(record => record.ar[1]);
+  for (const question of questions) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "button";
+    button.textContent = question + "؟";
+    button.addEventListener("click", () => {
+      askInput.value = question + "؟";
+      askForm.requestSubmit();
+      askTitle.focus();
+    });
+    askRelatedQuestions.append(button);
+  }
+  askRelated.hidden = !questions.length;
+}
+
+function showNoAnswer(topics) {
+  showResult("لم أجد جوابًا موثّقًا يطابق هذا السؤال.", "كيف تحدّد سؤالك؟", referencesForHelp,
+    "حدّد المسألة التي تريد معرفة حكمها، مثل وقت العبادة أو طريقتها أو ما يؤثر في صحتها. وإذا كانت المسألة مرتبطة بظروفك الخاصة، فراجع جهة إفتاء للاطلاع على تفاصيلها.");
+  showRelated(topics);
 }
 
 let modelWorker;
@@ -140,7 +175,7 @@ function finishLookup() {
 }
 
 function resetModel(message) {
-  if (pendingTopics) showNoAnswer();
+  if (pendingTopics) showNoAnswer(pendingTopics);
   finishLookup();
   modelWorker?.terminate();
   modelWorker = undefined;
@@ -194,13 +229,15 @@ modelButton.addEventListener("click", async () => {
         modelReady = true;
         modelStatus.textContent = "اقتراح المراجع بالذكاء الاصطناعي جاهز.";
       } else if (data.type === "topic" && pendingTopics) {
-        const source = pendingTopics.has(data.id) ? askEvidence[data.id] : null;
+        const topics = pendingTopics;
+        const source = topics.some(topic => topic.id === data.id) ? askEvidence[data.id] : null;
         finishLookup();
         if (source) {
           showResult("لم أجد جوابًا موثّقًا يطابق السؤال. قد تساعدك هذه المراجع.",
             source.title, source.sources);
+          showRelated(topics);
         } else {
-          showNoAnswer();
+          showNoAnswer(topics);
         }
       } else if (data.type === "error") {
         resetModel(unavailable);
@@ -234,17 +271,20 @@ askForm.addEventListener("submit", event => {
   }
   const match = questionIndex.get(key);
   if (match) {
-    showResult("وجدت جوابًا موثّقًا يطابق السؤال.", "جواب موثّق", match.sources, match.answer, match.language);
+    showResult("وجدت جوابًا موثّقًا يطابق السؤال.", match.correction ? "تصحيح موثّق" : "جواب موثّق",
+      match.sources, match.answer, match.language);
     return;
   }
 
   const authors = Object.keys(scholarNames).filter(id => scholarNames[id].some(name => includesPhrase(key, name)));
+  const topics = authors.length ? [] : relatedTopics(key);
   const references = relevantFatwas(key, authors);
   if (references.length) {
     showResult("وجدت فتاوى مرتبطة بموضوع السؤال.", "نتائج من مواقع العلماء",
       references.map(entry => [entry.title + " · " + sourceDescription(entry), entry.url]),
       "راجع السؤال والجواب كاملين في المصدر. إذا كانت مسألتك لها ظروف خاصة، فاسأل مختصًا يمكنه معرفة تفاصيلها.");
     askSources.classList.add("fatwa-results");
+    showRelated(topics);
     return;
   }
   if (authors.length) {
@@ -253,15 +293,12 @@ askForm.addEventListener("submit", event => {
     return;
   }
 
-  const words = " " + key + " ";
-  const topics = [...topicTerms].filter(([, terms]) => terms.some(term => words.includes(" " + term + " ")))
-    .map(([id]) => ({id, title: askEvidence[id].title}));
   if (!modelReady || !topics.length) {
-    showNoAnswer();
+    showNoAnswer(topics);
     return;
   }
 
-  pendingTopics = new Set(topics.map(topic => topic.id));
+  pendingTopics = topics;
   askButton.disabled = true;
   askResult.hidden = true;
   askStatus.textContent = "جارٍ البحث عن مراجع قد تفيدك…";
