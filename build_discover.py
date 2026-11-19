@@ -12,7 +12,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261119-11"
+REVISION = "20261119-12"
 SECTIONS = {
     "quran": "القرآن الكريم",
     "lessons": "الخطب والدروس",

@@ -171,60 +171,67 @@ body[data-page="home"] .route-top #nav {
 }
 
 .site-tour {
-  display: grid;
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.5fr);
-  column-gap: clamp(25px, 5vw, 76px);
   inline-size: min(73rem, calc(100% - 32px));
-  margin-block: clamp(20px, 4vw, 48px) clamp(24px, 5vw, 65px);
-  padding: clamp(19px, 4vw, 56px);
-  border: 1px solid #fffef7db;
-  border-radius: clamp(18px, 3.5vw, 31px);
-  background: linear-gradient(145deg, #fffdf2, #f7fbf5 48%, #e1efe3);
-  box-shadow: var(--glass-shadow);
+  margin-block: clamp(24px, 4vw, 48px) clamp(32px, 5vw, 65px);
   scroll-margin-block-start: 12px;
+}
+
+.site-tour-heading {
+  margin-block-end: clamp(17px, 3vw, 27px);
 }
 
 .site-tour-heading h2 {
   font-size: clamp(2.05rem, 5.5vw, 3.8rem);
   line-height: 1.12;
-  margin-block-end: 12px;
+  margin-block-end: 7px;
 }
 
 .site-tour-heading p,
-.site-tour-stops p {
+.site-tour-card p {
   color: var(--muted);
   margin: 0;
 }
 
-.site-tour-heading p {
-  max-inline-size: 24rem;
+.site-tour-stops {
+  display: grid;
+  gap: clamp(12px, 2vw, 18px);
 }
 
-.site-tour-stops h3 {
+.site-tour-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(12px, 2.8vw, 26px);
+  min-block-size: clamp(7.2rem, 12vw, 9rem);
+  padding: clamp(16px, 3.5vw, 34px);
+  border: 1px solid #b48a42;
+  border-radius: clamp(16px, 2.2vw, 25px);
+  background: linear-gradient(145deg, #fffdf4 5%, #f7fbf5 53%, #e0eee2);
+  box-shadow: 0 8px 22px #203b2b14, inset 0 0 0 1px #fff9e7;
+}
+
+.site-tour-card .section-icon {
+  inline-size: clamp(43px, 7vw, 63px);
+  block-size: clamp(43px, 7vw, 63px);
+  border-color: #c8a261;
+  background: linear-gradient(145deg, #fffdf3, #f3e4c3);
+  color: #855a16;
+}
+
+.site-tour-card .zad-icon {
+  --zad-icon-size: clamp(1.2rem, 3vw, 1.72rem);
+}
+
+.site-tour-card h3 {
   color: var(--forest);
-  margin-block-end: 3px;
-  font-size: clamp(1.13rem, 2.4vw, 1.43rem);
-  line-height: 1.5;
+  margin-block-end: 4px;
+  font-size: clamp(1.12rem, 2.4vw, 1.52rem);
+  line-height: 1.45;
 }
 
-.site-tour-stops section + section {
-  margin-block-start: 15px;
-  padding-block-start: 15px;
-  border-block-start: 1px solid #b8cabc;
-}
-
-@media (max-width: 720px) {
-  .site-tour {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 18px;
-  }
-
-  .site-tour-heading h2 { margin-block-end: 6px; }
-
-  .site-tour-stops {
-    padding-block-start: 15px;
-    border-block-start: 1px solid #b8cabc;
-  }
+@media (max-width: 540px) {
+  .site-tour-card { align-items: start; }
+  .site-tour-card p { line-height: 1.65; }
 }
 
 @media (max-width: 360px) {
