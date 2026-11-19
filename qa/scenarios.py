@@ -238,6 +238,10 @@ def public_cases(suite, browser, device):
               lambda: new_visit(browser, PUBLIC, verified_answer))
     suite.run("عام | تصحيح موعد الحج وعدد الأركان مع المصادر",
               lambda: new_visit(browser, PUBLIC, corrected_questions))
+    suite.run("عام | طريقة المسح ومدته وشروطه مع المصادر",
+              lambda: new_visit(browser, PUBLIC, khuff_answers))
+    suite.run("عام | فصل أجزاء السؤال الموثّقة وحفظ قيود المسألة الخاصة",
+              lambda: new_visit(browser, PUBLIC, compound_and_scope))
     suite.run("عام | سؤال غير محدد والانتقال إلى جواب موثّق",
               lambda: new_visit(browser, PUBLIC, clarification))
     suite.run("عام | مسائل شخصية وأسئلة خارج المطابقة",
@@ -301,7 +305,50 @@ def corrected_questions(page):
     expect(page.locator("#ask-answer-heading")).to_have_text("تصحيح موثّق")
     expect(page.locator("#ask-answer")).to_contain_text("أركان الإسلام خمسة")
     expect(page.locator('#ask-sources a[href="https://sunnah.com/bukhari:8"]')).to_be_visible()
+    ask(page, "هل أركان الإسلام ٧؟")
+    expect(page.locator("#ask-answer-heading")).to_have_text("تصحيح موثّق")
     without_overflow(page)
+
+
+def khuff_answers(page):
+    cases = (
+        ("أنا طريقة المسح على الخفين", "أعلى كل قدم", "20314"),
+        ("السلام عليكم، لو سمحت أبي أعرف كيف أمسح على الشراب؟", "مرة واحدة", "7784"),
+        ("كيف أمسح عالجوارب؟", "على الظاهر", "20314"),
+        ("أبغى أعرف كم مدة المسح على الجوربين؟", "ثلاثة أيام", "12763"),
+        ("ما شروط المسح على الخفين؟", "مع الكعبين", "12430"),
+    )
+    for question, text, source in cases:
+        ask(page, question)
+        expect(page.locator("#ask-answer-heading")).to_have_text("جواب موثّق")
+        expect(page.locator("#ask-answer")).to_contain_text(text)
+        expect(page.locator(f'#ask-sources a[href*="/fatwas/{source}/"]')).to_be_visible()
+    without_overflow(page)
+
+
+def compound_and_scope(page):
+    ask(page, "كيف أمسح على الخفين وكم مدة المسح على الخفين؟")
+    expect(page.locator("#ask-answer-heading")).to_have_text("أجوبة موثّقة")
+    answer = page.locator("#ask-answer")
+    expect(answer).to_contain_text("مرة واحدة")
+    expect(answer).to_contain_text("ثلاثة أيام")
+    expect(page.locator('#ask-sources a[href*="/fatwas/20314/"]')).to_be_visible()
+    expect(page.locator('#ask-sources a[href*="/fatwas/12763/"]')).to_be_visible()
+    ask(page, "ما طريقة الوضوء، وماذا أفعل إذا نسيت الصلاة؟")
+    expect(page.locator("#ask-answer-heading")).to_have_text("أجوبة موثّقة")
+    expect(answer).to_contain_text("المرفقين")
+    expect(answer).to_contain_text("حين يذكرها")
+
+    ask(page, "كيف أمسح على الخفين، والطبيب منع وصول الماء للجرح؟")
+    expect(page.locator("#ask-answer-heading")).to_have_text("نتائج من مواقع العلماء")
+    expect(answer).not_to_contain_text("أعلى كل قدم")
+    expect(page.locator('#ask-sources a[href*="/fatwas/20314/"]')).to_be_visible()
+    ask(page, "كم مدة المسح على الجبيرة؟")
+    expect(page.locator("#ask-answer-heading")).to_have_text("كيف تحدّد سؤالك؟")
+    expect(page.locator('#ask-sources a[href*="/fatwas/12763/"]')).to_have_count(0)
+    ask(page, "أبي طريقة المسح على الخفين عند الفوزان")
+    expect(page.locator("#ask-answer-heading")).to_have_text("المواقع الرسمية")
+    expect(page.locator('#ask-sources a[href*="/fatwas/20314/"]')).to_have_count(0)
 
 
 def clarification(page):
@@ -340,8 +387,8 @@ def unsafe_assumptions(page):
 def fatwa_filters(page):
     library = page.locator("#fatwa-library")
     library.locator("summary").click()
-    expect(library.locator("#fatwa-list li")).to_have_count(16)
-    expect(library.locator('a[href^="https://binbaz.org.sa/fatwas/"]')).to_have_count(9)
+    expect(library.locator("#fatwa-list li")).to_have_count(19)
+    expect(library.locator('a[href^="https://binbaz.org.sa/fatwas/"]')).to_have_count(12)
     expect(library.locator('a[href^="https://binothaimeen.net/"]')).to_have_count(7)
     library.locator("#fatwa-scholar").select_option("ibn-uthaymeen")
     expect(library.locator("#fatwa-list li")).to_have_count(7)
@@ -609,6 +656,8 @@ def local_cases(suite, browser, origin):
     run("كل صيغ الأسئلة المعتمدة وتطابق لغة الرد ومراجعه", catalog_variants)
 
     run("تصحيح وقت الحج وعدد الأركان والتمييز بين العمرة والحج", corrected_questions)
+    run("طريقة المسح على الخفين بصياغة المستخدم واللهجة، وتمييز المدة والشروط", khuff_answers)
+    run("السؤال المركّب المطابق وتجنّب فصل قيد يغيّر معنى السؤال", compound_and_scope)
     run("أسئلة قريبة قابلة للاختيار والتنقل بلوحة المفاتيح", clarification)
     run("ظرف شخصي وسؤال خارج المطابقة وطلب اختلاق حديث", unsafe_assumptions)
     run("تصفية مصادر الفتاوى حسب العالم والموضوع وإعادة الاختيار", fatwa_filters)
@@ -710,6 +759,10 @@ def main():
                                       lambda: new_visit(browser, PUBLIC, fatwa_rank_and_scope, device=device))
                             suite.run("عام | تصحيح الالتباس ومراجعه على WebKit",
                                       lambda: new_visit(browser, PUBLIC, corrected_questions, device=device))
+                            suite.run("عام | سؤال المسح على الخفين كما كُتب على الجوال",
+                                      lambda: new_visit(browser, PUBLIC, khuff_answers, device=device))
+                            suite.run("عام | السؤال المركّب والقيود الشخصية على WebKit",
+                                      lambda: new_visit(browser, PUBLIC, compound_and_scope, device=device))
                             suite.run("عام | اختيار صيغة موثّقة على WebKit",
                                       lambda: new_visit(browser, PUBLIC, clarification, device=device))
                     except Exception as error:

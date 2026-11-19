@@ -2,6 +2,9 @@
 const hajjRitesSource = ["ابن باز · ما هي أنساك الحج؟", "https://binbaz.org.sa/fatwas/7201/ما-هي-انساك-الحج"];
 const ramadanUmrahSource = ["ابن باز · عدم إجزاء العمرة في رمضان عن الحج", "https://binbaz.org.sa/fatwas/6252/عدم-اجزاء-العمرة-في-رمضان-عن-الحج"];
 
+const footwearTerms = ["الخفين", "الخف", "الجوربين", "الجوارب", "الشراب"];
+const khuffQuestions = forms => forms.flatMap(form => footwearTerms.map(term => form + " " + term));
+
 const askEvidence = {
   shahada: {
     title: "معنى الشهادتين · Testimony of faith",
@@ -77,6 +80,55 @@ const askEvidence = {
     en: ["In the documented example, wash the hands, rinse the mouth and nose, wash the face and arms through the elbows, wipe the head, and wash the feet through the ankles.", "how do i perform wudu", "how do i make wudu", "what are the steps of wudu"],
     fr: ["Dans le récit cité, on lave les mains, on rince la bouche et le nez, on lave le visage et les bras jusqu’aux coudes, on passe les mains mouillées sur la tête et on lave les pieds jusqu’aux chevilles.", "comment faire les ablutions", "quelles sont les étapes du wudu"],
     es: ["El relato citado describe lavarse las manos, enjuagarse la boca y la nariz, lavarse la cara y los brazos hasta los codos, pasarse las manos húmedas por la cabeza y lavarse los pies hasta los tobillos.", "cómo hago la ablución", "cuáles son los pasos del wudu"]
+  },
+  khuff_method: {
+    title: "طريقة المسح على الخفين والجوارب · How to wipe over footwear in wudu",
+    terms: [...khuffQuestions(["المسح على", "أمسح على"]), "الخفين", "الجوربين", "الجوارب", "wipe over socks", "wipe over khuffs"],
+    sources: [
+      ["ابن باز · كيفية المسح على الجوارب", "https://binbaz.org.sa/fatwas/20314/كيفية-المسح-على-الجوارب"],
+      ["ابن باز · عدد المسح على الخفين", "https://binbaz.org.sa/fatwas/7784/عدد-المسح-على-الخفين"],
+      ["ابن باز · شروط المسح على الخفين أو الجوربين", "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"]
+    ],
+    ar: [
+      "في الوضوء، إذا لبست الخفين أو الجوربين الساترين على طهارة، امسح بيدك المبللة على أعلى كل قدم فوق الخف أو الجورب مرة واحدة. امسح اليمنى بيدك اليمنى واليسرى بيدك اليسرى، والمسح يكون على الظاهر.",
+      ...khuffQuestions(["كيف أمسح على", "كيف المسح على", "طريقة المسح على", "ما طريقة المسح على", "كيفية المسح على", "ما كيفية المسح على", "صفة المسح على", "ما صفة المسح على", "المسح على"]),
+      "كيف أمسح عالخفين", "كيف أمسح عالجوارب", "هل المسح على الخفين على الظاهر أم الباطن"
+    ],
+    en: ["If you put on the covering footwear while ritually pure, wipe once over the top of each foot during wudu. Use your wet right hand for the right foot and your left hand for the left foot.", "how do i wipe over socks during wudu", "how do i wipe over khuffs during wudu"],
+    fr: ["Si vous avez enfilé des chaussettes couvrantes en état de pureté rituelle, passez une fois la main humide sur le dessus de chaque pied pendant les ablutions. Utilisez la main droite pour le pied droit, et la gauche pour le pied gauche.", "comment essuyer les chaussettes pendant les ablutions"],
+    es: ["Si te pusiste los calcetines que cubren los pies en estado de pureza ritual, pasa una vez la mano húmeda por la parte superior de cada pie al hacer la ablución. Usa la mano derecha para el pie derecho y la izquierda para el izquierdo.", "cómo paso la mano sobre los calcetines durante la ablución"]
+  },
+  khuff_duration: {
+    title: "مدة المسح على الخفين والجوارب · Time limit for wiping over footwear",
+    terms: khuffQuestions(["مدة المسح على", "عدد أيام المسح على", "يبدأ المسح على"]),
+    sources: [
+      ["ابن باز · وقت بدء المسح على الخفين", "https://binbaz.org.sa/fatwas/12763/وقت-بدء-المسح-على-الخفين"],
+      ["ابن باز · المسح على الشراب", "https://binbaz.org.sa/fatwas/3666/المسح-على-الشراب"]
+    ],
+    ar: [
+      "مدة المسح يوم وليلة للمقيم، وثلاثة أيام بلياليها للمسافر. وبحسب فتوى الشيخ ابن باز تبدأ من أول مسح بعد الحدث، لا من وقت اللبس.",
+      ...khuffQuestions(["كم مدة المسح على", "مدة المسح على", "ما مدة المسح على", "متى يبدأ المسح على", "متى تبدأ مدة المسح على"]),
+      "كم مدة المسح على الخفين للمسافر", "كم مدة المسح على الخفين للمقيم"
+    ],
+    en: ["The time limit is one day and night for a resident and three days and nights for a traveller. Ibn Baz starts the period at the first wipe after wudu has been broken.", "how long can i wipe over socks during wudu"],
+    fr: ["La durée est d’un jour et d’une nuit pour le résident et de trois jours et trois nuits pour le voyageur. Selon Ibn Baz, elle commence au premier essuyage après la perte des ablutions.", "combien de temps peut on essuyer les chaussettes pendant les ablutions"],
+    es: ["El plazo es de un día y una noche para el residente y de tres días y tres noches para el viajero. Según Ibn Baz, empieza con el primer pasado de la mano después de perder la ablución.", "cuánto tiempo puedo pasar la mano sobre los calcetines durante la ablución"]
+  },
+  khuff_conditions: {
+    title: "شروط المسح على الخفين والجوارب · Conditions for wiping over footwear",
+    terms: [...khuffQuestions(["شروط المسح على"]), "لبستهما على غير طهارة"],
+    sources: [
+      ["ابن باز · شروط المسح على الخفين أو الجوربين", "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"],
+      ["ابن باز · المسح على الشراب", "https://binbaz.org.sa/fatwas/3666/المسح-على-الشراب"]
+    ],
+    ar: [
+      "من شروط المسح عند الشيخ ابن باز أن تلبس الخفين أو الجوربين على طهارة، وأن يسترا القدمين مع الكعبين. ويكون المسح في الوضوء من الحدث الأصغر وفي المدة المحددة.",
+      ...khuffQuestions(["ما شروط المسح على", "شروط المسح على"]),
+      "هل يجوز لبس الخفين بدون وضوء ثم المسح عليهما"
+    ],
+    en: ["According to Ibn Baz, the footwear must be put on in a state of ritual purity and cover the feet including the ankles. Wiping applies in wudu after minor ritual impurity, within the time limit.", "what are the conditions for wiping over socks"],
+    fr: ["Selon Ibn Baz, les chaussettes doivent être enfilées en état de pureté rituelle et couvrir les pieds jusqu’aux chevilles incluses. L’essuyage s’applique aux ablutions après une impureté mineure, pendant la durée prévue.", "quelles sont les conditions pour essuyer les chaussettes"],
+    es: ["Según Ibn Baz, hay que ponerse los calcetines en estado de pureza ritual y deben cubrir los pies y los tobillos. Pasar la mano sobre ellos se aplica en la ablución tras una impureza ritual menor, dentro del plazo establecido.", "cuáles son las condiciones para pasar la mano sobre los calcetines"]
   },
   missed_prayer: {
     title: "الصلاة عند النوم أو النسيان · Missed prayer due to sleep or forgetfulness",

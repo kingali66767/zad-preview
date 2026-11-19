@@ -25,6 +25,8 @@ const referencesForHelp = [
 
 function normalizeQuestion(value) {
   return value.toLowerCase().replace(/ـ/g, "").replace(/ى/g, "ي").replace(/ة/g, "ه")
+    .replace(/[٠-٩]/g, digit => String(digit.charCodeAt(0) - 0x660))
+    .replace(/[۰-۹]/g, digit => String(digit.charCodeAt(0) - 0x6f0))
     .normalize("NFKD").replace(/\p{M}/gu, "").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
 }
 
@@ -50,6 +52,39 @@ const fatwaIndex = fatwaSources.map(entry => ({
 const exactFatwas = new Map(fatwaSources.flatMap(entry =>
   (entry.excerpt?.questions || []).map(question => [normalizeQuestion(question), entry])
 ));
+
+const questionIntro = /^(?:(?:السلام عليكم(?: ورحمه الله(?: وبركاته)?)?|لو سمحت(?:م)?|من فضلك(?:م)?|ممكن اعرف|(?:ابغ[يا]|ابي|ودي)(?: اعرف)?|اريد(?: معرفه)?|انا) )+/;
+
+function reviewedAnswer(key) {
+  const request = key.replace(questionIntro, "");
+  const fatwa = exactFatwas.get(key) || exactFatwas.get(request);
+  if (fatwa) {
+    return {
+      status: "مقتطف من فتوى " + fatwaScholars[fatwa.scholar],
+      title: fatwa.title,
+      sources: [[fatwa.title + " · اقرأ الفتوى كاملة", fatwa.url]],
+      answer: fatwa.excerpt.text,
+      language: "ar"
+    };
+  }
+  const match = questionIndex.get(key) || questionIndex.get(request);
+  if (match) {
+    return {
+      ...match,
+      status: "وجدت جوابًا موثّقًا يطابق السؤال.",
+      title: match.correction ? "تصحيح موثّق" : "جواب موثّق"
+    };
+  }
+}
+
+function reviewedParts(question) {
+  const questions = question.split(/[؟?،؛;]+|\s+و\s*(?=(?:هل|ما|ماذا|كيف|متى|كم)\s)/)
+    .map(part => part.trim().replace(/^و\s*(?=(?:هل|ما|ماذا|كيف|متى|كم)\s)/, ""))
+    .filter(Boolean);
+  if (questions.length < 2 || questions.length > 3) return;
+  const parts = questions.map(part => ({question: part, match: reviewedAnswer(normalizeQuestion(part))}));
+  if (parts.every(part => part.match?.language === "ar")) return parts;
+}
 
 function sourceDescription(entry) {
   const format = entry.format === "audio" ? "تسجيل صوتي" : "فتوى مكتوبة";
@@ -263,16 +298,19 @@ askForm.addEventListener("submit", event => {
     askInput.focus();
     return;
   }
-  const exactFatwa = exactFatwas.get(key);
-  if (exactFatwa) {
-    showResult("مقتطف من فتوى " + fatwaScholars[exactFatwa.scholar], exactFatwa.title,
-      [[exactFatwa.title + " · اقرأ الفتوى كاملة", exactFatwa.url]], exactFatwa.excerpt.text);
+  const match = reviewedAnswer(key);
+  if (match) {
+    showResult(match.status, match.title, match.sources, match.answer, match.language);
     return;
   }
-  const match = questionIndex.get(key);
-  if (match) {
-    showResult("وجدت جوابًا موثّقًا يطابق السؤال.", match.correction ? "تصحيح موثّق" : "جواب موثّق",
-      match.sources, match.answer, match.language);
+  const parts = reviewedParts(question);
+  if (parts) {
+    const sources = new Map();
+    for (const part of parts) {
+      for (const [label, url] of part.match.sources) sources.set(url, label);
+    }
+    const answer = parts.map(part => part.question + "؟\n" + part.match.answer).join("\n\n");
+    showResult("وجدت أجوبة موثّقة لأجزاء السؤال.", "أجوبة موثّقة", [...sources].map(([url, label]) => [label, url]), answer);
     return;
   }
 
