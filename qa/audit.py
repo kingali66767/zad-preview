@@ -95,7 +95,7 @@ def browser_checks(origin, output, live):
             expect(first_surah).to_be_checked()
             page.locator(".reading-panel button").click()
             expect(first_surah).not_to_be_checked()
-            expect(page.locator("#ask-submit")).to_be_disabled()
+            expect(page.locator("#ask-submit")).to_be_enabled()
             assert not page_errors, page_errors
             if width in (390, 1440):
                 page.goto(origin, wait_until="load")
@@ -193,32 +193,26 @@ def browser_checks(origin, output, live):
         expect(page.locator("#times strong")).to_have_count(0)
         results.append("Prayer UI: five cities, parameters, five times and 503 recovery (simulated provider)")
 
-        # This stub exercises the real browser worker/UI integration without external downloads.
         worker_script = """
             self.onmessage = ({data}) => {
               if (data.type === "init") self.postMessage({type:"ready"});
-              else if (data.question === "تعذّر") self.postMessage({type:"error",stage:"ask"});
-              else self.postMessage({type:"answer", answer:data.question, truncated:false});
+              else self.postMessage({type:"topic", id:"zakat_charity", answer:"Inert fabricated text"});
             };
         """
         page.route("**/assets/ask-worker.js", lambda route: route.fulfill(content_type="text/javascript", body=worker_script))
         page.add_init_script("Object.defineProperty(navigator, 'gpu', {value: {requestAdapter: async () => ({features: new Set(['shader-f16'])})}})")
         page.goto(origin)
+        page.locator(".ask-optional summary").click()
         page.locator("#ask-enable").click()
-        expect(page.locator("#ask-submit")).to_be_enabled()
-        # Use inert text with angle brackets to check that it is displayed exactly as returned.
-        page.locator("#ask-input").fill("جواب <مرجع> & نص")
+        expect(page.locator("#ask-model-status")).to_contain_text("جاهز")
+        page.locator("#ask-input").fill("هل يمكن دفع الزكاة عن أرضي؟")
         page.locator("#ask-submit").click()
-        expect(page.locator("#ask-answer")).to_have_text("جواب <مرجع> & نص")
-        expect(page.locator("#ask-answer > *")).to_have_count(0)
-        page.locator("#ask-input").fill("تعذّر")
-        page.locator("#ask-submit").click()
-        expect(page.locator("#ask-status")).to_contain_text("تعذّر توليد")
-        expect(page.locator("#ask-enable")).to_be_enabled()
-        page.locator("#ask-enable").click()
-        expect(page.locator("#ask-submit")).to_be_enabled()
+        expect(page.locator("#ask-status")).to_contain_text("قد تساعدك")
+        expect(page.locator("#ask-answer")).to_be_hidden()
+        expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+        assert "Inert fabricated text" not in page.locator("#ask-result").inner_text()
         assert not page_errors, page_errors
-        results.append("AI browser worker: load, question, plain-text answer, error and retry (simulated model)")
+        results.append("AI browser worker suggests a source only and cannot display invented text (simulated model)")
         context.close()
 
         context = browser.new_context(java_script_enabled=False, reduced_motion="reduce")
@@ -274,19 +268,21 @@ def browser_checks(origin, output, live):
             if integration["webgpu"].get("shader_f16"):
                 page.unroute_all()
                 context.unroute_all()
+                page.locator(".ask-optional summary").click()
                 page.locator("#ask-enable").click()
                 try:
-                    expect(page.locator("#ask-submit")).to_be_enabled(timeout=310000)
-                    page.locator("#ask-input").fill("ما الفرق بين الزكاة والصدقة؟ اشرح بإيجاز.")
+                    expect(page.locator("#ask-model-status")).to_contain_text("جاهز", timeout=310000)
+                    page.locator("#ask-input").fill("أريد مرجعًا يساعدني على معرفة مصارف الزكاة.")
                     page.locator("#ask-submit").click()
                     expect(page.locator("#ask-result")).to_be_visible(timeout=95000)
-                    integration["model_response"] = page.locator("#ask-answer").inner_text()
+                    integration["suggested_sources"] = page.locator("#ask-sources a").evaluate_all("links => links.map(link => link.href)")
                 except AssertionError:
-                    integration["model_error"] = page.locator("#ask-status").inner_text()
+                    integration["model_error"] = page.locator("#ask-model-status").inner_text()
             else:
+                page.locator(".ask-optional summary").click()
                 page.locator("#ask-enable").click()
-                expect(page.locator("#ask-enable")).to_be_enabled(timeout=10000)
-                integration["model_start_status"] = page.locator("#ask-status").inner_text()
+                expect(page.locator("#ask-enable")).to_be_enabled(timeout=11000)
+                integration["model_start_status"] = page.locator("#ask-model-status").inner_text()
             context.close()
         browser.close()
     return results, sorted(external_links), integration

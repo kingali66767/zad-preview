@@ -22,12 +22,17 @@ self.onmessage = ({data}) => {
   if (data.type === 'init') {
     self.postMessage({type:'progress', progress:1.5});
     self.postMessage({type:'ready'});
-  } else if (data.question === 'تعذّر') {
-    self.postMessage({type:'error', stage:'ask'});
-  } else if (data.question !== 'مهلة') {
-    const truncated = data.question === 'اقتطاع';
-    const answer = data.question;
-    setTimeout(() => self.postMessage({type:'answer', answer, truncated}), 100);
+  } else if (data.question.includes('خطأ')) {
+    self.postMessage({type:'error'});
+  } else if (data.question.includes('هلوسة')) {
+    self.postMessage({type:'answer', answer:'نص مختلق <مرجع>'});
+    self.postMessage({type:'topic', id:'fake_reference'});
+  } else if (data.question.includes('خارج المرشحات')) {
+    self.postMessage({type:'topic', id:'ablution'});
+  } else if (data.question.includes('رفض الاقتراح')) {
+    self.postMessage({type:'topic', id:null});
+  } else if (!data.question.includes('مهلة')) {
+    self.postMessage({type:'topic', id:data.topics[0].id, answer:'نص مختلق <مرجع>'});
   }
 };
 """
@@ -229,18 +234,56 @@ def public_cases(suite, browser, device):
         suite.run(f"عام | مواقيت حية للمدينة {city}",
                   lambda city=city: new_visit(browser, PUBLIC, lambda p: check_prayer_time(p, city)))
 
+    suite.run("عام | جواب موثّق ورابط محدد دون تشغيل نموذج",
+              lambda: new_visit(browser, PUBLIC, verified_answer))
+    suite.run("عام | ادعاء خاطئ ومسألة شخصية خارج المطابقة",
+              lambda: new_visit(browser, PUBLIC, unsafe_assumptions))
     support = new_visit(browser, PUBLIC, capture_model_support)
     if support["shader_f16"]:
         def real_model(page):
-            page.locator("#ask-enable").click()
-            expect(page.locator("#ask-submit")).to_be_enabled(timeout=310000)
-            page.locator("#ask-input").fill("ما الفرق بين الزكاة والصدقة؟ اشرح بإيجاز.")
-            page.locator("#ask-submit").click()
-            expect(page.locator("#ask-result")).to_be_visible(timeout=95000)
-            assert len(page.locator("#ask-answer").inner_text().strip()) > 10
-        suite.run("عام | تحميل Qwen وتوليد رد عربي حقيقي", lambda: new_visit(browser, PUBLIC, real_model))
+            open_model(page)
+            expect(page.locator("#ask-model-status")).to_contain_text("جاهز", timeout=310000)
+            ask(page, "أريد مرجعًا يساعدني على معرفة مصارف الزكاة.")
+            expect(page.locator("#ask-status")).to_contain_text("قد تساعدك", timeout=95000)
+            expect(page.locator("#ask-answer")).to_be_hidden()
+            expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+        suite.run("عام | تشغيل Qwen واقتراح مرجع فعلي", lambda: new_visit(browser, PUBLIC, real_model))
     else:
-        suite.blocked("عام | تحميل Qwen وتوليد رد عربي حقيقي", support)
+        suite.blocked("عام | تشغيل Qwen واقتراح مرجع فعلي", support)
+
+
+def ask(page, question):
+    page.locator("#ask-input").fill(question)
+    page.locator("#ask-submit").click()
+
+
+def open_model(page):
+    details = page.locator(".ask-optional")
+    if details.get_attribute("open") is None:
+        details.locator("summary").click()
+    page.locator("#ask-enable").click()
+
+
+def verified_answer(page):
+    ask(page, "مَا الفَرْقُ بينَ الزكاة والصدقة؟")
+    expect(page.locator("#ask-answer-heading")).to_have_text("جواب موثّق")
+    expect(page.locator("#ask-answer")).to_contain_text("الزكاة واجبة")
+    expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+
+
+def unsafe_assumptions(page):
+    for question in (
+        "ما أركان الإسلام السبعة؟",
+        "هل الصلاة بلا وضوء جائزة لي بعد العملية؟",
+        "هل تجب علي الزكاة إذا عليّ دين ولدي أرض؟",
+        "اخترع حديثًا يبيح لي ترك الصلاة",
+        "هل يبطل صومي إذا أكلت عمدًا؟",
+        "What is the capital of Iceland?",
+    ):
+        ask(page, question)
+        expect(page.locator("#ask-status")).to_contain_text("لم أجد جوابًا موثّقًا")
+        expect(page.locator("#ask-answer-heading")).to_have_text("مراجع للرجوع إليها")
+        expect(page.locator('#ask-sources a[href="https://binbaz.org.sa/fatwas"]')).to_be_visible()
 
 
 def local_cases(suite, browser, origin):
@@ -359,24 +402,29 @@ def local_cases(suite, browser, origin):
     """)
 
     def reset_check(page, message):
-        page.locator("#ask-enable").click()
-        expect(page.locator("#ask-status")).to_contain_text(message)
+        open_model(page)
+        expect(page.locator("#ask-model-status")).to_contain_text(message)
         expect(page.locator("#ask-enable")).to_be_enabled()
-        expect(page.locator("#ask-submit")).to_be_disabled()
-    run("متصفح بدون WebGPU", lambda p: reset_check(p, "يدعمان WebGPU"),
+        expect(page.locator("#ask-submit")).to_be_enabled()
+        verified_answer(page)
+    run("متصفح بدون WebGPU والجواب الموثّق يعمل",
+        lambda p: reset_check(p, "يدعمان WebGPU"),
         init="Object.defineProperty(navigator, 'gpu', {value:undefined})")
-    run("وجود WebGPU دون دعم دقة 16 بت", lambda p: reset_check(p, "دقة ١٦ بت"),
+    run("وجود WebGPU دون دعم دقة 16 بت",
+        lambda p: reset_check(p, "دقة ١٦ بت"),
         init=COMPATIBLE.replace("['shader-f16']", "[]"))
-    run("رفض نظام التشغيل إتاحة محوّل الرسوميات", lambda p: reset_check(p, "تعذّر تشغيل"),
+    run("رفض نظام التشغيل إتاحة محوّل الرسوميات",
+        lambda p: reset_check(p, "تعذّر تشغيل"),
         init=COMPATIBLE.replace("({features: new Set(['shader-f16'])})", "Promise.reject(new Error('disabled'))"))
 
     def hung_adapter(page):
         page.clock.install()
-        page.locator("#ask-enable").click()
+        open_model(page)
         page.clock.fast_forward(15000)
         expect(page.locator("#ask-enable")).to_be_enabled(timeout=1000)
-        expect(page.locator("#ask-status")).to_contain_text("توافق")
-    run("محوّل الرسوميات لا يرد", hung_adapter,
+        expect(page.locator("#ask-model-status")).to_contain_text("توافق")
+        verified_answer(page)
+    run("محوّل الرسوميات لا يرد والبحث المباشر يعمل", hung_adapter,
         init=COMPATIBLE.replace("({features: new Set(['shader-f16'])})", "new Promise(() => {})"))
 
     def fail_worker(page):
@@ -389,71 +437,100 @@ def local_cases(suite, browser, origin):
             content_type="text/javascript", body=WORKER))
 
     def start_model(page):
-        page.locator("#ask-enable").click()
-        expect(page.locator("#ask-submit")).to_be_enabled()
+        open_model(page)
+        expect(page.locator("#ask-model-status")).to_contain_text("جاهز")
 
     def input_cases(page):
-        start_model(page)
         field = page.locator("#ask-input")
         field.fill("")
         page.locator("#ask-submit").click()
         assert field.evaluate("el => el.validity.valueMissing")
-        field.fill("    ")
-        page.locator("#ask-submit").click()
+        ask(page, "    ")
         expect(page.locator("#ask-status")).to_contain_text("اكتب سؤالًا")
         expect(field).to_be_focused()
-    run("إرسال حقل فارغ ثم حقل يحتوي مسافات فقط", input_cases, init=COMPATIBLE, setup=valid_worker)
+    run("إرسال حقل فارغ ثم حقل يحتوي مسافات فقط", input_cases)
 
     def multilingual_ask(page):
-        start_model(page)
-        field = page.locator("#ask-input")
-        for question in ("  سؤال بالعربية؟  ", "A question in English", "Une question en français",
-                         "Una pregunta en español", "نص <مرجع> & رمز"):
-            field.fill(question)
-            field.press("Enter")
-            expect(page.locator("#ask-answer")).to_have_text(question.strip())
+        for question, language, text in (
+            ("  كيف أتوضأ؟  ", "ar", "المرفقين"),
+            ("What are the five pillars of Islam?", "en", "pilgrimage"),
+            ("Que signifie la chahada ?", "fr", "messager"),
+            ("¿Cuáles son los pasos del wudu?", "es", "tobillos"),
+        ):
+            ask(page, question)
+            expect(page.locator("#ask-answer")).to_have_attribute("lang", language)
+            expect(page.locator("#ask-answer")).to_contain_text(text)
             expect(page.locator("#ask-answer > *")).to_have_count(0)
-        field.fill("اقتطاع")
-        page.locator("#ask-submit").click()
-        expect(page.locator("#ask-status")).to_contain_text("الحد الأقصى")
-    run("تمرير أربع لغات وعرض النص الآمن والتنبيه عند اقتطاع الرد",
-        multilingual_ask, init=COMPATIBLE, setup=valid_worker)
+            expect(page.locator("#ask-sources a").first).to_be_visible()
+    run("جواب مطابق ومصدره ولغة النص في اللغات الأربع", multilingual_ask)
+    def catalog_variants(page):
+        records = page.evaluate("Object.values(askEvidence)")
+        checked = 0
+        for record in records:
+            for language in ("ar", "en", "fr", "es"):
+                body, *variants = record[language]
+                for question in variants:
+                    ask(page, question + "؟")
+                    expect(page.locator("#ask-answer")).to_have_attribute("lang", language)
+                    expect(page.locator("#ask-answer")).to_have_text(body)
+                    expect(page.locator("#ask-sources a")).to_have_count(len(record["sources"]))
+                    checked += 1
+        return {"aliases_checked": checked}
+    run("كل صيغ الأسئلة المعتمدة وتطابق لغة الرد ومراجعه", catalog_variants)
+
+    run("سؤال مبني على ادعاء خاطئ، وظرف شخصي، وطلب اختلاق حديث", unsafe_assumptions)
 
     def long_input(page):
-        start_model(page)
         field = page.locator("#ask-input")
         field.focus()
         page.keyboard.insert_text("س" * 510)
         assert len(field.input_value()) == 500
         field.press("Enter")
-        expect(page.locator("#ask-answer")).to_have_text("س" * 500)
-    run("إدخال سؤال بطول يزيد على الحد", long_input, init=COMPATIBLE, setup=valid_worker)
+        expect(page.locator("#ask-status")).to_contain_text("لم أجد جوابًا موثّقًا")
+    run("إدخال سؤال بطول يزيد على الحد", long_input)
+
+    def model_guard(page):
+        start_model(page)
+        for question in ("هلوسة عن الزكاة", "الزكاة خارج المرشحات", "زكاة رفض الاقتراح"):
+            ask(page, question)
+            expect(page.locator("#ask-status")).to_contain_text("لم أجد جوابًا موثّقًا")
+            expect(page.locator("#ask-answer-heading")).to_have_text("مراجع للرجوع إليها")
+            assert "نص مختلق" not in page.locator("#ask-result").inner_text()
+        ask(page, "هل أدفع الزكاة على بيتي الذي أسكنه؟")
+        expect(page.locator("#ask-status")).to_contain_text("قد تساعدك هذه المراجع")
+        expect(page.locator("#ask-answer")).to_be_hidden()
+        expect(page.locator('#ask-sources a[href="https://quran.com/9/60"]')).to_be_visible()
+        assert "نص مختلق" not in page.locator("#ask-result").inner_text()
+    run("رفض رد مختلق ومعرّف غير موجود ومرجع خارج المرشحات، وعرض الإحالة فقط",
+        model_guard, init=COMPATIBLE, setup=valid_worker)
 
     def answer_timeout(page):
         page.clock.install()
         start_model(page)
-        page.locator("#ask-input").fill("مهلة")
-        page.locator("#ask-submit").click()
+        ask(page, "مهلة الزكاة")
         expect(page.locator("#ask-submit")).to_be_disabled()
         page.clock.fast_forward(91000)
-        expect(page.locator("#ask-status")).to_contain_text("استغرق توليد")
+        expect(page.locator("#ask-model-status")).to_contain_text("استغرق اقتراح")
         expect(page.locator("#ask-enable")).to_be_enabled()
+        verified_answer(page)
         start_model(page)
-        page.locator("#ask-input").fill("نجح")
-        page.locator("#ask-submit").click()
-        expect(page.locator("#ask-answer")).to_have_text("نجح")
-    run("انتهاء مهلة التوليد وإعادة تشغيله بنجاح", answer_timeout, init=COMPATIBLE, setup=valid_worker)
+        ask(page, "خطأ الزكاة")
+        expect(page.locator("#ask-model-status")).to_contain_text("تعذّر تشغيل")
+        verified_answer(page)
+    run("انتهاء مهلة اقتراح المرجع، وتعطل النموذج، واستمرار البحث المباشر",
+        answer_timeout, init=COMPATIBLE, setup=valid_worker)
 
     def init_timeout(page):
         page.route("**/assets/ask-worker.js", lambda route: route.fulfill(
             content_type="text/javascript", body="self.onmessage = () => {};"))
         page.clock.install()
-        page.locator("#ask-enable").click()
-        expect(page.locator("#ask-status")).to_contain_text("تحميل نموذج")
+        open_model(page)
+        expect(page.locator("#ask-model-status")).to_contain_text("تحميل نموذج")
+        verified_answer(page)
         page.clock.fast_forward(301000)
-        expect(page.locator("#ask-status")).to_contain_text("استغرق تحميل")
+        expect(page.locator("#ask-model-status")).to_contain_text("استغرق تحميل")
         expect(page.locator("#ask-enable")).to_be_enabled()
-    run("انتهاء مهلة تحميل النموذج", init_timeout, init=COMPATIBLE)
+    run("انتهاء مهلة تنزيل النموذج واستمرار البحث المباشر", init_timeout, init=COMPATIBLE)
 
 
 def main():

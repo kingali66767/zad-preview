@@ -13,6 +13,7 @@
 <script src="assets/content.js" defer></script>
 <script src="assets/library-content.js" defer></script>
 <script src="assets/site.js" defer></script>
+<script src="assets/ask-evidence.js" defer></script>
 <script id="ask-script" data-worker="assets/ask-worker.js" src="assets/ask.js" defer></script>
 </head>
 <body>
@@ -401,21 +402,24 @@
 <div class="ask-panel">
 <p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
 <h2 id="ask-heading">اسأل زاد</h2>
-<p>اطرح سؤالًا عن الإسلام بلغتك. يولّد نموذج الذكاء الاصطناعي الإجابة على جهازك.</p>
-<p class="ask-ai"><button class="button green" id="ask-enable" type="button">تشغيل نموذج الذكاء الاصطناعي</button>
-<span>يتطلّب التنزيل الأول اتصالًا بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.</span></p>
+<p>ابحث عن جواب موثّق في موضوعات مختارة عن الإسلام. جرّب مثلًا «ما أركان الإسلام؟» أو «كيف أتوضأ؟».</p>
 <form id="ask-form" class="ask-form">
 <label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: ما الفرق بين الزكاة والصدقة؟"></label>
-<button class="button green" id="ask-submit" type="submit" disabled>ولّد إجابة</button>
+<button class="button green" id="ask-submit" type="submit" disabled>ابحث عن جواب</button>
 </form>
-<p id="ask-status" role="status">شغّل النموذج أولًا لطرح سؤالك.</p>
+<p id="ask-status" role="status"></p>
 <article class="card ask-result" id="ask-result" aria-labelledby="ask-answer-heading" hidden>
-<h3 id="ask-answer-heading">إجابة مولّدة بالذكاء الاصطناعي</h3>
+<h3 id="ask-answer-heading"></h3>
 <p id="ask-answer" dir="auto"></p>
-<p class="time-source">قد تخطئ الإجابة. تحقّق من النصوص، وارجع إلى مختص للمسائل الشخصية.</p>
-<div class="references"><a href="https://quran.com/">القرآن الكريم</a><a href="https://sunnah.com/">مراجع الحديث</a></div>
+<div class="references" id="ask-sources"></div>
 </article>
-<noscript><p>فعّل جافاسكربت لتشغيل النموذج. يمكنك قراءة <a href="#discover-islam">دليل التعرّف على الإسلام</a> دون جافاسكربت.</p></noscript>
+<details class="ask-optional">
+<summary>اقتراح مراجع بالذكاء الاصطناعي</summary>
+<p>ميزة اختيارية لاختيار مراجع مرتبطة بالسؤال من قائمة محددة. يحتاج التنزيل الأول إلى اتصال بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.</p>
+<button class="button green" id="ask-enable" type="button">تشغيل اقتراح المراجع</button>
+<p id="ask-model-status" role="status"></p>
+</details>
+<noscript><p>فعّل جافاسكربت للبحث عن الأجوبة. يمكنك قراءة <a href="#discover-islam">دليل التعرّف على الإسلام</a> دون جافاسكربت.</p></noscript>
 </div>
 </section>
 <div class="collection"><div class="wrap" id="sections"></div></div>

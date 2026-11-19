@@ -33,8 +33,6 @@ header{background:var(--forest);color:#f9f5e9;border-bottom:1px solid #ffffff22}
 .ask-form{justify-content:flex-start;align-items:end;margin-bottom:12px}
 .ask-form label{flex:1;max-width:42rem}
 .ask-form input{width:100%;font:inherit;background:var(--white);color:var(--ink);border:1px solid #9a9e8f;border-radius:8px;padding:8px 12px;min-height:44px}
-.ask-ai{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-.ask-ai{color:var(--muted);font-size:.95rem}
 .ask-result{margin-block:12px 24px}
 #ask-answer{white-space:pre-wrap;overflow-wrap:anywhere;text-align:start}
 @media(max-width:600px){.ask-form{flex-direction:column;align-items:stretch;gap:8px}}
@@ -43,3 +41,6 @@ header{background:var(--forest);color:#f9f5e9;border-bottom:1px solid #ffffff22}
 .prayer-note{margin-top:12px;padding:8px 13px}
 .prayer-note p{margin-bottom:5px}
 .source-policy{padding-block:34px;border-bottom:1px solid var(--line)}
+
+.ask-optional{margin-top:14px;padding:10px 14px}
+#ask-model-status{margin-bottom:0}
