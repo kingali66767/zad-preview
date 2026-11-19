@@ -91,7 +91,14 @@ def browser_checks(origin, output, live):
             assert not missing_anchors, missing_anchors
             assert page.locator('meta[http-equiv="Content-Security-Policy"]').count() == 1
             assert page.locator('meta[name="referrer"]').get_attribute("content") == "no-referrer"
-            external_links.update(page.locator('a[href^="https://"]').evaluate_all("links => links.map(link => link.href)"))
+            if width == 1440:
+                for section in SECTIONS:
+                    page.goto(section_address(origin, section))
+                    external_links.update(page.locator('main a[href^="https://"]').evaluate_all(
+                        "links => links.map(link => link.href)"
+                    ))
+                assert external_links, "No source links found across the section pages"
+                page.goto(origin)
             page.locator('#section-launcher a[href="quran/"]').click()
             expect(page).to_have_url(section_address(origin, "quran"))
             expect(page.locator("#sections > section")).to_have_count(1)
