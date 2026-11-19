@@ -140,7 +140,7 @@ const cities = {
   mecca: { lat: 21.3891, lon: 39.8579, zone: "Asia/Riyadh", method: 4, label: "تقويم أم القرى" },
   cairo: { lat: 30.0444, lon: 31.2357, zone: "Africa/Cairo", method: 5, label: "الهيئة المصرية العامة للمساحة" },
   amman: { lat: 31.9539, lon: 35.9106, zone: "Asia/Amman", method: 23, label: "وزارة الأوقاف الأردنية" },
-  dubai: { lat: 25.2048, lon: 55.2708, zone: "Asia/Dubai", method: 16, label: "دبي (AlAdhan)" }
+  dubai: { lat: 25.2048, lon: 55.2708, zone: "Asia/Dubai", method: 16, label: "طريقة دبي التجريبية لدى AlAdhan" }
 };
 const prayers = [["Fajr", "الفجر"], ["Dhuhr", "الظهر"], ["Asr", "العصر"], ["Maghrib", "المغرب"], ["Isha", "العشاء"]];
 const form = document.querySelector("#prayer-form");
@@ -148,6 +148,16 @@ const citySelect = document.querySelector("#city");
 const times = document.querySelector("#times");
 const status = document.querySelector("#prayer-status");
 let currentRequest;
+
+function prayerResponseMatches(data, city, date) {
+  const meta = data?.meta;
+  return data?.date?.gregorian?.date === date &&
+    meta?.timezone === city.zone &&
+    meta.method?.id === city.method &&
+    meta.school === "STANDARD" &&
+    Number.isFinite(meta.latitude) && Math.abs(meta.latitude - city.lat) <= 0.001 &&
+    Number.isFinite(meta.longitude) && Math.abs(meta.longitude - city.lon) <= 0.001;
+}
 
 async function loadTimes() {
   currentRequest?.abort();
@@ -171,12 +181,19 @@ async function loadTimes() {
   try {
     const response = await fetch("https://api.aladhan.com/v1/timings/" + date + "?" + params, { signal: request.signal });
     if (!response.ok) throw new Error("Prayer API request failed");
-    const { data } = await response.json();
+    const { code, data } = await response.json();
+    if (code !== 200 || !prayerResponseMatches(data, city, date)) {
+      throw new Error("Prayer response does not match the selected city and date");
+    }
+    let previousMinutes = -1;
     const rows = prayers.map(([key, label]) => {
       const rawTime = data?.timings?.[key];
       const value = typeof rawTime === "string" &&
         rawTime.trim().match(/^((?:[01]\d|2[0-3]):[0-5]\d)(?: \([A-Za-z0-9+:-]{1,12}\))?$/)?.[1];
       if (!value) throw new Error("Missing or invalid prayer time");
+      const minutes = Number(value.slice(0, 2)) * 60 + Number(value.slice(3));
+      if (minutes <= previousMinutes) throw new Error("Prayer times are out of order");
+      previousMinutes = minutes;
       const row = element("div");
       const time = element("strong", value);
       time.dir = "ltr";
@@ -188,7 +205,7 @@ async function loadTimes() {
       status.textContent = caption + " · بنظام ٢٤ ساعة";
     }
   } catch {
-    if (currentRequest === request) status.textContent = "تعذر تحميل المواقيت. حاول مجددًا. · " + caption;
+    if (currentRequest === request) status.textContent = "تعذر تحميل مواقيت مطابقة للطلب. حاول مجددًا أو راجع التقويم المحلي. · " + caption;
   } finally {
     clearTimeout(timeout);
   }

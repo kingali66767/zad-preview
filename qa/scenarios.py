@@ -10,7 +10,7 @@ import re
 import threading
 from urllib.parse import parse_qs, urlsplit
 
-from audit import Handler, Server, SITE, without_overflow
+from audit import Handler, Server, SITE, prayer_payload, without_overflow
 from playwright.sync_api import expect, sync_playwright
 
 PUBLIC = "https://kingali66767.github.io/zad-preview/"
@@ -330,10 +330,28 @@ def local_cases(suite, browser, origin):
         "حظر AlAdhan المؤقت 429": lambda route: route.fulfill(status=429, json={}),
         "خطأ الخادم 503": lambda route: route.fulfill(status=503, json={}),
         "استجابة غير قابلة لفك JSON": lambda route: route.fulfill(body="Invalid JSON", content_type="application/json"),
-        "مواقيت ناقصة": lambda route: route.fulfill(json={"data": {"timings": {"Fajr": "05:00"}}}),
-        "ساعة خارج نطاق اليوم": lambda route: route.fulfill(json={"data": {"timings": TIMINGS | {"Fajr": "29:00"}}}),
-        "وقت ملحق بنص غير صالح": lambda route: route.fulfill(json={"data": {"timings": TIMINGS | {"Fajr": "05:00invalid"}}}),
+        "مواقيت ناقصة": lambda route: route.fulfill(json=prayer_payload(route.request.url, {"Fajr": "05:00"})),
+        "ساعة خارج نطاق اليوم": lambda route: route.fulfill(json=prayer_payload(route.request.url, TIMINGS | {"Fajr": "29:00"})),
+        "وقت ملحق بنص غير صالح": lambda route: route.fulfill(json=prayer_payload(route.request.url, TIMINGS | {"Fajr": "05:00invalid"})),
     }
+    mismatches = {
+        "تاريخ مختلف": ("date", {"gregorian": {"date": "01-01-2000"}}),
+        "إحداثيات مختلفة": ("latitude", 0),
+        "منطقة زمنية مختلفة": ("timezone", "UTC"),
+        "طريقة حساب مختلفة": ("method", {"id": 2}),
+        "مدرسة حساب العصر مختلفة": ("school", "HANAFI"),
+    }
+    for name, (field, replacement) in mismatches.items():
+        def mismatched_response(route, field=field, replacement=replacement):
+            payload = prayer_payload(route.request.url, TIMINGS)
+            target = payload["data"] if field == "date" else payload["data"]["meta"]
+            target[field] = replacement
+            route.fulfill(json=payload)
+        failures[name] = mismatched_response
+    failures["مواقيت غير مرتبة"] = lambda route: route.fulfill(
+        json=prayer_payload(route.request.url, TIMINGS | {"Asr": "06:00"}))
+    failures["رمز خطأ في جسم استجابة HTTP 200"] = lambda route: route.fulfill(
+        json=prayer_payload(route.request.url, TIMINGS) | {"code": 503})
     for name, bad_reply in failures.items():
         def prayer_failure(page, bad_reply=bad_reply):
             first = True
@@ -343,7 +361,7 @@ def local_cases(suite, browser, origin):
                     first = False
                     bad_reply(route)
                 else:
-                    route.fulfill(json={"data": {"timings": TIMINGS}})
+                    route.fulfill(json=prayer_payload(route.request.url, TIMINGS))
             page.route(PRAYER_API, respond)
             page.locator("#prayer-form button").click()
             expect(page.locator("#prayer-status")).to_contain_text("تعذر تحميل")
@@ -353,7 +371,7 @@ def local_cases(suite, browser, origin):
 
     def supported_time_suffix(page):
         page.route(PRAYER_API, lambda route: route.fulfill(
-            json={"data": {"timings": TIMINGS | {"Fajr": "05:10 (+03:00)"}}}))
+            json=prayer_payload(route.request.url, TIMINGS | {"Fajr": "05:10 (+03:00)"})))
         check_prayer_time(page, "riyadh")
         expect(page.locator("#times strong").first).to_have_text("05:10")
     run("قبول وقت صالح مع لاحقة المنطقة الزمنية", supported_time_suffix)
@@ -362,7 +380,7 @@ def local_cases(suite, browser, origin):
         calls = []
         def respond(route):
             calls.append(urlsplit(route.request.url))
-            route.fulfill(json={"data": {"timings": TIMINGS}})
+            route.fulfill(json=prayer_payload(route.request.url, TIMINGS))
         page.clock.set_fixed_time(datetime(2026, 1, 1, 21, 30, tzinfo=timezone.utc))
         page.route(PRAYER_API, respond)
         check_prayer_time(page, "riyadh")
@@ -384,9 +402,16 @@ def local_cases(suite, browser, origin):
         expect(page.locator("#prayer-status")).to_contain_text("القاهرة")
     run("تبديل المدينة أثناء الطلب مع وصول النتيجة القديمة لاحقًا", prayer_race, init="""
         window.zadPrayerRequests=[];
-        window.fetch=(url,{signal})=>new Promise(resolve=>window.zadPrayerRequests.push({
-            url,signal,reply:timings=>resolve(new Response(JSON.stringify({data:{timings}})))
-        }));
+        window.fetch=(url,{signal})=>new Promise(resolve=>{
+            const request=new URL(url);
+            const params=request.searchParams;
+            const date={gregorian:{date:request.pathname.split('/').at(-1)}};
+            const meta={timezone:params.get('timezonestring'),school:'STANDARD',
+                method:{id:Number(params.get('method'))},
+                latitude:Number(params.get('latitude')),longitude:Number(params.get('longitude'))};
+            window.zadPrayerRequests.push({url,signal,reply:timings=>
+                resolve(new Response(JSON.stringify({code:200,data:{timings,date,meta}})))});
+        });
     """)
 
     def prayer_timeout(page):

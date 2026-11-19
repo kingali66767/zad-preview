@@ -31,6 +31,25 @@ class Handler(SimpleHTTPRequestHandler):
         pass
 
 
+def prayer_payload(url, timings):
+    request = urlsplit(url)
+    params = parse_qs(request.query)
+    return {
+        "code": 200,
+        "data": {
+            "timings": timings,
+            "date": {"gregorian": {"date": request.path.rsplit("/", 1)[-1]}},
+            "meta": {
+                "latitude": float(params["latitude"][0]),
+                "longitude": float(params["longitude"][0]),
+                "timezone": params["timezonestring"][0],
+                "method": {"id": int(params["method"][0])},
+                "school": "STANDARD",
+            },
+        },
+    }
+
+
 def without_overflow(page):
     widths = page.evaluate("({ viewport: document.documentElement.clientWidth, content: document.documentElement.scrollWidth })")
     assert widths["content"] <= widths["viewport"], (page.url, widths)
@@ -161,7 +180,7 @@ def browser_checks(origin, output, live):
             if state["fail"]:
                 route.fulfill(status=503, json={"message": "unavailable"})
             else:
-                route.fulfill(json={"data": {"timings": times}})
+                route.fulfill(json=prayer_payload(route.request.url, times))
 
         inline_blocked = page.evaluate("""() => new Promise(resolve => {
             const timer = setTimeout(() => resolve(false), 1500);
