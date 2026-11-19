@@ -1,0 +1,119 @@
+{
+  "name": "Español",
+  "direction": "ltr",
+  "title": "Descubre el islam",
+  "intro": "Una guía para quienes quieren conocer el islam o están pensando en hacerse musulmanes. Explora las preguntas que más te interesen y consulta las fuentes a tu ritmo.",
+  "language": "Idioma de la guía",
+  "contents": "En esta guía",
+  "sources": "Fuentes",
+  "about": {
+    "title": "¿Qué es el islam?",
+    "body": "El islam se basa en adorar únicamente a Dios. Los musulmanes creen en profetas como Abraham, Moisés y Jesús, y consideran a Muhammad el último profeta. El Corán es el libro que, según la fe musulmana, Dios reveló a Muhammad.",
+    "ethics": "El Corán vincula la fe con los actos. Presenta ayudar a quienes lo necesitan, cumplir las promesas y actuar con paciencia en las dificultades como parte de la rectitud."
+  },
+  "pillars": {
+    "title": "¿Cuáles son los cinco pilares del islam?",
+    "items": [
+      "Shahada · El testimonio de fe en Dios como único digno de adoración y en Muhammad como Su mensajero.",
+      "Salat · Las cinco oraciones diarias.",
+      "Zakat · Una contribución obligatoria sobre ciertos bienes cuando se cumplen las condiciones.",
+      "Sawm · El ayuno de Ramadán, con exenciones en determinadas circunstancias.",
+      "Hach · La peregrinación a La Meca una vez en la vida para quienes puedan realizarla."
+    ]
+  },
+  "shahada": {
+    "title": "¿Cómo se hace musulmana una persona?",
+    "body": "Si crees en el islam y eliges abrazarlo libremente, pronuncia la shahada, el testimonio de fe, comprendiendo su significado y con sinceridad.",
+    "next": "Una mezquita o un centro islámico de confianza puede ayudarte con la pronunciación y el aprendizaje posterior, preferiblemente en un idioma que entiendas.",
+    "practice": {
+      "title": "Practica la pronunciación de la shahada",
+      "intro": "Lee una frase a la vez y entiende su significado. La transcripción es aproximada. Si puedes, pide a alguien que sepa árabe que lea cada frase despacio.",
+      "lines": [
+        {
+          "meaning": "Atestiguo que solo Dios merece ser adorado.",
+          "phonetic": "Ash-hadu an la ilaha illa Al-lah."
+        },
+        {
+          "meaning": "Y atestiguo que Muhammad es el mensajero de Dios.",
+          "phonetic": "Wa ash-hadu anna Muhammadan rasulu Al-lah."
+        }
+      ]
+    }
+  },
+  "next": {
+    "title": "Primeros pasos después de la shahada",
+    "items": [
+      "Empieza por aprender la ablución ritual y cómo realizar las cinco oraciones diarias.",
+      "Lee el significado de Al-Fatiha, el capítulo inicial del Corán, y practica poco a poco su recitación en árabe.",
+      "Consulta tus dudas prácticas con una persona cualificada y aprende paso a paso."
+    ],
+    "quran": "Leer Al-Fatiha en traducción",
+    "guide": "Guía de ablución y oración en árabe",
+    "bath": {
+      "title": "¿Debo hacer el gusl después de la shahada?",
+      "body": "Los juristas discrepan sobre si el gusl, el baño ritual completo, es obligatorio al abrazar el islam. Algunos lo consideran obligatorio y otros lo recomiendan en determinadas circunstancias. Pregunta a una persona cualificada qué corresponde en tu caso, sobre todo si no puedes utilizar agua."
+    },
+    "bath_source": "IslamQA · ¿Cuándo es obligatorio o recomendado el baño ritual? (árabe)"
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      [
+        "¿Tengo que aprender árabe primero?",
+        "Puedes comprender la shahada en tu idioma y decirla en una lengua que entiendas si no puedes pronunciarla en árabe. Puedes practicar la pronunciación árabe poco a poco."
+      ],
+      [
+        "¿Tengo que ir a una mezquita?",
+        "Puedes pronunciar la shahada donde estés. En una mezquita puedes encontrar apoyo u obtener una constancia si la necesitas para algún trámite."
+      ],
+      [
+        "¿Y si solo quiero informarme?",
+        "Puedes leer, preguntar y tomarte el tiempo que necesites. El Corán dice que no hay coacción en la religión (2:256)."
+      ],
+      [
+        "¿Qué creen los musulmanes acerca de Jesús?",
+        "Los musulmanes honran a Jesús, hijo de María, como mensajero de Dios, y honran a María. El capítulo que lleva su nombre relata parte de su historia, y Corán 4:171 explica su lugar en la fe islámica."
+      ],
+      [
+        "¿Por dónde puedo empezar a aprender?",
+        "Empieza por la adoración de Dios como único digno de culto y los cinco pilares. Después, lee una traducción de Al-Fatiha. Anota tus preguntas y consúltalas con alguien que pueda explicártelas en tu idioma."
+      ]
+    ]
+  },
+  "paths": {
+    "explore": "Quiero conocer el islam",
+    "join": "Quiero saber cómo abrazar el islam",
+    "begin": "Acabo de abrazar el islam y quiero empezar"
+  },
+  "wudu": {
+    "title": "¿Cómo hago la ablución?",
+    "intro": "El wudu es el lavado ritual con agua antes de la oración. Los pasos se basan en el versículo sobre la ablución y en el relato que describe cómo la hacía Uzmán.",
+    "items": [
+      "Ten la intención de hacer la ablución y después lávate las manos.",
+      "Enjuágate la boca. Aspira suavemente un poco de agua por la nariz y expúlsala.",
+      "Lávate todo el rostro.",
+      "Lávate los brazos hasta los codos inclusive, empezando por el derecho.",
+      "Pásate las manos húmedas por la cabeza.",
+      "Lávate los pies hasta los tobillos inclusive, empezando por el derecho."
+    ],
+    "note": "El relato de Uzmán describe lavar algunas partes tres veces y pasar las manos húmedas por la cabeza. Si una enfermedad te impide utilizar agua, o tienes dudas sobre la purificación en seco o qué invalida la ablución, consulta a una persona cualificada."
+  },
+  "prayer": {
+    "title": "¿Cómo empiezo a rezar?",
+    "intro": "Las cinco oraciones diarias son Fajr, Dhuhr, Asr, Maghrib e Isha. Consulta sus horarios para tu ciudad.",
+    "items": [
+      "Haz la ablución si la necesitas, comprueba que haya empezado la hora de la oración y oriéntate hacia La Meca (la qibla).",
+      "Aprende el takbir inicial y la recitación de Al-Fatiha. Practica la inclinación, ponerte de pie, la postración y sentarte entre las dos postraciones. Haz una pausa en cada posición.",
+      "Pide a una persona cualificada que te muestre una oración completa, incluido el número de unidades, el testimonio sentado y el saludo final. Explícale si tienes dificultad con algún movimiento."
+    ]
+  },
+  "living": {
+    "title": "¿Cómo aplicar las enseñanzas del islam en el día a día?",
+    "intro": "Empieza por lo que necesitas hoy y consulta fuentes fiables a medida que surjan situaciones nuevas.",
+    "items": [
+      "Practica la honestidad, la amabilidad y el respeto por los derechos de los demás. Trata bien a tus padres aunque tengáis creencias distintas.",
+      "Aprende los principios de la alimentación halal y revisa los ingredientes cuando haga falta. Pregunta cuando tengas dudas.",
+      "Anota tus preguntas sobre el ayuno, el zakat, el trabajo o la familia. Consulta a una persona cualificada que pueda hablar en tu idioma y conocer el contexto."
+    ]
+  }
+}

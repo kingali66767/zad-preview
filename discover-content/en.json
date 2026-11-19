@@ -1,0 +1,119 @@
+{
+  "name": "English",
+  "direction": "ltr",
+  "title": "Discover Islam",
+  "intro": "A guide for anyone curious about Islam or considering becoming Muslim. Start with the questions that matter to you and explore the sources at your own pace.",
+  "language": "Guide language",
+  "contents": "In this guide",
+  "sources": "Sources",
+  "about": {
+    "title": "What is Islam?",
+    "body": "Islam is rooted in worshipping God alone. Muslims believe in prophets including Abraham, Moses and Jesus, and believe that Muhammad was the final prophet. The Qur’an is the scripture Muslims believe God revealed to Muhammad.",
+    "ethics": "The Qur’an connects faith with action. It describes giving to people in need, keeping promises and remaining patient in hardship as parts of righteousness."
+  },
+  "pillars": {
+    "title": "What are the five pillars of Islam?",
+    "items": [
+      "Shahada · The testimony of faith in God alone and in Muhammad as His messenger.",
+      "Salah · The five daily prayers.",
+      "Zakat · An obligatory contribution from eligible wealth.",
+      "Sawm · Fasting in Ramadan, with exemptions in certain circumstances.",
+      "Hajj · Pilgrimage to Mecca once in a lifetime for those able to undertake it."
+    ]
+  },
+  "shahada": {
+    "title": "How does someone become Muslim?",
+    "body": "If you believe in Islam and freely choose to embrace it, affirm the Shahada, the testimony of faith, with understanding and sincerity.",
+    "next": "A trusted mosque or Islamic centre can help you with pronunciation and learning after the Shahada. You can ask for someone who speaks your language.",
+    "practice": {
+      "title": "Practise saying the Shahada",
+      "intro": "Read one line at a time and understand its meaning. The written pronunciation is approximate. If you can, ask an Arabic speaker to say each line slowly.",
+      "lines": [
+        {
+          "meaning": "I bear witness that none is worthy of worship except God.",
+          "phonetic": "Ashhadu an lā ilāha illa Allāh."
+        },
+        {
+          "meaning": "And I bear witness that Muhammad is the messenger of God.",
+          "phonetic": "Wa ashhadu anna Muḥammadan rasūlu Allāh."
+        }
+      ]
+    }
+  },
+  "next": {
+    "title": "First steps after the Shahada",
+    "items": [
+      "Start by learning how to perform wudu, the ritual washing, and the five daily prayers.",
+      "Read the meaning of Al-Fatihah, the opening chapter of the Qur’an, and gradually practise reciting it in Arabic.",
+      "Ask a trusted teacher about the practical questions you face and learn one step at a time."
+    ],
+    "quran": "Read Al-Fatihah in translation",
+    "guide": "Wudu and prayer guide in Arabic",
+    "bath": {
+      "title": "Should I perform ghusl after the Shahada?",
+      "body": "Scholars differ about whether ghusl, a full ritual bath, is required on embracing Islam. Some consider it obligatory and others recommend it in some cases. Ask a trusted teacher what applies to you and how to do it, especially if you cannot use water."
+    },
+    "bath_source": "IslamQA · When is ghusl required or recommended? (Arabic)"
+  },
+  "faq": {
+    "title": "Common questions",
+    "items": [
+      [
+        "Do I need to learn Arabic first?",
+        "You can understand the Shahada in your own language and say it in a language you understand if you are unable to say it in Arabic. You can practise the Arabic pronunciation gradually."
+      ],
+      [
+        "Do I need to go to a mosque?",
+        "You can say the Shahada wherever you are. A mosque can help with support or documentation if you need a formal record."
+      ],
+      [
+        "What if I’m just curious?",
+        "You are welcome to read, ask questions and take your time. The Qur’an states that there is no compulsion in religion (2:256)."
+      ],
+      [
+        "What do Muslims believe about Jesus?",
+        "Muslims honour Jesus, son of Mary, as a messenger of God, and honour Mary. The chapter named after Mary recounts part of his story, and Qur’an 4:171 describes his place in Islamic belief."
+      ],
+      [
+        "Where can I start learning?",
+        "Begin with the worship of God alone and the five pillars. Then read a translation of Al-Fatihah. Write down your questions and ask someone who can explain them in your language."
+      ]
+    ]
+  },
+  "paths": {
+    "explore": "I want to learn about Islam",
+    "join": "I want to know how to become Muslim",
+    "begin": "I’m new to Islam and ready to start"
+  },
+  "wudu": {
+    "title": "How do I perform wudu?",
+    "intro": "Wudu is ritual washing with water before prayer. These steps follow the Qur’anic verse on washing for prayer and the narration describing Uthman’s wudu.",
+    "items": [
+      "Intend in your heart to perform wudu, then wash both hands.",
+      "Rinse your mouth. Gently draw a little water into your nose and blow it out.",
+      "Wash your whole face.",
+      "Wash both arms up to and including the elbows, starting with the right.",
+      "Wipe your head with wet hands.",
+      "Wash both feet up to and including the ankles, starting with the right."
+    ],
+    "note": "Uthman’s narration describes washing some parts three times and wiping the head. If illness prevents you from using water, or you have questions about dry purification or what invalidates wudu, ask a trusted teacher."
+  },
+  "prayer": {
+    "title": "How do I start praying?",
+    "intro": "Muslims perform five daily prayers: Fajr, Dhuhr, Asr, Maghrib and Isha. Learn their times for your city.",
+    "items": [
+      "Perform wudu if you need it, check that the prayer time has begun, and face the direction of Mecca (the qibla).",
+      "Learn the opening takbir and the recitation of Al-Fatihah. Practise bowing, standing again, prostrating and sitting between the two prostrations, pausing in each position.",
+      "Ask a teacher to show you a complete prayer, including the number of units for each prayer, the sitting testimony and the closing greeting. Ask how to adapt if you have limited mobility."
+    ]
+  },
+  "living": {
+    "title": "How can I put Islamic teachings into practice?",
+    "intro": "Start with what you need today and learn from reliable sources as situations arise.",
+    "items": [
+      "Practise honesty, kindness and meeting your obligations. Treat your parents well even when you differ in religion.",
+      "Learn the basics of halal food and check ingredients when necessary. Ask about ingredients or situations you are unsure of.",
+      "Write down questions about fasting, zakat, work or family and share the context with a qualified teacher. You can ask for someone who speaks your language."
+    ]
+  }
+}

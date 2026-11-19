@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="زاد، منصة عربية مستقلة للتوعية الدينية. القرآن الكريم والأحاديث الصحيحة والدروس ومواقيت الصلاة.">
+<meta name="theme-color" content="#102c24">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://api.aladhan.com; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>زاد | منصة التوعية الدينية</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/discover.css">
+<script src="assets/content.js" defer></script>
+<script src="assets/library-content.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script id="ask-script" data-worker="assets/ask-worker.js" src="assets/ask.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">تجاوز إلى المحتوى</a>
+<header>
+<div class="wrap top">
+<a class="brand" href="#home"><span class="seal" aria-hidden="true">✧</span><span>زاد<small>منصة التوعية الدينية</small></span></a>
+<button id="menu" class="menu" aria-expanded="false" aria-controls="nav" type="button">القائمة</button>
+<nav id="nav" aria-label="التنقل الرئيسي" aria-expanded="false">
+<a href="#home">الرئيسية</a><a href="#quran">القرآن الكريم</a><a href="#lessons">الخطب والدروس</a><a href="#hadith">الأحاديث</a><a href="#ask">اسأل زاد</a><a href="#media">المحاضرات</a><a href="#occasions">المناسبات</a><a href="#contact">تواصل معنا</a>
+</nav>
+<a class="prayer-link" href="#prayer">◷ &nbsp; مواقيت الصلاة</a>
+</div>
+</header>
+<main id="main">
+<section id="home" class="hero">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<p class="eyebrow"><span></span> منصة التوعية الدينية</p>
+<h1>زادك من العلم،<br><em>ونورك بالمعرفة.</em></h1>
+<p class="intro">مساحة عربية للعلم الشرعي النافع، تجمع القرآن الكريم والأحاديث الصحيحة والمواد التوعوية الموثّقة في مكان واحد.</p>
+<div class="actions"><a class="button gold" href="#daily">ابدأ بالتطبيق</a><a class="button outline" href="#quran">اقرأ من القرآن</a></div>
+</div>
+<div class="hero-image" role="img" aria-label="أقواس معمارية إسلامية يضيئها ضوء الشمس"></div>
+</div>
+</section>
+<section class="wrap prayer" id="prayer" aria-labelledby="prayer-heading">
+<div class="prayer-head">
+<div><p class="eyebrow"><span></span> حسب التوقيت المحلي للمدينة</p><h2 id="prayer-heading">مواقيت الصلاة</h2></div>
+<form id="prayer-form"><label>المدينة<select id="city"><option value="riyadh">الرياض، السعودية</option><option value="mecca">مكة المكرمة، السعودية</option><option value="cairo">القاهرة، مصر</option><option value="amman">عمّان، الأردن</option><option value="dubai">دبي، الإمارات</option></select></label><button class="button green" type="submit">عرض المواقيت</button></form>
+</div>
+<div class="times" id="times"></div>
+<p id="prayer-status" role="status">اختر مدينتك، ثم اعرض مواقيت اليوم.</p>
+<p class="time-source">مصدر البيانات <a href="https://aladhan.com/prayer-times-api">AlAdhan</a> · قد تختلف الدقائق عن التقويم المحلي.</p>
+<details class="prayer-note">
+<summary>كيف تُحسب المواقيت؟</summary>
+<p>يستخدم زاد إحداثيات المدينة وتوقيتها المحلي. تظهر طريقة الحساب المطبّقة بجوار التاريخ بعد جلب المواقيت. عند السفر إلى مكان خارج المدن المتاحة أو عند اختلاف الوقت، ارجع إلى تقويم المسجد أو الجهة المحلية التي تعتمدها.</p>
+</details>
+</section>
+<section class="wrap daily" id="daily" aria-labelledby="daily-heading">
+<p class="eyebrow"><span></span> زادك اليومي</p>
+<h2 id="daily-heading">أدلة وأدوات للعبادة اليومية</h2>
+<div class="tiles">
+<a href="#worship"><span aria-hidden="true">◇</span><strong>تعلّم الوضوء والصلاة</strong><small>خطوات مرتبة للمبتدئ مع أدلتها</small></a>
+<a href="#adhkar"><span aria-hidden="true">✧</span><strong>الأذكار اليومية</strong><small>أذكار مختارة للصباح والمساء وبعد الصلاة وقبل النوم</small></a>
+<a href="#reading"><span aria-hidden="true">▤</span><strong>خطة قراءة أسبوعية</strong><small>سبع سور قصيرة مع متابعة تقدمك</small></a>
+</div>
+</section>
+<section class="wrap library" id="library">
+<p class="eyebrow"><span></span> مكتبة زاد</p><h2>استكشف أقسام المنصة</h2>
+<div class="tiles">
+<a href="#quran"><span>▤</span><strong>القرآن الكريم</strong><small>آيات مختارة وفضائل التلاوة</small></a>
+<a href="#lessons"><span>◈</span><strong>الخطب والدروس</strong><small>مواد مكتوبة للقراءة والاستفادة</small></a>
+<a href="#hadith"><span>✧</span><strong>الأحاديث الصحيحة</strong><small>نصوص مختارة مع تخريجها</small></a>
+<a href="#faq"><span>؟</span><strong>أسئلة وأجوبة شرعية</strong><small>إجابات مختصرة مع أدلتها</small></a>
+<a href="#media"><span>▷</span><strong>المحاضرات والتلاوات</strong><small>مواد صوتية ومرئية من مصادرها</small></a>
+<a href="#occasions"><span aria-hidden="true">◷</span><strong>المناسبات الإسلامية</strong><small>مواسم العبادة وأدلتها</small></a>
+<a href="#belief"><span aria-hidden="true">◇</span><strong>العقيدة وأصول الإيمان</strong><small>التوحيد وأركان الإيمان ومعنى الإحسان</small></a>
+<a href="#seerah"><span aria-hidden="true">▤</span><strong>السيرة النبوية</strong><small>من بدء الوحي إلى حجة الوداع</small></a>
+</div>
+<!-- discover-guide:start -->
+<details class="discover discover-section" id="discover-islam">
+<summary>تعرّف على الإسلام</summary>
+<p>دليل لغير المسلمين والمسلمين الجدد، يتناول الشهادتين والوضوء والصلاة.</p>
+<nav class="discover-languages" aria-label="لغة الدليل"><a href="#discover-ar" lang="ar" dir="rtl">العربية</a> <a href="#discover-en" lang="en" dir="ltr">English</a> <a href="#discover-es" lang="es" dir="ltr">Español</a> <a href="#discover-fr" lang="fr" dir="ltr">Français</a></nav>
+<details class="discover-locale" id="discover-ar" name="discover-language" lang="ar" dir="rtl" open>
+<summary>العربية</summary>
+<div class="discover-intro">
+<h3>تعرّف على الإسلام</h3>
+<p>دليل لمن يرغب في فهم الإسلام، أو لديه أسئلة حول اعتناقه. ابدأ من الموضوع الذي يهمك واقرأ المصادر على مهل.</p>
+<div class="actions discover-paths">
+<a href="#discover-ar-about" class="button green">أريد أن أتعرّف على الإسلام</a>
+<a href="#discover-ar-shahada" class="button discover-outline">أريد معرفة كيفية الدخول في الإسلام</a>
+<a href="#discover-ar-next" class="button discover-outline">أسلمت حديثًا وأريد أن أبدأ</a>
+</div>
+</div>
+<div class="discover-layout">
+<nav class="discover-toc" aria-label="موضوعات الدليل">
+<strong>موضوعات الدليل</strong>
+<a href="#discover-ar-about">ما الإسلام؟</a><a href="#discover-ar-pillars">ما أركان الإسلام الخمسة؟</a><a href="#discover-ar-shahada">كيف يدخل الإنسان في الإسلام؟</a><a href="#discover-ar-next">الخطوات الأولى بعد الشهادة</a><a href="#discover-ar-wudu">كيف أتوضّأ؟</a><a href="#discover-ar-prayer-basics">كيف أبدأ بالصلاة؟</a><a href="#discover-ar-daily-life">كيف أتعامل مع تعاليم الإسلام يوميًا؟</a><a href="#discover-ar-faq">أسئلة شائعة</a>
+</nav>
+<div class="discover-content">
+<section id="discover-ar-about">
+<h4>ما الإسلام؟</h4>
+<p>يقوم الإسلام على عبادة الله وحده. يؤمن المسلمون بالأنبياء، ومنهم إبراهيم وموسى وعيسى عليهم السلام، وبأن محمدًا ﷺ خاتم الأنبياء. والقرآن هو الكتاب الذي يؤمن المسلمون بأن الله أنزله على محمد ﷺ.</p>
+<p>ويجمع القرآن بين الإيمان والعمل؛ فيذكر من البرّ الإنفاق على المحتاج، والوفاء بالعهد، والصبر عند الشدائد.</p>
+<p class="discover-sources">المصادر · <a href="https://quran.com/112">Qur’an 112</a> · <a href="https://quran.com/2/136">Qur’an 2:136</a> · <a href="https://quran.com/33/40">Qur’an 33:40</a> · <a href="https://quran.com/26/192-195">Qur’an 26:192–195</a> · <a href="https://quran.com/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-ar-pillars">
+<h4>ما أركان الإسلام الخمسة؟</h4>
+<ol><li>الشهادتان · الإقرار بوحدانية الله ورسالة محمد ﷺ.</li><li>الصلاة · أداء الصلوات الخمس كل يوم.</li><li>الزكاة · إخراج حق واجب من المال عند تحقق شروطه.</li><li>الصيام · صيام شهر رمضان، مع الرخص المقررة.</li><li>الحج · قصد مكة لأداء المناسك مرة في العمر لمن استطاع.</li></ol>
+<p class="discover-sources">المصادر · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a></p>
+</section>
+<section id="discover-ar-shahada" class="discover-shahada">
+<h4>كيف يدخل الإنسان في الإسلام؟</h4>
+<p>إذا اقتنعت بالإسلام واخترت اعتناقه، فاشهد الشهادتين عن فهم وصدق واختيار. معناهما إفراد الله بالعبادة والإقرار بأن محمدًا رسوله.</p>
+<h5>تدرّب على نطق الشهادتين</h5>
+<p>اقرأ كل جملة على حدة، وافهم معناها. إن احتجت إلى تصحيح النطق فاطلب من شخص يجيد العربية أن يقرأهما لك ببطء.</p>
+<ol class="shahada-lines"><li><blockquote lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ</blockquote><p>أشهد أن الله وحده المستحق للعبادة.</p></li><li><blockquote lang="ar" dir="rtl">وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</blockquote><p>وأشهد أن محمدًا رسول الله.</p></li></ol>
+<p>يمكن لمسجد أو مركز إسلامي موثوق أن يساعدك في النطق والتعلّم بعد الشهادة، بلغتك إن أمكن.</p>
+<p class="discover-sources">المصادر · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a> · <a href="https://quran.com/2/256">Qur’an 2:256</a></p>
+</section>
+<section id="discover-ar-next">
+<h4>الخطوات الأولى بعد الشهادة</h4>
+<ol><li>ابدأ بتعلّم الوضوء وكيفية أداء الصلوات الخمس.</li><li>اقرأ معاني سورة الفاتحة، وتدرّب على تلاوتها بالعربية تدريجيًا.</li><li>اسأل معلّمًا موثوقًا عن الأسئلة العملية التي تطرأ عليك، وتعلّم خطوة بخطوة.</li></ol>
+<h5>هل أغتسل بعد الشهادتين؟</h5>
+<p>اختلف الفقهاء في حكم الغُسل عند الدخول في الإسلام. من أهل العلم من أوجبه، ومنهم من استحبّه في بعض الأحوال. اسأل معلّمًا موثوقًا عن حكم حالك وكيفية الغسل، وخاصة إذا تعذّر عليك استعمال الماء.</p>
+<p class="discover-bath-source"><a href="https://islamqa.info/ar/answers/81949">الإسلام سؤال وجواب · متى يجب الغسل ومتى يستحب؟</a></p>
+<div class="actions"><a href="#discover-ar-wudu" class="button green">كيف أتوضّأ؟</a>
+<a href="#discover-ar-prayer-basics" class="button discover-outline">كيف أبدأ بالصلاة؟</a>
+<a href="https://quran.com/1" class="button discover-outline">اقرأ الفاتحة</a>
+<a href="#worship" class="button discover-outline">دليل الوضوء والصلاة بالعربية</a></div>
+</section>
+<section id="discover-ar-wudu">
+<h4>كيف أتوضّأ؟</h4>
+<p>الوضوء طهارة بالماء قبل الصلاة. إليك صفة مختصرة مستندة إلى آية الوضوء وحديث عثمان رضي الله عنه.</p>
+<ol><li>انوِ الوضوء بقلبك، ثم اغسل كفّيك.</li><li>تمضمض بالماء، ثم استنشق قليلًا منه وانثره.</li><li>اغسل وجهك كاملًا.</li><li>اغسل يديك إلى المرفقين مع المرفقين، وابدأ باليمنى.</li><li>امسح رأسك بيدين مبللتين.</li><li>اغسل رجليك إلى الكعبين مع الكعبين، وابدأ باليمنى.</li></ol>
+<p>في رواية عثمان غسل بعض الأعضاء ثلاثًا ومسح الرأس. إذا منعك مرض من استعمال الماء أو احتجت إلى بيان أحكام التيمّم أو نواقض الوضوء، فاسأل معلّمًا موثوقًا.</p>
+<p class="discover-sources">المصادر · <a href="https://quran.com/5/6">Qur’an 5:6</a> · <a href="https://sunnah.com/bukhari:159">Sahih al-Bukhari 159</a></p>
+</section>
+<section id="discover-ar-prayer-basics">
+<h4>كيف أبدأ بالصلاة؟</h4>
+<p>الصلوات الخمس هي الفجر والظهر والعصر والمغرب والعشاء. تعلّم أوقاتها حسب مدينتك.</p>
+<ol><li>توضّأ عند الحاجة للوضوء، وتحقق من دخول الوقت، واستقبل القبلة.</li><li>تعلّم التكبير وقراءة الفاتحة، ثم الركوع والرفع منه والسجود والجلوس بين السجدتين مع الطمأنينة.</li><li>تعلّم عدد الركعات لكل صلاة، والتشهّد والتسليم مع معلّم يمكنه أن يريك الصلاة كاملةً ويجيب عن حالك إن عجزت عن بعض أفعالها.</li></ol>
+<p class="discover-sources">المصادر · <a href="https://sunnah.com/bukhari:757">Sahih al-Bukhari 757</a> · <a href="https://sunnah.com/bukhari:831">Sahih al-Bukhari 831</a> · <a href="https://sunnah.com/muslim:582">Sahih Muslim 582</a></p>
+</section>
+<section id="discover-ar-daily-life">
+<h4>كيف أتعامل مع تعاليم الإسلام يوميًا؟</h4>
+<p>ابدأ بما تحتاجه الآن، وتعلّم أحكام المواقف التي تمرّ بك من مصدر موثوق.</p>
+<ul><li>طبّق ما تتعلّمه في الصدق والرفق وأداء الحقوق. وبرّ والديك وأحسن صحبتهم ولو اختلفتم في الدين.</li><li>ابدأ بالتعرّف على الحلال في الطعام، وراجع المكوّنات عند الحاجة. اسأل عن المكوّنات أو الحالات التي تلتبس عليك.</li><li>دوّن أسئلتك عن الصيام والزكاة والعمل والأسرة، واطرحها مع سياقها على أهل العلم. يمكنك طلب معلّم يتحدث لغتك.</li></ul>
+<p class="discover-sources">المصادر · <a href="https://quran.com/31/15">Qur’an 31:15</a> · <a href="https://quran.com/5/3">Qur’an 5:3</a> · <a href="https://quran.com/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-ar-faq">
+<h4>أسئلة شائعة</h4>
+<div class="faq-list"><details><summary>هل يلزمني تعلّم العربية قبل الشهادة؟</summary><p>يمكنك فهم معنى الشهادتين بلغتك والشهادة بما تفهمه إن عجزت عن النطق بالعربية. تعلّم النطق بالعربية بالتدريج، ويمكنك طلب المساعدة ممن يتحدث لغتك.</p></details>
+<details><summary>هل يلزمني الذهاب إلى مسجد؟</summary><p>يمكنك النطق بالشهادتين حيث أنت. قد يفيد حضور المسجد في الحصول على دعم أو توثيق الشهادة عند الحاجة الإدارية.</p></details>
+<details><summary>ماذا لو كنت أقرأ بدافع الفضول فقط؟</summary><p>يمكنك قراءة الدليل وطرح أسئلتك وأخذ الوقت الذي تحتاجه. يقول القرآن: «لَا إِكْرَاهَ فِي الدِّينِ» (البقرة، ٢٥٦).</p></details>
+<details><summary>ماذا يؤمن المسلمون بشأن عيسى عليه السلام؟</summary><p>يؤمن المسلمون بأن عيسى ابن مريم عليه السلام رسول من عند الله، ويجلّون مريم عليها السلام. وتعرض سورة مريم جزءًا من قصته، فيما تبيّن آية النساء مكانته عند المسلمين.</p></details>
+<details><summary>من أين أبدأ إذا أردت التعلّم؟</summary><p>ابدأ بمعنى التوحيد وأركان الإسلام، ثم اقرأ ترجمة معنى الفاتحة. دوّن الأسئلة التي تظهر لك واطرحها على من يستطيع شرحها بلغتك.</p></details></div>
+<p class="discover-sources">المصادر · <a href="https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim">IslamReligion.com (English)</a> · <a href="https://quran.com/2/256">Qur’an 2:256</a> · <a href="https://quran.com/4/171">Qur’an 4:171</a> · <a href="https://quran.com/19/30-36">Qur’an 19:30–36</a></p>
+</section>
+</div>
+</div>
+</details>
+<details class="discover-locale" id="discover-en" name="discover-language" lang="en" dir="ltr">
+<summary>English</summary>
+<div class="discover-intro">
+<h3>Discover Islam</h3>
+<p>A guide for anyone curious about Islam or considering becoming Muslim. Start with the questions that matter to you and explore the sources at your own pace.</p>
+<div class="actions discover-paths">
+<a href="#discover-en-about" class="button green">I want to learn about Islam</a>
+<a href="#discover-en-shahada" class="button discover-outline">I want to know how to become Muslim</a>
+<a href="#discover-en-next" class="button discover-outline">I’m new to Islam and ready to start</a>
+</div>
+</div>
+<div class="discover-layout">
+<nav class="discover-toc" aria-label="In this guide">
+<strong>In this guide</strong>
+<a href="#discover-en-about">What is Islam?</a><a href="#discover-en-pillars">What are the five pillars of Islam?</a><a href="#discover-en-shahada">How does someone become Muslim?</a><a href="#discover-en-next">First steps after the Shahada</a><a href="#discover-en-wudu">How do I perform wudu?</a><a href="#discover-en-prayer-basics">How do I start praying?</a><a href="#discover-en-daily-life">How can I put Islamic teachings into practice?</a><a href="#discover-en-faq">Common questions</a>
+</nav>
+<div class="discover-content">
+<section id="discover-en-about">
+<h4>What is Islam?</h4>
+<p>Islam is rooted in worshipping God alone. Muslims believe in prophets including Abraham, Moses and Jesus, and believe that Muhammad was the final prophet. The Qur’an is the scripture Muslims believe God revealed to Muhammad.</p>
+<p>The Qur’an connects faith with action. It describes giving to people in need, keeping promises and remaining patient in hardship as parts of righteousness.</p>
+<p class="discover-sources">Sources · <a href="https://quran.com/en/112">Qur’an 112</a> · <a href="https://quran.com/en/2/136">Qur’an 2:136</a> · <a href="https://quran.com/en/33/40">Qur’an 33:40</a> · <a href="https://quran.com/en/26/192-195">Qur’an 26:192–195</a> · <a href="https://quran.com/en/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-en-pillars">
+<h4>What are the five pillars of Islam?</h4>
+<ol><li>Shahada · The testimony of faith in God alone and in Muhammad as His messenger.</li><li>Salah · The five daily prayers.</li><li>Zakat · An obligatory contribution from eligible wealth.</li><li>Sawm · Fasting in Ramadan, with exemptions in certain circumstances.</li><li>Hajj · Pilgrimage to Mecca once in a lifetime for those able to undertake it.</li></ol>
+<p class="discover-sources">Sources · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a></p>
+</section>
+<section id="discover-en-shahada" class="discover-shahada">
+<h4>How does someone become Muslim?</h4>
+<p>If you believe in Islam and freely choose to embrace it, affirm the Shahada, the testimony of faith, with understanding and sincerity.</p>
+<h5>Practise saying the Shahada</h5>
+<p>Read one line at a time and understand its meaning. The written pronunciation is approximate. If you can, ask an Arabic speaker to say each line slowly.</p>
+<ol class="shahada-lines"><li><blockquote lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ</blockquote><p class="discover-transliteration" dir="ltr">Ashhadu an lā ilāha illa Allāh.</p><p>I bear witness that none is worthy of worship except God.</p></li><li><blockquote lang="ar" dir="rtl">وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</blockquote><p class="discover-transliteration" dir="ltr">Wa ashhadu anna Muḥammadan rasūlu Allāh.</p><p>And I bear witness that Muhammad is the messenger of God.</p></li></ol>
+<p>A trusted mosque or Islamic centre can help you with pronunciation and learning after the Shahada. You can ask for someone who speaks your language.</p>
+<p class="discover-sources">Sources · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a> · <a href="https://quran.com/en/2/256">Qur’an 2:256</a></p>
+</section>
+<section id="discover-en-next">
+<h4>First steps after the Shahada</h4>
+<ol><li>Start by learning how to perform wudu, the ritual washing, and the five daily prayers.</li><li>Read the meaning of Al-Fatihah, the opening chapter of the Qur’an, and gradually practise reciting it in Arabic.</li><li>Ask a trusted teacher about the practical questions you face and learn one step at a time.</li></ol>
+<h5>Should I perform ghusl after the Shahada?</h5>
+<p>Scholars differ about whether ghusl, a full ritual bath, is required on embracing Islam. Some consider it obligatory and others recommend it in some cases. Ask a trusted teacher what applies to you and how to do it, especially if you cannot use water.</p>
+<p class="discover-bath-source"><a href="https://islamqa.info/ar/answers/81949">IslamQA · When is ghusl required or recommended? (Arabic)</a></p>
+<div class="actions"><a href="#discover-en-wudu" class="button green">How do I perform wudu?</a>
+<a href="#discover-en-prayer-basics" class="button discover-outline">How do I start praying?</a>
+<a href="https://quran.com/en/1" class="button discover-outline">Read Al-Fatihah in translation</a>
+<a href="#worship" class="button discover-outline">Wudu and prayer guide in Arabic</a></div>
+</section>
+<section id="discover-en-wudu">
+<h4>How do I perform wudu?</h4>
+<p>Wudu is ritual washing with water before prayer. These steps follow the Qur’anic verse on washing for prayer and the narration describing Uthman’s wudu.</p>
+<ol><li>Intend in your heart to perform wudu, then wash both hands.</li><li>Rinse your mouth. Gently draw a little water into your nose and blow it out.</li><li>Wash your whole face.</li><li>Wash both arms up to and including the elbows, starting with the right.</li><li>Wipe your head with wet hands.</li><li>Wash both feet up to and including the ankles, starting with the right.</li></ol>
+<p>Uthman’s narration describes washing some parts three times and wiping the head. If illness prevents you from using water, or you have questions about dry purification or what invalidates wudu, ask a trusted teacher.</p>
+<p class="discover-sources">Sources · <a href="https://quran.com/en/5/6">Qur’an 5:6</a> · <a href="https://sunnah.com/bukhari:159">Sahih al-Bukhari 159</a></p>
+</section>
+<section id="discover-en-prayer-basics">
+<h4>How do I start praying?</h4>
+<p>Muslims perform five daily prayers: Fajr, Dhuhr, Asr, Maghrib and Isha. Learn their times for your city.</p>
+<ol><li>Perform wudu if you need it, check that the prayer time has begun, and face the direction of Mecca (the qibla).</li><li>Learn the opening takbir and the recitation of Al-Fatihah. Practise bowing, standing again, prostrating and sitting between the two prostrations, pausing in each position.</li><li>Ask a teacher to show you a complete prayer, including the number of units for each prayer, the sitting testimony and the closing greeting. Ask how to adapt if you have limited mobility.</li></ol>
+<p class="discover-sources">Sources · <a href="https://sunnah.com/bukhari:757">Sahih al-Bukhari 757</a> · <a href="https://sunnah.com/bukhari:831">Sahih al-Bukhari 831</a> · <a href="https://sunnah.com/muslim:582">Sahih Muslim 582</a></p>
+</section>
+<section id="discover-en-daily-life">
+<h4>How can I put Islamic teachings into practice?</h4>
+<p>Start with what you need today and learn from reliable sources as situations arise.</p>
+<ul><li>Practise honesty, kindness and meeting your obligations. Treat your parents well even when you differ in religion.</li><li>Learn the basics of halal food and check ingredients when necessary. Ask about ingredients or situations you are unsure of.</li><li>Write down questions about fasting, zakat, work or family and share the context with a qualified teacher. You can ask for someone who speaks your language.</li></ul>
+<p class="discover-sources">Sources · <a href="https://quran.com/en/31/15">Qur’an 31:15</a> · <a href="https://quran.com/en/5/3">Qur’an 5:3</a> · <a href="https://quran.com/en/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-en-faq">
+<h4>Common questions</h4>
+<div class="faq-list"><details><summary>Do I need to learn Arabic first?</summary><p>You can understand the Shahada in your own language and say it in a language you understand if you are unable to say it in Arabic. You can practise the Arabic pronunciation gradually.</p></details>
+<details><summary>Do I need to go to a mosque?</summary><p>You can say the Shahada wherever you are. A mosque can help with support or documentation if you need a formal record.</p></details>
+<details><summary>What if I’m just curious?</summary><p>You are welcome to read, ask questions and take your time. The Qur’an states that there is no compulsion in religion (2:256).</p></details>
+<details><summary>What do Muslims believe about Jesus?</summary><p>Muslims honour Jesus, son of Mary, as a messenger of God, and honour Mary. The chapter named after Mary recounts part of his story, and Qur’an 4:171 describes his place in Islamic belief.</p></details>
+<details><summary>Where can I start learning?</summary><p>Begin with the worship of God alone and the five pillars. Then read a translation of Al-Fatihah. Write down your questions and ask someone who can explain them in your language.</p></details></div>
+<p class="discover-sources">Sources · <a href="https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim">IslamReligion.com (English)</a> · <a href="https://quran.com/en/2/256">Qur’an 2:256</a> · <a href="https://quran.com/en/4/171">Qur’an 4:171</a> · <a href="https://quran.com/en/19/30-36">Qur’an 19:30–36</a></p>
+</section>
+</div>
+</div>
+</details>
+<details class="discover-locale" id="discover-es" name="discover-language" lang="es" dir="ltr">
+<summary>Español</summary>
+<div class="discover-intro">
+<h3>Descubre el islam</h3>
+<p>Una guía para quienes quieren conocer el islam o están pensando en hacerse musulmanes. Explora las preguntas que más te interesen y consulta las fuentes a tu ritmo.</p>
+<div class="actions discover-paths">
+<a href="#discover-es-about" class="button green">Quiero conocer el islam</a>
+<a href="#discover-es-shahada" class="button discover-outline">Quiero saber cómo abrazar el islam</a>
+<a href="#discover-es-next" class="button discover-outline">Acabo de abrazar el islam y quiero empezar</a>
+</div>
+</div>
+<div class="discover-layout">
+<nav class="discover-toc" aria-label="En esta guía">
+<strong>En esta guía</strong>
+<a href="#discover-es-about">¿Qué es el islam?</a><a href="#discover-es-pillars">¿Cuáles son los cinco pilares del islam?</a><a href="#discover-es-shahada">¿Cómo se hace musulmana una persona?</a><a href="#discover-es-next">Primeros pasos después de la shahada</a><a href="#discover-es-wudu">¿Cómo hago la ablución?</a><a href="#discover-es-prayer-basics">¿Cómo empiezo a rezar?</a><a href="#discover-es-daily-life">¿Cómo aplicar las enseñanzas del islam en el día a día?</a><a href="#discover-es-faq">Preguntas frecuentes</a>
+</nav>
+<div class="discover-content">
+<section id="discover-es-about">
+<h4>¿Qué es el islam?</h4>
+<p>El islam se basa en adorar únicamente a Dios. Los musulmanes creen en profetas como Abraham, Moisés y Jesús, y consideran a Muhammad el último profeta. El Corán es el libro que, según la fe musulmana, Dios reveló a Muhammad.</p>
+<p>El Corán vincula la fe con los actos. Presenta ayudar a quienes lo necesitan, cumplir las promesas y actuar con paciencia en las dificultades como parte de la rectitud.</p>
+<p class="discover-sources">Fuentes · <a href="https://quran.com/es/112">Qur’an 112</a> · <a href="https://quran.com/es/2/136">Qur’an 2:136</a> · <a href="https://quran.com/es/33/40">Qur’an 33:40</a> · <a href="https://quran.com/es/26/192-195">Qur’an 26:192–195</a> · <a href="https://quran.com/es/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-es-pillars">
+<h4>¿Cuáles son los cinco pilares del islam?</h4>
+<ol><li>Shahada · El testimonio de fe en Dios como único digno de adoración y en Muhammad como Su mensajero.</li><li>Salat · Las cinco oraciones diarias.</li><li>Zakat · Una contribución obligatoria sobre ciertos bienes cuando se cumplen las condiciones.</li><li>Sawm · El ayuno de Ramadán, con exenciones en determinadas circunstancias.</li><li>Hach · La peregrinación a La Meca una vez en la vida para quienes puedan realizarla.</li></ol>
+<p class="discover-sources">Fuentes · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a></p>
+</section>
+<section id="discover-es-shahada" class="discover-shahada">
+<h4>¿Cómo se hace musulmana una persona?</h4>
+<p>Si crees en el islam y eliges abrazarlo libremente, pronuncia la shahada, el testimonio de fe, comprendiendo su significado y con sinceridad.</p>
+<h5>Practica la pronunciación de la shahada</h5>
+<p>Lee una frase a la vez y entiende su significado. La transcripción es aproximada. Si puedes, pide a alguien que sepa árabe que lea cada frase despacio.</p>
+<ol class="shahada-lines"><li><blockquote lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ</blockquote><p class="discover-transliteration" dir="ltr">Ash-hadu an la ilaha illa Al-lah.</p><p>Atestiguo que solo Dios merece ser adorado.</p></li><li><blockquote lang="ar" dir="rtl">وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</blockquote><p class="discover-transliteration" dir="ltr">Wa ash-hadu anna Muhammadan rasulu Al-lah.</p><p>Y atestiguo que Muhammad es el mensajero de Dios.</p></li></ol>
+<p>Una mezquita o un centro islámico de confianza puede ayudarte con la pronunciación y el aprendizaje posterior, preferiblemente en un idioma que entiendas.</p>
+<p class="discover-sources">Fuentes · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a> · <a href="https://quran.com/es/2/256">Qur’an 2:256</a></p>
+</section>
+<section id="discover-es-next">
+<h4>Primeros pasos después de la shahada</h4>
+<ol><li>Empieza por aprender la ablución ritual y cómo realizar las cinco oraciones diarias.</li><li>Lee el significado de Al-Fatiha, el capítulo inicial del Corán, y practica poco a poco su recitación en árabe.</li><li>Consulta tus dudas prácticas con una persona cualificada y aprende paso a paso.</li></ol>
+<h5>¿Debo hacer el gusl después de la shahada?</h5>
+<p>Los juristas discrepan sobre si el gusl, el baño ritual completo, es obligatorio al abrazar el islam. Algunos lo consideran obligatorio y otros lo recomiendan en determinadas circunstancias. Pregunta a una persona cualificada qué corresponde en tu caso, sobre todo si no puedes utilizar agua.</p>
+<p class="discover-bath-source"><a href="https://islamqa.info/ar/answers/81949">IslamQA · ¿Cuándo es obligatorio o recomendado el baño ritual? (árabe)</a></p>
+<div class="actions"><a href="#discover-es-wudu" class="button green">¿Cómo hago la ablución?</a>
+<a href="#discover-es-prayer-basics" class="button discover-outline">¿Cómo empiezo a rezar?</a>
+<a href="https://quran.com/es/1" class="button discover-outline">Leer Al-Fatiha en traducción</a>
+<a href="#worship" class="button discover-outline">Guía de ablución y oración en árabe</a></div>
+</section>
+<section id="discover-es-wudu">
+<h4>¿Cómo hago la ablución?</h4>
+<p>El wudu es el lavado ritual con agua antes de la oración. Los pasos se basan en el versículo sobre la ablución y en el relato que describe cómo la hacía Uzmán.</p>
+<ol><li>Ten la intención de hacer la ablución y después lávate las manos.</li><li>Enjuágate la boca. Aspira suavemente un poco de agua por la nariz y expúlsala.</li><li>Lávate todo el rostro.</li><li>Lávate los brazos hasta los codos inclusive, empezando por el derecho.</li><li>Pásate las manos húmedas por la cabeza.</li><li>Lávate los pies hasta los tobillos inclusive, empezando por el derecho.</li></ol>
+<p>El relato de Uzmán describe lavar algunas partes tres veces y pasar las manos húmedas por la cabeza. Si una enfermedad te impide utilizar agua, o tienes dudas sobre la purificación en seco o qué invalida la ablución, consulta a una persona cualificada.</p>
+<p class="discover-sources">Fuentes · <a href="https://quran.com/es/5/6">Qur’an 5:6</a> · <a href="https://sunnah.com/bukhari:159">Sahih al-Bukhari 159</a></p>
+</section>
+<section id="discover-es-prayer-basics">
+<h4>¿Cómo empiezo a rezar?</h4>
+<p>Las cinco oraciones diarias son Fajr, Dhuhr, Asr, Maghrib e Isha. Consulta sus horarios para tu ciudad.</p>
+<ol><li>Haz la ablución si la necesitas, comprueba que haya empezado la hora de la oración y oriéntate hacia La Meca (la qibla).</li><li>Aprende el takbir inicial y la recitación de Al-Fatiha. Practica la inclinación, ponerte de pie, la postración y sentarte entre las dos postraciones. Haz una pausa en cada posición.</li><li>Pide a una persona cualificada que te muestre una oración completa, incluido el número de unidades, el testimonio sentado y el saludo final. Explícale si tienes dificultad con algún movimiento.</li></ol>
+<p class="discover-sources">Fuentes · <a href="https://sunnah.com/bukhari:757">Sahih al-Bukhari 757</a> · <a href="https://sunnah.com/bukhari:831">Sahih al-Bukhari 831</a> · <a href="https://sunnah.com/muslim:582">Sahih Muslim 582</a></p>
+</section>
+<section id="discover-es-daily-life">
+<h4>¿Cómo aplicar las enseñanzas del islam en el día a día?</h4>
+<p>Empieza por lo que necesitas hoy y consulta fuentes fiables a medida que surjan situaciones nuevas.</p>
+<ul><li>Practica la honestidad, la amabilidad y el respeto por los derechos de los demás. Trata bien a tus padres aunque tengáis creencias distintas.</li><li>Aprende los principios de la alimentación halal y revisa los ingredientes cuando haga falta. Pregunta cuando tengas dudas.</li><li>Anota tus preguntas sobre el ayuno, el zakat, el trabajo o la familia. Consulta a una persona cualificada que pueda hablar en tu idioma y conocer el contexto.</li></ul>
+<p class="discover-sources">Fuentes · <a href="https://quran.com/es/31/15">Qur’an 31:15</a> · <a href="https://quran.com/es/5/3">Qur’an 5:3</a> · <a href="https://quran.com/es/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-es-faq">
+<h4>Preguntas frecuentes</h4>
+<div class="faq-list"><details><summary>¿Tengo que aprender árabe primero?</summary><p>Puedes comprender la shahada en tu idioma y decirla en una lengua que entiendas si no puedes pronunciarla en árabe. Puedes practicar la pronunciación árabe poco a poco.</p></details>
+<details><summary>¿Tengo que ir a una mezquita?</summary><p>Puedes pronunciar la shahada donde estés. En una mezquita puedes encontrar apoyo u obtener una constancia si la necesitas para algún trámite.</p></details>
+<details><summary>¿Y si solo quiero informarme?</summary><p>Puedes leer, preguntar y tomarte el tiempo que necesites. El Corán dice que no hay coacción en la religión (2:256).</p></details>
+<details><summary>¿Qué creen los musulmanes acerca de Jesús?</summary><p>Los musulmanes honran a Jesús, hijo de María, como mensajero de Dios, y honran a María. El capítulo que lleva su nombre relata parte de su historia, y Corán 4:171 explica su lugar en la fe islámica.</p></details>
+<details><summary>¿Por dónde puedo empezar a aprender?</summary><p>Empieza por la adoración de Dios como único digno de culto y los cinco pilares. Después, lee una traducción de Al-Fatiha. Anota tus preguntas y consúltalas con alguien que pueda explicártelas en tu idioma.</p></details></div>
+<p class="discover-sources">Fuentes · <a href="https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim">IslamReligion.com (English)</a> · <a href="https://quran.com/es/2/256">Qur’an 2:256</a> · <a href="https://quran.com/es/4/171">Qur’an 4:171</a> · <a href="https://quran.com/es/19/30-36">Qur’an 19:30–36</a></p>
+</section>
+</div>
+</div>
+</details>
+<details class="discover-locale" id="discover-fr" name="discover-language" lang="fr" dir="ltr">
+<summary>Français</summary>
+<div class="discover-intro">
+<h3>Découvrir l’islam</h3>
+<p>Un guide pour les personnes qui souhaitent comprendre l’islam ou envisagent de devenir musulmanes. Explorez les questions qui vous intéressent, à votre rythme.</p>
+<div class="actions discover-paths">
+<a href="#discover-fr-about" class="button green">Je souhaite découvrir l’islam</a>
+<a href="#discover-fr-shahada" class="button discover-outline">Je souhaite savoir comment devenir musulman</a>
+<a href="#discover-fr-next" class="button discover-outline">Je débute dans l’islam</a>
+</div>
+</div>
+<div class="discover-layout">
+<nav class="discover-toc" aria-label="Dans ce guide">
+<strong>Dans ce guide</strong>
+<a href="#discover-fr-about">Qu’est-ce que l’islam ?</a><a href="#discover-fr-pillars">Quels sont les cinq piliers de l’islam ?</a><a href="#discover-fr-shahada">Comment devenir musulman ou musulmane ?</a><a href="#discover-fr-next">Premiers pas après la chahada</a><a href="#discover-fr-wudu">Comment faire les ablutions ?</a><a href="#discover-fr-prayer-basics">Comment commencer à prier ?</a><a href="#discover-fr-daily-life">Comment vivre les enseignements de l’islam au quotidien ?</a><a href="#discover-fr-faq">Questions fréquentes</a>
+</nav>
+<div class="discover-content">
+<section id="discover-fr-about">
+<h4>Qu’est-ce que l’islam ?</h4>
+<p>L’islam repose sur l’adoration de Dieu seul. Les musulmans croient aux prophètes, dont Abraham, Moïse et Jésus, et considèrent Muhammad comme le dernier prophète. Le Coran est le livre que les musulmans croient révélé par Dieu à Muhammad.</p>
+<p>Le Coran relie la foi aux actes. Il présente l’aide aux personnes dans le besoin, le respect des engagements et la patience dans l’épreuve comme des composantes de la droiture.</p>
+<p class="discover-sources">Sources · <a href="https://quran.com/fr/112">Qur’an 112</a> · <a href="https://quran.com/fr/2/136">Qur’an 2:136</a> · <a href="https://quran.com/fr/33/40">Qur’an 33:40</a> · <a href="https://quran.com/fr/26/192-195">Qur’an 26:192–195</a> · <a href="https://quran.com/fr/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-fr-pillars">
+<h4>Quels sont les cinq piliers de l’islam ?</h4>
+<ol><li>Chahada · L’attestation de foi en Dieu seul et en Muhammad comme Son messager.</li><li>Salat · Les cinq prières quotidiennes.</li><li>Zakat · Un prélèvement obligatoire sur certains biens lorsque les conditions sont remplies.</li><li>Sawm · Le jeûne du ramadan, avec des dispenses selon la situation.</li><li>Hajj · Le pèlerinage à La Mecque, une fois dans la vie pour qui en a les moyens.</li></ol>
+<p class="discover-sources">Sources · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a></p>
+</section>
+<section id="discover-fr-shahada" class="discover-shahada">
+<h4>Comment devenir musulman ou musulmane ?</h4>
+<p>Si vous croyez en l’islam et choisissez librement de l’embrasser, prononcez la chahada, l’attestation de foi, en comprenant son sens et avec sincérité.</p>
+<h5>S’exercer à prononcer la chahada</h5>
+<p>Lisez une ligne à la fois et prenez le temps d’en comprendre le sens. La transcription est approximative. Si possible, demandez à une personne arabophone de prononcer lentement chaque phrase.</p>
+<ol class="shahada-lines"><li><blockquote lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ</blockquote><p class="discover-transliteration" dir="ltr">Ach-hadou an lâ ilâha illa Allâh.</p><p>J’atteste que Dieu seul mérite d’être adoré.</p></li><li><blockquote lang="ar" dir="rtl">وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</blockquote><p class="discover-transliteration" dir="ltr">Wa ach-hadou anna Mouhammadan rassoulou Allâh.</p><p>Et j’atteste que Muhammad est le messager de Dieu.</p></li></ol>
+<p>Une mosquée ou un centre islamique de confiance peut vous aider à prononcer l’attestation et à poursuivre votre apprentissage, si possible dans votre langue.</p>
+<p class="discover-sources">Sources · <a href="https://sunnah.com/bukhari:8">Sahih al-Bukhari 8</a> · <a href="https://quran.com/fr/2/256">Qur’an 2:256</a></p>
+</section>
+<section id="discover-fr-next">
+<h4>Premiers pas après la chahada</h4>
+<ol><li>Apprenez les ablutions rituelles et la pratique des cinq prières quotidiennes.</li><li>Lisez le sens d’Al-Fatiha, la sourate d’ouverture du Coran, puis exercez-vous progressivement à la réciter en arabe.</li><li>Posez vos questions pratiques à une personne qualifiée et avancez étape par étape.</li></ol>
+<h5>Dois-je faire le ghusl après la chahada ?</h5>
+<p>Les juristes divergent sur le statut du ghusl, le bain rituel complet, lorsqu’une personne embrasse l’islam. Certains le considèrent obligatoire et d’autres le recommandent dans certains cas. Demandez à une personne qualifiée ce qui s’applique à votre situation, surtout si vous ne pouvez pas utiliser d’eau.</p>
+<p class="discover-bath-source"><a href="https://islamqa.info/ar/answers/81949">IslamQA · Quand le bain rituel est-il obligatoire ou recommandé ? (arabe)</a></p>
+<div class="actions"><a href="#discover-fr-wudu" class="button green">Comment faire les ablutions ?</a>
+<a href="#discover-fr-prayer-basics" class="button discover-outline">Comment commencer à prier ?</a>
+<a href="https://quran.com/fr/1" class="button discover-outline">Lire une traduction d’Al-Fatiha</a>
+<a href="#worship" class="button discover-outline">Guide des ablutions et de la prière en arabe</a></div>
+</section>
+<section id="discover-fr-wudu">
+<h4>Comment faire les ablutions ?</h4>
+<p>Le wudu désigne les ablutions à l’eau avant la prière. Ces étapes s’appuient sur le verset des ablutions et le récit décrivant les ablutions d’Othman.</p>
+<ol><li>Formez dans votre cœur l’intention de faire les ablutions, puis lavez-vous les mains.</li><li>Rincez-vous la bouche. Aspirez doucement un peu d’eau par le nez, puis rejetez-la.</li><li>Lavez tout votre visage.</li><li>Lavez vos bras du bout des doigts jusqu’aux coudes inclus, en commençant par le droit.</li><li>Passez les mains mouillées sur votre tête.</li><li>Lavez vos pieds jusqu’aux chevilles incluses, en commençant par le droit.</li></ol>
+<p>Le récit d’Othman décrit le lavage de certaines parties trois fois et le passage des mains humides sur la tête. Si une maladie vous empêche d’utiliser l’eau ou si vous avez des questions sur les ablutions sèches ou leur validité, consultez une personne qualifiée.</p>
+<p class="discover-sources">Sources · <a href="https://quran.com/fr/5/6">Qur’an 5:6</a> · <a href="https://sunnah.com/bukhari:159">Sahih al-Bukhari 159</a></p>
+</section>
+<section id="discover-fr-prayer-basics">
+<h4>Comment commencer à prier ?</h4>
+<p>Les cinq prières quotidiennes sont Fajr, Dhohr, Asr, Maghrib et Icha. Consultez les horaires de votre ville.</p>
+<ol><li>Faites les ablutions si nécessaire, vérifiez que l’heure de la prière a commencé et orientez-vous vers La Mecque (la qibla).</li><li>Apprenez le takbir d’ouverture et la récitation d’Al-Fatiha. Entraînez-vous à vous incliner, vous redresser, vous prosterner et vous asseoir entre les deux prosternations, en marquant une pause à chaque position.</li><li>Demandez à une personne qualifiée de vous montrer la prière complète, notamment le nombre d’unités, l’attestation en position assise et la salutation finale. Signalez-lui toute difficulté à effectuer certains mouvements.</li></ol>
+<p class="discover-sources">Sources · <a href="https://sunnah.com/bukhari:757">Sahih al-Bukhari 757</a> · <a href="https://sunnah.com/bukhari:831">Sahih al-Bukhari 831</a> · <a href="https://sunnah.com/muslim:582">Sahih Muslim 582</a></p>
+</section>
+<section id="discover-fr-daily-life">
+<h4>Comment vivre les enseignements de l’islam au quotidien ?</h4>
+<p>Commencez par ce dont vous avez besoin aujourd’hui et consultez des sources fiables au fil des situations.</p>
+<ul><li>Cultivez l’honnêteté et la bienveillance, et respectez vos engagements. Traitez bien vos parents même si vous avez des convictions différentes.</li><li>Apprenez les bases de l’alimentation halal et vérifiez les ingrédients au besoin. Demandez conseil en cas de doute.</li><li>Notez vos questions sur le jeûne, la zakat, le travail ou la famille. Présentez leur contexte à une personne qualifiée qui parle votre langue si possible.</li></ul>
+<p class="discover-sources">Sources · <a href="https://quran.com/fr/31/15">Qur’an 31:15</a> · <a href="https://quran.com/fr/5/3">Qur’an 5:3</a> · <a href="https://quran.com/fr/2/177">Qur’an 2:177</a></p>
+</section>
+<section id="discover-fr-faq">
+<h4>Questions fréquentes</h4>
+<div class="faq-list"><details><summary>Faut-il apprendre l’arabe avant de se convertir ?</summary><p>Vous pouvez comprendre la chahada dans votre langue et la prononcer dans une langue que vous comprenez si vous ne pouvez pas la dire en arabe. Vous pouvez apprendre la prononciation arabe progressivement.</p></details>
+<details><summary>Faut-il se rendre dans une mosquée ?</summary><p>Vous pouvez prononcer la chahada où que vous soyez. Une mosquée peut vous accompagner ou vous aider à obtenir une attestation si vous en avez besoin pour une démarche.</p></details>
+<details><summary>Et si je souhaite simplement me renseigner ?</summary><p>Vous pouvez lire, poser des questions et prendre votre temps. Le Coran affirme qu’il n’y a pas de contrainte en religion (2:256).</p></details>
+<details><summary>Que croient les musulmans au sujet de Jésus ?</summary><p>Les musulmans honorent Jésus, fils de Marie, comme messager de Dieu, et honorent Marie. La sourate qui porte le nom de Marie relate une partie de son histoire, et le verset 4:171 précise sa place dans la foi musulmane.</p></details>
+<details><summary>Par où commencer pour apprendre ?</summary><p>Commencez par l’adoration de Dieu seul et les cinq piliers. Lisez ensuite une traduction d’Al-Fatiha. Notez vos questions et posez-les à une personne qui peut y répondre dans votre langue.</p></details></div>
+<p class="discover-sources">Sources · <a href="https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim">IslamReligion.com (English)</a> · <a href="https://quran.com/fr/2/256">Qur’an 2:256</a> · <a href="https://quran.com/fr/4/171">Qur’an 4:171</a> · <a href="https://quran.com/fr/19/30-36">Qur’an 19:30–36</a></p>
+</section>
+</div>
+</div>
+</details>
+</details>
+<!-- discover-guide:end -->
+</section>
+<section class="wrap ask" id="ask" aria-labelledby="ask-heading">
+<div class="ask-panel">
+<p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
+<h2 id="ask-heading">اسأل زاد</h2>
+<p>اطرح سؤالًا عن الإسلام بلغتك. يولّد نموذج الذكاء الاصطناعي الإجابة على جهازك.</p>
+<p class="ask-ai"><button class="button green" id="ask-enable" type="button">تشغيل نموذج الذكاء الاصطناعي</button>
+<span>يتطلّب التنزيل الأول اتصالًا بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.</span></p>
+<form id="ask-form" class="ask-form">
+<label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: ما الفرق بين الزكاة والصدقة؟"></label>
+<button class="button green" id="ask-submit" type="submit" disabled>ولّد إجابة</button>
+</form>
+<p id="ask-status" role="status">شغّل النموذج أولًا لطرح سؤالك.</p>
+<article class="card ask-result" id="ask-result" aria-labelledby="ask-answer-heading" hidden>
+<h3 id="ask-answer-heading">إجابة مولّدة بالذكاء الاصطناعي</h3>
+<p id="ask-answer" dir="auto"></p>
+<p class="time-source">قد تخطئ الإجابة. تحقّق من النصوص، وارجع إلى مختص للمسائل الشخصية.</p>
+<div class="references"><a href="https://quran.com/">القرآن الكريم</a><a href="https://sunnah.com/">مراجع الحديث</a></div>
+</article>
+<noscript><p>تصفّح <a href="#faq">الأسئلة الشائعة</a> أو فعّل جافاسكربت لتشغيل النموذج.</p></noscript>
+</div>
+</section>
+<div class="collection"><div class="wrap" id="sections"></div></div>
+<section class="wrap source-policy" id="sources" aria-labelledby="sources-heading">
+<h2 id="sources-heading">مصادر المكتبة</h2>
+<p>تستند المواد إلى القرآن والسنة الصحيحة، وإلى تفاسير وفتاوى من أهل السنة والجماعة. تُرفق بكل مادة إحالة إلى دليلها أو مصدرها، وتُنسب ملخّصات الفتاوى إلى الجهة أو العالم المذكور.</p>
+<div class="references"><a href="https://quran.ksu.edu.sa/tafseer/saadi/sura1-aya1.html">تفسير السعدي</a><a href="https://dorar.net/hadith">الموسوعة الحديثية</a><a href="https://binbaz.org.sa/fatwas/kind/1">مجموع فتاوى ابن باز</a><a href="https://islamqa.info/ar">الإسلام سؤال وجواب</a></div>
+</section>
+<noscript><p class="wrap">فعّل جافاسكربت لعرض المكتبة ومواقيت الصلاة.</p></noscript>
+<section class="wrap contact" id="contact"><div><p class="eyebrow"><span></span> تواصل معنا</p><h2>شاركنا ملاحظاتك</h2><p id="contact-note">عند اقتراح تصحيح، اذكر عنوان المادة والنص المراد مراجعته ورابط المصدر إن وجد. سيظهر زر المراسلة عند إضافة بريد المبادرة.</p><a id="contact-link" class="button green" hidden>راسل زاد عبر البريد</a></div><div class="contact-mark" aria-hidden="true">✧</div></section>
+</main>
+<footer><div class="wrap foot"><a class="brand" href="#home"><span class="seal" aria-hidden="true">✧</span><span>زاد<small>منصة التوعية الدينية</small></span></a><p>مبادرة توعوية مستقلة غير رسمية، وليست تابعة لأي جهة حكومية أو عسكرية.</p></div></footer>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{
+  "name": "Français",
+  "direction": "ltr",
+  "title": "Découvrir l’islam",
+  "intro": "Un guide pour les personnes qui souhaitent comprendre l’islam ou envisagent de devenir musulmanes. Explorez les questions qui vous intéressent, à votre rythme.",
+  "language": "Langue du guide",
+  "contents": "Dans ce guide",
+  "sources": "Sources",
+  "about": {
+    "title": "Qu’est-ce que l’islam ?",
+    "body": "L’islam repose sur l’adoration de Dieu seul. Les musulmans croient aux prophètes, dont Abraham, Moïse et Jésus, et considèrent Muhammad comme le dernier prophète. Le Coran est le livre que les musulmans croient révélé par Dieu à Muhammad.",
+    "ethics": "Le Coran relie la foi aux actes. Il présente l’aide aux personnes dans le besoin, le respect des engagements et la patience dans l’épreuve comme des composantes de la droiture."
+  },
+  "pillars": {
+    "title": "Quels sont les cinq piliers de l’islam ?",
+    "items": [
+      "Chahada · L’attestation de foi en Dieu seul et en Muhammad comme Son messager.",
+      "Salat · Les cinq prières quotidiennes.",
+      "Zakat · Un prélèvement obligatoire sur certains biens lorsque les conditions sont remplies.",
+      "Sawm · Le jeûne du ramadan, avec des dispenses selon la situation.",
+      "Hajj · Le pèlerinage à La Mecque, une fois dans la vie pour qui en a les moyens."
+    ]
+  },
+  "shahada": {
+    "title": "Comment devenir musulman ou musulmane ?",
+    "body": "Si vous croyez en l’islam et choisissez librement de l’embrasser, prononcez la chahada, l’attestation de foi, en comprenant son sens et avec sincérité.",
+    "next": "Une mosquée ou un centre islamique de confiance peut vous aider à prononcer l’attestation et à poursuivre votre apprentissage, si possible dans votre langue.",
+    "practice": {
+      "title": "S’exercer à prononcer la chahada",
+      "intro": "Lisez une ligne à la fois et prenez le temps d’en comprendre le sens. La transcription est approximative. Si possible, demandez à une personne arabophone de prononcer lentement chaque phrase.",
+      "lines": [
+        {
+          "meaning": "J’atteste que Dieu seul mérite d’être adoré.",
+          "phonetic": "Ach-hadou an lâ ilâha illa Allâh."
+        },
+        {
+          "meaning": "Et j’atteste que Muhammad est le messager de Dieu.",
+          "phonetic": "Wa ach-hadou anna Mouhammadan rassoulou Allâh."
+        }
+      ]
+    }
+  },
+  "next": {
+    "title": "Premiers pas après la chahada",
+    "items": [
+      "Apprenez les ablutions rituelles et la pratique des cinq prières quotidiennes.",
+      "Lisez le sens d’Al-Fatiha, la sourate d’ouverture du Coran, puis exercez-vous progressivement à la réciter en arabe.",
+      "Posez vos questions pratiques à une personne qualifiée et avancez étape par étape."
+    ],
+    "quran": "Lire une traduction d’Al-Fatiha",
+    "guide": "Guide des ablutions et de la prière en arabe",
+    "bath": {
+      "title": "Dois-je faire le ghusl après la chahada ?",
+      "body": "Les juristes divergent sur le statut du ghusl, le bain rituel complet, lorsqu’une personne embrasse l’islam. Certains le considèrent obligatoire et d’autres le recommandent dans certains cas. Demandez à une personne qualifiée ce qui s’applique à votre situation, surtout si vous ne pouvez pas utiliser d’eau."
+    },
+    "bath_source": "IslamQA · Quand le bain rituel est-il obligatoire ou recommandé ? (arabe)"
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "items": [
+      [
+        "Faut-il apprendre l’arabe avant de se convertir ?",
+        "Vous pouvez comprendre la chahada dans votre langue et la prononcer dans une langue que vous comprenez si vous ne pouvez pas la dire en arabe. Vous pouvez apprendre la prononciation arabe progressivement."
+      ],
+      [
+        "Faut-il se rendre dans une mosquée ?",
+        "Vous pouvez prononcer la chahada où que vous soyez. Une mosquée peut vous accompagner ou vous aider à obtenir une attestation si vous en avez besoin pour une démarche."
+      ],
+      [
+        "Et si je souhaite simplement me renseigner ?",
+        "Vous pouvez lire, poser des questions et prendre votre temps. Le Coran affirme qu’il n’y a pas de contrainte en religion (2:256)."
+      ],
+      [
+        "Que croient les musulmans au sujet de Jésus ?",
+        "Les musulmans honorent Jésus, fils de Marie, comme messager de Dieu, et honorent Marie. La sourate qui porte le nom de Marie relate une partie de son histoire, et le verset 4:171 précise sa place dans la foi musulmane."
+      ],
+      [
+        "Par où commencer pour apprendre ?",
+        "Commencez par l’adoration de Dieu seul et les cinq piliers. Lisez ensuite une traduction d’Al-Fatiha. Notez vos questions et posez-les à une personne qui peut y répondre dans votre langue."
+      ]
+    ]
+  },
+  "paths": {
+    "explore": "Je souhaite découvrir l’islam",
+    "join": "Je souhaite savoir comment devenir musulman",
+    "begin": "Je débute dans l’islam"
+  },
+  "wudu": {
+    "title": "Comment faire les ablutions ?",
+    "intro": "Le wudu désigne les ablutions à l’eau avant la prière. Ces étapes s’appuient sur le verset des ablutions et le récit décrivant les ablutions d’Othman.",
+    "items": [
+      "Formez dans votre cœur l’intention de faire les ablutions, puis lavez-vous les mains.",
+      "Rincez-vous la bouche. Aspirez doucement un peu d’eau par le nez, puis rejetez-la.",
+      "Lavez tout votre visage.",
+      "Lavez vos bras du bout des doigts jusqu’aux coudes inclus, en commençant par le droit.",
+      "Passez les mains mouillées sur votre tête.",
+      "Lavez vos pieds jusqu’aux chevilles incluses, en commençant par le droit."
+    ],
+    "note": "Le récit d’Othman décrit le lavage de certaines parties trois fois et le passage des mains humides sur la tête. Si une maladie vous empêche d’utiliser l’eau ou si vous avez des questions sur les ablutions sèches ou leur validité, consultez une personne qualifiée."
+  },
+  "prayer": {
+    "title": "Comment commencer à prier ?",
+    "intro": "Les cinq prières quotidiennes sont Fajr, Dhohr, Asr, Maghrib et Icha. Consultez les horaires de votre ville.",
+    "items": [
+      "Faites les ablutions si nécessaire, vérifiez que l’heure de la prière a commencé et orientez-vous vers La Mecque (la qibla).",
+      "Apprenez le takbir d’ouverture et la récitation d’Al-Fatiha. Entraînez-vous à vous incliner, vous redresser, vous prosterner et vous asseoir entre les deux prosternations, en marquant une pause à chaque position.",
+      "Demandez à une personne qualifiée de vous montrer la prière complète, notamment le nombre d’unités, l’attestation en position assise et la salutation finale. Signalez-lui toute difficulté à effectuer certains mouvements."
+    ]
+  },
+  "living": {
+    "title": "Comment vivre les enseignements de l’islam au quotidien ?",
+    "intro": "Commencez par ce dont vous avez besoin aujourd’hui et consultez des sources fiables au fil des situations.",
+    "items": [
+      "Cultivez l’honnêteté et la bienveillance, et respectez vos engagements. Traitez bien vos parents même si vous avez des convictions différentes.",
+      "Apprenez les bases de l’alimentation halal et vérifiez les ingrédients au besoin. Demandez conseil en cas de doute.",
+      "Notez vos questions sur le jeûne, la zakat, le travail ou la famille. Présentez leur contexte à une personne qualifiée qui parle votre langue si possible."
+    ]
+  }
+}
