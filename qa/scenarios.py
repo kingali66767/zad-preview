@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import re
 import threading
-from urllib.parse import parse_qs, urljoin, urlsplit
+from urllib.parse import parse_qs, unquote_plus, urljoin, urlsplit
 
 from audit import (Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
                    verify_home_menu, verify_homepage, without_overflow)
@@ -20,6 +20,11 @@ TIMINGS = {"Fajr": "05:10", "Dhuhr": "12:10", "Asr": "15:10", "Maghrib": "18:10"
 COMPATIBLE = "Object.defineProperty(navigator, 'gpu', {value: {requestAdapter: async () => ({features: new Set(['shader-f16'])})}})"
 DIRECT_ANSWER = re.compile("^(?:تصحيح|جواب|أجوبة) موثّق")
 MODEL_QUESTION = "أريد مرجعًا يساعدني على قراءة القرآن باتقان."
+BLOCKED_QUESTION_STORAGE = """
+Object.defineProperty(window, 'sessionStorage', {
+  get() { throw new DOMException('Denied by browser settings', 'SecurityError'); }
+});
+"""
 WORKER = """
 self.onmessage = ({data}) => {
   const send = (message) => self.postMessage({...message, requestId:data.requestId});
@@ -120,6 +125,83 @@ def homepage_transitions(page):
     page.go_back(wait_until="domcontentloaded")
     expect(page).to_have_url(home)
     verify_home_menu(page, sections=SECTIONS)
+
+
+def homepage_ask(page):
+    home = page.url
+    question = "كيف أتوضأ؟"
+    field = page.locator("#home-ask-input")
+    submit = page.locator("#home-ask-submit")
+    expect(field).to_be_editable()
+
+    field.fill("   ")
+    submit.click()
+    expect(page).to_have_url(home)
+    expect(page.locator("#home-ask-status")).to_contain_text(re.compile("سؤال"))
+
+    requests = []
+    page.on("request", lambda request: requests.append((request.url, request.post_data or "")))
+    field.fill(question)
+    submit.click()
+    expect(page).to_have_url(urljoin(home, "ask/"))
+    expect(page.locator("#ask-input")).to_have_value(question)
+    expect(page.locator("#ask-question")).to_contain_text(question)
+    expect(page.locator("#ask-answer-heading")).to_have_text("جواب موثّق")
+    expect(page.locator("#ask-answer")).to_contain_text("المرفقين")
+    expect(page.locator('#ask-sources a[href="https://quran.com/5/6"]')).to_be_visible()
+    question_text = question.rstrip("؟")
+    assert requests and all(question_text not in unquote_plus(url) and question_text not in unquote_plus(body)
+                            for url, body in requests), "The reviewed question traveled in a network request"
+    assert page.evaluate("(text) => !Object.values(sessionStorage).some(value => value.includes(text))", question)
+    without_overflow(page)
+    page.reload(wait_until="domcontentloaded")
+    expect(page.locator("#ask-submit")).to_be_enabled()
+    expect(page.locator("#ask-result")).to_be_hidden()
+
+
+def homepage_ask_without_storage(page):
+    home = page.url
+    question = "كيف أتوضأ؟"
+    field = page.locator("#home-ask-input")
+    field.fill(question)
+    page.locator("#home-ask-submit").click()
+    expect(page).to_have_url(home)
+    expect(page.locator("#home-ask-status")).to_contain_text(re.compile("تعذّر|نقل|تعطّل"))
+    expect(field).to_have_value(question)
+    expect(page.locator("#home-ask-submit")).to_be_enabled()
+
+
+def homepage_ask_without_js(page):
+    home = page.url
+    submit = page.locator("#home-ask-submit")
+    assert not submit.is_visible() or submit.is_disabled()
+    fallback = page.locator('main noscript a[href="ask/"]')
+    expect(fallback).to_be_visible()
+    fallback.click()
+    expect(page).to_have_url(urljoin(home, "ask/"))
+    expect(page.locator("body")).to_have_attribute("data-page", "ask")
+
+
+def ask_shortcut(page):
+    home = page.url
+    destination = urljoin(home, "ask/")
+    shortcut = page.locator("a.ask-shortcut")
+    for address in (home, urljoin(home, "quran/")):
+        page.goto(address, wait_until="domcontentloaded")
+        expect(shortcut).to_be_visible()
+        expect(shortcut).to_have_accessible_name(re.compile("اسأل زاد"))
+        assert shortcut.evaluate("(link) => link.href") == destination
+        expect(shortcut.locator(".zad-icon")).to_be_visible()
+        bounds = shortcut.bounding_box()
+        bottom = page.evaluate("window.innerHeight") - bounds["y"] - bounds["height"]
+        assert 0 <= bounds["x"] <= 64 and 0 <= bottom <= 64, (bounds, bottom)
+        assert bounds["width"] >= 44 and bounds["height"] >= 44, bounds
+        assert shortcut.evaluate("(link) => getComputedStyle(link).position") == "fixed"
+        without_overflow(page)
+    shortcut.click()
+    expect(page).to_have_url(destination)
+    expect(page.locator("#ask-submit")).to_be_enabled()
+    expect(shortcut).to_have_count(0)
 
 
 def legacy_home_links(page):
@@ -251,6 +333,12 @@ def public_cases(suite, browser, device):
 
     suite.run("عام | الصورة والجولة التعريفية والتنقل إلى الأقسام الستة عشر من القائمة",
               lambda: visit("", homepage_transitions, device=device))
+    suite.run("عام | تمرير سؤال الرئيسية إلى جواب موثّق دون وضعه في الرابط أو إعادة إرساله",
+              lambda: visit("", homepage_ask, device=device))
+    suite.run("عام | رابط اسأل زاد عند تعطيل JavaScript",
+              lambda: visit("", homepage_ask_without_js, java_script_enabled=False))
+    suite.run("عام | أيقونة اسأل زاد الثابتة أسفل الصفحة والانتقال إلى النموذج",
+              lambda: visit("", ask_shortcut, device=device))
     suite.run("عام | دعم روابط الواجهة القديمة للجولة والأسئلة والدليل",
               lambda: visit("", legacy_home_links))
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
@@ -646,6 +734,14 @@ def local_cases(suite, browser, origin):
 
     run("الصورة والجولة التعريفية والتنقل إلى جميع الأقسام من القائمة",
         homepage_transitions, section="")
+    run("تمرير سؤال الرئيسية خصوصيًا وإظهار الجواب الموثّق دون تكراره بعد إعادة التحميل",
+        homepage_ask, section="")
+    run("رابط اسأل زاد البديل عند تعطيل JavaScript",
+        homepage_ask_without_js, section="", java_script_enabled=False)
+    run("تعذر التخزين يبقي سؤال الرئيسية ظاهرًا مع رسالة توضيح",
+        homepage_ask_without_storage, section="", init=BLOCKED_QUESTION_STORAGE)
+    run("أيقونة اسأل زاد ثابتة أسفل الرئيسية والقرآن وتفتح القسم",
+        ask_shortcut, section="")
     run("دعم روابط الواجهة القديمة للجولة والأسئلة والدليل", legacy_home_links, section="")
 
     def unavailable_storage(page):

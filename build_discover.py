@@ -5,6 +5,7 @@ import json
 import re
 from html import escape
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent
 ARABIC_SHAHADA = (
@@ -12,7 +13,9 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261119-12"
+REVISION = "20261120-1"
+# Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
+ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
     "quran": "القرآن الكريم",
     "lessons": "الخطب والدروس",
@@ -195,7 +198,7 @@ def render_home():
     templates = ROOT / "page-templates"
     return "\n".join(
         (templates / f"home-{part}.html").read_text(encoding="utf-8").strip()
-        for part in ("hero", "tour")
+        for part in ("ask", "hero", "tour")
     )
 
 
@@ -241,8 +244,17 @@ def render_page(slug, body):
         script_tags.append(f'<script{attributes} src="{assets}{name}?v={REVISION}" defer></script>')
     scripts_markup = "\n".join(script_tags)
     capabilities = {"prayer": "connect-src https://api.aladhan.com; ", "ask": "worker-src 'self'; "}.get(slug, "")
+    if slug == "ask" and ASK_AGENT_ENDPOINT:
+        endpoint = urlsplit(ASK_AGENT_ENDPOINT)
+        if (endpoint.scheme != "https" or endpoint.path != "/ask" or endpoint.query or endpoint.fragment
+                or not re.fullmatch(r"[A-Za-z0-9.-]+", endpoint.netloc) or not endpoint.hostname):
+            raise ValueError("ASK_AGENT_ENDPOINT must be an HTTPS URL ending in /ask.")
+        capabilities += f"connect-src https://{endpoint.netloc}; "
+    if slug == "ask":
+        body = body.replace("{{ASK_AGENT_ENDPOINT}}", escape(ASK_AGENT_ENDPOINT, quote=True))
     header = render_header(slug, base)
     footer = "" if is_home else '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'
+    shortcut = "" if slug == "ask" else f'<a class="ask-shortcut" href="{base}ask/" aria-label="اسأل زاد">{icon("ask")}</a>'
     main_class = "launcher-shell" if is_home else "section-main"
     return f'''<!doctype html>
 <html lang="ar" dir="rtl">
@@ -268,6 +280,7 @@ def render_page(slug, body):
 {body}
 </main>
 {footer}
+{shortcut}
 </body>
 </html>
 '''

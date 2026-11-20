@@ -8,12 +8,12 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>زاد | منصة التوعية الدينية</title>
-<link rel="stylesheet" href="assets/style.css?v=20261119-12">
-<link rel="stylesheet" href="assets/discover.css?v=20261119-12">
-<link rel="stylesheet" href="assets/section-icons.css?v=20261119-12">
-<link rel="stylesheet" href="assets/glass.css?v=20261119-12">
-<link rel="stylesheet" href="assets/sections.css?v=20261119-12">
-<script src="assets/site.js?v=20261119-12" defer></script>
+<link rel="stylesheet" href="assets/style.css?v=20261120-1">
+<link rel="stylesheet" href="assets/discover.css?v=20261120-1">
+<link rel="stylesheet" href="assets/section-icons.css?v=20261120-1">
+<link rel="stylesheet" href="assets/glass.css?v=20261120-1">
+<link rel="stylesheet" href="assets/sections.css?v=20261120-1">
+<script src="assets/site.js?v=20261120-1" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">تجاوز إلى المحتوى</a>
@@ -42,6 +42,20 @@
 </div>
 </header>
 <main id="main" class="launcher-shell">
+<section class="home-ask" aria-labelledby="home-ask-heading">
+<div class="wrap home-ask-panel">
+<h2 id="home-ask-heading"><span class="home-ask-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>اسأل زاد</h2>
+<div class="home-ask-controls">
+<form id="home-ask-form" action="ask/" role="search" aria-labelledby="home-ask-heading">
+<label class="visually-hidden" for="home-ask-input">سؤالك في اسأل زاد</label>
+<input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" placeholder="سؤالك دون بيانات شخصية">
+<button class="button gold" id="home-ask-submit" type="submit" disabled>ابحث</button>
+</form>
+<p id="home-ask-status" role="status"></p>
+<noscript><p class="home-ask-noscript"><a href="ask/">افتح صفحة اسأل زاد</a></p></noscript>
+</div>
+</div>
+</section>
 <section id="home" class="hero" aria-labelledby="home-heading">
 <div class="wrap hero-grid">
 <div class="hero-copy">
@@ -84,5 +98,6 @@
 </section>
 </main>
 
+<a class="ask-shortcut" href="ask/" aria-label="اسأل زاد"><span class="zad-icon" data-icon="ask" aria-hidden="true"></span></a>
 </body>
 </html>

@@ -84,10 +84,18 @@ def verify_homepage(page):
     action = hero.get_by_role("link", name="ابدأ الجولة", exact=True)
     expect(action).to_be_visible()
     expect(action).to_have_attribute("href", "#site-tour")
-    expect(page.locator("main a[href]")).to_have_count(1)
+    form = page.locator("main #home-ask-form")
+    field = form.locator("#home-ask-input")
+    expect(form).to_be_visible()
+    expect(field).to_be_editable()
+    expect(field).to_have_accessible_name(re.compile("سؤال"))
+    assert field.get_attribute("name") is None, "Submitting without JavaScript must not put the question in a URL"
+    expect(form.locator("#home-ask-submit")).to_be_enabled()
+    expect(page.locator("main a[href]:not(.ask-shortcut):visible")).to_have_count(1)
     tour = page.locator("#site-tour")
     expect(tour.get_by_role("heading", level=2)).to_be_visible()
     assert hero.bounding_box()["y"] < tour.bounding_box()["y"], "The hero must appear above the tour"
+    assert form.bounding_box()["y"] < tour.bounding_box()["y"], "The question form must appear above the tour"
     items = tour.locator(".site-tour-stops > section")
     expect(items).to_have_count(3)
     for item in items.all():
@@ -101,7 +109,7 @@ def verify_homepage(page):
     expect(page.locator("#sections, #section-launcher, .launcher-link, " +
                         ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
     links_outside_menu = page.locator("a[href]").evaluate_all(
-        "links => links.filter(link => !link.closest('header #nav')).map(link => link.href)"
+        "links => links.filter(link => !link.closest('header #nav, .ask-shortcut')).map(link => link.href)"
     )
     destinations = {urljoin(page.url, section + "/") for section in SECTIONS}
     assert not destinations.intersection(links_outside_menu), links_outside_menu

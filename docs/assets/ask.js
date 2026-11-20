@@ -12,6 +12,8 @@ const askAnswer = document.querySelector("#ask-answer");
 const askSources = document.querySelector("#ask-sources");
 const askRelated = document.querySelector("#ask-related");
 const askRelatedQuestions = document.querySelector("#ask-related-questions");
+const askAgentEndpoint = askForm.dataset.agentEndpoint;
+const askAgentNotice = document.querySelector("#ask-agent-notice");
 const modelButton = document.querySelector("#ask-enable");
 const modelStatus = document.querySelector("#ask-model-status");
 const fatwaScholar = document.querySelector("#fatwa-scholar");
@@ -270,11 +272,14 @@ let pendingLookup;
 let nextLookupId = 0;
 let startupTimer;
 let lookupTimer;
+let agentRequest;
+
+if (askAgentEndpoint) askAgentNotice.hidden = false;
 
 function finishLookup() {
   clearTimeout(lookupTimer);
   pendingLookup = undefined;
-  askButton.disabled = false;
+  askButton.disabled = Boolean(agentRequest);
 }
 
 function resetModel(message) {
@@ -394,13 +399,60 @@ function reviewedParts(questions, topic) {
   return parts;
 }
 
+function cancelAgent() {
+  agentRequest?.abort();
+  agentRequest = undefined;
+}
+
+function mayUseAgent(question, key, topic) {
+  if (!askAgentEndpoint || reviewedAnswer(key)?.needsDetails ||
+      followUpIndex.has(topic + ":" + key.replace(questionIntro, ""))) return false;
+  const intent = resolveQuestionIntent(question, topic);
+  return intent?.kind !== "refer" && !askEvidence[intent?.id]?.clarification;
+}
+
+async function requestAgentAnswer(question, controller) {
+  const timer = setTimeout(() => controller.abort(), 22000);
+  try {
+    const response = await fetch(askAgentEndpoint, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      credentials: "omit",
+      cache: "no-store",
+      redirect: "error",
+      signal: controller.signal,
+      body: JSON.stringify({question})
+    });
+    if (!response.ok) return;
+    const data = await response.json();
+    if (data?.kind !== "answer" || typeof data.answer !== "string" ||
+        !data.answer.trim() || data.answer.length > 2500 ||
+        !Array.isArray(data.sources) || !data.sources.length || data.sources.length > 12) return;
+    const sources = [];
+    for (const source of data.sources) {
+      if (typeof source?.label !== "string" || !source.label.trim() || source.label.length > 250 ||
+          typeof source.url !== "string" || source.url.length > 1800) return;
+      const url = new URL(source.url);
+      if (url.protocol !== "https:" || url.username || url.password || url.port) return;
+      sources.push([source.label.trim(), url.href]);
+    }
+    return {answer: data.answer.trim(), sources};
+  } catch {
+    // Fall back to the independently reviewed content if the agent is unavailable.
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 askInput.addEventListener("input", () => {
-  if (!pendingLookup) return;
+  if (!pendingLookup && !agentRequest) return;
+  cancelAgent();
   finishLookup();
   askStatus.textContent = "";
 });
 
 askReset.addEventListener("click", () => {
+  cancelAgent();
   finishLookup();
   previousTopic = undefined;
   submittedQuestion = "";
@@ -411,21 +463,7 @@ askReset.addEventListener("click", () => {
   askInput.focus();
 });
 
-askForm.addEventListener("submit", event => {
-  event.preventDefault();
-  if (pendingLookup) return;
-  const question = askInput.value.trim();
-  const key = normalizeQuestion(question);
-  if (!key) {
-    askResult.hidden = true;
-    askStatus.textContent = "اكتب سؤالًا للبحث عن إجابة.";
-    askInput.focus();
-    return;
-  }
-  submittedQuestion = question;
-  askReset.hidden = false;
-  const topic = previousTopic;
-  previousTopic = undefined;
+function answerFromLibrary(question, key, topic) {
   const authors = requestedScholars(key);
   let intent;
   if (authors.length) {
@@ -498,6 +536,58 @@ askForm.addEventListener("submit", event => {
   } catch {
     resetModel("تعذّر اقتراح المراجع. يمكنك إعادة تشغيل النموذج.");
   }
+}
+
+askForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (pendingLookup || agentRequest) return;
+  const question = askInput.value.trim();
+  const key = normalizeQuestion(question);
+  if (!key) {
+    askResult.hidden = true;
+    askStatus.textContent = "اكتب سؤالًا للبحث عن إجابة.";
+    askInput.focus();
+    return;
+  }
+  submittedQuestion = question;
+  askReset.hidden = false;
+  const topic = previousTopic;
+  previousTopic = undefined;
+
+  if (mayUseAgent(question, key, topic)) {
+    const controller = new AbortController();
+    agentRequest = controller;
+    askButton.disabled = true;
+    askResult.hidden = true;
+    askStatus.textContent = "يبحث وكيل زاد في مواقع الفتوى المعتمدة…";
+    const result = await requestAgentAnswer(question, controller);
+    if (agentRequest !== controller) return;
+    agentRequest = undefined;
+    askButton.disabled = false;
+    if (result) {
+      const known = reviewedAnswer(key);
+      previousTopic = known?.id;
+      showResult("خلاصة من وكيل OpenAI. يمكنك فتح الفتوى من المراجع أدناه.",
+        "إجابة من المصادر", result.sources, result.answer, questionLanguage(key));
+      return;
+    }
+  }
+  answerFromLibrary(question, key, topic);
 });
 
 askButton.disabled = false;
+
+try {
+  const rawDraft = sessionStorage.getItem(askDraftKey);
+  sessionStorage.removeItem(askDraftKey);
+  if (rawDraft) {
+    const draft = JSON.parse(rawDraft);
+    if (typeof draft?.question === "string" && draft.question.trim() &&
+        draft.question.length <= askInput.maxLength && Number.isFinite(draft.expiresAt) && draft.expiresAt > Date.now()) {
+      askInput.value = draft.question;
+      askForm.requestSubmit();
+    }
+  }
+} catch {
+  // The form works directly on this page if browser storage cannot be used.
+}

@@ -189,3 +189,35 @@ function handleFragment() {
 
 window.addEventListener("hashchange", handleFragment);
 handleFragment();
+
+const askDraftKey = "zad-ask-draft-v1";
+const homeAskForm = document.querySelector("#home-ask-form");
+if (homeAskForm) {
+  const input = document.querySelector("#home-ask-input");
+  const status = document.querySelector("#home-ask-status");
+  const submit = document.querySelector("#home-ask-submit");
+  const destination = new URL(homeAskForm.action);
+  if (destination.origin === location.origin && /^https?:$/.test(location.protocol)) {
+    submit.disabled = false;
+  } else {
+    status.textContent = "افتح «اسأل زاد» من القائمة أو من الأيقونة أسفل الصفحة.";
+  }
+  homeAskForm.addEventListener("submit", event => {
+    event.preventDefault();
+    if (submit.disabled) return;
+    const question = input.value.trim();
+    if (!question || question.length > input.maxLength) {
+      status.textContent = "اكتب سؤالك أولًا في حدود ٥٠٠ حرف.";
+      input.focus();
+      return;
+    }
+    try {
+      sessionStorage.setItem(askDraftKey, JSON.stringify({question, expiresAt: Date.now() + 120000}));
+    } catch {
+      status.textContent = "تعذّر نقل السؤال عبر هذا المتصفح. افتح «اسأل زاد» من الأيقونة أسفل الصفحة.";
+      return;
+    }
+    input.value = "";
+    location.assign(destination);
+  });
+}

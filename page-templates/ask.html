@@ -3,7 +3,8 @@
 <p class="eyebrow"><span></span> الأسئلة والأجوبة</p>
 <h1 id="ask-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>اسأل زاد</h1>
 <p>اكتب سؤالك بعبارتك. إذا كانت الإجابة تعتمد على تفصيل، سيحدّد لك زاد ما يحتاج إلى توضيح.</p>
-<form id="ask-form" class="ask-form">
+<p id="ask-agent-notice" class="time-source" hidden>قد تُرسل الأسئلة العامة إلى OpenAI للبحث عن المصادر. تجنّب إدخال أسماء أو بيانات شخصية.</p>
+<form id="ask-form" class="ask-form" data-agent-endpoint="{{ASK_AGENT_ENDPOINT}}">
 <label for="ask-input">سؤالك<input id="ask-input" type="text" dir="auto" maxlength="500" required placeholder="مثال: سجود السهو أو زكاة الفطر"></label>
 <button class="button green" id="ask-submit" type="submit" disabled>أرسل السؤال</button>
 <button class="button ask-reset" id="ask-reset" type="button" hidden>سؤال جديد</button>
