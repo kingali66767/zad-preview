@@ -13,7 +13,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261120-6"
+REVISION = "20261120-7"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -255,7 +255,10 @@ def render_page(slug, body):
         capabilities += f"connect-src {ask_connections}; "
         body = body.replace("{{ASK_AGENT_ENDPOINT}}", escape(ASK_AGENT_ENDPOINT, quote=True))
     header = render_header(slug, base)
-    footer = "" if is_home else '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'
+    if is_home:
+        footer = (ROOT / "page-templates" / "home-footer.html").read_text(encoding="utf-8").strip()
+    else:
+        footer = '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'
     shortcut = "" if slug == "ask" else f'<a class="ask-shortcut" href="{base}ask/" aria-label="اسأل زاد">{icon("ask")}</a>'
     main_class = "launcher-shell" if is_home else "section-main"
     return f'''<!doctype html>
