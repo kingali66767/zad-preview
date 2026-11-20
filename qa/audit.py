@@ -22,6 +22,8 @@ SECTIONS = ("quran", "lessons", "hadith", "faq", "ask", "media", "occasions", "b
             "worship", "adhkar", "reading", "prayer", "discover", "sources", "contact")
 SAUDI_CITIES = ("riyadh", "mecca", "medina", "jeddah", "dammam", "khobar", "taif", "buraydah", "hail",
                 "tabuk", "abha", "jazan", "najran", "albaha", "sakaka", "arar", "hofuf")
+ADHKAR_CATEGORIES = ("morning", "evening", "after-prayer", "sleep", "waking", "home", "food",
+                    "daily-life", "mosque", "travel", "distress", "general")
 
 
 def section_address(origin, section=""):
@@ -61,6 +63,59 @@ def prayer_payload(url, timings):
 def without_overflow(page):
     widths = page.evaluate("({ viewport: document.documentElement.clientWidth, content: document.documentElement.scrollWidth })")
     assert widths["content"] <= widths["viewport"], (page.url, widths)
+
+
+def verify_adhkar_navigation(page, *, categories=ADHKAR_CATEGORIES):
+    index = page.url
+    site = urljoin(index, "../")
+    section = page.locator("main #adhkar")
+    expect(section).to_be_visible()
+    destinations = section.locator("a.adhkar-category-link")
+    expect(destinations).to_have_count(len(ADHKAR_CATEGORIES))
+    assert set(destinations.evaluate_all("links => links.map(link => link.href)")) == {
+        urljoin(index, f"{slug}/") for slug in ADHKAR_CATEGORIES
+    }
+    expect(section.locator("select")).to_have_count(0)
+    without_overflow(page)
+
+    counts = {}
+    excerpts = {}
+    sources = set()
+    for slug in categories:
+        section.locator(f'a.adhkar-category-link[href$="{slug}/"]').click()
+        expect(page).to_have_url(urljoin(index, f"{slug}/"))
+        page.wait_for_load_state("load")
+        expect(page.locator("main h1")).to_be_visible()
+        assert set(page.locator("header #nav a").evaluate_all("links => links.map(link => link.href)")) == {
+            urljoin(site, f"{route}/") for route in SECTIONS
+        }, slug
+        assert page.locator('link[rel="stylesheet"][href*="/assets/style.css"]').evaluate("link => !!link.sheet"), slug
+        category = page.locator("main section#adhkar-category")
+        expect(category).to_be_visible()
+        expect(category.locator("select")).to_have_count(0)
+        cards = category.locator("article.card")
+        expect(cards.first).to_be_visible()
+        content = cards.evaluate_all(r"""cards => cards.map(card => ({
+            sources: [...card.querySelectorAll('a[href^="https://"]')].map(link => link.href),
+            quotes: [...card.querySelectorAll('blockquote')].map(quote =>
+                quote.innerText.normalize('NFKD').replace(/\p{M}/gu, '').trim().replace(/\s+/g, ' ')
+            )
+        }))""")
+        assert all(item["sources"] for item in content), (slug, content)
+        counts[slug] = len(content)
+        excerpts[slug] = {quote for item in content for quote in item["quotes"] if quote}
+        sources.update(url for item in content for url in item["sources"])
+        without_overflow(page)
+        return_link = category.locator('a[href="../"]').first
+        expect(return_link).to_be_visible()
+        return_link.click()
+        expect(page).to_have_url(index)
+        expect(section).to_be_visible()
+    if "morning" in counts and "evening" in counts:
+        assert counts["morning"] >= 6 and counts["evening"] >= 6, counts
+        assert excerpts["morning"] - excerpts["evening"], "Missing morning-only dhikr"
+        assert excerpts["evening"] - excerpts["morning"], "Missing evening-only dhikr"
+    return {"cards_by_category": counts, "sources": sorted(sources)}
 
 
 def verify_homepage(page):
@@ -219,12 +274,8 @@ def browser_checks(origin, output, live):
             page.locator("#faq summary").first.click()
             expect(page.locator("#faq details").first).not_to_have_attribute("open", "")
             page.goto(section_address(origin, "adhkar"))
-            adhkar = page.locator("#adhkar")
-            expect(adhkar.locator(".card")).to_have_count(22)
-            adhkar.locator("select").select_option(label="بعد الصلاة")
-            expect(adhkar.locator(".card:visible")).to_have_count(3)
-            adhkar.locator("select").select_option("")
-            expect(adhkar.locator(".card:visible")).to_have_count(22)
+            categories = ADHKAR_CATEGORIES if width == 1440 else ("after-prayer",)
+            external_links.update(verify_adhkar_navigation(page, categories=categories)["sources"])
             page.goto(section_address(origin, "faq"))
             faq = page.locator("#faq")
             faq.locator("select").select_option(label="الصيام")
@@ -242,7 +293,7 @@ def browser_checks(origin, output, live):
             if width in (390, 1440):
                 page.goto(origin, wait_until="load")
                 page.screenshot(path=output / f"zad-{width}.png")
-            results.append(f"Homepage {width}px: top-left section menu, navigation, RTL, anchors, topic filters, and reading persistence")
+            results.append(f"Homepage {width}px: top-left section menu, navigation, RTL, Adhkar and FAQ, and reading persistence")
             context.close()
 
         context = browser.new_context(viewport={"width": 390, "height": 844}, reduced_motion="reduce")

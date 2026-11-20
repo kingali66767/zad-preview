@@ -11,7 +11,7 @@ import threading
 from urllib.parse import parse_qs, unquote_plus, urljoin, urlsplit
 
 from audit import (Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
-                   verify_home_menu, verify_homepage, without_overflow)
+                   verify_adhkar_navigation, verify_home_menu, verify_homepage, without_overflow)
 from playwright.sync_api import expect, sync_playwright
 
 PUBLIC = "https://kingali66767.github.io/zad-preview/"
@@ -104,7 +104,7 @@ def new_visit(browser, address, check, *, local=False, device=None, init=None, s
 def verify_sections(page):
     verify_homepage(page)
     home = page.url
-    for ident, expected in {"worship": 8, "adhkar": 22, "quran": 8, "lessons": 7, "hadith": 10,
+    for ident, expected in {"worship": 8, "quran": 8, "lessons": 7, "hadith": 10,
                             "faq": 11, "media": 7, "occasions": 8, "belief": 5, "seerah": 4}.items():
         page.goto(section_address(home, ident), wait_until="domcontentloaded")
         selector = ":scope > .faq-list > details" if ident == "faq" else ":scope > .cards > article"
@@ -248,24 +248,20 @@ def verify_menu(page):
     expect(page.locator("#nav")).to_be_hidden()
 
 
-def all_filters(page):
-    origin = page.url
-    for section, total, categories in (("adhkar", 22, 6), ("faq", 11, 4)):
-        page.goto(section_address(origin, section), wait_until="domcontentloaded")
-        button = page.locator(f"#{section} select")
-        selector = f"#{section} .card" if section == "adhkar" else f"#{section} .faq-list > details"
-        choices = button.locator("option").evaluate_all("items => Array.from(items, o => o.value).filter(Boolean)")
-        assert len(choices) == categories, choices
-        visible_total = 0
-        for value in choices:
-            button.select_option(value)
-            visible = page.locator(selector + ":visible").count()
-            assert visible > 0, value
-            visible_total += visible
-        assert visible_total == total
-        button.select_option("")
-        expect(page.locator(selector + ":visible")).to_have_count(total)
+def faq_filters(page):
+    button = page.locator("#faq select")
     questions = page.locator("#faq .faq-list > details")
+    choices = button.locator("option").evaluate_all("items => Array.from(items, o => o.value).filter(Boolean)")
+    assert len(choices) == 4, choices
+    visible_total = 0
+    for value in choices:
+        button.select_option(value)
+        visible = questions.filter(visible=True).count()
+        assert visible > 0, value
+        visible_total += visible
+    assert visible_total == 11
+    button.select_option("")
+    expect(questions.filter(visible=True)).to_have_count(11)
     for question in questions.all():
         question.locator("summary").press("Enter")
         expect(question).to_have_attribute("open", "")
@@ -352,7 +348,9 @@ def public_cases(suite, browser, device):
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
     suite.run("عام | جميع روابط قائمة الجوال والتنقل بلوحة المفاتيح",
               lambda: visit("quran", verify_menu, device=device))
-    suite.run("عام | جميع مرشحات الأذكار والفتاوى وفتح كل سؤال", lambda: new_visit(browser, PUBLIC, all_filters))
+    suite.run("عام | صفحات الأذكار المستقلة ومصادرها والرجوع إلى الفهرس",
+              lambda: visit("adhkar", verify_adhkar_navigation, device=device))
+    suite.run("عام | جميع مرشحات الفتاوى وفتح كل سؤال", lambda: visit("faq", faq_filters))
     suite.run("عام | إكمال جميع السور والحفظ والتراجع وإعادة الضبط", lambda: visit("reading", reading_cycle))
     suite.run("عام | اللغات الأربع ورجوع المتصفح وإعادة التحميل", lambda: visit("discover", guide_history, device=device))
 
@@ -773,6 +771,9 @@ def local_cases(suite, browser, origin):
         )
         assert not missing, f"Broken fallback links: {missing}"
     run("إرشادات تعطيل JavaScript وروابط الدليل", no_js, section="discover", java_script_enabled=False)
+    run("فهرس الأذكار وصفحاتها ومصادرها مع تعطيل JavaScript",
+        verify_adhkar_navigation, section="adhkar", java_script_enabled=False)
+    run("ترشيح الفتاوى وفتح جميع الأسئلة بعد فصل صفحات الأذكار", faq_filters, section="faq")
     run("عرض متاح مع منع الخطوط الخارجية وعرض 320 بكسل",
         verify_sections, section="", viewport={"width": 320, "height": 750})
 
@@ -1125,7 +1126,8 @@ def webkit_public_cases(suite, browser, device):
     for name, section, check in (
         ("فتح الصفحة بأبعاد iPhone", "", verify_sections),
         ("اللغات والرجوع", "discover", guide_history),
-        ("الأذكار والفتاوى", "", all_filters),
+        ("صفحات الأذكار المستقلة والرجوع إلى الفهرس", "adhkar", verify_adhkar_navigation),
+        ("الفتاوى ومرشحاتها", "faq", faq_filters),
         ("حفظ خطة القراءة", "reading", reading_cycle),
         ("مواقيت الرياض الحية", "prayer", lambda page: check_prayer_time(page, "riyadh")),
         ("فهرس الفتاوى وتصفية المصادر", "ask", fatwa_filters),

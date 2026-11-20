@@ -13,7 +13,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261120-8"
+REVISION = "20261120-9"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -191,7 +191,7 @@ def render_redirect(code, data):
 '''
 
 def icon(key):
-    return f'<span class="zad-icon" data-icon="{key}" aria-hidden="true"></span>'
+    return f'<span class="zad-icon" data-icon="{escape(key)}" aria-hidden="true"></span>'
 
 
 def render_home():
@@ -202,7 +202,72 @@ def render_home():
     )
 
 
-def render_header(slug, base):
+def load_adhkar():
+    categories = {}
+    for path in sorted((ROOT / "adhkar-content").glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        shared = data.get("shared", {})
+        for category in data["categories"]:
+            slug = category["slug"]
+            if not re.fullmatch(r"[a-z]+(?:-[a-z]+)*", slug) or slug in categories:
+                raise ValueError(f"Invalid or duplicate adhkar category: {slug}")
+            items = [shared[item] if isinstance(item, str) else item for item in category["items"]]
+            if not items or any(not item["links"] for item in items):
+                raise ValueError(f"Adhkar category {slug} needs entries with sources")
+            for item in items:
+                for _, href in item["links"]:
+                    source = urlsplit(href)
+                    if source.scheme != "https" or not source.hostname or source.username or source.password:
+                        raise ValueError(f"Invalid source URL in {slug}: {href}")
+            categories[slug] = {**category, "items": items}
+    if not categories:
+        raise ValueError("Add categories in adhkar-content before building the site")
+    return categories
+
+
+def render_adhkar_index(categories):
+    cards = "\n".join(
+        f'<a class="adhkar-category-link" href="{slug}/">'
+        f'<span class="section-icon">{icon(category["icon"])}</span>'
+        f'<strong>{escape(category["title"])}</strong><small>{escape(category["intro"])}</small></a>'
+        for slug, category in categories.items()
+    )
+    return f'''<section class="wrap adhkar-index" id="adhkar" aria-labelledby="adhkar-heading">
+<h1 class="section-heading" id="adhkar-heading"><span class="section-icon">{icon("adhkar")}</span>الأذكار اليومية</h1>
+<p class="section-intro">اختر وقت الذكر أو مناسبته لقراءة النص وعدد التكرار الوارد ومصدره.</p>
+<div class="tiles adhkar-tiles">
+{cards}
+</div>
+</section>'''
+
+
+def render_adhkar_card(item):
+    repeat = f'<p class="adhkar-repeat">{escape(item["repeat"])}</p>' if item.get("repeat") else ""
+    quote = escape(item.get("quote", "")).replace("\n", "<br>")
+    quotation = f'<blockquote class="quote">{quote}</blockquote>' if quote else ""
+    references = " ".join(link(href, label) for label, href in item["links"])
+    return f'''<article class="card adhkar-card">
+<h2>{escape(item["title"])}</h2>
+{repeat}{quotation}
+<p>{escape(item["text"])}</p>
+<div class="references">{references}</div>
+</article>'''
+
+
+def render_adhkar_category(category):
+    cards = "\n".join(render_adhkar_card(item) for item in category["items"])
+    return f'''<section class="wrap adhkar-detail" id="adhkar-category" aria-labelledby="adhkar-heading">
+<a class="adhkar-back" href="../">جميع الأذكار</a>
+<h1 class="section-heading" id="adhkar-heading"><span class="section-icon">{icon(category["icon"])}</span>{escape(category["title"])}</h1>
+<p class="section-intro">{escape(category["intro"])}</p>
+<div class="cards adhkar-cards">
+{cards}
+</div>
+<a class="adhkar-back" href="../">العودة إلى قائمة الأذكار</a>
+</section>'''
+
+
+def render_header(slug, base, *, subsection=False):
     if slug == "home":
         brand = (
             f'<div class="launcher-brand"><span class="route-brand" aria-hidden="true">{icon("brand")}</span>'
@@ -214,7 +279,7 @@ def render_header(slug, base):
     items = []
     for route, title in SECTIONS.items():
         shape = "" if slug == "home" else icon("discover-islam" if route == "discover" else route)
-        selected = ' aria-current="page"' if route == slug else ""
+        selected = f' aria-current="{"location" if subsection else "page"}"' if route == slug else ""
         items.append(f'<a href="{base}{route}/" data-section-link="{route}"{selected}>{shape}<span>{escape(title)}</span></a>')
     links = "\n".join(items)
     return f'''{brand}
@@ -224,14 +289,14 @@ def render_header(slug, base):
 </nav>'''
 
 
-def render_page(slug, body):
+def render_page(slug, body, *, subsection_title=None):
     is_home = slug == "home"
-    base = "" if is_home else "../"
+    base = "" if is_home else "../../" if subsection_title else "../"
     assets = base + "assets/"
-    title = "زاد | منصة التوعية الدينية" if is_home else f"{SECTIONS[slug]} | زاد"
+    title = "زاد | منصة التوعية الدينية" if is_home else f"{subsection_title or SECTIONS[slug]} | زاد"
     styles = "\n".join(f'<link rel="stylesheet" href="{assets}{name}?v={REVISION}">' for name in STYLES)
     scripts = []
-    if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug != "discover"):
+    if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug not in {"discover", "adhkar"}):
         scripts.extend(("content.js", "library-content.js"))
     scripts.append("site.js")
     if slug == "prayer":
@@ -254,7 +319,7 @@ def render_page(slug, body):
     if slug == "ask":
         capabilities += f"connect-src {ask_connections}; "
         body = body.replace("{{ASK_AGENT_ENDPOINT}}", escape(ASK_AGENT_ENDPOINT, quote=True))
-    header = render_header(slug, base)
+    header = render_header(slug, base, subsection=bool(subsection_title))
     if is_home:
         footer = (ROOT / "page-templates" / "home-footer.html").read_text(encoding="utf-8").strip()
     else:
@@ -305,17 +370,24 @@ def main():
         languages[path.stem] = data
     if "ar" not in languages:
         parser.error("The Arabic default translation is required.")
+    adhkar = load_adhkar()
     docs = ROOT / "docs"
     outputs = {docs / "index.html": render_page("home", render_home())}
     for slug, title in SECTIONS.items():
         if slug == "discover":
             body = f'<h1 class="visually-hidden">{escape(title)}</h1>\n' + render_guide(languages)
+        elif slug == "adhkar":
+            body = render_adhkar_index(adhkar)
         elif slug in TEMPLATED_SECTIONS:
             body = (ROOT / "page-templates" / f"{slug}.html").read_text(encoding="utf-8").strip()
         else:
             body = (f'<div class="wrap" id="sections" data-section="{slug}"></div>\n'
                     f'<noscript><p class="wrap">{escape(title)} · فعّل جافاسكربت لعرض مواد القسم.</p></noscript>')
         outputs[docs / slug / "index.html"] = render_page(slug, body)
+    for slug, category in adhkar.items():
+        outputs[docs / "adhkar" / slug / "index.html"] = render_page(
+            "adhkar", render_adhkar_category(category), subsection_title=category["title"]
+        )
     for code, data in languages.items():
         outputs[docs / "discover" / code / "index.html"] = render_redirect(code, data)
     for output, page in outputs.items():
