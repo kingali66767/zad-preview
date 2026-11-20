@@ -135,10 +135,9 @@ body[data-page] {
 }
 
 body[data-page="home"] {
-  background:
+  --page-lighting:
     radial-gradient(ellipse at 95% 8%, #d4e7d9 0%, transparent 50%),
-    radial-gradient(ellipse at 4% 24%, #f6e8cc 0%, transparent 46%),
-    #edf4ec;
+    radial-gradient(ellipse at 4% 24%, #f6e8cc 0%, transparent 46%);
 }
 
 body[data-page="home"] .route-top {
@@ -250,7 +249,11 @@ body[data-page="home"] .route-top #nav {
 
 .home-ask {
   padding-block: clamp(10px, 1.6vw, 18px);
-  background: radial-gradient(ellipse at 76% 0%, #244638, transparent 78%), #102c24;
+  background:
+    radial-gradient(ellipse at 76% 0%, #244638, transparent 78%),
+    linear-gradient(#102c249e, #102c249e),
+    var(--geometry-tile) center top / var(--geometry-size) repeat,
+    #102c24;
 }
 
 .home-ask-panel {
