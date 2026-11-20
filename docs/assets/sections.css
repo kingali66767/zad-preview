@@ -386,11 +386,14 @@ body[data-page="home"] .route-top #nav {
 }
 
 #home-ask-status,
+#home-ask-source,
 .home-ask-noscript {
   margin: 6px 2px 0;
   font-size: .9rem;
   overflow-wrap: anywhere;
 }
+
+#home-ask-source { color: #e2eee5; font-size: .81rem; }
 
 #home-ask-status:empty {
   margin: 0;

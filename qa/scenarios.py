@@ -970,6 +970,50 @@ def local_cases(suite, browser, origin):
     run("مقتطفات الفتاوى المطابقة وربطها بالعالم والصفحة الأصلية", fatwa_excerpts)
     run("ترتيب الفتاوى والتحقق من نسبة الكلام للعالم المطلوب", fatwa_rank_and_scope)
 
+    def bin_baz_lookup(page):
+        queries = []
+        reference = 'https://binbaz.org.sa/byreference/fatwas/1323'
+
+        def reply(route):
+            params = parse_qs(urlsplit(route.request.url).query)
+            query = params["q"][0]
+            queries.append(query)
+            assert params["type"] == ["fatwa"] and params["operator"] == ["AND_ONLY"]
+            headers = {"Access-Control-Allow-Origin": "*"}
+            if "الخاتم" in query:
+                route.fulfill(status=503, headers=headers, json={})
+                return
+            title = "حكم السواك للصائم بعد الزوال"
+            description = "الجواب:\n\n<em>السواك</em> سنة للجميع، السواك سنة للصائم قبل الزوال، وبعده."
+            if "قبل" in query:
+                description = "السواك سنة للجميع، وفي المسألة تفاصيل لم يظهر نصها"
+            route.fulfill(headers=headers, json={"Search": {"results": [
+                {"reference": 1323, "title": title, "question": None,
+                 "searchHighlights": {"description": [description]}}
+            ]}})
+        page.route("https://binbaz.org.sa/api/search?**", reply)
+
+        ask(page, "وش يقول الشيخ ابن باز عن طريقة المسح على الخفين؟")
+        expect(page.locator("#ask-answer")).to_contain_text("أعلى كل قدم")
+        assert not queries
+        ask(page, "ما حكم السواك للصايم بعد الزوال عند الشيخ عبدالعزيز بن باز رحمه الله؟")
+        expect(page.locator("#ask-status")).to_contain_text("مقتطف من بداية جواب الشيخ")
+        expect(page.locator("#ask-answer")).to_have_text("السواك سنة للجميع، السواك سنة للصائم قبل الزوال، وبعده.")
+        expect(page.locator(f'#ask-sources a[href="{reference}"]')).to_be_visible()
+        assert queries == ["السواك للصائم بعد الزوال"]
+        ask(page, "هل يجوز السواك للصائم قبل الزوال؟")
+        expect(page.locator("#ask-answer-heading")).to_have_text("نتائج موقع الشيخ ابن باز")
+        expect(page.locator("#ask-answer")).not_to_contain_text("السواك سنة للجميع")
+        ask(page, "لبس الخاتم للرجال")
+        expect(page.locator('#ask-sources a[href^="https://binbaz.org.sa/search?"]')).to_be_visible()
+        count = len(queries)
+        ask(page, "اسمي فلان ورقم جوالي 0501234567، هل يجوز السواك للصائم؟")
+        expect(page.locator("#ask-result")).to_be_visible()
+        assert len(queries) == count
+        expect(page.locator('#ask-sources a[href^="https://binbaz.org.sa/search?"]')).to_have_count(0)
+
+    run("البحث الرسمي لابن باز والمقتطف المباشر والخصوصية وتعطّل الخدمة", bin_baz_lookup)
+
     def long_input(page):
         field = page.locator("#ask-input")
         field.focus()

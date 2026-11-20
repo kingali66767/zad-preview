@@ -13,7 +13,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261120-4"
+REVISION = "20261120-5"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -36,7 +36,7 @@ SECTIONS = {
 }
 TEMPLATED_SECTIONS = {"ask", "prayer", "sources", "contact"}
 STYLES = ("style.css", "discover.css", "section-icons.css", "glass.css", "sections.css")
-ASK_SCRIPTS = ("ask-evidence.js", "fatwa-sources.js", "ask-intents.js", "ask.js")
+ASK_SCRIPTS = ("ask-evidence.js", "fatwa-sources.js", "ask-intents.js", "ask-baz.js", "ask.js")
 
 
 def link(href, label, attributes=""):
@@ -244,13 +244,15 @@ def render_page(slug, body):
         script_tags.append(f'<script{attributes} src="{assets}{name}?v={REVISION}" defer></script>')
     scripts_markup = "\n".join(script_tags)
     capabilities = {"prayer": "connect-src https://api.aladhan.com; ", "ask": "worker-src 'self'; "}.get(slug, "")
+    ask_connections = "https://binbaz.org.sa"
     if slug == "ask" and ASK_AGENT_ENDPOINT:
         endpoint = urlsplit(ASK_AGENT_ENDPOINT)
         if (endpoint.scheme != "https" or endpoint.path != "/ask" or endpoint.query or endpoint.fragment
                 or not re.fullmatch(r"[A-Za-z0-9.-]+", endpoint.netloc) or not endpoint.hostname):
             raise ValueError("ASK_AGENT_ENDPOINT must be an HTTPS URL ending in /ask.")
-        capabilities += f"connect-src https://{endpoint.netloc}; "
+        ask_connections += f" https://{endpoint.netloc}"
     if slug == "ask":
+        capabilities += f"connect-src {ask_connections}; "
         body = body.replace("{{ASK_AGENT_ENDPOINT}}", escape(ASK_AGENT_ENDPOINT, quote=True))
     header = render_header(slug, base)
     footer = "" if is_home else '<footer class="section-footer"><p>زاد · مبادرة توعوية مستقلة غير رسمية</p></footer>'

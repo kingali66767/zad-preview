@@ -137,7 +137,7 @@ fatwaCategory.addEventListener("change", browseFatwas);
 browseFatwas();
 
 const scholarNames = {
-  "ibn-baz": ["ابن باز", "بن باز"],
+  "ibn-baz": ["ابن باز", "بن باز", "عبد العزيز باز", "عبدالعزيز باز", "ibn baz", "bin baz"],
   "ibn-uthaymeen": ["ابن عثيمين", "بن عثيمين", "العثيمين"],
   unlisted: ["الفوزان", "اللحيدان", "الحيدان"]
 };
@@ -246,7 +246,7 @@ function showRelated(topics, language = "ar") {
   askRelated.hidden = !questions.length;
 }
 
-function showIntent(intent, related = []) {
+function showIntent(intent, related = [], officialSearch) {
   const language = intent.language || "ar";
   const ids = intent.ids || [];
   const sources = [...new Map(ids.flatMap(id => {
@@ -254,14 +254,17 @@ function showIntent(intent, related = []) {
     return (record?.localizedSources?.[language] || record?.sources || []).map(([label, url]) => [url, label]);
   }))].map(([url, label]) => [label, url]);
   const clarification = intent.kind === "clarify";
+  const links = sources.length ? sources.slice(0, 5) : [...referencesForHelp];
+  if (officialSearch) links.push(officialSearch);
   showResult(clarification ? "يتغيّر الجواب بحسب ما تقصده." : "هذه المسألة تحتاج إلى معرفة تفاصيلها.",
-    "أحتاج إلى توضيح", sources.length ? sources.slice(0, 5) : referencesForHelp,
+    "أحتاج إلى توضيح", links,
     intent.prompt, language);
   if (clarification) showRelated([...new Set([...ids, ...related.map(topic => topic.id)])].map(id => ({id})), language);
 }
 
-function showNoAnswer(topics) {
-  showResult("لم أجد جوابًا موثّقًا يطابق هذا السؤال.", "كيف تحدّد سؤالك؟", referencesForHelp,
+function showNoAnswer(topics, officialSearch) {
+  const sources = officialSearch ? [officialSearch, ...referencesForHelp] : referencesForHelp;
+  showResult("لم أجد جوابًا موثّقًا يطابق هذا السؤال.", "كيف تحدّد سؤالك؟", sources,
     "اذكر العبادة أو المسألة، وحدّد ما تريد معرفته عنها. يمكنك أيضًا اختيار أحد الأسئلة القريبة إن ظهر هنا.");
   showRelated(topics);
 }
@@ -283,7 +286,7 @@ function finishLookup() {
 }
 
 function resetModel(message) {
-  if (pendingLookup) showNoAnswer(pendingLookup.topics);
+  if (pendingLookup) showNoAnswer(pendingLookup.topics, pendingLookup.officialSearch);
   finishLookup();
   clearTimeout(startupTimer);
   modelWorker?.terminate();
@@ -338,15 +341,15 @@ modelButton.addEventListener("click", async () => {
         modelReady = true;
         modelStatus.textContent = "اقتراح المراجع بالذكاء الاصطناعي جاهز.";
       } else if (data.type === "topic" && pendingLookup && data.requestId === pendingLookup.id) {
-        const {topics} = pendingLookup;
+        const {topics, officialSearch} = pendingLookup;
         const source = topics.some(topic => topic.id === data.id) ? askEvidence[data.id] : null;
         finishLookup();
         if (source) {
           showResult("لم أجد جوابًا موثّقًا يطابق السؤال. قد تساعدك هذه المراجع.",
-            source.title, source.sources);
+            source.title, officialSearch ? [...source.sources, officialSearch] : source.sources);
           showRelated(topics);
         } else {
-          showNoAnswer(topics);
+          showNoAnswer(topics, officialSearch);
         }
       } else if (data.type === "error" &&
           (data.requestId === undefined || data.requestId === pendingLookup?.id)) {
@@ -369,16 +372,11 @@ function exactOrFollowUp(key, topic) {
   if (followUp) return catalogAnswer(followUp, "ar");
 }
 
-function scholarAnswer(key, authors) {
-  if (authors.length !== 1 || authors[0] !== "ibn-baz") return;
-  const suffix = scholarNames["ibn-baz"].flatMap(name =>
-    ["عند", "بحسب", "حسب فتوى", "من"].flatMap(prefix =>
-      [name, "الشيخ " + name].map(author => " " + normalizeQuestion(prefix + " " + author))))
-    .find(ending => key.endsWith(ending));
-  if (!suffix) return;
-  const subject = key.slice(0, -suffix.length);
-  const match = reviewedAnswer(subject);
-  if (match?.sources.length && match.sources.every(([, url]) => url.startsWith("https://binbaz.org.sa/"))) {
+function scholarAnswer(subject, intent) {
+  const match = reviewedAnswer(subject) ||
+    (intent?.kind === "answer" && catalogAnswer(intent.id, intent.language));
+  if (match?.sources?.length && match.sources.every(([, url]) =>
+    /^https:\/\/binbaz\.org\.sa\/fatwas\/\d+\//.test(url))) {
     return match;
   }
 }
@@ -463,14 +461,19 @@ askReset.addEventListener("click", () => {
   askInput.focus();
 });
 
-function answerFromLibrary(question, key, topic) {
+async function answerFromLibrary(question, key, topic) {
   const authors = requestedScholars(key);
+  const namedBinBaz = authors.length === 1 && authors[0] === "ibn-baz";
+  const subject = namedBinBaz ? binBazSubject(key) : key;
   let intent;
   if (authors.length) {
-    const match = scholarAnswer(key, authors);
-    if (match) {
-      showReviewed(match);
-      return;
+    if (namedBinBaz && subject !== key) {
+      intent = resolveQuestionIntent(subject, topic);
+      const match = scholarAnswer(subject, intent);
+      if (match) {
+        showReviewed(match);
+        return;
+      }
     }
   } else {
     const match = exactOrFollowUp(key, topic);
@@ -497,36 +500,73 @@ function answerFromLibrary(question, key, topic) {
     }
   }
 
+  if (intent?.kind === "refer") {
+    showIntent(intent);
+    return;
+  }
+
+  let officialSearch, relatedOnline;
+  if ((!authors.length || namedBinBaz && subject !== key) && questionParts(question).length === 1) {
+    const query = binBazLookupQuery(question, subject);
+    if (query) {
+      officialSearch = ["بحث هذا الموضوع في موقع الشيخ ابن باز", binBazSearchURL("/search", query.text).href];
+      const controller = new AbortController();
+      agentRequest = controller;
+      askButton.disabled = true;
+      askResult.hidden = true;
+      askStatus.textContent = "جارٍ البحث في الموقع الرسمي للشيخ ابن باز…";
+      const result = await searchBinBaz(query, controller);
+      if (agentRequest !== controller) return;
+      finishLookupAfterAgent();
+      if (result?.direct) {
+        const { title, url, answer } = result.direct;
+        showResult("مقتطف من بداية جواب الشيخ عبد العزيز بن باز", title,
+          [["اقرأ الفتوى كاملةً في موقع الشيخ", url]], answer);
+        return;
+      }
+      relatedOnline = result?.related;
+    }
+  }
+
   const topics = authors.length ? [] : relatedTopics(key);
   const references = relevantFatwas(key, authors);
   if (intent?.kind === "clarify") {
     const ordinarySources = new Set((intent.ids || []).flatMap(id => (askEvidence[id]?.sources || []).map(([, url]) => url)));
     if (!references.some(entry => !ordinarySources.has(entry.url))) {
-      showIntent(intent, topics);
+      showIntent(intent, topics, officialSearch);
       return;
     }
   }
   if (references.length) {
+    const sources = references.map(entry => [entry.title + " · " + sourceDescription(entry), entry.url]);
+    if (officialSearch) sources.push(officialSearch);
     showResult("وجدت فتاوى مرتبطة بموضوع السؤال.", "نتائج من مواقع العلماء",
-      references.map(entry => [entry.title + " · " + sourceDescription(entry), entry.url]),
+      sources,
       "راجع السؤال والجواب كاملين في المصدر. إذا كانت مسألتك لها ظروف خاصة، فاسأل مختصًا يمكنه معرفة تفاصيلها.");
     askSources.classList.add("fatwa-results");
     showRelated(topics);
     return;
   }
+  if (relatedOnline?.length) {
+    const sources = relatedOnline.map(({title, url}) => [title, url]);
+    showResult("وجدت فتاوى مرتبطة في البحث الرسمي.", "نتائج موقع الشيخ ابن باز", [...sources, officialSearch],
+      "افتح الفتوى الأقرب إلى سؤالك لقراءة الجواب كاملًا؛ المقتطفات المتاحة لا تكفي لإجابة هذا السؤال بدقة.");
+    return;
+  }
   if (authors.length) {
     showResult("لم أجد فتوى مطابقة من العالم المذكور في الفهرس.", "المواقع الرسمية",
-      referencesForHelp, "يمكنك تغيير صياغة السؤال أو مراجعة الجهات الرسمية.");
+      officialSearch ? [officialSearch, ...referencesForHelp] : referencesForHelp,
+      "يمكنك تغيير صياغة السؤال أو مراجعة الجهات الرسمية.");
     return;
   }
 
   if (!modelReady || !topics.length) {
-    showNoAnswer(topics);
+    showNoAnswer(topics, officialSearch);
     return;
   }
 
   const requestId = ++nextLookupId;
-  pendingLookup = {id: requestId, topics};
+  pendingLookup = {id: requestId, topics, officialSearch};
   askButton.disabled = true;
   askResult.hidden = true;
   askStatus.textContent = "جارٍ البحث عن مراجع قد تفيدك…";
@@ -536,6 +576,11 @@ function answerFromLibrary(question, key, topic) {
   } catch {
     resetModel("تعذّر اقتراح المراجع. يمكنك إعادة تشغيل النموذج.");
   }
+}
+
+function finishLookupAfterAgent() {
+  agentRequest = undefined;
+  askButton.disabled = false;
 }
 
 askForm.addEventListener("submit", async event => {
@@ -562,8 +607,7 @@ askForm.addEventListener("submit", async event => {
     askStatus.textContent = "يبحث وكيل زاد في مواقع الفتوى المعتمدة…";
     const result = await requestAgentAnswer(question, controller);
     if (agentRequest !== controller) return;
-    agentRequest = undefined;
-    askButton.disabled = false;
+    finishLookupAfterAgent();
     if (result) {
       const known = reviewedAnswer(key);
       previousTopic = known?.id;
@@ -572,7 +616,7 @@ askForm.addEventListener("submit", async event => {
       return;
     }
   }
-  answerFromLibrary(question, key, topic);
+  await answerFromLibrary(question, key, topic);
 });
 
 askButton.disabled = false;
