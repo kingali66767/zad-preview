@@ -169,6 +169,67 @@ body[data-page="home"] .route-top #nav {
   inline-size: min(73rem, calc(100% - 32px));
 }
 
+.hero-identity {
+  margin-block-end: clamp(16px, 2.2vw, 26px);
+  padding: clamp(17px, 2.5vw, 34px);
+  border: 1px solid #eccc869c;
+  border-radius: clamp(21px, 2.5vw, 34px);
+  background: linear-gradient(148deg, #426c5ae3, #11352dcb 61%, #0c2923e8);
+  box-shadow: 0 15px 32px #061e1673, inset 0 1px 0 #fff0c65e, inset 0 0 0 4px #f7e9bf15;
+}
+
+.hero-identity-label {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.7vw, 16px);
+  margin-block-end: 12px;
+}
+
+.hero-identity-mark {
+  flex: none;
+  inline-size: clamp(47px, 5.6vw, 62px);
+  block-size: clamp(47px, 5.6vw, 62px);
+  border-color: #ecce939e;
+  background: linear-gradient(150deg, #f9e3b24d, #1e3e31 78%);
+}
+
+.hero-identity-mark .zad-icon {
+  --zad-icon-size: clamp(1.66rem, 2.8vw, 2.25rem);
+}
+
+.hero-identity-name {
+  margin: 0;
+  color: #ffe2a2;
+}
+
+.hero-identity-name strong {
+  display: block;
+  font: 700 clamp(2rem, 4vw, 2.85rem)/1 Amiri, Georgia, serif;
+}
+
+.hero-identity-name small {
+  display: block;
+  color: #ebf2e8;
+  font-size: .88rem;
+  line-height: 1.35;
+}
+
+.hero-identity h1 {
+  margin: 0;
+  border-block-start: 1px solid #ffdc944d;
+  padding-block-start: 12px;
+  font-size: clamp(2.12rem, 5.05vw, 4.55rem);
+  line-height: 1.15;
+}
+
+@media (max-width: 680px) {
+  .hero-identity h1 { font-size: clamp(2.12rem, 9.8vw, 2.9rem); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .hero-identity { background: #153a2f; }
+}
+
 .site-tour {
   inline-size: min(73rem, calc(100% - 32px));
   margin-block: clamp(24px, 4vw, 48px) clamp(32px, 5vw, 65px);
