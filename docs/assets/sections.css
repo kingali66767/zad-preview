@@ -234,6 +234,13 @@ body[data-page="home"] .route-top #nav {
   scroll-margin-block-start: 12px;
 }
 
+.site-tour:focus { outline: none; }
+
+.site-tour:focus-visible h2 {
+  text-decoration: underline #966e32;
+  text-underline-offset: .15em;
+}
+
 .site-tour-heading {
   margin-block-end: clamp(17px, 3vw, 27px);
 }
@@ -286,6 +293,45 @@ body[data-page="home"] .route-top #nav {
   font-size: clamp(1.12rem, 2.4vw, 1.52rem);
   line-height: 1.45;
 }
+
+a.site-tour-card {
+  text-decoration: none;
+}
+
+a.site-tour-card:hover {
+  border-color: #8b6024;
+  box-shadow: 0 10px 26px #203b2b26, inset 0 0 0 1px #fff9e7;
+}
+
+.site-tour-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-start: 10px;
+}
+
+.site-tour-action {
+  display: inline-flex;
+  align-items: center;
+  color: #215342;
+  font-size: .93rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
+span.site-tour-action { margin-block-start: 8px; }
+
+a.site-tour-action {
+  min-block-size: 44px;
+  padding-inline: 12px;
+  border: 1px solid #a2bda9;
+  border-radius: 999px;
+  background: #f4f8ed;
+  text-decoration: none;
+}
+
+a.site-tour-action:hover { background: #e2f0e4; }
 
 @media (max-width: 540px) {
   .site-tour-card { align-items: start; }

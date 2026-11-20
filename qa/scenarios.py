@@ -121,7 +121,15 @@ def homepage_transitions(page):
     home = page.url
     page.locator('main .hero a[href="#site-tour"]').click()
     expect(page).to_have_url(home + "#site-tour")
-    expect(page.locator("#site-tour")).to_be_in_viewport()
+    tour = page.locator("#site-tour")
+    expect(tour.get_by_role("heading", level=2)).to_be_in_viewport()
+    for label, route in (("افتح القرآن الكريم", "quran"), ("افتح الوضوء والصلاة", "worship"),
+                         ("اسأل زاد", "ask"), ("تعرّف على الإسلام", "discover")):
+        tour.get_by_role("link", name=label, exact=True).click()
+        expect(page).to_have_url(section_address(home, route))
+        expect(page.locator("main h1")).to_be_visible()
+        page.go_back(wait_until="domcontentloaded")
+        expect(page).to_have_url(home + "#site-tour")
     page.go_back(wait_until="domcontentloaded")
     expect(page).to_have_url(home)
     verify_home_menu(page, sections=SECTIONS)
