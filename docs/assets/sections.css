@@ -63,6 +63,112 @@ body[data-page] {
 .route-back { justify-self: start; }
 .route-top #menu { justify-self: end; }
 
+.route-controls {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 7px;
+}
+
+.route-controls #menu { white-space: nowrap; }
+
+.site-language {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.site-language > summary {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-block-size: 44px;
+  margin: 0;
+  padding: 5px 10px;
+  border: 1px solid #efce8a71;
+  border-radius: 999px;
+  background: #214439;
+  color: #ffe3a8;
+  font-size: .87rem;
+  white-space: nowrap;
+}
+
+.site-language > summary::before { display: none; }
+
+.site-language > summary::after {
+  inline-size: 5px;
+  block-size: 5px;
+  margin-block-end: 3px;
+  border: solid currentColor;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.site-language-links {
+  position: absolute;
+  inset-block-start: calc(100% + 9px);
+  inset-inline-end: 0;
+  z-index: 4;
+  display: grid;
+  min-inline-size: 9rem;
+  padding: 5px;
+  border: 1px solid #efce8a71;
+  border-radius: 14px;
+  background: #17392e;
+  box-shadow: 0 6px 22px #031c1699;
+}
+
+.site-language-links a {
+  display: flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: 10px;
+  border-radius: 9px;
+  color: #f5f7ef;
+  text-decoration: none;
+  font-size: .96rem;
+}
+
+.site-language-links a:hover,
+.site-language-links a[aria-current] {
+  color: #ffe3a8;
+  background: #30584a;
+}
+
+@media (max-width: 700px) {
+  .route-top { grid-template-columns: minmax(0, 1fr) auto auto; }
+}
+
+@media (max-width: 450px) {
+  .route-top > .route-back > span:not(.zad-icon) { display: none; }
+  .route-top > .route-back { inline-size: 44px; }
+  .route-controls { gap: 5px; }
+  .route-controls #menu,
+  .site-language > summary { padding-inline: 8px; font-size: .81rem; }
+}
+
+@media (max-width: 360px) {
+  .launcher-brand { gap: 6px; }
+  .launcher-brand .route-brand { inline-size: 37px; block-size: 37px; }
+  .launcher-wordmark { font-size: 1.8rem; }
+  .route-controls #menu,
+  .site-language > summary { padding-inline: 6px; font-size: .78rem; }
+}
+
+html:not([lang="ar"]) .hero-identity h1 {
+  font-size: clamp(1.25rem, 6.8cqi, 2.45rem);
+  line-height: 1.35;
+}
+
+html:not([lang="ar"]) #home-ask-heading { white-space: normal; }
+html[lang="zh"] body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+html[lang="ur"] body { font-family: "Noto Naskh Arabic", Tajawal, Tahoma, sans-serif; }
+html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic", Tahoma, serif; }
+.quote-meaning strong { color: var(--forest); }
+
 .route-top #nav {
   display: none;
   position: absolute;

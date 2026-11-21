@@ -24,6 +24,8 @@ SAUDI_CITIES = ("riyadh", "mecca", "medina", "jeddah", "dammam", "khobar", "taif
                 "tabuk", "abha", "jazan", "najran", "albaha", "sakaka", "arar", "hofuf")
 ADHKAR_CATEGORIES = ("morning", "evening", "after-prayer", "sleep", "waking", "home", "food",
                     "daily-life", "mosque", "travel", "distress", "general")
+SITE_LANGUAGES = {"ar": "rtl", "en": "ltr", "ur": "rtl", "zh": "ltr", "fr": "ltr"}
+GUIDE_LANGUAGES = {**SITE_LANGUAGES, "es": "ltr"}
 
 
 def section_address(origin, section=""):
@@ -307,7 +309,7 @@ def browser_checks(origin, output, live):
         page.goto(guide_url)
         guide = page.locator("#discover-islam")
         expect(guide).to_have_attribute("open", "")
-        for code, direction in (("ar", "rtl"), ("en", "ltr"), ("fr", "ltr"), ("es", "ltr")):
+        for code, direction in GUIDE_LANGUAGES.items():
             prefix = f"discover-{code}"
             locale = guide.locator(f"#{prefix}")
             guide.locator(f'.discover-languages a[href="#{prefix}"]').click()
@@ -330,7 +332,7 @@ def browser_checks(origin, output, live):
             expect(locale.locator(f"#{prefix}-faq details").first).to_have_attribute("open", "")
             without_overflow(page)
             results.append(f"Inline guide {code}: same-page navigation, Shahada, wudu, prayer, daily life and FAQ at 390px")
-        page.locator('#discover-es-next a[href="../worship/"]').click()
+        page.locator(f'#discover-{code}-next a[href="../worship/"]').click()
         expect(page.locator("#worship")).to_be_attached()
         expect(page).to_have_url(section_address(origin, "worship"))
         page.goto(origin + "/discover/en/index.html")

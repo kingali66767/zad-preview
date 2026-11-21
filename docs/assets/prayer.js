@@ -2,6 +2,7 @@
 
 (() => {
   const timeZone = "Asia/Riyadh";
+  const locale = typeof zadServiceLocale === "string" ? zadServiceLocale : "ar";
   const method = 4;
   const school = 0;
   const prayers = [
@@ -13,6 +14,10 @@
   const times = document.querySelector("#times");
   const status = document.querySelector("#prayer-status");
   let currentRequest;
+
+  function prayerMessage(key, fallback) {
+    return typeof zadServiceText === "function" ? zadServiceText("prayer", key, fallback) : fallback;
+  }
 
   function matchesRequest(data, latitude, longitude, date) {
     const meta = data?.meta;
@@ -38,7 +43,7 @@
       const row = document.createElement("div");
       const name = document.createElement("span");
       const time = document.createElement("strong");
-      name.textContent = label;
+      name.textContent = prayerMessage(key, label);
       time.textContent = value;
       time.dir = "ltr";
       row.append(name, time);
@@ -56,7 +61,7 @@
     const latitude = Number(city?.dataset.latitude);
     const longitude = Number(city?.dataset.longitude);
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
-      status.textContent = "اختر مدينة سعودية من القائمة.";
+      status.textContent = prayerMessage("choose", "اختر مدينة سعودية من القائمة.");
       currentRequest = undefined;
       return;
     }
@@ -69,11 +74,14 @@
       timeZone, day: "2-digit", month: "2-digit", year: "numeric"
     }).formatToParts(today).map(({ type, value }) => [type, value]));
     const date = [parts.day, parts.month, parts.year].join("-");
-    const localDate = new Intl.DateTimeFormat("ar-u-ca-gregory", {
-      timeZone, dateStyle: "full"
+    const localDate = new Intl.DateTimeFormat(locale, {
+      timeZone, calendar: "gregory", dateStyle: "full"
     }).format(today);
-    const caption = city.textContent + " · " + localDate + " · أم القرى · العصر وفق حساب الجمهور";
-    status.textContent = "جارٍ تحميل المواقيت · " + caption;
+    const caption = [
+      city.textContent, localDate, prayerMessage("method", "أم القرى"),
+      prayerMessage("school", "العصر وفق حساب الجمهور")
+    ].join(" · ");
+    status.textContent = prayerMessage("loading", "جارٍ تحميل المواقيت") + " · " + caption;
     const timeout = setTimeout(() => request.abort(), 9000);
 
     try {
@@ -89,11 +97,11 @@
       const rows = prayerRows(data.timings);
       if (currentRequest === request) {
         times.replaceChildren(...rows);
-        status.textContent = caption + " · بنظام ٢٤ ساعة";
+        status.textContent = caption + " · " + prayerMessage("clock", "بنظام ٢٤ ساعة");
       }
     } catch {
       if (currentRequest === request) {
-        status.textContent = "تعذر تحميل مواقيت مطابقة للطلب. حاول مجددًا أو راجع التقويم المحلي. · " + caption;
+        status.textContent = prayerMessage("failed", "تعذر تحميل مواقيت مطابقة للطلب. حاول مجددًا أو راجع التقويم المحلي.") + " · " + caption;
       }
     } finally {
       clearTimeout(timeout);

@@ -1,15 +1,15 @@
 <section class="home-ask" aria-labelledby="home-ask-heading">
 <div class="wrap home-ask-panel">
-<h2 id="home-ask-heading"><span class="home-ask-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>اسأل زاد</h2>
+<h2 id="home-ask-heading"><span class="home-ask-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>{{t:ask}}</h2>
 <div class="home-ask-controls">
 <form id="home-ask-form" action="ask/" role="search" aria-labelledby="home-ask-heading">
-<label class="visually-hidden" for="home-ask-input">سؤالك في اسأل زاد</label>
-<input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="سؤالك دون بيانات شخصية">
-<button class="button gold" id="home-ask-submit" type="submit" disabled>ابحث</button>
+<label class="visually-hidden" for="home-ask-input">{{t:home_ask_label}}</label>
+<input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="{{t:no_private}}">
+<button class="button gold" id="home-ask-submit" type="submit" disabled>{{t:search}}</button>
 </form>
-<p id="home-ask-source">قد تُرسل كلمات السؤال إلى البحث الرسمي في موقع ابن باز.</p>
+<p id="home-ask-source">{{t:home_privacy}}</p>
 <p id="home-ask-status" role="status"></p>
-<noscript><p class="home-ask-noscript"><a href="ask/">افتح صفحة اسأل زاد</a></p></noscript>
+<noscript><p class="home-ask-noscript"><a href="ask/">{{t:open_ask}}</a></p></noscript>
 </div>
 </div>
 </section>

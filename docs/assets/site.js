@@ -1,5 +1,37 @@
 "use strict";
 
+const siteLocale = document.documentElement.lang || "ar";
+const siteTranslation = typeof zadLocale === "object" ? zadLocale : null;
+
+function siteText(key, arabic, values = {}) {
+  return (siteTranslation?.ui[key] || arabic).replace(/\{([a-z]+)\}/g, (marker, field) => values[field] ?? marker);
+}
+
+function referenceLabel(label, href) {
+  if (!siteTranslation) return label;
+  const url = new URL(href);
+  const domain = url.hostname.replace(/^www\./, "");
+  const path = url.pathname.replace(/^\/+|\/+$/g, "");
+  if (domain === "quran.com") return `${siteText("quran", label)} ${path.replaceAll("/", ":")}`.trim();
+  if (domain === "sunnah.com") {
+    const [collection, number = ""] = path.split(":");
+    return `${siteText("hadith_" + collection, siteText("hadith", label))} ${number}`.trim();
+  }
+  const group = {
+    "binbaz.org.sa": "source_binbaz", "dorar.net": "source_dorar",
+    "quran.ksu.edu.sa": "source_saadi", "islamqa.info": "source_islamqa"
+  }[domain];
+  return group ? siteText(group, label) : `${siteText("reference", label)} · ${domain}`;
+}
+
+function translatedSection(section) {
+  const translation = siteTranslation?.sections[section.id];
+  if (!translation) return section;
+  const translations = new Map(translation.items.map(item => [item.sourceTitle, item]));
+  const items = section.items.map(item => ({...item, ...translations.get(item.title)}));
+  return {...section, title: translation.title, intro: translation.intro, items};
+}
+
 function element(tag, text, className) {
   const node = document.createElement(tag);
   if (text) node.textContent = text;
@@ -22,17 +54,18 @@ function readingTracker() {
   const progress = element("p", null, "reading-progress");
   progress.setAttribute("role", "status");
   const list = element("ol", null, "reading-list");
-  const number = new Intl.NumberFormat("ar-SA");
+  const number = new Intl.NumberFormat(siteLocale === "ar" ? "ar-SA" : siteLocale);
   const checkboxes = plan.map(([name, url], index) => {
     const row = element("li");
-    const link = element("a", "سورة " + name);
+    const surah = siteText("surah_" + url.split("/").at(-1), name);
+    const link = element("a", siteText("surah_prefix", "سورة {name}", {name: surah}));
     link.href = url;
     const label = element("label");
     const checkbox = element("input");
     checkbox.type = "checkbox";
     checkbox.checked = completed.includes(index);
-    checkbox.setAttribute("aria-label", "تمت قراءة سورة " + name);
-    label.append(checkbox, element("span", "تمت القراءة"));
+    checkbox.setAttribute("aria-label", siteText("reading_done_name", "تمت قراءة سورة {name}", {name: surah}));
+    label.append(checkbox, element("span", siteText("reading_done", "تمت القراءة")));
     row.append(link, label);
     list.append(row);
     return checkbox;
@@ -40,19 +73,21 @@ function readingTracker() {
 
   function updateProgress(save) {
     const checked = checkboxes.flatMap((checkbox, index) => checkbox.checked ? [index] : []);
+    const message = siteText("reading_result", "تمت قراءة {done} من {total}", {
+      done: number.format(checked.length), total: number.format(plan.length)
+    });
     if (save) {
       try {
         localStorage.setItem(key, JSON.stringify(checked));
       } catch {
-        progress.textContent = "تمت قراءة " + number.format(checked.length) + " من " +
-          number.format(plan.length) + " · تعذّر حفظ التقدّم في هذا المتصفح.";
+        progress.textContent = message + " · " + siteText("reading_storage", "تعذّر حفظ التقدّم في هذا المتصفح.");
         return;
       }
     }
-    progress.textContent = "تمت قراءة " + number.format(checked.length) + " من " + number.format(plan.length);
+    progress.textContent = message;
   }
 
-  const reset = element("button", "ابدأ أسبوعًا جديدًا", "button green");
+  const reset = element("button", siteText("reading_reset", "ابدأ أسبوعًا جديدًا"), "button green");
   reset.type = "button";
   reset.addEventListener("click", () => {
     for (const checkbox of checkboxes) checkbox.checked = false;
@@ -60,7 +95,7 @@ function readingTracker() {
   });
   list.addEventListener("change", () => updateProgress(true));
   updateProgress(false);
-  panel.append(progress, list, reset, element("p", "يُحفظ التقدم في هذا المتصفح عند إتاحة التخزين.", "time-source"));
+  panel.append(progress, list, reset, element("p", siteText("reading_note", "يُحفظ التقدم في هذا المتصفح عند إتاحة التخزين."), "time-source"));
   return panel;
 }
 
@@ -80,8 +115,22 @@ function renderSection(section, container) {
   const items = element("div", null, isFaq ? "faq-list" : "cards");
   for (const item of section.items) {
     const card = element(isFaq ? "details" : "article", null, isFaq ? "" : "card");
+    if (siteTranslation && !item.sourceTitle) {
+      card.lang = "ar";
+      card.dir = "rtl";
+    }
     card.append(element(isFaq ? "summary" : "h3", item.title));
-    if (item.quote) card.append(element("blockquote", item.quote, "quote"));
+    if (item.quote) {
+      const quote = element("blockquote", item.quote, "quote");
+      quote.lang = "ar";
+      quote.dir = "rtl";
+      card.append(quote);
+    }
+    if (item.meaning) {
+      const meaning = element("p", null, "quote-meaning");
+      meaning.append(element("strong", siteText("meaning", "المعنى")), document.createTextNode(" " + item.meaning));
+      card.append(meaning);
+    }
     if (item.steps) {
       const steps = element("ol", null, "practice-steps");
       for (const step of item.steps) steps.append(element("li", step));
@@ -90,7 +139,7 @@ function renderSection(section, container) {
     card.append(element("p", item.text));
     const references = element("div", null, "references");
     for (const [label, url] of item.links) {
-      const link = element("a", label);
+      const link = element("a", referenceLabel(label, url));
       link.href = url;
       references.append(link);
     }
@@ -100,9 +149,9 @@ function renderSection(section, container) {
   feature.append(heading, element("p", section.intro, "section-intro"));
   const topics = [...new Set(section.items.map(item => item.topic).filter(Boolean))];
   if (topics.length) {
-    const label = element("label", "اختر الموضوع", "topic-filter");
+    const label = element("label", siteText("filter_topic", "اختر الموضوع"), "topic-filter");
     const select = element("select");
-    const all = element("option", "جميع الموضوعات");
+    const all = element("option", siteText("filter_all", "جميع الموضوعات"));
     all.value = "";
     select.append(all, ...topics.map(topic => element("option", topic)));
     select.addEventListener("change", () => {
@@ -120,16 +169,21 @@ function renderSection(section, container) {
 const sectionContainer = document.querySelector("#sections[data-section]");
 if (sectionContainer && typeof zadContent !== "undefined") {
   const section = zadContent.sections.find(({ id }) => id === sectionContainer.dataset.section);
-  if (section) renderSection(section, sectionContainer);
+  if (section) renderSection(translatedSection(section), sectionContainer);
 }
 
 function initializeMenu(menu, nav) {
+  const language = document.querySelector(".site-language");
   function setMenu(open) {
+    if (open && language) language.open = false;
     menu.setAttribute("aria-expanded", open);
     nav.setAttribute("aria-expanded", open);
   }
 
   menu.addEventListener("click", () => setMenu(menu.getAttribute("aria-expanded") === "false"));
+  language?.addEventListener("toggle", () => {
+    if (language.open) setMenu(false);
+  });
   nav.addEventListener("click", (event) => {
     if (event.target.closest("a")) setMenu(false);
   });
@@ -150,7 +204,7 @@ if (contactLink && typeof zadContent !== "undefined" && zadContent.contactEmail)
   contactLink.href = "mailto:" + zadContent.contactEmail;
   contactLink.hidden = false;
   const contactNote = document.querySelector("#contact-note");
-  if (contactNote) contactNote.textContent = "أرسل اقتراحًا لمادة جديدة أو نبّهنا إلى تصحيح في المحتوى.";
+  if (contactNote) contactNote.textContent = siteText("contact_live", "أرسل اقتراحًا لمادة جديدة أو نبّهنا إلى تصحيح في المحتوى.");
 }
 
 function redirectLegacySection() {
@@ -200,21 +254,21 @@ if (homeAskForm) {
   if (destination.origin === location.origin && /^https?:$/.test(location.protocol)) {
     submit.disabled = false;
   } else {
-    status.textContent = "افتح «اسأل زاد» من القائمة أو من الأيقونة أسفل الصفحة.";
+    status.textContent = siteText("draft_open", "افتح «اسأل زاد» من القائمة أو من الأيقونة أسفل الصفحة.");
   }
   homeAskForm.addEventListener("submit", event => {
     event.preventDefault();
     if (submit.disabled) return;
     const question = input.value.trim();
     if (!question || question.length > input.maxLength) {
-      status.textContent = "اكتب سؤالك أولًا في حدود ٥٠٠ حرف.";
+      status.textContent = siteText("draft_empty", "اكتب سؤالك أولًا في حدود ٥٠٠ حرف.");
       input.focus();
       return;
     }
     try {
       sessionStorage.setItem(askDraftKey, JSON.stringify({question, expiresAt: Date.now() + 120000}));
     } catch {
-      status.textContent = "تعذّر نقل السؤال عبر هذا المتصفح. افتح «اسأل زاد» من الأيقونة أسفل الصفحة.";
+      status.textContent = siteText("draft_failed", "تعذّر نقل السؤال عبر هذا المتصفح. افتح «اسأل زاد» من الأيقونة أسفل الصفحة.");
       return;
     }
     input.value = "";

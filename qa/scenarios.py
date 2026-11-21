@@ -10,7 +10,7 @@ import re
 import threading
 from urllib.parse import parse_qs, unquote_plus, urljoin, urlsplit
 
-from audit import (Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
+from audit import (GUIDE_LANGUAGES, SITE_LANGUAGES, Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
                    verify_adhkar_navigation, verify_home_menu, verify_homepage, without_overflow)
 from playwright.sync_api import expect, sync_playwright
 
@@ -290,8 +290,9 @@ def reading_cycle(page):
 def guide_history(page):
     guide = page.locator("#discover-islam")
     expect(guide).to_have_attribute("open", "")
+    expect(guide.locator(".discover-languages a")).to_have_count(len(GUIDE_LANGUAGES))
     address = page.url.split("#")[0]
-    for code, direction in (("ar", "rtl"), ("en", "ltr"), ("fr", "ltr"), ("es", "ltr")):
+    for code, direction in GUIDE_LANGUAGES.items():
         prefix = f"discover-{code}"
         guide.locator(f'.discover-languages a[href="#{prefix}"]').click()
         expect(guide.locator(f"#{prefix}")).to_have_attribute("dir", direction)
@@ -301,14 +302,68 @@ def guide_history(page):
         expect(page).to_have_url(address + f"#{prefix}-shahada")
         expect(guide.locator(f"#{prefix}-shahada blockquote")).to_have_count(2)
         without_overflow(page)
+    second_last, last = list(GUIDE_LANGUAGES)[-2:]
     page.go_back()
-    expect(page.locator("#discover-es")).to_have_attribute("open", "")
+    expect(page.locator(f"#discover-{last}")).to_have_attribute("open", "")
     page.go_back()
-    expect(page.locator("#discover-fr")).to_have_attribute("open", "")
+    expect(page.locator(f"#discover-{second_last}")).to_have_attribute("open", "")
     page.go_forward()
-    expect(page.locator("#discover-es")).to_have_attribute("open", "")
+    expect(page.locator(f"#discover-{last}")).to_have_attribute("open", "")
     page.reload()
-    expect(page.locator("#discover-es")).to_have_attribute("open", "")
+    expect(page.locator(f"#discover-{last}")).to_have_attribute("open", "")
+
+
+TRANSLATED_HEADINGS = {
+    "": {"en": "Knowledge to sustain you", "ur": "علم آپ کا زادِ راہ", "zh": "以知识充实自己",
+         "fr": "Le savoir pour vous nourrir", "ar": "زَادُكَ مِنَ الْعِلْمِ"},
+    "quran/": {"en": "Quran", "ur": "قرآن کریم", "zh": "古兰经", "fr": "Coran", "ar": "القرآن الكريم"},
+    "adhkar/morning/": {"en": "Morning remembrances", "ur": "صبح کے اذکار", "zh": "晨间赞念",
+                        "fr": "Rappels du matin", "ar": "أذكار الصباح"},
+}
+
+
+def language_navigation(page, *, routes=TRANSLATED_HEADINGS):
+    site = page.url
+    language_menu = page.locator("header details.site-language")
+    routes_tested = 0
+    for route in routes:
+        page.goto(urljoin(site, route), wait_until="domcontentloaded")
+        translations = TRANSLATED_HEADINGS[route]
+        expected = {code: urljoin(site, (f"{code}/" if code != "ar" else "") + route)
+                    for code in SITE_LANGUAGES}
+        original_heading = page.locator("main h1")
+        expect(original_heading).to_contain_text(translations["ar"])
+        original_entry = page.locator("#quran article.card h3").first.inner_text() if route == "quran/" else None
+        for code in ("en", "ur", "zh", "fr", "ar"):
+            language_menu.locator("summary").press("Enter")
+            expect(language_menu).to_have_attribute("open", "")
+            options = language_menu.locator(".site-language-links a")
+            expect(options).to_have_count(len(SITE_LANGUAGES))
+            assert options.evaluate_all("links => Object.fromEntries(links.map(link => [link.hreflang, link.href]))") == expected
+            without_overflow(page)
+            language_menu.locator(f'.site-language-links a[hreflang="{code}"]').click()
+            expect(page).to_have_url(expected[code])
+            page.wait_for_load_state("load")
+            expect(page.locator("html")).to_have_attribute("lang", code)
+            expect(page.locator("html")).to_have_attribute("dir", SITE_LANGUAGES[code])
+            expect(language_menu.locator(f'a[hreflang="{code}"]')).to_have_attribute("aria-current", "true")
+            expect(page.locator("main h1")).to_contain_text(translations[code])
+            if route == "quran/":
+                cards = page.locator("#quran article.card")
+                expect(cards).to_have_count(8)
+                first_heading = cards.first.locator("h3")
+                if code != "ar":
+                    expect(first_heading).not_to_have_text(original_entry)
+                expect(cards.first.locator('a[href^="https://"]').first).to_be_visible()
+            elif route == "adhkar/morning/":
+                cards = page.locator("#adhkar-category article.card")
+                expect(cards).to_have_count(9)
+                expect(cards.first.locator('blockquote[lang="ar"][dir="rtl"]')).to_be_visible()
+                if code != "ar":
+                    expect(cards.first.locator(".quote-meaning")).to_be_visible()
+            without_overflow(page)
+            routes_tested += 1
+    return {"localized_route_visits": routes_tested}
 
 
 def check_prayer_time(page, city):
@@ -352,10 +407,11 @@ def public_cases(suite, browser, device):
               lambda: visit("adhkar", verify_adhkar_navigation, device=device))
     suite.run("عام | جميع مرشحات الفتاوى وفتح كل سؤال", lambda: visit("faq", faq_filters))
     suite.run("عام | إكمال جميع السور والحفظ والتراجع وإعادة الضبط", lambda: visit("reading", reading_cycle))
-    suite.run("عام | اللغات الأربع ورجوع المتصفح وإعادة التحميل", lambda: visit("discover", guide_history, device=device))
+    suite.run("عام | تبديل لغة الموقع مع البقاء في الصفحة نفسها", lambda: visit("", language_navigation, device=device))
+    suite.run("عام | لغات الدليل الست ورجوع المتصفح وإعادة التحميل", lambda: visit("discover", guide_history, device=device))
 
     def old_addresses(page):
-        for code in ("ar", "en", "fr", "es"):
+        for code in GUIDE_LANGUAGES:
             page.goto(PUBLIC + f"discover/{code}/index.html")
             expect(page).to_have_url(section_address(PUBLIC, "discover") + f"#discover-{code}")
             expect(page.locator(f"#discover-{code}")).to_have_attribute("open", "")
@@ -771,6 +827,11 @@ def local_cases(suite, browser, origin):
         )
         assert not missing, f"Broken fallback links: {missing}"
     run("إرشادات تعطيل JavaScript وروابط الدليل", no_js, section="discover", java_script_enabled=False)
+    run("تبديل لغة الموقع واختبار العناوين والمحتوى على عرض 320 بكسل",
+        language_navigation, section="", viewport={"width": 320, "height": 750})
+    run("قائمة اللغة العادية والصفحات الثابتة تعمل دون JavaScript",
+        lambda page: language_navigation(page, routes=("", "adhkar/morning/")),
+        section="", java_script_enabled=False)
     run("فهرس الأذكار وصفحاتها ومصادرها مع تعطيل JavaScript",
         verify_adhkar_navigation, section="adhkar", java_script_enabled=False)
     run("ترشيح الفتاوى وفتح جميع الأسئلة بعد فصل صفحات الأذكار", faq_filters, section="faq")
@@ -1125,6 +1186,7 @@ def main():
 def webkit_public_cases(suite, browser, device):
     for name, section, check in (
         ("فتح الصفحة بأبعاد iPhone", "", verify_sections),
+        ("تبديل لغة الموقع في صفحاتها المترجمة", "", language_navigation),
         ("اللغات والرجوع", "discover", guide_history),
         ("صفحات الأذكار المستقلة والرجوع إلى الفهرس", "adhkar", verify_adhkar_navigation),
         ("الفتاوى ومرشحاتها", "faq", faq_filters),

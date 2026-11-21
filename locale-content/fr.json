@@ -1,0 +1,808 @@
+{
+  "sections": {
+    "worship": {
+      "title": "Apprendre les ablutions et la prière",
+      "intro": "Un guide d’initiation aux ablutions et aux gestes d’une unité de prière.",
+      "items": [
+        {
+          "title": "Comment faire les ablutions",
+          "text": "Le hadith transmis par Othman décrit le lavage répété trois fois pour certaines parties du corps et le passage des mains mouillées sur la tête. Reportez-vous au récit pour le déroulement complet.",
+          "steps": [
+            "Formez l’intention de faire les ablutions. Lavez-vous les mains, rincez-vous la bouche, puis aspirez un peu d’eau par le nez et rejetez-la.",
+            "Lavez-vous le visage, puis les bras jusqu’aux coudes, en commençant par le droit.",
+            "Passez les mains mouillées sur la tête, puis lavez-vous les pieds jusqu’aux chevilles, en commençant par le droit."
+          ],
+          "sourceTitle": "صفة الوضوء"
+        },
+        {
+          "title": "Les gestes d’une unité de prière",
+          "text": "Les récits ci-dessous décrivent le tachahhoud, l’attestation récitée en position assise, et le salut final.",
+          "steps": [
+            "Tournez-vous vers la qibla et dites « Allahou akbar ». Si vous le pouvez, restez debout pour réciter la Fatiha.",
+            "Inclinez-vous jusqu’à être stable, puis redressez-vous complètement.",
+            "Prosternez-vous jusqu’à être stable, asseyez-vous posément, puis prosternez-vous de nouveau. Reprenez ces gestes dans les unités de prière suivantes."
+          ],
+          "sourceTitle": "أعمال الركعة"
+        },
+        {
+          "title": "Quand faire les ablutions sèches ?",
+          "text": "Le verset sur la purification prévoit les ablutions sèches, appelées tayammoum, lorsqu’il n’y a pas d’eau dans les cas qu’il précise. Le hadith transmis par Ammar explique comment passer les mains sur le visage et les mains. Pour une plaie ou une maladie qui empêche l’usage de l’eau, demandez conseil en exposant la situation.",
+          "sourceTitle": "متى أتيمّم؟"
+        },
+        {
+          "title": "Prier quand on ne peut pas se tenir debout",
+          "text": "Le hadith transmis par Imran ibn Husayn décrit cette progression, qui adapte la position de prière aux capacités de chacun.",
+          "meaning": "Prie debout. Si tu ne le peux pas, prie assis. Si tu ne le peux pas, prie allongé sur le côté.",
+          "sourceTitle": "الصلاة عند العجز عن القيام"
+        },
+        {
+          "title": "Le tachahhoud",
+          "text": "Lisez la formule rapportée par Ibn Massoud. Dans ce récit, le Prophète enseignait le tachahhoud à ses compagnons comme il leur enseignait une sourate du Coran.",
+          "sourceTitle": "التشهّد"
+        },
+        {
+          "title": "La prière en commun",
+          "text": "Selon le hadith transmis par Ibn Omar, la prière en commun dépasse la prière individuelle de vingt-sept degrés. Le texte se trouve dans le chapitre sur le mérite de la prière en commun.",
+          "sourceTitle": "صلاة الجماعة"
+        },
+        {
+          "title": "Ce qu’on dit en s’inclinant et en se prosternant",
+          "text": "Dans le récit où Houdayfa décrit la prière nocturne du Prophète, la première formule est dite à l’inclination et la seconde à la prosternation.",
+          "meaning": "Gloire à mon Seigneur, l’Immense. Gloire à mon Seigneur, le Très-Haut.",
+          "sourceTitle": "ذكر الركوع والسجود"
+        },
+        {
+          "title": "Prier pour le Prophète pendant le tachahhoud",
+          "text": "Le récit transmis par Kaab ibn Oujra relate la question des compagnons sur la manière de prier pour le Prophète. Retrouvez la formule dans le hadith.",
+          "sourceTitle": "الصلاة على النبي ﷺ في التشهّد"
+        }
+      ]
+    },
+    "reading": {
+      "title": "Programme hebdomadaire de lecture",
+      "intro": "Lisez une courte sourate par jour et marquez-la comme lue. Progressez ainsi vers une lecture régulière. Après chaque lecture, choisissez un verset pour en lire le commentaire ou écoutez la sourate récitée par un lecteur qualifié.",
+      "items": []
+    },
+    "quran": {
+      "title": "Le Coran et les mérites de sa récitation",
+      "intro": "Les mérites de la récitation, le commentaire de quelques sourates et des pistes pour méditer le Coran.",
+      "items": [
+        {
+          "title": "Un Livre béni à méditer",
+          "text": "Le verset présente la méditation des significations du Coran comme l’un des buts de sa révélation. Lisez-le dans son contexte et consultez un commentaire pour en comprendre le sens.",
+          "meaning": "C’est un Livre béni que Nous avons fait descendre vers toi pour que l’on médite ses versets et que les personnes douées de discernement s’en souviennent.",
+          "sourceTitle": "كتاب مبارك للتدبر"
+        },
+        {
+          "title": "Le Coran intercède pour ceux qui le lisent",
+          "text": "Extrait d’un hadith transmis par Abou Oumama al-Bahili sur le mérite de la récitation.",
+          "meaning": "Récitez le Coran, car au Jour de la Résurrection il viendra intercéder pour ceux qui s’y attachent.",
+          "sourceTitle": "القرآن يشفع لأصحابه"
+        },
+        {
+          "title": "Commencer par le commentaire de la Fatiha",
+          "text": "Lisez le commentaire de la Fatiha par le cheikh Abd al-Rahman al-Saadi. La sourate passe de la louange de Dieu à l’adoration de Dieu seul et à l’appel à Son aide, puis à la demande de guidance.",
+          "sourceTitle": "ابدأ بتفسير الفاتحة"
+        },
+        {
+          "title": "La sourate al-Ikhlas et l’unicité de Dieu",
+          "text": "Découvrez le sens de cette sourate dans le commentaire d’al-Saadi. Un hadith authentique transmis par Abou Saïd al-Khoudri indique qu’elle équivaut à un tiers du Coran.",
+          "sourceTitle": "سورة الإخلاص والتوحيد"
+        },
+        {
+          "title": "Réciter couramment ou avec difficulté",
+          "text": "Le recueil de Mouslim évoque le mérite de la récitation maîtrisée et la double récompense de celui qui récite avec hésitation et difficulté. Commencez selon vos capacités et améliorez votre récitation progressivement.",
+          "sourceTitle": "الماهر بالقرآن ومن تشق عليه القراءة"
+        },
+        {
+          "title": "Apprendre et enseigner le Coran",
+          "text": "Ce hadith est transmis par Othman ibn Affan. Prenez le temps de lire avec un enseignant qualifié, puis transmettez ce que vous maîtrisez.",
+          "meaning": "Les meilleurs d’entre vous sont ceux qui apprennent le Coran et l’enseignent.",
+          "sourceTitle": "تعلّم القرآن وتعليمه"
+        },
+        {
+          "title": "Le mérite de la sourate al-Baqara",
+          "text": "Le Prophète a expliqué que s’attacher à la sourate al-Baqara est une bénédiction. Lisez le récit complet dans le livre de la prière des voyageurs du recueil de Mouslim.",
+          "sourceTitle": "فضل سورة البقرة"
+        },
+        {
+          "title": "Une méthode pour méditer le Coran",
+          "text": "Ces étapes d’apprentissage s’inspirent du but général de la méditation.",
+          "steps": [
+            "Lisez le verset ainsi que ceux qui le précèdent et le suivent pour en comprendre le contexte.",
+            "Consultez un commentaire fiable pour éclairer le vocabulaire et le sens du verset.",
+            "Demandez-vous quelle action vous pourriez mettre en pratique à partir de ce que vous avez compris."
+          ],
+          "sourceTitle": "طريقة عملية للتدبّر"
+        }
+      ]
+    },
+    "lessons": {
+      "title": "Prêches et cours",
+      "intro": "De courts textes pour la lecture personnelle et la préparation de cours.",
+      "items": [
+        {
+          "title": "Prêche bref sur la bonne parole",
+          "text": "Louange à Dieu, et que la prière et la paix soient sur Son Messager. Parmi les occasions de faire le bien chaque jour figure le choix d’une parole bienveillante. Dieu dit « Adressez aux gens de bonnes paroles. » Un hadith authentique dit que la bonne parole est une aumône. Commençons avec ceux que nous rencontrons à la maison et au travail. Rendons le salut, remercions ceux qui nous font du bien et choisissons la douceur dans le désaccord. Ô Dieu, guide-nous vers le meilleur comportement et aide-nous à faire ce que Tu aimes et agrées.",
+          "sourceTitle": "خطبة موجزة | الكلمة الطيبة"
+        },
+        {
+          "title": "Cours bref sur la douceur",
+          "text": "Le Prophète a enseigné que la douceur embellit tout ce qu’elle accompagne et que son absence enlaidit toute chose. Dans l’enseignement ou la correction, expliquez l’erreur clairement, respectez la dignité de votre interlocuteur et donnez-lui la possibilité de poser des questions.",
+          "sourceTitle": "درس قصير | الرفق في المعاملة"
+        },
+        {
+          "title": "Prêche bref sur la maîtrise de la parole",
+          "text": "Louange à Dieu, et que la prière et la paix soient sur Son Messager. Dieu a ordonné la parole juste. Le Prophète a recommandé à celui qui croit en Dieu et au Jour dernier de dire du bien ou de se taire. Examinons ce que nous disons et publions, vérifions les informations et remplaçons la médisance par l’invocation et le conseil bienveillant. Ô Dieu, améliore nos paroles et nos actes.",
+          "sourceTitle": "خطبة موجزة | مراقبة اللسان"
+        },
+        {
+          "title": "Cours sur les parents et les liens familiaux",
+          "text": "La sourate al-Isra associe l’adoration de Dieu à la bienfaisance envers les parents. Cela commence par leur parler calmement, les aider dans la mesure du possible et prier pour eux. Un hadith recommande d’entretenir les liens familiaux même lorsque des proches les rompent.",
+          "sourceTitle": "درس | برّ الوالدين وصلة الرحم"
+        },
+        {
+          "title": "Cours sur la vérification des informations",
+          "text": "La sourate al-Houjourat enjoint de vérifier l’information apportée par une personne qui se conduit mal. Avant de relayer une nouvelle, vérifiez-en la source et le contexte, surtout lorsque les droits d’autrui sont en jeu.",
+          "sourceTitle": "درس | أمانة الخبر"
+        },
+        {
+          "title": "Cours sur le repentir et l’espérance",
+          "text": "Le Coran invite à ne pas désespérer de la miséricorde de Dieu et à revenir à Lui. Se repentir implique d’abandonner la faute, de la regretter, de prendre la résolution de ne pas y revenir et, si les droits d’autrui sont concernés, de les rétablir.",
+          "sourceTitle": "درس | التوبة والرجاء"
+        },
+        {
+          "title": "Cours sur la bienveillance envers le voisinage",
+          "text": "La bienfaisance envers les voisins passe par le fait de ne pas leur nuire, de les aider et de les traiter avec bienveillance. Le Prophète a rapporté que Gabriel lui recommandait si souvent de prendre soin du voisin qu’il pensa que celui-ci deviendrait un héritier.",
+          "sourceTitle": "درس | الرفق بالجار"
+        }
+      ]
+    },
+    "hadith": {
+      "title": "Hadiths prophétiques authentiques",
+      "intro": "Des extraits des deux recueils authentiques d’al-Boukhari et de Mouslim, avec leurs références.",
+      "items": [
+        {
+          "title": "L’intention dans l’action",
+          "text": "Rapporté par Omar ibn al-Khattab. Ayez votre intention à l’esprit au début de chaque action et renouvelez-la si nécessaire.",
+          "meaning": "Les actes valent par les intentions, et chacun obtient selon ce qu’il a voulu.",
+          "sourceTitle": "النية في العمل"
+        },
+        {
+          "title": "Vouloir le bien d’autrui",
+          "text": "Rapporté par Anas ibn Malik.",
+          "meaning": "Nul d’entre vous ne croit pleinement tant qu’il n’aime pas pour son frère ce qu’il aime pour lui-même.",
+          "sourceTitle": "حب الخير للآخرين"
+        },
+        {
+          "title": "La religion est le conseil sincère",
+          "text": "Rapporté par Tamim al-Dari. Le récit précise à qui s’applique ce principe.",
+          "meaning": "La religion est le conseil sincère.",
+          "sourceTitle": "الدين النصيحة"
+        },
+        {
+          "title": "Maîtriser sa langue et sa main",
+          "text": "Rapporté par Abdallah ibn Amr. Le récit encourage à s’abstenir de faire du tort.",
+          "meaning": "Le musulman est celui dont les autres musulmans sont à l’abri de la langue et de la main.",
+          "sourceTitle": "حفظ اللسان واليد"
+        },
+        {
+          "title": "La miséricorde",
+          "text": "Rapporté par Abou Hourayra dans le chapitre sur la tendresse et le baiser donnés aux enfants.",
+          "meaning": "Celui qui ne fait pas miséricorde ne recevra pas de miséricorde.",
+          "sourceTitle": "الرحمة"
+        },
+        {
+          "title": "La maîtrise de soi face à la colère",
+          "text": "Rapporté par Abou Hourayra à propos de la maîtrise de soi au moment de la colère.",
+          "meaning": "Le fort n’est pas celui qui terrasse autrui. Le fort est celui qui se maîtrise lorsqu’il se met en colère.",
+          "sourceTitle": "الرفق والثبات عند الغضب"
+        },
+        {
+          "title": "La constance dans les bonnes actions",
+          "text": "Extrait d’un hadith transmis par Aïcha qui encourage à choisir une bonne action que l’on peut accomplir avec régularité.",
+          "meaning": "Les œuvres les plus aimées de Dieu sont les plus régulières, même si elles sont modestes.",
+          "sourceTitle": "الدوام على العمل الصالح"
+        },
+        {
+          "title": "Le mérite de soulager la détresse",
+          "text": "Le hadith transmis par Abou Hourayra annonce une récompense à qui soulage un croyant d’une difficulté de cette vie. Il souligne aussi le mérite de faciliter les choses à une personne en difficulté et de rechercher le savoir.",
+          "sourceTitle": "فضل تفريج الكرب"
+        },
+        {
+          "title": "Le licite, l’illicite et les cas douteux",
+          "text": "Le Prophète a expliqué que le licite et l’illicite sont clairs et qu’il existe entre eux des cas douteux. Lisez le hadith complet d’al-Nouman ibn Bachir pour comprendre la prudence qu’il enseigne.",
+          "sourceTitle": "الحلال والحرام والشبهات"
+        },
+        {
+          "title": "L’aumône au quotidien",
+          "text": "Selon le hadith transmis par Abou Hourayra, le Prophète a compté la parole bienveillante, l’aide apportée à autrui et le fait d’écarter un danger du chemin parmi les aumônes.",
+          "sourceTitle": "أبواب الصدقة في المعاملة اليومية"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Questions et réponses religieuses",
+      "intro": "Des réponses pédagogiques et des résumés d’avis religieux, avec leurs sources. Pour une situation personnelle, soumettez les détails de votre cas à une personne qualifiée.",
+      "items": [
+        {
+          "title": "Que faire si j’ai oublié une prière ou si j’ai dormi au moment de la faire ?",
+          "text": "Accomplissez-la dès que vous vous en souvenez ou dès votre réveil. Un hadith authentique demande à celui qui a oublié sa prière de l’accomplir quand il s’en souvient.",
+          "topic": "Purification et prière",
+          "sourceTitle": "ماذا أفعل إذا نسيت صلاة أو نمت عنها؟"
+        },
+        {
+          "title": "Puis-je faire une petite aumône ?",
+          "text": "Oui. Le Prophète a encouragé à donner, fût-ce une demi-datte, dans un hadith transmis par Adi ibn Hatim.",
+          "topic": "Zakat et aumône",
+          "sourceTitle": "هل يجوز أن أتصدق بالقليل؟"
+        },
+        {
+          "title": "Les cinq prières sont-elles mentionnées dans le Coran ?",
+          "text": "Le site Islam Question et Réponse rapporte que, selon Ibn Abbas et plusieurs commentateurs, deux versets de la sourate al-Roum renvoient aux horaires des cinq prières. Il indique qu’ils divergent sur le passage qui désigne la prière de la nuit. La Sunna précise les horaires et la manière d’accomplir les prières.",
+          "topic": "Purification et prière",
+          "sourceTitle": "هل ذُكرت الصلوات الخمس في القرآن؟"
+        },
+        {
+          "title": "Peut-on regrouper deux prières à n’importe quel moment ?",
+          "text": "Le site Islam Question et Réponse présente les cas où un motif valable permet le regroupement, notamment certaines situations de voyage, de pluie ou de maladie. Il relève des différences d’avis sur certaines conditions. Le motif, les prières concernées et l’horaire ont une incidence sur la réponse.",
+          "topic": "Purification et prière",
+          "sourceTitle": "هل يُجمع بين الصلاتين في كل وقت؟"
+        },
+        {
+          "title": "Comment calculer le milieu de la nuit pour la prière d’al-icha ?",
+          "text": "Le site Islam Question et Réponse calcule le milieu de la nuit à partir de la durée entre le coucher du soleil et l’aube. Il peut donc précéder ou suivre le minuit de l’heure civile. Le récit transmis par Abdallah ibn Amr mentionne que l’horaire d’al-icha s’étend jusqu’au milieu de la nuit.",
+          "topic": "Purification et prière",
+          "sourceTitle": "كيف يُحسب نصف الليل في وقت العشاء؟"
+        },
+        {
+          "title": "La prière du tarawih est-elle prescrite aux femmes ?",
+          "text": "Le site Islam Question et Réponse explique que le tarawih est une pratique prophétique fortement recommandée, qu’une femme peut accomplir chez elle. Le site détaille aussi l’avis et les conditions sur sa présence à la mosquée.",
+          "topic": "Jeûne",
+          "sourceTitle": "هل صلاة التراويح مشروعة للنساء؟"
+        },
+        {
+          "title": "Quel était l’avis du cheikh Ibn Baz sur le spray nasal pendant le jeûne ?",
+          "text": "Selon Islam Question et Réponse, le cheikh Abd al-Aziz ibn Baz en autorisait l’usage en cas de nécessité et estimait plus prudent de le reporter à la nuit si possible. Cet avis lui est attribué pour le cas décrit. Consultez le médecin et une personne qualifiée sur les détails du traitement.",
+          "topic": "Jeûne",
+          "sourceTitle": "ماذا ورد عن الشيخ ابن باز في بخّاخ الأنف للصائم؟"
+        },
+        {
+          "title": "Que faire si j’ai bu ou mangé par oubli en jeûnant ?",
+          "text": "Selon un hadith transmis par Abou Hourayra, la personne qui boit ou mange par oubli doit poursuivre son jeûne.",
+          "topic": "Jeûne",
+          "sourceTitle": "ماذا أفعل إذا أكلت أو شربت ناسيًا وأنا صائم؟"
+        },
+        {
+          "title": "Sur quoi repose la dispense de jeûne accordée au malade et au voyageur ?",
+          "text": "Le verset sur le jeûne mentionne la dispense accordée au malade et au voyageur et le fait de rattraper le même nombre de jours. Les conditions et le rattrapage varient selon le cas.",
+          "topic": "Jeûne",
+          "sourceTitle": "ما أصل رخصة الإفطار للمريض والمسافر؟"
+        },
+        {
+          "title": "À qui peut-on verser la zakat ?",
+          "text": "La sourate al-Tawba énumère huit catégories de bénéficiaires, notamment les pauvres, les personnes dans le besoin, les personnes endettées et les voyageurs de passage. Le commentaire d’al-Saadi aide à les comprendre. Consultez une personne qualifiée pour un cas particulier.",
+          "topic": "Zakat et aumône",
+          "sourceTitle": "من مصارف الزكاة؟"
+        },
+        {
+          "title": "Comment vérifier un hadith ou un avis religieux reçu dans un message ?",
+          "text": "Cherchez le texte, la référence et l’appréciation des spécialistes dans l’encyclopédie des hadiths. Pour un avis religieux, lisez l’intégralité des propos dans leur source et tenez compte des conditions et de la question à laquelle l’auteur répondait.",
+          "topic": "Recherche du savoir",
+          "sourceTitle": "كيف أتحقق من حديث أو فتوى وجدتها في رسالة؟"
+        }
+      ]
+    },
+    "media": {
+      "title": "Cours audio et vidéo",
+      "intro": "Des récitations à écouter et des cours à suivre sur leurs sites d’origine.",
+      "items": [
+        {
+          "title": "Écouter la sourate al-Fatiha",
+          "text": "Ouvrez la sourate al-Fatiha et lancez la lecture pour écouter la récitation dans le lecteur du Coran.",
+          "sourceTitle": "استمع إلى سورة الفاتحة"
+        },
+        {
+          "title": "Cours et conférences en vidéo",
+          "text": "Parcourez les ressources publiées sur le site du cheikh Abd al-Razzaq al-Badr et choisissez un sujet dans le répertoire des cours.",
+          "sourceTitle": "دروس ومحاضرات مرئية"
+        },
+        {
+          "title": "Récitations du Coran par différents lecteurs",
+          "text": "Choisissez un lecteur et une sourate dans la bibliothèque audio du Coran. Le site précise pour chaque enregistrement le nom du lecteur et la tradition de récitation.",
+          "sourceTitle": "مصاحف مسموعة بروايات وقرّاء مختلفين"
+        },
+        {
+          "title": "Commentaire du Coran et sciences coraniques",
+          "text": "Des cours audio classés sur le commentaire du Coran et les sciences coraniques, sur le site du cheikh Abd al-Razzaq al-Badr.",
+          "sourceTitle": "تفسير القرآن وعلومه"
+        },
+        {
+          "title": "Cours audio sur la croyance et les invocations",
+          "text": "Choisissez un cours dans l’index de la croyance ou dans celui des invocations et rappels, selon le sujet qui vous intéresse.",
+          "sourceTitle": "العقيدة والأذكار في دروس صوتية"
+        },
+        {
+          "title": "Commentaires d’ouvrages et conférences",
+          "text": "Retrouvez les commentaires d’ouvrages et les conférences dans la bibliothèque audio du site officiel du cheikh Abd al-Aziz ibn Baz.",
+          "sourceTitle": "شروح الكتب والمحاضرات"
+        },
+        {
+          "title": "Conférences classées par sujet",
+          "text": "Parcourez le répertoire des conférences du cheikh Abd al-Razzaq al-Badr et consultez les ressources sur son site.",
+          "sourceTitle": "محاضرات مرتبة حسب الموضوع"
+        }
+      ]
+    },
+    "occasions": {
+      "title": "Temps forts du calendrier musulman",
+      "intro": "Découvrez quelques périodes de pratique et d’adoration à la lumière du Coran et de la Sunna.",
+      "items": [
+        {
+          "title": "Le mois de Ramadan",
+          "text": "C’est le mois du jeûne et celui durant lequel le Coran a été révélé. Le verset sur le jeûne expose la règle du mois, la dispense en cas de voyage ou de maladie, et le rattrapage des jours.",
+          "sourceTitle": "شهر رمضان"
+        },
+        {
+          "title": "Les dix premiers jours de Dhou al-Hijja",
+          "text": "Un hadith authentique d’Ibn Abbas évoque le mérite des bonnes actions durant ces jours, parmi lesquelles le rappel de Dieu, l’aumône et l’entretien des liens familiaux.",
+          "sourceTitle": "عشر ذي الحجة"
+        },
+        {
+          "title": "Les dix dernières nuits et la Nuit du Destin",
+          "text": "Le Prophète encourageait à rechercher la Nuit du Destin dans les nuits impaires des dix dernières nuits de Ramadan. La sourate al-Qadr la décrit comme meilleure que mille mois.",
+          "sourceTitle": "العشر الأواخر وليلة القدر"
+        },
+        {
+          "title": "La zakat al-fitr et la fête de la rupture du jeûne",
+          "text": "Ibn Omar rapporte que le Prophète a ordonné de verser la zakat al-fitr avant que les gens ne partent pour la prière de la fête. Pour en connaître le montant et les modalités dans votre pays, consultez un avis religieux fiable.",
+          "sourceTitle": "زكاة الفطر وعيد الفطر"
+        },
+        {
+          "title": "Les six jours de Chawwal",
+          "text": "Un hadith authentique transmis par Abou Ayyoub al-Ansari rapporte le mérite de faire suivre le jeûne du Ramadan de six jours de jeûne en Chawwal.",
+          "sourceTitle": "ستة أيام من شوّال"
+        },
+        {
+          "title": "Les jours de Arafa et d’Achoura",
+          "text": "Le hadith transmis par Abou Qatada indique que le jeûne de Arafa expie les fautes de l’année précédente et de l’année suivante, et que celui d’Achoura expie les fautes de l’année précédente. Il est également authentiquement rapporté que le Prophète n’a pas jeûné au cours de sa station à Arafa durant le pèlerinage.",
+          "sourceTitle": "عرفة وعاشوراء"
+        },
+        {
+          "title": "La fête du Sacrifice",
+          "text": "Le hadith transmis par al-Bara ibn Azib explique le lien entre le moment du sacrifice et celui de la prière de la fête. Consultez une personne qualifiée pour les conditions et les horaires de cette pratique dans votre pays.",
+          "sourceTitle": "عيد الأضحى"
+        },
+        {
+          "title": "Le vendredi",
+          "text": "La sourate al-Joumoua ordonne de se rendre au rappel de Dieu à l’appel à la prière du vendredi. Le Prophète a également expliqué le mérite de ce jour dans un hadith transmis par Abou Hourayra.",
+          "sourceTitle": "يوم الجمعة"
+        }
+      ]
+    },
+    "belief": {
+      "title": "La croyance et les fondements de la foi",
+      "intro": "Une introduction aux fondements de la foi et à l’unicité de Dieu à partir du Coran et de la Sunna.",
+      "items": [
+        {
+          "title": "Les six piliers de la foi",
+          "text": "Dans le hadith de Gabriel, le Prophète explique que la foi comprend la croyance en Dieu, en Ses anges, en Ses livres, en Ses messagers, au Jour dernier et au destin, dans ce qu’il comporte de bien et de mal. Le récit distingue aussi l’islam, la foi et l’ihsan.",
+          "sourceTitle": "أركان الإيمان الستة"
+        },
+        {
+          "title": "Adorer Dieu seul",
+          "text": "La Fatiha invite à adorer Dieu seul et à Lui demander aide. La sourate al-Ikhlas affirme Son unicité et qu’Il n’a pas d’égal.",
+          "sourceTitle": "توحيد الله في العبادة"
+        },
+        {
+          "title": "La foi en les prophètes et les messagers",
+          "text": "Les musulmans croient aux révélations de Dieu à Ses prophètes, dont Abraham, Moïse et Jésus. Le Coran présente Mohammed comme le sceau des prophètes.",
+          "sourceTitle": "الإيمان بالأنبياء والرسل"
+        },
+        {
+          "title": "L’ihsan et la conscience du regard de Dieu",
+          "text": "Dans le hadith de Gabriel, le Prophète définit l’ihsan comme le fait d’adorer Dieu comme si on Le voyait, car même si on ne Le voit pas, Lui nous voit.",
+          "sourceTitle": "الإحسان ومراقبة الله"
+        },
+        {
+          "title": "Agir et demander l’aide de Dieu",
+          "text": "Ce passage vient d’un hadith d’Abou Hourayra. La suite du récit indique ce que le croyant peut dire lorsque survient une épreuve.",
+          "meaning": "Recherche ce qui t’est bénéfique, demande l’aide de Dieu et ne baisse pas les bras.",
+          "sourceTitle": "الأخذ بالأسباب والاستعانة بالله"
+        }
+      ]
+    },
+    "seerah": {
+      "title": "La vie du Prophète",
+      "intro": "Des étapes de la vie du Prophète avec les références des récits correspondants.",
+      "items": [
+        {
+          "title": "Le début de la révélation",
+          "text": "Le hadith transmis par Aïcha raconte la retraite dans la grotte de Hira, la venue de Gabriel et le soutien que Khadija apporta au Prophète après la révélation.",
+          "sourceTitle": "بدء الوحي"
+        },
+        {
+          "title": "L’émigration vers Médine",
+          "text": "La sourate al-Tawba évoque les deux compagnons dans la grotte. Le récit transmis par Aïcha détaille les préparatifs et le voyage.",
+          "sourceTitle": "الهجرة إلى المدينة"
+        },
+        {
+          "title": "Le traité d’al-Houdaybiya",
+          "text": "Al-Houdaybiya eut lieu la sixième année de l’Hégire. Le hadith authentique relate les négociations de paix. Consultez le commentaire de la sourate al-Fath pour comprendre le contexte de ses versets.",
+          "sourceTitle": "صلح الحديبية"
+        },
+        {
+          "title": "Le pèlerinage d’adieu",
+          "text": "Jabir ibn Abdallah a relaté en détail le pèlerinage du Prophète, de l’entrée en état de consécration jusqu’aux rites. Son récit permet de suivre les étapes et de situer le sermon prononcé à Arafa.",
+          "sourceTitle": "حجة الوداع"
+        }
+      ]
+    }
+  },
+  "adhkar": {
+    "morning": {
+      "title": "Rappels du matin",
+      "intro": "Invocations et récitations à dire le matin.",
+      "items": [
+        {
+          "title": "Au matin, la souveraineté appartient à Dieu",
+          "text": "Le cheikh Ibn Baz cite cette formule du matin dans son avis. Le récit transmis par Ibn Massoud indique comment commence ce rappel au matin.",
+          "meaning": "Nous sommes entrés dans le matin, et la souveraineté appartient à Dieu. Nul n’est digne d’adoration si ce n’est Dieu, seul, sans associé. À Lui la souveraineté et la louange, et Il est capable de toute chose. Ô Dieu, je Te demande le bien de ce jour, de ce qu’il contient et de ce qui le suit. Je cherche refuge auprès de Toi contre le mal de ce jour, de ce qu’il contient et de ce qui le suit. Seigneur, je cherche refuge auprès de Toi contre la paresse, les maux de la vieillesse, le châtiment du Feu et celui de la tombe.",
+          "sourceTitle": "أصبحنا وأصبح الملك لله"
+        },
+        {
+          "title": "Ô Dieu, par Toi nous arrivons au matin",
+          "text": "Formule du matin rapportée par Abou Hourayra.",
+          "meaning": "Ô Dieu, par Toi nous arrivons au matin et au soir, par Toi nous vivons et par Toi nous mourons. C’est vers Toi que se fera la résurrection.",
+          "sourceTitle": "اللهم بك أصبحنا"
+        },
+        {
+          "title": "Al-Ikhlas et les deux sourates de protection",
+          "text": "Les trois sourates se récitent le matin et le soir. Le récit transmis par Abdallah ibn Khoubayb précise le nombre de récitations.",
+          "repeat": "3 fois par sourate",
+          "meaning": "Dis « Il est Dieu, l’Unique. Dieu, Celui dont tous dépendent. Il n’a pas engendré et n’a pas été engendré. Nul ne Lui est égal. »\nDis « Je cherche refuge auprès du Seigneur de l’aube contre le mal de ce qu’Il a créé, contre le mal de l’obscurité lorsqu’elle se répand, contre le mal de celles qui soufflent sur les nœuds et contre le mal de l’envieux quand il envie. »\nDis « Je cherche refuge auprès du Seigneur des humains, du Souverain des humains, du Dieu des humains, contre le mal du tentateur qui se dérobe et souffle dans les cœurs des humains, qu’il soit parmi les djinns ou les humains. »",
+          "sourceTitle": "الإخلاص والمعوّذتان"
+        },
+        {
+          "title": "La meilleure demande de pardon",
+          "text": "Le Prophète a exposé le mérite de dire cette formule avec conviction, de jour comme de nuit, dans le récit transmis par Chaddad ibn Aws.",
+          "meaning": "Ô Dieu, Tu es mon Seigneur. Nul n’est digne d’adoration si ce n’est Toi. Tu m’as créé et je suis Ton serviteur. Je respecte autant que je le peux mon engagement envers Toi et Ta promesse. Je cherche refuge auprès de Toi contre le mal de mes actes. Je reconnais Tes bienfaits envers moi et je reconnais ma faute. Pardonne-moi, car nul autre que Toi ne pardonne les péchés.",
+          "sourceTitle": "سيّد الاستغفار"
+        },
+        {
+          "title": "Au nom de Dieu, avec le nom duquel rien ne nuit",
+          "text": "À dire trois fois chaque matin et chaque soir, selon le hadith transmis par Othman ibn Affan.",
+          "repeat": "3 fois",
+          "meaning": "Au nom de Dieu, avec le nom duquel rien sur terre ni dans le ciel ne peut nuire. Il est Celui qui entend et qui sait toute chose.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Demander le pardon et la préservation",
+          "text": "Le Prophète faisait régulièrement cette invocation le matin et le soir, selon le récit transmis par Abdallah ibn Omar.",
+          "meaning": "Ô Dieu, je Te demande la préservation en ce monde et dans l’au-delà. Ô Dieu, je Te demande le pardon et la préservation pour ma foi, ma vie, mes proches et mes biens. Ô Dieu, couvre ce que je dois garder caché et rassure-moi dans mes frayeurs. Ô Dieu, protège-moi de devant, de derrière, de droite, de gauche et d’au-dessus. Je cherche refuge dans Ta grandeur contre un mal qui me surprendrait par en dessous.",
+          "sourceTitle": "سؤال العفو والعافية"
+        },
+        {
+          "title": "Se protéger du mal de son âme et de Satan",
+          "text": "Le Prophète a enseigné cette formule à Abou Bakr al-Siddiq. Il lui a conseillé de la dire le matin, le soir et au moment de se coucher.",
+          "meaning": "Ô Dieu, Créateur des cieux et de la terre, Toi qui connais l’invisible et le visible, Seigneur et Souverain de toute chose, j’atteste que nul n’est digne d’adoration si ce n’est Toi. Je cherche refuge auprès de Toi contre le mal de mon âme, contre le mal de Satan et contre l’association à Dieu à laquelle il incite.",
+          "sourceTitle": "الاستعاذة من شر النفس والشيطان"
+        },
+        {
+          "title": "Commencer le jour dans la disposition naturelle de l’islam",
+          "text": "Cette formule du matin est rapportée par Abd al-Rahman ibn Abza.",
+          "meaning": "Nous sommes entrés dans le matin dans la disposition naturelle de l’islam, avec la parole qui affirme l’unicité de Dieu, dans la religion de notre prophète Mohammed et la voie de notre père Abraham. Il était voué à Dieu seul, soumis à Lui, et n’était pas de ceux qui Lui donnent des associés.",
+          "sourceTitle": "أصبحنا على فطرة الإسلام"
+        },
+        {
+          "title": "Glorifier et louer Dieu",
+          "text": "Selon le hadith transmis par Abou Hourayra, cette formule se dit cent fois le matin et cent fois le soir.",
+          "repeat": "100 fois",
+          "meaning": "Gloire et louange à Dieu.",
+          "sourceTitle": "التسبيح والتحميد"
+        }
+      ]
+    },
+    "evening": {
+      "title": "Rappels du soir",
+      "intro": "Invocations et récitations à dire le soir.",
+      "items": [
+        {
+          "title": "Au soir, la souveraineté appartient à Dieu",
+          "text": "Cette invocation du soir est rapportée par Abdallah ibn Massoud. Elle demande le bien de la nuit et la protection contre son mal.",
+          "meaning": "Nous sommes entrés dans le soir, et la souveraineté appartient à Dieu. Louange à Dieu. Nul n’est digne d’adoration si ce n’est Dieu, seul, sans associé. À Lui la souveraineté et la louange, et Il est capable de toute chose. Seigneur, je Te demande le bien de cette nuit et de ce qui la suit. Je cherche refuge auprès de Toi contre le mal de cette nuit et de ce qui la suit. Seigneur, je cherche refuge auprès de Toi contre la paresse et les maux de la vieillesse. Seigneur, je cherche refuge auprès de Toi contre le châtiment du Feu et celui de la tombe.",
+          "sourceTitle": "أمسينا وأمسى الملك لله"
+        },
+        {
+          "title": "Ô Dieu, par Toi nous arrivons au soir",
+          "text": "Formule du soir transmise par Abou Hourayra dans le recueil d’Abou Daoud.",
+          "meaning": "Ô Dieu, par Toi nous arrivons au soir, par Toi nous vivons et par Toi nous mourons. C’est vers Toi que se fera la résurrection.",
+          "sourceTitle": "اللهم بك أمسينا"
+        },
+        {
+          "title": "Al-Ikhlas et les deux sourates de protection",
+          "text": "Les trois sourates se récitent le matin et le soir. Le récit transmis par Abdallah ibn Khoubayb précise le nombre de récitations.",
+          "repeat": "3 fois par sourate",
+          "meaning": "Dis « Il est Dieu, l’Unique. Dieu, Celui dont tous dépendent. Il n’a pas engendré et n’a pas été engendré. Nul ne Lui est égal. »\nDis « Je cherche refuge auprès du Seigneur de l’aube contre le mal de ce qu’Il a créé, contre le mal de l’obscurité lorsqu’elle se répand, contre le mal de celles qui soufflent sur les nœuds et contre le mal de l’envieux quand il envie. »\nDis « Je cherche refuge auprès du Seigneur des humains, du Souverain des humains, du Dieu des humains, contre le mal du tentateur qui se dérobe et souffle dans les cœurs des humains, qu’il soit parmi les djinns ou les humains. »",
+          "sourceTitle": "الإخلاص والمعوّذتان"
+        },
+        {
+          "title": "La meilleure demande de pardon",
+          "text": "Le Prophète a exposé le mérite de dire cette formule avec conviction, de jour comme de nuit, dans le récit transmis par Chaddad ibn Aws.",
+          "meaning": "Ô Dieu, Tu es mon Seigneur. Nul n’est digne d’adoration si ce n’est Toi. Tu m’as créé et je suis Ton serviteur. Je respecte autant que je le peux mon engagement envers Toi et Ta promesse. Je cherche refuge auprès de Toi contre le mal de mes actes. Je reconnais Tes bienfaits envers moi et je reconnais ma faute. Pardonne-moi, car nul autre que Toi ne pardonne les péchés.",
+          "sourceTitle": "سيّد الاستغفار"
+        },
+        {
+          "title": "Au nom de Dieu, avec le nom duquel rien ne nuit",
+          "text": "À dire trois fois chaque matin et chaque soir, selon le hadith transmis par Othman ibn Affan.",
+          "repeat": "3 fois",
+          "meaning": "Au nom de Dieu, avec le nom duquel rien sur terre ni dans le ciel ne peut nuire. Il est Celui qui entend et qui sait toute chose.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Demander le pardon et la préservation",
+          "text": "Le Prophète faisait régulièrement cette invocation le matin et le soir, selon le récit transmis par Abdallah ibn Omar.",
+          "meaning": "Ô Dieu, je Te demande la préservation en ce monde et dans l’au-delà. Ô Dieu, je Te demande le pardon et la préservation pour ma foi, ma vie, mes proches et mes biens. Ô Dieu, couvre ce que je dois garder caché et rassure-moi dans mes frayeurs. Ô Dieu, protège-moi de devant, de derrière, de droite, de gauche et d’au-dessus. Je cherche refuge dans Ta grandeur contre un mal qui me surprendrait par en dessous.",
+          "sourceTitle": "سؤال العفو والعافية"
+        },
+        {
+          "title": "Se protéger du mal de son âme et de Satan",
+          "text": "Le Prophète a enseigné cette formule à Abou Bakr al-Siddiq. Il lui a conseillé de la dire le matin, le soir et au moment de se coucher.",
+          "meaning": "Ô Dieu, Créateur des cieux et de la terre, Toi qui connais l’invisible et le visible, Seigneur et Souverain de toute chose, j’atteste que nul n’est digne d’adoration si ce n’est Toi. Je cherche refuge auprès de Toi contre le mal de mon âme, contre le mal de Satan et contre l’association à Dieu à laquelle il incite.",
+          "sourceTitle": "الاستعاذة من شر النفس والشيطان"
+        },
+        {
+          "title": "Chercher refuge dans les paroles parfaites de Dieu",
+          "text": "Cette formule se dit le soir. Le recueil authentique de Mouslim en rapporte la formule de base. Le récit d’al-Tirmidhi, authentifié par al-Albani, indique la répétition trois fois.",
+          "repeat": "3 fois",
+          "meaning": "Je cherche refuge dans les paroles parfaites de Dieu contre le mal de ce qu’Il a créé.",
+          "sourceTitle": "التعوّذ بكلمات الله التامّات"
+        },
+        {
+          "title": "Glorifier et louer Dieu",
+          "text": "Selon le hadith transmis par Abou Hourayra, cette formule se dit cent fois le matin et cent fois le soir.",
+          "repeat": "100 fois",
+          "meaning": "Gloire et louange à Dieu.",
+          "sourceTitle": "التسبيح والتحميد"
+        }
+      ]
+    },
+    "after-prayer": {
+      "title": "Rappels après la prière",
+      "intro": "Dites ces formules après le salut final de la prière prescrite. Choisissez l’une des manières rapportées de glorifier Dieu.",
+      "items": [
+        {
+          "title": "Demander pardon, puis dire « Ô Dieu, Tu es la Paix »",
+          "text": "Dites « Je demande pardon à Dieu » trois fois après le salut final, puis dites cette invocation, selon le récit transmis par Thawban.",
+          "repeat": "Demander pardon 3 fois",
+          "meaning": "Ô Dieu, Tu es la Paix et de Toi vient la paix. Béni sois-Tu, Détenteur de la majesté et de la générosité.",
+          "sourceTitle": "الاستغفار ثم «اللهم أنت السلام»"
+        },
+        {
+          "title": "Glorifier, louer et magnifier Dieu, puis affirmer Son unicité",
+          "text": "Dites « Gloire à Dieu », « Louange à Dieu » et « Dieu est le plus grand », chaque formule trente-trois fois. Complétez la centaine en affirmant ainsi Son unicité.",
+          "repeat": "Gloire à Dieu 33 fois, louange à Dieu 33 fois, Dieu est le plus grand 33 fois",
+          "meaning": "Nul n’est digne d’adoration si ce n’est Dieu, seul, sans associé. À Lui la souveraineté et la louange, et Il est capable de toute chose.",
+          "sourceTitle": "التسبيح والتحميد والتكبير مع التهليل"
+        },
+        {
+          "title": "Une autre manière de glorifier, louer et magnifier Dieu",
+          "text": "Dans le hadith transmis par Kaab ibn Oujra, après chaque prière prescrite, dites trente-trois fois « Gloire à Dieu », trente-trois fois « Louange à Dieu » et trente-quatre fois « Dieu est le plus grand ».",
+          "repeat": "Gloire à Dieu 33 fois, louange à Dieu 33 fois, Dieu est le plus grand 34 fois",
+          "sourceTitle": "صيغة أخرى للتسبيح والتحميد والتكبير"
+        },
+        {
+          "title": "Ô Dieu, rien ne retient ce que Tu donnes",
+          "text": "Le récit transmis par al-Moughira ibn Chouba rapporte cette invocation après la formule d’unicité qui suit la prière prescrite.",
+          "meaning": "Ô Dieu, nul ne peut retenir ce que Tu donnes, et nul ne peut donner ce que Tu retiens. La fortune des fortunés ne leur sert à rien contre Toi.",
+          "sourceTitle": "اللهم لا مانع لما أعطيت"
+        }
+      ]
+    },
+    "sleep": {
+      "title": "Rappels avant le sommeil",
+      "intro": "Formules et récitations au coucher, ainsi qu’un rappel sur les deux derniers versets de la sourate al-Baqara à lire la nuit.",
+      "items": [
+        {
+          "title": "Al-Ikhlas, al-Falaq et al-Nas",
+          "text": "Joignez vos deux paumes, soufflez-y légèrement et récitez les trois sourates. Passez ensuite vos mains sur les parties du corps que vous pouvez atteindre, en commençant par la tête, le visage et l’avant du corps. Répétez l’ensemble trois fois.",
+          "repeat": "3 fois",
+          "sourceTitle": "الإخلاص والفلق والناس"
+        },
+        {
+          "title": "L’invocation au coucher",
+          "text": "Le Prophète disait cette invocation en se couchant, selon le hadith transmis par Houdayfa.",
+          "meaning": "En Ton nom, ô Dieu, je meurs et je vis.",
+          "sourceTitle": "الدعاء عند الإيواء إلى الفراش"
+        },
+        {
+          "title": "Le verset du Trône",
+          "text": "Lisez le verset du Trône en entier au coucher. Le Prophète a confirmé ce qu’Abou Hourayra avait appris dans le récit où il gardait l’aumône de Ramadan.",
+          "sourceTitle": "آية الكرسي"
+        },
+        {
+          "title": "La glorification enseignée à Fatima pour le coucher",
+          "text": "Au coucher, dites trente-trois fois « Gloire à Dieu », trente-trois fois « Louange à Dieu » et trente-quatre fois « Dieu est le plus grand ». Le Prophète a enseigné ce rappel à Ali et Fatima.",
+          "repeat": "Gloire à Dieu 33 fois, louange à Dieu 33 fois, Dieu est le plus grand 34 fois",
+          "sourceTitle": "تسبيح فاطمة قبل النوم"
+        },
+        {
+          "title": "Les deux derniers versets d’al-Baqara durant la nuit",
+          "text": "Lisez les deux derniers versets d’al-Baqara la nuit. Le hadith indique qu’ils suffisent à celui qui les récite au cours d’une nuit.",
+          "sourceTitle": "آخر آيتين من سورة البقرة في الليل"
+        }
+      ]
+    },
+    "waking": {
+      "title": "Rappels au réveil",
+      "intro": "Une louange à dire au réveil et un rappel à dire lorsque l’on se réveille durant la nuit.",
+      "items": [
+        {
+          "title": "Louer Dieu au réveil",
+          "text": "Formule rapportée dans le hadith de Houdayfa sur le réveil.",
+          "meaning": "Louange à Dieu qui nous a rendus à la vie après nous avoir fait mourir. C’est vers Lui que se fera la résurrection.",
+          "sourceTitle": "الحمد بعد الاستيقاظ من النوم"
+        },
+        {
+          "title": "Quand on se réveille durant la nuit",
+          "text": "Dites cette formule d’unicité, puis louez Dieu, glorifiez-Le, affirmez Son unicité, magnifiez-Le et dites « Il n’y a de force ni de puissance qu’en Dieu », dans l’ordre rapporté. Demandez ensuite pardon ou invoquez Dieu selon vos besoins. Le hadith transmis par Oubada ibn al-Samit contient le texte complet.",
+          "meaning": "Nul n’est digne d’adoration si ce n’est Dieu, seul, sans associé. À Lui la souveraineté et la louange, et Il est capable de toute chose.",
+          "sourceTitle": "من استيقظ أثناء الليل"
+        }
+      ]
+    },
+    "home": {
+      "title": "Rappels à la maison",
+      "intro": "Le rappel de Dieu et le salut en entrant chez soi, et la confiance en Lui en sortant.",
+      "items": [
+        {
+          "title": "Évoquer Dieu en entrant",
+          "text": "Évoquez Dieu quand vous entrez chez vous. Le hadith transmis par Jabir explique l’effet du rappel de Dieu en entrant et au moment du repas.",
+          "sourceTitle": "ذكر الله عند الدخول"
+        },
+        {
+          "title": "Saluer en entrant dans une maison",
+          "text": "Saluez en entrant. La sourate al-Nour décrit ici le salut comme une salutation bénie et bonne.",
+          "meaning": "Lorsque vous entrez dans des maisons, saluez-vous les uns les autres d’une salutation venant de Dieu, bénie et bonne.",
+          "sourceTitle": "السلام عند دخول البيوت"
+        },
+        {
+          "title": "Placer sa confiance en Dieu en sortant de chez soi",
+          "text": "À dire en sortant de chez soi, selon le hadith transmis par Anas ibn Malik.",
+          "meaning": "Au nom de Dieu, je place ma confiance en Dieu. Il n’y a de force ni de puissance qu’en Dieu.",
+          "sourceTitle": "التوكّل عند الخروج من البيت"
+        }
+      ]
+    },
+    "food": {
+      "title": "Rappels aux repas",
+      "intro": "Commencez le repas au nom de Dieu et louez-Le à la fin.",
+      "items": [
+        {
+          "title": "Dire le nom de Dieu au début du repas",
+          "text": "Prononcez le nom de Dieu avant de manger. Le Prophète a enseigné à Omar ibn Abi Salama de nommer Dieu, de manger de la main droite et de prendre ce qui se trouve devant lui.",
+          "meaning": "Au nom de Dieu.",
+          "sourceTitle": "التسمية عند البدء بالطعام"
+        },
+        {
+          "title": "Louer Dieu en fin de repas",
+          "text": "Une formule de louange après le repas rapportée par Abou Oumama dans le recueil authentique d’al-Boukhari.",
+          "meaning": "À Dieu la louange, abondante, bonne et bénie. Une louange que nous ne pouvons tenir pour suffisante, délaisser ni considérer comme superflue, ô notre Seigneur.",
+          "sourceTitle": "الحمد عند رفع المائدة"
+        }
+      ]
+    },
+    "daily-life": {
+      "title": "Rappels de la vie quotidienne",
+      "intro": "Les invocations en entrant aux toilettes et en en sortant, ainsi que les paroles échangées après un éternuement.",
+      "items": [
+        {
+          "title": "Avant d’entrer aux toilettes",
+          "text": "À dire avant d’entrer aux toilettes, selon le hadith transmis par Anas.",
+          "meaning": "Ô Dieu, je cherche refuge auprès de Toi contre les démons mâles et femelles.",
+          "sourceTitle": "قبل دخول الخلاء"
+        },
+        {
+          "title": "En sortant des toilettes",
+          "text": "Le Prophète prononçait cette formule en sortant des toilettes. Aïcha a transmis ce récit, qu’al-Tirmidhi a jugé bon.",
+          "meaning": "Je Te demande pardon.",
+          "sourceTitle": "عند الخروج من الخلاء"
+        },
+        {
+          "title": "Louer Dieu après un éternuement",
+          "text": "Celui qui éternue dit « Louange à Dieu ». Celui qui l’entend ainsi louer Dieu lui dit « Que Dieu te fasse miséricorde ». Celui qui a éternué répond « Que Dieu vous guide et améliore votre situation ».",
+          "sourceTitle": "الحمد وتشميت العاطس"
+        }
+      ]
+    },
+    "mosque": {
+      "title": "Rappels à la mosquée et lors de l’appel à la prière",
+      "intro": "Les paroles à dire quand on entre dans la mosquée ou qu’on en sort, et l’invocation après l’appel à la prière.",
+      "items": [
+        {
+          "title": "En entrant dans la mosquée",
+          "text": "À dire en entrant dans la mosquée, selon le hadith transmis par Abou Houmayd ou Abou Ousayd.",
+          "meaning": "Ô Dieu, ouvre-moi les portes de Ta miséricorde.",
+          "sourceTitle": "عند دخول المسجد"
+        },
+        {
+          "title": "En sortant de la mosquée",
+          "text": "À dire en sortant de la mosquée, selon le même hadith.",
+          "meaning": "Ô Dieu, je Te demande de Ta grâce.",
+          "sourceTitle": "عند الخروج من المسجد"
+        },
+        {
+          "title": "L’invocation pour la wasila après l’appel",
+          "text": "Cette invocation est rapportée par Jabir dans le chapitre sur l’invocation à l’appel à la prière.",
+          "meaning": "Ô Dieu, Seigneur de cet appel parfait et de cette prière à accomplir, accorde à Mohammed la wasila et l’excellence. Élève-le au rang loué que Tu lui as promis.",
+          "sourceTitle": "دعاء الوسيلة عقب الأذان"
+        }
+      ]
+    },
+    "travel": {
+      "title": "Rappels en voyage",
+      "intro": "Les paroles au départ, en chemin et au retour d’un voyage.",
+      "items": [
+        {
+          "title": "Au départ en voyage",
+          "text": "Dites trois fois « Dieu est le plus grand » en montant dans le moyen de transport, puis prononcez cette invocation, selon le hadith transmis par Abdallah ibn Omar.",
+          "repeat": "Dire « Dieu est le plus grand » 3 fois",
+          "meaning": "Gloire à Celui qui a mis ceci à notre service alors que nous n’aurions pas pu le maîtriser. C’est vers notre Seigneur que nous retournerons. Ô Dieu, pendant ce voyage nous Te demandons la droiture, la piété et des actes que Tu agrées. Ô Dieu, facilite-nous ce voyage et raccourcis-en la distance. Ô Dieu, Tu es le compagnon du voyage et Celui qui veille sur la famille. Ô Dieu, je cherche refuge auprès de Toi contre les peines du voyage, les visions affligeantes et un mauvais retour touchant mes biens ou ma famille.",
+          "sourceTitle": "الذكر عند الركوب للسفر"
+        },
+        {
+          "title": "En montant ou en descendant",
+          "text": "Dites « Dieu est le plus grand » en montant et « Gloire à Dieu » en descendant, comme Jabir le rapporte au sujet des compagnons.",
+          "sourceTitle": "عند صعود مرتفع أو النزول منه"
+        },
+        {
+          "title": "Au retour de voyage",
+          "text": "Le Prophète répétait aussi l’invocation du voyage au retour et y ajoutait ces paroles.",
+          "meaning": "Nous revenons repentants, adorant notre Seigneur et Le louant.",
+          "sourceTitle": "عند الرجوع من السفر"
+        }
+      ]
+    },
+    "distress": {
+      "title": "Rappels en cas de détresse",
+      "intro": "Des invocations en période d’épreuve, tirées du Coran et du recueil authentique d’al-Boukhari.",
+      "items": [
+        {
+          "title": "L’invocation en cas de détresse rapportée par Ibn Abbas",
+          "text": "Ibn Abbas rapporte que le Prophète disait ces paroles en cas de détresse.",
+          "meaning": "Nul n’est digne d’adoration si ce n’est Dieu, l’Immense, le Longanime. Nul n’est digne d’adoration si ce n’est Dieu, Seigneur du Trône immense. Nul n’est digne d’adoration si ce n’est Dieu, Seigneur des cieux, Seigneur de la terre et Seigneur du Trône noble.",
+          "sourceTitle": "ذكر الكرب من حديث ابن عباس"
+        },
+        {
+          "title": "L’invocation de Jonas",
+          "text": "Jonas a invoqué Dieu ainsi dans les ténèbres. Le verset suivant relate que Dieu lui a répondu et l’a délivré de son affliction.",
+          "meaning": "Nul n’est digne d’adoration si ce n’est Toi. Gloire à Toi. J’ai vraiment été parmi les injustes.",
+          "sourceTitle": "دعاء يونس عليه السلام"
+        }
+      ]
+    },
+    "general": {
+      "title": "Rappels à tout moment",
+      "intro": "Des formules pour glorifier Dieu, s’en remettre à Sa force et Lui demander pardon au fil de la journée.",
+      "items": [
+        {
+          "title": "Deux paroles faciles à prononcer",
+          "text": "Le Prophète les a décrites comme faciles à prononcer, lourdes dans la balance et aimées du Tout Miséricordieux.",
+          "meaning": "Gloire à Dieu, l’Immense. Gloire et louange à Dieu.",
+          "sourceTitle": "كلمتان خفيفتان على اللسان"
+        },
+        {
+          "title": "Un trésor parmi les trésors du Paradis",
+          "text": "Le Prophète a enseigné cette parole à Abou Moussa al-Achari.",
+          "meaning": "Il n’y a de force ni de puissance qu’en Dieu.",
+          "sourceTitle": "كنز من كنوز الجنة"
+        },
+        {
+          "title": "Demander pardon au fil de la journée",
+          "text": "Abou Hourayra rapporte que le Prophète demandait pardon à Dieu et se repentait auprès de Lui plus de soixante-dix fois par jour.",
+          "sourceTitle": "الاستغفار في اليوم"
+        }
+      ]
+    }
+  }
+}

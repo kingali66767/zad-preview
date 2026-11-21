@@ -1,0 +1,808 @@
+{
+  "sections": {
+    "worship": {
+      "title": "Learn wudu and prayer",
+      "intro": "A short beginner’s guide to wudu (ablution) and the actions of one unit of prayer.",
+      "items": [
+        {
+          "title": "How to perform wudu",
+          "text": "In Uthman’s account, the Prophet washed three times where prescribed and wiped his head. Read the hadith for the complete description.",
+          "steps": [
+            "Make the intention to perform wudu. Wash your hands, then rinse your mouth and draw water gently into your nose and blow it out.",
+            "Wash your face and then your arms up to and including the elbows, starting with the right arm.",
+            "Wipe your head, then wash your feet up to and including the ankles, starting with the right foot."
+          ],
+          "sourceTitle": "صفة الوضوء"
+        },
+        {
+          "title": "The actions of one rak‘ah",
+          "text": "The linked reports explain the tashahhud (testimony recited while sitting) and taslim (the salutation that closes the prayer).",
+          "steps": [
+            "Face the direction of prayer, say “Allahu akbar,” and recite while standing if you are able. Include al-Fatihah in your recitation.",
+            "Bow and pause until steady, then rise and stand upright.",
+            "Prostrate and pause until steady, sit until steady, then prostrate again. Follow the same sequence for the remaining units of prayer."
+          ],
+          "sourceTitle": "أعمال الركعة"
+        },
+        {
+          "title": "When can I perform tayammum?",
+          "text": "The verse on purification prescribes tayammum when water is unavailable in the circumstances it describes. The hadith of Ammar shows how to wipe the face and hands. If an injury or illness prevents you from using water, ask a qualified scholar about your specific situation.",
+          "sourceTitle": "متى أتيمّم؟"
+        },
+        {
+          "title": "Praying when you cannot stand",
+          "text": "This sequence comes from the hadith of Imran ibn Husayn, which describes how to pray according to your ability.",
+          "meaning": "Pray standing. If you cannot, pray sitting. If you cannot do that, pray on your side.",
+          "sourceTitle": "الصلاة عند العجز عن القيام"
+        },
+        {
+          "title": "The tashahhud",
+          "text": "Read the words of the tashahhud in Ibn Mas‘ud’s report. He says the Prophet taught it to the Companions as he would teach them a surah of the Quran.",
+          "sourceTitle": "التشهّد"
+        },
+        {
+          "title": "Congregational prayer",
+          "text": "Ibn Umar reported that praying in congregation surpasses praying alone by twenty-seven degrees. Read the hadith in the chapter on the merit of congregational prayer.",
+          "sourceTitle": "صلاة الجماعة"
+        },
+        {
+          "title": "Remembrance during bowing and prostration",
+          "text": "Hudhayfah’s report of the Prophet’s night prayer gives the first phrase for bowing and the second for prostration.",
+          "meaning": "Glory be to my Lord, the Magnificent. · Glory be to my Lord, the Most High.",
+          "sourceTitle": "ذكر الركوع والسجود"
+        },
+        {
+          "title": "Sending blessings on the Prophet in the tashahhud",
+          "text": "Ka‘b ibn Ujrah reported that the Companions asked how to send blessings on the Prophet. Read the hadith for the words he taught them.",
+          "sourceTitle": "الصلاة على النبي ﷺ في التشهّد"
+        }
+      ]
+    },
+    "reading": {
+      "title": "Weekly reading plan",
+      "intro": "Read one short surah each day and mark it as read. The plan helps you build a steady habit. After reading, choose one verse and explore its meaning in a commentary or listen to the surah from a skilled reciter.",
+      "items": []
+    },
+    "quran": {
+      "title": "The Quran and the virtues of recitation",
+      "intro": "Explore the merits of reciting the Quran, commentary on selected surahs, and ways to reflect on what you read.",
+      "items": [
+        {
+          "title": "A blessed Book to reflect on",
+          "text": "The verse teaches that reflection on the meanings of the Quran is a purpose of its revelation. Read it in context and use a commentary to understand its meaning.",
+          "meaning": "This is a blessed Book We have revealed to you so that people may reflect on its verses and those with understanding may take heed.",
+          "sourceTitle": "كتاب مبارك للتدبر"
+        },
+        {
+          "title": "The Quran intercedes for its readers",
+          "text": "An excerpt from Abu Umamah al-Bahili’s hadith on the merit of reciting the Quran.",
+          "meaning": "Recite the Quran, for on the Day of Resurrection it will come as an intercessor for its companions.",
+          "sourceTitle": "القرآن يشفع لأصحابه"
+        },
+        {
+          "title": "Start with the commentary on al-Fatihah",
+          "text": "Read Abd al-Rahman al-Sa‘di’s commentary on al-Fatihah. Notice how the surah moves from praising Allah to worshipping Him alone, seeking His help, and asking for guidance.",
+          "sourceTitle": "ابدأ بتفسير الفاتحة"
+        },
+        {
+          "title": "Surah al-Ikhlas and the oneness of Allah",
+          "text": "Explore the surah’s meaning in al-Sa‘di’s commentary. Abu Sa‘id al-Khudri reported in an authentic hadith that this surah is equivalent to a third of the Quran.",
+          "sourceTitle": "سورة الإخلاص والتوحيد"
+        },
+        {
+          "title": "Skilled recitation and reciting with difficulty",
+          "text": "Sahih Muslim describes the merit of a skilled Quran reciter and the two rewards for someone who struggles while reciting. Start with what you can and improve your reading gradually.",
+          "sourceTitle": "الماهر بالقرآن ومن تشق عليه القراءة"
+        },
+        {
+          "title": "Learning and teaching the Quran",
+          "text": "From the hadith of Uthman ibn Affan. Set aside time to read with a skilled teacher, then share what you have learned well.",
+          "meaning": "The best of you are those who learn the Quran and teach it.",
+          "sourceTitle": "تعلّم القرآن وتعليمه"
+        },
+        {
+          "title": "The merit of Surah al-Baqarah",
+          "text": "The Prophet spoke of the merit of keeping to Surah al-Baqarah and described doing so as a blessing. Read the complete hadith in the Book of Travellers’ Prayer in Sahih Muslim.",
+          "sourceTitle": "فضل سورة البقرة"
+        },
+        {
+          "title": "A practical way to reflect on the Quran",
+          "text": "These steps apply the Quran’s general call to reflect on its verses.",
+          "steps": [
+            "Read the verse and the verses around it to understand the context.",
+            "Consult a reliable commentary for the meaning of the words and the purpose of the verse.",
+            "Think of one action you can take from what you have understood."
+          ],
+          "sourceTitle": "طريقة عملية للتدبّر"
+        }
+      ]
+    },
+    "lessons": {
+      "title": "Sermons and lessons",
+      "intro": "Short written materials for personal study and lesson preparation.",
+      "items": [
+        {
+          "title": "Short sermon · A kind word",
+          "text": "Praise belongs to Allah, and may blessings and peace be upon His Messenger. Choosing kind words gives us daily opportunities to do good. Allah tells us to speak kindly to people, and an authentic hadith teaches that a kind word is an act of charity. Start with those you meet at home and at work. Return their greetings, thank them for their kindness, and speak gently when you disagree. O Allah, guide us to good character and help us do what pleases You.",
+          "sourceTitle": "خطبة موجزة | الكلمة الطيبة"
+        },
+        {
+          "title": "Short lesson · Treating others gently",
+          "text": "The Prophet taught that gentleness beautifies whatever it is part of and that removing it makes matters worse. In teaching or correcting someone, explain the mistake plainly while preserving their dignity and giving them room to ask questions.",
+          "sourceTitle": "درس قصير | الرفق في المعاملة"
+        },
+        {
+          "title": "Short sermon · Being mindful of what we say",
+          "text": "Praise belongs to Allah, and may blessings and peace be upon His Messenger. Allah commands us to speak with integrity. The Prophet taught those who believe in Allah and the Last Day to say what is good or remain silent. Consider what you say and share. Check reports before passing them on, and replace backbiting with prayer and gentle advice. O Allah, set our words and deeds right.",
+          "sourceTitle": "خطبة موجزة | مراقبة اللسان"
+        },
+        {
+          "title": "Lesson · Honouring parents and keeping family ties",
+          "text": "The verses in Surah al-Isra connect worship of Allah with kindness to parents. That kindness begins with speaking gently, helping them as you can, and praying for them. The hadith teaches that truly keeping family ties means maintaining them even when relatives cut you off.",
+          "sourceTitle": "درس | برّ الوالدين وصلة الرحم"
+        },
+        {
+          "title": "Lesson · Verifying what you share",
+          "text": "The verse in Surah al-Hujurat directs believers to verify a report brought by someone of unsound conduct. Check a report’s original source and context before sharing it, particularly when it concerns other people’s rights.",
+          "sourceTitle": "درس | أمانة الخبر"
+        },
+        {
+          "title": "Lesson · Repentance and hope",
+          "text": "The Quran calls people to turn back to Allah and to have hope in His mercy. Repentance includes leaving the wrongdoing, regretting it, resolving to avoid it, and restoring other people’s rights when they are involved.",
+          "sourceTitle": "درس | التوبة والرجاء"
+        },
+        {
+          "title": "Lesson · Kindness to neighbours",
+          "text": "Being a good neighbour means avoiding harm, offering help, and treating people well. The Prophet reported that Jibril kept urging him to care for his neighbour until he thought the neighbour might be given a share of the inheritance.",
+          "sourceTitle": "درس | الرفق بالجار"
+        }
+      ]
+    },
+    "hadith": {
+      "title": "Authentic prophetic hadith",
+      "intro": "Excerpts from Sahih al-Bukhari and Sahih Muslim with links to each report.",
+      "items": [
+        {
+          "title": "Intention and deeds",
+          "text": "From the hadith of Umar ibn al-Khattab. Bring your intention to mind when starting a deed and renew it if needed.",
+          "meaning": "Deeds are according to intentions, and each person will have what they intended.",
+          "sourceTitle": "النية في العمل"
+        },
+        {
+          "title": "Wishing good for others",
+          "text": "Reported by Anas ibn Malik.",
+          "meaning": "None of you truly believes until they love for their brother what they love for themselves.",
+          "sourceTitle": "حب الخير للآخرين"
+        },
+        {
+          "title": "Religion is sincere counsel",
+          "text": "From the hadith of Tamim al-Dari. The rest of the report explains to whom this sincerity is owed.",
+          "meaning": "Religion is sincere counsel.",
+          "sourceTitle": "الدين النصيحة"
+        },
+        {
+          "title": "Guarding your words and actions",
+          "text": "From the hadith of Abdullah ibn Amr, which encourages people to refrain from causing harm.",
+          "meaning": "A Muslim is one from whose tongue and hand other Muslims are safe.",
+          "sourceTitle": "حفظ اللسان واليد"
+        },
+        {
+          "title": "Showing mercy",
+          "text": "From the hadith of Abu Hurayrah in the chapter on showing affection and mercy to children.",
+          "meaning": "Whoever shows no mercy will be shown no mercy.",
+          "sourceTitle": "الرحمة"
+        },
+        {
+          "title": "Self-control when angry",
+          "text": "From Abu Hurayrah’s hadith about controlling oneself in anger.",
+          "meaning": "The strong person is the one who controls themselves when angry, rather than the one who overpowers others in wrestling.",
+          "sourceTitle": "الرفق والثبات عند الغضب"
+        },
+        {
+          "title": "Consistency in good deeds",
+          "text": "From the hadith of Aishah, which encourages choosing deeds you can maintain consistently.",
+          "meaning": "The deeds dearest to Allah are those done consistently, even if they are small.",
+          "sourceTitle": "الدوام على العمل الصالح"
+        },
+        {
+          "title": "The merit of relieving hardship",
+          "text": "Abu Hurayrah’s hadith mentions the reward for relieving a believer’s hardship in this life. It also describes the merit of helping someone in difficulty and seeking knowledge.",
+          "sourceTitle": "فضل تفريج الكرب"
+        },
+        {
+          "title": "The lawful, the unlawful, and doubtful matters",
+          "text": "The Prophet taught that what is lawful and what is unlawful are clear and that there are doubtful matters between them. Read the full hadith of al-Nu‘man ibn Bashir for its account of conscientious restraint.",
+          "sourceTitle": "الحلال والحرام والشبهات"
+        },
+        {
+          "title": "Acts of charity in everyday life",
+          "text": "In Abu Hurayrah’s hadith, the Prophet counts speaking kindly, helping others, and removing hazards from the road as acts of charity.",
+          "sourceTitle": "أبواب الصدقة في المعاملة اليومية"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Questions about Islamic practice",
+      "intro": "Educational answers and summaries of scholarly rulings with their sources. When a question depends on personal circumstances, explain them to a qualified scholar.",
+      "items": [
+        {
+          "topic": "Purification and prayer",
+          "title": "What should I do if I forget a prayer or sleep through it?",
+          "text": "Pray as soon as you remember or wake up. An authentic hadith instructs anyone who forgets a prayer to pray when they remember it.",
+          "sourceTitle": "ماذا أفعل إذا نسيت صلاة أو نمت عنها؟"
+        },
+        {
+          "topic": "Zakat and charity",
+          "title": "Can I give a small amount in charity?",
+          "text": "Yes. In the hadith reported by Adi ibn Hatim, the Prophet encouraged giving in charity even if all you can give is half a date.",
+          "sourceTitle": "هل يجوز أن أتصدق بالقليل؟"
+        },
+        {
+          "topic": "Purification and prayer",
+          "title": "Are the five daily prayers mentioned in the Quran?",
+          "text": "Islam Question and Answer cites Ibn Abbas and a number of commentators on the prayer times understood from the verses in Surah al-Rum. It notes differences of interpretation about where Isha is indicated. The Sunnah sets out the prayer times and how the prayers are performed.",
+          "sourceTitle": "هل ذُكرت الصلوات الخمس في القرآن؟"
+        },
+        {
+          "topic": "Purification and prayer",
+          "title": "Can two prayers be combined at any time?",
+          "text": "Islam Question and Answer discusses combining prayers for a valid reason, including circumstances involving travel, rain, or illness. It also describes scholarly differences over some of the conditions. The reason, the prayers involved, and the timing all matter.",
+          "sourceTitle": "هل يُجمع بين الصلاتين في كل وقت؟"
+        },
+        {
+          "topic": "Purification and prayer",
+          "title": "How is the middle of the night calculated for Isha?",
+          "text": "Islam Question and Answer explains that the middle of the night is halfway between sunset and dawn. It may fall before or after midnight on the clock. The report of Abdullah ibn Amr gives Isha’s time as extending to the middle of the night.",
+          "sourceTitle": "كيف يُحسب نصف الليل في وقت العشاء؟"
+        },
+        {
+          "topic": "Fasting",
+          "title": "Is Tarawih prayer prescribed for women?",
+          "text": "Islam Question and Answer describes Tarawih as an emphasised Sunnah. A woman may pray it at home. The linked answer also discusses attending the mosque and the conditions for doing so.",
+          "sourceTitle": "هل صلاة التراويح مشروعة للنساء؟"
+        },
+        {
+          "topic": "Fasting",
+          "title": "What did Sheikh Ibn Baz say about nasal spray while fasting?",
+          "text": "Islam Question and Answer reports that Sheikh Abd al-Aziz ibn Baz allowed its use when necessary and said waiting until night was more cautious if feasible. The ruling addresses the circumstances described in the source. Discuss the use of your medication with a doctor and a qualified scholar.",
+          "sourceTitle": "ماذا ورد عن الشيخ ابن باز في بخّاخ الأنف للصائم؟"
+        },
+        {
+          "topic": "Fasting",
+          "title": "What if I eat or drink forgetfully while fasting?",
+          "text": "Abu Hurayrah reported that anyone who eats or drinks forgetfully should complete the fast.",
+          "sourceTitle": "ماذا أفعل إذا أكلت أو شربت ناسيًا وأنا صائم؟"
+        },
+        {
+          "topic": "Fasting",
+          "title": "Where is the fasting exemption for illness or travel established?",
+          "text": "The Quranic verse on fasting permits those who are ill or travelling to break the fast and make up the days later. The specific grounds for exemption and how to make up the fast depend on the circumstances.",
+          "sourceTitle": "ما أصل رخصة الإفطار للمريض والمسافر؟"
+        },
+        {
+          "topic": "Zakat and charity",
+          "title": "Who can receive zakat?",
+          "text": "Surah al-Tawbah lists eight categories, including the poor, those in need, people burdened by debt, and stranded travellers. Al-Sa‘di’s commentary explains the categories. Ask a qualified scholar about applying them in a specific case.",
+          "sourceTitle": "من مصارف الزكاة؟"
+        },
+        {
+          "topic": "Seeking knowledge",
+          "title": "How can I verify a hadith or ruling someone sent me?",
+          "text": "Look up the wording, original source, and scholars’ assessment of a hadith in the hadith encyclopaedia. For a ruling, read the scholar’s complete answer in the original source and check the circumstances and question it addresses.",
+          "sourceTitle": "كيف أتحقق من حديث أو فتوى وجدتها في رسالة؟"
+        }
+      ]
+    },
+    "media": {
+      "title": "Audio and video lectures",
+      "intro": "Listen to recitations and lessons on the original publishers’ websites.",
+      "items": [
+        {
+          "title": "Listen to Surah al-Fatihah",
+          "text": "Open Surah al-Fatihah and press play in the Quran audio player.",
+          "sourceTitle": "استمع إلى سورة الفاتحة"
+        },
+        {
+          "title": "Video lessons and lectures",
+          "text": "Browse the material on Sheikh Abd al-Razzaq al-Badr’s website and choose a topic from the lesson index.",
+          "sourceTitle": "دروس ومحاضرات مرئية"
+        },
+        {
+          "title": "Quran recordings by reciter and style of transmission",
+          "text": "Choose a reciter and a surah in the Quran audio library. The publisher identifies the reciter and the transmission used for each recording of the complete Quran.",
+          "sourceTitle": "مصاحف مسموعة بروايات وقرّاء مختلفين"
+        },
+        {
+          "title": "Quran commentary and sciences",
+          "text": "Explore audio lessons on Quran commentary and sciences in Sheikh Abd al-Razzaq al-Badr’s library.",
+          "sourceTitle": "تفسير القرآن وعلومه"
+        },
+        {
+          "title": "Audio lessons on belief and remembrance",
+          "text": "Choose from the indexes on Islamic belief or on remembrance and supplication to match what you are studying in the library.",
+          "sourceTitle": "العقيدة والأذكار في دروس صوتية"
+        },
+        {
+          "title": "Book commentaries and lectures",
+          "text": "Listen to book commentaries and lectures from the audio library on Sheikh Abd al-Aziz ibn Baz’s official website.",
+          "sourceTitle": "شروح الكتب والمحاضرات"
+        },
+        {
+          "title": "Lectures by topic",
+          "text": "Browse Sheikh Abd al-Razzaq al-Badr’s lecture index and open a lecture on his website.",
+          "sourceTitle": "محاضرات مرتبة حسب الموضوع"
+        }
+      ]
+    },
+    "occasions": {
+      "title": "Islamic occasions",
+      "intro": "Learn about seasons of worship through the Quran and Sunnah.",
+      "items": [
+        {
+          "title": "The month of Ramadan",
+          "text": "Ramadan is the month of fasting and the month in which the Quran was revealed. The verse on fasting describes the obligation to fast, the exemption for illness or travel, and the need to make up missed days.",
+          "sourceTitle": "شهر رمضان"
+        },
+        {
+          "title": "The first ten days of Dhul-Hijjah",
+          "text": "Ibn Abbas reported an authentic hadith about the merit of good deeds on these days. These deeds include remembering Allah, giving charity, and keeping family ties.",
+          "sourceTitle": "عشر ذي الحجة"
+        },
+        {
+          "title": "The last ten nights and Laylat al-Qadr",
+          "text": "The Prophet encouraged looking for Laylat al-Qadr on the odd nights of the last ten nights of Ramadan. Surah al-Qadr describes that night as better than a thousand months.",
+          "sourceTitle": "العشر الأواخر وليلة القدر"
+        },
+        {
+          "title": "Zakat al-Fitr and Eid al-Fitr",
+          "text": "Ibn Umar reported that the Prophet ordered zakat al-fitr to be given before people went out to the Eid prayer. Consult a trusted scholarly body about the amount and method of giving in your country.",
+          "sourceTitle": "زكاة الفطر وعيد الفطر"
+        },
+        {
+          "title": "Six days of Shawwal",
+          "text": "Abu Ayyub al-Ansari’s hadith records the merit of following the fast of Ramadan with six days of fasting in Shawwal.",
+          "sourceTitle": "ستة أيام من شوّال"
+        },
+        {
+          "title": "Arafah and Ashura",
+          "text": "Abu Qatadah’s hadith mentions that fasting on the Day of Arafah expiates the previous and coming years, and fasting on Ashura expiates the previous year. During Hajj, the Prophet did not fast while standing at Arafah.",
+          "sourceTitle": "عرفة وعاشوراء"
+        },
+        {
+          "title": "Eid al-Adha",
+          "text": "Al-Bara ibn Azib’s hadith explains how the time for the Eid sacrifice relates to the Eid prayer. Ask a qualified scholar about the conditions of the sacrifice and its timing where you live.",
+          "sourceTitle": "عيد الأضحى"
+        },
+        {
+          "title": "Friday",
+          "text": "Surah al-Jumu‘ah calls believers to go to the remembrance of Allah when Friday prayer is announced. The Prophet also described the merits of Friday in Abu Hurayrah’s hadith.",
+          "sourceTitle": "يوم الجمعة"
+        }
+      ]
+    },
+    "belief": {
+      "title": "Islamic belief and the foundations of faith",
+      "intro": "An introduction to the foundations of faith and the oneness of Allah as taught in the Quran and Sunnah.",
+      "items": [
+        {
+          "title": "The six pillars of faith",
+          "text": "In the hadith of Jibril, the Prophet explained that faith means believing in Allah, His angels, His books, His messengers, the Last Day, and divine decree, both its good and its bad. The report also distinguishes the answers about Islam, faith, and ihsan.",
+          "sourceTitle": "أركان الإيمان الستة"
+        },
+        {
+          "title": "Worshipping Allah alone",
+          "text": "Al-Fatihah directs worship and the seeking of help to Allah alone. Surah al-Ikhlas affirms His oneness and that He has no equal.",
+          "sourceTitle": "توحيد الله في العبادة"
+        },
+        {
+          "title": "Belief in the prophets and messengers",
+          "text": "Muslims believe in what Allah revealed to His prophets, including Abraham, Moses, and Jesus, peace be upon them. The Quran calls Muhammad the seal of the prophets.",
+          "sourceTitle": "الإيمان بالأنبياء والرسل"
+        },
+        {
+          "title": "Ihsan and awareness of Allah",
+          "text": "In the hadith of Jibril, the Prophet explained ihsan as worshipping Allah as though you see Him. Even though you do not see Him, He sees you.",
+          "sourceTitle": "الإحسان ومراقبة الله"
+        },
+        {
+          "title": "Taking action and asking Allah for help",
+          "text": "This is part of a hadith narrated by Abu Hurayrah. The rest of the report offers guidance on what to say when something unpleasant happens.",
+          "meaning": "Pursue what benefits you, ask Allah for help, and do not give up.",
+          "sourceTitle": "الأخذ بالأسباب والاستعانة بالله"
+        }
+      ]
+    },
+    "seerah": {
+      "title": "The life of the Prophet",
+      "intro": "Episodes from the life of the Prophet Muhammad with links to their source accounts.",
+      "items": [
+        {
+          "title": "The beginning of revelation",
+          "text": "Aishah’s account describes the Prophet worshipping in the cave of Hira, Jibril bringing him the revelation, and Khadijah reassuring him afterwards.",
+          "sourceTitle": "بدء الوحي"
+        },
+        {
+          "title": "The migration to Madinah",
+          "text": "The verse in Surah al-Tawbah recalls the companionship in the cave. Aishah’s account describes the preparations for the migration and the journey itself.",
+          "sourceTitle": "الهجرة إلى المدينة"
+        },
+        {
+          "title": "The Treaty of Hudaybiyyah",
+          "text": "The treaty was concluded in the sixth year after the Hijrah. The report in Sahih al-Bukhari describes the negotiations. Read Surah al-Fath with its commentary to understand the verses in context.",
+          "sourceTitle": "صلح الحديبية"
+        },
+        {
+          "title": "The Farewell Pilgrimage",
+          "text": "Jabir ibn Abdullah narrated a detailed account of the Prophet’s Hajj, from entering ihram through the rites. The report helps readers follow the sequence and understand the setting of the sermon at Arafah.",
+          "sourceTitle": "حجة الوداع"
+        }
+      ]
+    }
+  },
+  "adhkar": {
+    "morning": {
+      "title": "Morning remembrances",
+      "intro": "Supplications and recitations for the morning.",
+      "items": [
+        {
+          "title": "We have entered the morning",
+          "text": "This is the morning wording given by Sheikh Ibn Baz in his fatwa. Ibn Mas‘ud’s hadith gives the opening words for the morning.",
+          "meaning": "We have entered the morning, and all dominion belongs to Allah. None is worthy of worship but Allah alone, without partner. His is the dominion and the praise, and He has power over all things. O Allah, I ask You for the good of this day, the good within it, and the good that follows. I seek refuge in You from its evil, the evil within it, and the evil that follows. My Lord, I seek refuge in You from laziness and the ills of old age, and from punishment in the Fire and in the grave.",
+          "sourceTitle": "أصبحنا وأصبح الملك لله"
+        },
+        {
+          "title": "O Allah, by You we enter the morning",
+          "text": "The morning wording in Abu Hurayrah’s hadith.",
+          "meaning": "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.",
+          "sourceTitle": "اللهم بك أصبحنا"
+        },
+        {
+          "title": "Al-Ikhlas, al-Falaq, and al-Nas",
+          "text": "Recite the three surahs in the morning and evening. Abdullah ibn Khubayb’s hadith gives the number of repetitions.",
+          "repeat": "3 times for each surah",
+          "meaning": "Al-Ikhlas affirms that Allah is One, the One on whom all depend. He neither begets nor was born, and none is equal to Him. Al-Falaq asks the Lord of daybreak for protection from the evil of what He created, the darkness when it settles, those who blow on knots, and an envier when they envy. Al-Nas asks the Lord, King, and God of humankind for protection from the retreating whisperer who whispers into people’s hearts, whether from among jinn or humankind.",
+          "sourceTitle": "الإخلاص والمعوّذتان"
+        },
+        {
+          "title": "The foremost prayer for forgiveness",
+          "text": "Shaddad ibn Aws’s hadith describes the merit of saying this with conviction during the day or at night.",
+          "meaning": "O Allah, You are my Lord. None is worthy of worship but You. You created me and I am Your servant. I hold to Your covenant and promise as far as I can. I seek refuge in You from the evil I have done. I acknowledge Your blessings upon me and I acknowledge my sin. Forgive me, for none forgives sins but You.",
+          "sourceTitle": "سيّد الاستغفار"
+        },
+        {
+          "title": "In Allah’s name, with whose name nothing can harm",
+          "text": "Say this three times each morning and evening, as narrated by Uthman ibn Affan.",
+          "repeat": "3 times",
+          "meaning": "In the name of Allah, with whose name nothing on earth or in heaven can harm. He is the All-Hearing, the All-Knowing.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Asking for pardon and well-being",
+          "text": "Abdullah ibn Umar reported that the Prophet regularly said this supplication in the morning and evening.",
+          "meaning": "O Allah, I ask You for well-being in this life and the Hereafter. I ask You for pardon and well-being in my faith, my worldly life, my family, and my wealth. Conceal my vulnerabilities and calm my fears. Protect me from ahead, behind, to my right, to my left, and above me. I seek refuge in Your greatness from being struck from below.",
+          "sourceTitle": "سؤال العفو والعافية"
+        },
+        {
+          "title": "Seeking refuge from the evil of the self and Satan",
+          "text": "The Prophet taught Abu Bakr al-Siddiq to say this in the morning, in the evening, and when going to bed.",
+          "meaning": "O Allah, Creator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of all things, I testify that none is worthy of worship but You. I seek refuge in You from the evil of my own self, the evil of Satan, and the association of partners with You to which he calls.",
+          "sourceTitle": "الاستعاذة من شر النفس والشيطان"
+        },
+        {
+          "title": "Beginning the day upon Islam",
+          "text": "A morning remembrance narrated by Abd al-Rahman ibn Abza.",
+          "meaning": "We have entered the morning upon the natural disposition of Islam, the declaration of sincere faith, the religion of our Prophet Muhammad, and the way of our father Abraham, who turned to Allah alone in submission and was not among those who associate partners with Him.",
+          "sourceTitle": "أصبحنا على فطرة الإسلام"
+        },
+        {
+          "title": "Glorifying and praising Allah",
+          "text": "Abu Hurayrah’s hadith records saying this one hundred times in the morning and one hundred times in the evening.",
+          "repeat": "100 times",
+          "meaning": "Glory and praise be to Allah.",
+          "sourceTitle": "التسبيح والتحميد"
+        }
+      ]
+    },
+    "evening": {
+      "title": "Evening remembrances",
+      "intro": "Supplications and recitations for the evening.",
+      "items": [
+        {
+          "title": "We have entered the evening",
+          "text": "This evening supplication in the hadith of Abdullah ibn Mas‘ud asks for the good of the night and seeks refuge from its evil.",
+          "meaning": "We have entered the evening, and all dominion belongs to Allah. All praise belongs to Allah. None is worthy of worship but Allah alone, without partner. His is the dominion and the praise, and He has power over all things. My Lord, I ask You for the good of this night and what follows it, and I seek refuge in You from the evil of this night and what follows it. My Lord, I seek refuge in You from laziness and the ills of old age. My Lord, I seek refuge in You from punishment in the Fire and in the grave.",
+          "sourceTitle": "أمسينا وأمسى الملك لله"
+        },
+        {
+          "title": "O Allah, by You we enter the evening",
+          "text": "The evening wording narrated by Abu Dawud from Abu Hurayrah.",
+          "meaning": "O Allah, by You we enter the evening, by You we live and by You we die, and to You is the resurrection.",
+          "sourceTitle": "اللهم بك أمسينا"
+        },
+        {
+          "title": "Al-Ikhlas, al-Falaq, and al-Nas",
+          "text": "Recite the three surahs in the morning and evening. Abdullah ibn Khubayb’s hadith gives the number of repetitions.",
+          "repeat": "3 times for each surah",
+          "meaning": "Al-Ikhlas affirms that Allah is One, the One on whom all depend. He neither begets nor was born, and none is equal to Him. Al-Falaq asks the Lord of daybreak for protection from the evil of what He created, the darkness when it settles, those who blow on knots, and an envier when they envy. Al-Nas asks the Lord, King, and God of humankind for protection from the retreating whisperer who whispers into people’s hearts, whether from among jinn or humankind.",
+          "sourceTitle": "الإخلاص والمعوّذتان"
+        },
+        {
+          "title": "The foremost prayer for forgiveness",
+          "text": "Shaddad ibn Aws’s hadith describes the merit of saying this with conviction during the day or at night.",
+          "meaning": "O Allah, You are my Lord. None is worthy of worship but You. You created me and I am Your servant. I hold to Your covenant and promise as far as I can. I seek refuge in You from the evil I have done. I acknowledge Your blessings upon me and I acknowledge my sin. Forgive me, for none forgives sins but You.",
+          "sourceTitle": "سيّد الاستغفار"
+        },
+        {
+          "title": "In Allah’s name, with whose name nothing can harm",
+          "text": "Say this three times each morning and evening, as narrated by Uthman ibn Affan.",
+          "repeat": "3 times",
+          "meaning": "In the name of Allah, with whose name nothing on earth or in heaven can harm. He is the All-Hearing, the All-Knowing.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Asking for pardon and well-being",
+          "text": "Abdullah ibn Umar reported that the Prophet regularly said this supplication in the morning and evening.",
+          "meaning": "O Allah, I ask You for well-being in this life and the Hereafter. I ask You for pardon and well-being in my faith, my worldly life, my family, and my wealth. Conceal my vulnerabilities and calm my fears. Protect me from ahead, behind, to my right, to my left, and above me. I seek refuge in Your greatness from being struck from below.",
+          "sourceTitle": "سؤال العفو والعافية"
+        },
+        {
+          "title": "Seeking refuge from the evil of the self and Satan",
+          "text": "The Prophet taught Abu Bakr al-Siddiq to say this in the morning, in the evening, and when going to bed.",
+          "meaning": "O Allah, Creator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of all things, I testify that none is worthy of worship but You. I seek refuge in You from the evil of my own self, the evil of Satan, and the association of partners with You to which he calls.",
+          "sourceTitle": "الاستعاذة من شر النفس والشيطان"
+        },
+        {
+          "title": "Seeking refuge in the perfect words of Allah",
+          "text": "Say this in the evening. The remembrance is narrated in Sahih Muslim. The three repetitions are given in al-Tirmidhi’s narration, which al-Albani graded authentic.",
+          "repeat": "3 times",
+          "meaning": "I seek refuge in the perfect words of Allah from the evil of what He created.",
+          "sourceTitle": "التعوّذ بكلمات الله التامّات"
+        },
+        {
+          "title": "Glorifying and praising Allah",
+          "text": "Abu Hurayrah’s hadith records saying this one hundred times in the morning and one hundred times in the evening.",
+          "repeat": "100 times",
+          "meaning": "Glory and praise be to Allah.",
+          "sourceTitle": "التسبيح والتحميد"
+        }
+      ]
+    },
+    "after-prayer": {
+      "title": "Remembrance after prayer",
+      "intro": "Say these remembrances after ending an obligatory prayer with the greeting of peace. Choose one of the narrated forms of glorification.",
+      "items": [
+        {
+          "title": "Seeking forgiveness, then “O Allah, You are Peace”",
+          "text": "After the closing greeting, say “I seek Allah’s forgiveness” three times, then say this supplication, as narrated by Thawban.",
+          "repeat": "Seek forgiveness 3 times",
+          "meaning": "O Allah, You are Peace and from You comes peace. Blessed are You, Possessor of Majesty and Honour.",
+          "sourceTitle": "الاستغفار ثم «اللهم أنت السلام»"
+        },
+        {
+          "title": "Glorifying Allah, praising Him, and declaring His greatness and oneness",
+          "text": "Say “Glory be to Allah,” “Praise belongs to Allah,” and “Allah is the Greatest” thirty-three times each. Complete the hundred with this declaration.",
+          "repeat": "33 glorifications · 33 praises · 33 declarations of Allah’s greatness",
+          "meaning": "None is worthy of worship but Allah alone, without partner. His is the dominion and the praise, and He has power over all things.",
+          "sourceTitle": "التسبيح والتحميد والتكبير مع التهليل"
+        },
+        {
+          "title": "Another form of glorification and praise",
+          "text": "In Ka‘b ibn Ujrah’s hadith, after each obligatory prayer say “Glory be to Allah” thirty-three times, “Praise belongs to Allah” thirty-three times, and “Allah is the Greatest” thirty-four times.",
+          "repeat": "33 glorifications · 33 praises · 34 declarations of Allah’s greatness",
+          "sourceTitle": "صيغة أخرى للتسبيح والتحميد والتكبير"
+        },
+        {
+          "title": "O Allah, none can withhold what You give",
+          "text": "The hadith of al-Mughirah ibn Shu‘bah gives this supplication after the declaration of Allah’s oneness following obligatory prayer.",
+          "meaning": "O Allah, none can withhold what You give, and none can give what You withhold. No one’s wealth or standing can avail them against You.",
+          "sourceTitle": "اللهم لا مانع لما أعطيت"
+        }
+      ]
+    },
+    "sleep": {
+      "title": "Bedtime remembrances",
+      "intro": "Remembrances and recitations for bedtime, including the last two verses of al-Baqarah for the night.",
+      "items": [
+        {
+          "title": "Al-Ikhlas, al-Falaq, and al-Nas",
+          "text": "Cup your hands together and blow lightly into them, recite the three surahs, then wipe as much of your body as you can with your hands. Begin with the head, face, and front of the body. Repeat the entire sequence three times.",
+          "repeat": "3 times",
+          "sourceTitle": "الإخلاص والفلق والناس"
+        },
+        {
+          "title": "Supplication at bedtime",
+          "text": "The Prophet said this when he went to bed, as narrated by Hudhayfah.",
+          "meaning": "In Your name, O Allah, I die and I live.",
+          "sourceTitle": "الدعاء عند الإيواء إلى الفراش"
+        },
+        {
+          "title": "The Throne Verse",
+          "text": "Recite the whole Throne Verse when you go to bed. The Prophet confirmed what Abu Hurayrah learned in the account of guarding the Ramadan charity.",
+          "sourceTitle": "آية الكرسي"
+        },
+        {
+          "title": "Fatimah’s bedtime remembrance",
+          "text": "When going to bed, say “Glory be to Allah” thirty-three times, “Praise belongs to Allah” thirty-three times, and “Allah is the Greatest” thirty-four times. The Prophet taught this remembrance to Ali and Fatimah.",
+          "repeat": "33 glorifications · 33 praises · 34 declarations of Allah’s greatness",
+          "sourceTitle": "تسبيح فاطمة قبل النوم"
+        },
+        {
+          "title": "The last two verses of al-Baqarah at night",
+          "text": "Recite the last two verses of al-Baqarah at night. The hadith says they suffice for whoever recites them that night.",
+          "sourceTitle": "آخر آيتين من سورة البقرة في الليل"
+        }
+      ]
+    },
+    "waking": {
+      "title": "Remembrance on waking",
+      "intro": "Praise Allah when you wake. There is also a remembrance for waking during the night.",
+      "items": [
+        {
+          "title": "Praising Allah on waking",
+          "text": "This remembrance on waking is narrated by Hudhayfah.",
+          "meaning": "All praise belongs to Allah, who brought us to life after causing us to die, and to Him is the resurrection.",
+          "sourceTitle": "الحمد بعد الاستيقاظ من النوم"
+        },
+        {
+          "title": "Waking during the night",
+          "text": "Say this declaration of Allah’s oneness. Then praise Allah, glorify Him, declare His oneness, say that He is the Greatest, and say “There is no power and no strength except through Allah,” in the narrated order. Then ask forgiveness or make a supplication for what you need. Read the full wording in the hadith of Ubadah ibn al-Samit.",
+          "meaning": "None is worthy of worship but Allah alone, without partner. His is the dominion and the praise, and He has power over all things.",
+          "sourceTitle": "من استيقظ أثناء الليل"
+        }
+      ]
+    },
+    "home": {
+      "title": "Remembrance at home",
+      "intro": "Remember Allah and greet with peace when you enter, and place your trust in Him as you leave.",
+      "items": [
+        {
+          "title": "Remembering Allah on entering",
+          "text": "Remember Allah when you enter your home. Jabir’s hadith explains the effect of remembering Allah when entering the home and when eating.",
+          "sourceTitle": "ذكر الله عند الدخول"
+        },
+        {
+          "title": "Greeting others with peace on entering",
+          "text": "Greet with peace when you enter. The verse in Surah al-Nur describes this greeting as blessed and good.",
+          "meaning": "When you enter houses, greet one another with peace, a blessed and good greeting from Allah.",
+          "sourceTitle": "السلام عند دخول البيوت"
+        },
+        {
+          "title": "Trusting Allah when leaving home",
+          "text": "Say this when leaving home, as narrated by Anas ibn Malik.",
+          "meaning": "In the name of Allah. I place my trust in Allah. There is no power and no strength except through Allah.",
+          "sourceTitle": "التوكّل عند الخروج من البيت"
+        }
+      ]
+    },
+    "food": {
+      "title": "Mealtime remembrances",
+      "intro": "Begin eating in Allah’s name and praise Him when you finish.",
+      "items": [
+        {
+          "title": "Saying Allah’s name before eating",
+          "text": "Mention Allah’s name before you begin eating. The Prophet taught Umar ibn Abi Salamah to mention Allah’s name, eat with his right hand, and eat from what was nearest to him.",
+          "meaning": "In the name of Allah.",
+          "sourceTitle": "التسمية عند البدء بالطعام"
+        },
+        {
+          "title": "Praising Allah when the meal is cleared",
+          "text": "This praise after eating appears in the hadith of Abu Umamah in Sahih al-Bukhari.",
+          "meaning": "All praise belongs to Allah, abundant, good, and blessed. We can never praise Him enough, bid Him farewell, or do without Him, our Lord.",
+          "sourceTitle": "الحمد عند رفع المائدة"
+        }
+      ]
+    },
+    "daily-life": {
+      "title": "Everyday remembrances",
+      "intro": "What to say when entering or leaving the toilet, and when someone sneezes and praises Allah.",
+      "items": [
+        {
+          "title": "Before entering the toilet",
+          "text": "Say this before entering to relieve yourself, as narrated by Anas.",
+          "meaning": "O Allah, I seek refuge in You from male and female devils.",
+          "sourceTitle": "قبل دخول الخلاء"
+        },
+        {
+          "title": "On leaving the toilet",
+          "text": "The Prophet said this when he left the toilet. Aishah reported it, and al-Tirmidhi graded the narration sound (hasan).",
+          "meaning": "I seek Your forgiveness.",
+          "sourceTitle": "عند الخروج من الخلاء"
+        },
+        {
+          "title": "Praising Allah after sneezing and responding",
+          "text": "The person who sneezes says “Praise belongs to Allah.” The person who hears them says “May Allah have mercy on you.” The person who sneezed replies “May Allah guide you and set your affairs right.”",
+          "sourceTitle": "الحمد وتشميت العاطس"
+        }
+      ]
+    },
+    "mosque": {
+      "title": "Mosque and call to prayer",
+      "intro": "What to say when entering and leaving the mosque, and the supplication to say after hearing the call to prayer.",
+      "items": [
+        {
+          "title": "Entering the mosque",
+          "text": "Say this when entering the mosque, as narrated by Abu Humayd or Abu Usayd.",
+          "meaning": "O Allah, open the gates of Your mercy for me.",
+          "sourceTitle": "عند دخول المسجد"
+        },
+        {
+          "title": "Leaving the mosque",
+          "text": "Say this when leaving the mosque, as given in the same hadith.",
+          "meaning": "O Allah, I ask You for Your bounty.",
+          "sourceTitle": "عند الخروج من المسجد"
+        },
+        {
+          "title": "Asking for al-Wasilah after the call to prayer",
+          "text": "This supplication appears in Jabir’s hadith in the chapter on supplication after hearing the call to prayer.",
+          "meaning": "O Allah, Lord of this perfect call and of the prayer about to be established, grant Muhammad al-Wasilah, the station of nearness to You, and excellence. Raise him to the praised station You have promised him.",
+          "sourceTitle": "دعاء الوسيلة عقب الأذان"
+        }
+      ]
+    },
+    "travel": {
+      "title": "Travel remembrances",
+      "intro": "What to say when setting out, during the journey, and on returning.",
+      "items": [
+        {
+          "title": "When setting out on a journey",
+          "text": "Say “Allah is the Greatest” three times when you mount or board for travel, then say this supplication, as narrated by Abdullah ibn Umar.",
+          "repeat": "Say “Allah is the Greatest” 3 times",
+          "meaning": "Glory be to Him who made this available to us, for we could not have mastered it ourselves, and to our Lord we will return. O Allah, we ask You for righteousness, mindfulness of You, and deeds that please You on this journey. Make this journey easy for us and shorten its distance. You are our companion on the journey and guardian of the family we leave behind. I seek refuge in You from the hardships of travel, distressing sights, and returning to hardship concerning wealth and family.",
+          "sourceTitle": "الذكر عند الركوب للسفر"
+        },
+        {
+          "title": "When going uphill or downhill",
+          "text": "Say “Allah is the Greatest” when ascending and “Glory be to Allah” when descending, as Jabir reported the Companions did.",
+          "sourceTitle": "عند صعود مرتفع أو النزول منه"
+        },
+        {
+          "title": "When returning from a journey",
+          "text": "The Prophet also said the travel supplication when returning and added these words.",
+          "meaning": "We return, repent, worship, and praise our Lord.",
+          "sourceTitle": "عند الرجوع من السفر"
+        }
+      ]
+    },
+    "distress": {
+      "title": "Remembrance in distress",
+      "intro": "Supplications and remembrance in times of hardship, from the Quran and Sahih al-Bukhari.",
+      "items": [
+        {
+          "title": "The supplication for distress narrated by Ibn Abbas",
+          "text": "Ibn Abbas narrated that the Prophet said this when in distress.",
+          "meaning": "None is worthy of worship but Allah, the Magnificent, the Forbearing. None is worthy of worship but Allah, Lord of the Mighty Throne. None is worthy of worship but Allah, Lord of the heavens and the earth and Lord of the Noble Throne.",
+          "sourceTitle": "ذكر الكرب من حديث ابن عباس"
+        },
+        {
+          "title": "The supplication of Jonah, peace be upon him",
+          "text": "Jonah made this supplication in the darkness. The next verse tells how Allah answered him and saved him from distress.",
+          "meaning": "None is worthy of worship but You. Glory be to You. I have been among the wrongdoers.",
+          "sourceTitle": "دعاء يونس عليه السلام"
+        }
+      ]
+    },
+    "general": {
+      "title": "General remembrances",
+      "intro": "Glorify Allah, acknowledge that all strength comes through Him, and seek His forgiveness throughout the day.",
+      "items": [
+        {
+          "title": "Two phrases that are easy to say",
+          "text": "The Prophet described these phrases as light on the tongue, heavy on the scales, and beloved to the Most Merciful.",
+          "meaning": "Glory be to Allah, the Magnificent. Glory and praise be to Allah.",
+          "sourceTitle": "كلمتان خفيفتان على اللسان"
+        },
+        {
+          "title": "A treasure from the treasures of Paradise",
+          "text": "The Prophet taught this remembrance to Abu Musa al-Ashari.",
+          "meaning": "There is no power and no strength except through Allah.",
+          "sourceTitle": "كنز من كنوز الجنة"
+        },
+        {
+          "title": "Seeking forgiveness throughout the day",
+          "text": "The Prophet used to ask Allah’s forgiveness and repent to Him more than seventy times a day, as narrated by Abu Hurayrah.",
+          "sourceTitle": "الاستغفار في اليوم"
+        }
+      ]
+    }
+  }
+}

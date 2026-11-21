@@ -219,7 +219,11 @@ function isIntentPhrasePresent(key, phrases) {
 }
 
 function questionLanguage(key) {
-  if (/\p{Script=Arabic}/u.test(key)) return "ar";
+  if (/\p{Script=Han}/u.test(key)) return "zh";
+  if (/\p{Script=Arabic}/u.test(key)) {
+    return /[ٹڈڑپچژگںھہےک]/u.test(key) ||
+      (typeof zadServiceLocale === "string" && zadServiceLocale === "ur") ? "ur" : "ar";
+  }
   if (/\b(puis|peut|peux|quels|quelles|veut|est|pendant|devenir|quand|comment|combien|voudrais|veux)\b/.test(key)) return "fr";
   if (/\b(puede|puedo|cual|cuales|quiero|convertirme|es posible|que|como|cuando|cuanto|cuantos|cuantas|hacer|hacerme|empiezo|si|soy)\b/.test(key)) return "es";
   return "en";
@@ -247,7 +251,9 @@ function resolveQuestionIntent(question, previousTopic) {
   const normalized = normalizeQuestion(question);
   if (!normalized) return null;
   const language = questionLanguage(normalized);
-  const {terms, rules} = compiledQuestionIntents[language];
+  const compiled = compiledQuestionIntents[language];
+  if (!compiled) return null;
+  const {terms, rules} = compiled;
   const key = " " + normalized + " ";
   const topic = intentTopics.find(entry => entry.groups.every(group => isIntentPhrasePresent(key, terms[group])));
   const has = group => isIntentPhrasePresent(key, terms[group]);

@@ -20,11 +20,16 @@ const fatwaScholar = document.querySelector("#fatwa-scholar");
 const fatwaCategory = document.querySelector("#fatwa-category");
 const fatwaCount = document.querySelector("#fatwa-count");
 const fatwaList = document.querySelector("#fatwa-list");
+const askLocale = typeof zadServiceLocale === "string" ? zadServiceLocale : "ar";
+
+function askMessage(key, fallback) {
+  return typeof zadServiceText === "function" ? zadServiceText("ask", key, fallback) : fallback;
+}
 
 const referencesForHelp = [
-  ["الموقع الرسمي للشيخ ابن باز", "https://binbaz.org.sa/fatwas"],
-  ["الموقع الرسمي للشيخ ابن عثيمين", "https://binothaimeen.net/"],
-  ["الرئاسة العامة للبحوث العلمية والإفتاء", "https://alifta.gov.sa/ar/home"]
+  [askMessage("ibnBaz", "الموقع الرسمي للشيخ ابن باز"), "https://binbaz.org.sa/fatwas"],
+  [askMessage("ibnUthaymeen", "الموقع الرسمي للشيخ ابن عثيمين"), "https://binothaimeen.net/"],
+  [askMessage("fatwaAuthority", "الرئاسة العامة للبحوث العلمية والإفتاء"), "https://alifta.gov.sa/ar/home"]
 ];
 
 function normalizeQuestion(value) {
@@ -37,16 +42,26 @@ function normalizeQuestion(value) {
 const questionIndex = new Map();
 const topicTerms = new Map();
 const followUpIndex = new Map();
+if (typeof applyZadReviewedTranslations === "function") applyZadReviewedTranslations(askEvidence);
 for (const [id, record] of Object.entries(askEvidence)) {
   topicTerms.set(id, record.terms.map(normalizeQuestion));
-  for (const language of ["ar", "en", "fr", "es"]) {
+  for (const language of ["ar", "en", "fr", "es", "ur", "zh"]) {
     const [, ...questions] = record[language] || [];
     for (const question of questions) {
       questionIndex.set(normalizeQuestion(question), {id, language});
     }
   }
   for (const [topic, questions] of Object.entries(record.followUp || {})) {
-    for (const question of questions) followUpIndex.set(topic + ":" + normalizeQuestion(question), id);
+    for (const question of questions) followUpIndex.set(topic + ":" + normalizeQuestion(question), {id, language: "ar"});
+  }
+}
+if (typeof zadReviewedTranslations === "object") {
+  for (const [language, records] of Object.entries(zadReviewedTranslations)) {
+    for (const [id, record] of Object.entries(records)) {
+      for (const [topic, questions] of Object.entries(record.followUp || {})) {
+        for (const question of questions) followUpIndex.set(topic + ":" + normalizeQuestion(question), {id, language});
+      }
+    }
   }
 }
 
@@ -69,8 +84,10 @@ function catalogAnswer(id, language) {
     answer: record[language][0],
     sources: record.localizedSources?.[language] || record.sources,
     needsDetails: Boolean(record.clarification),
-    status: record.clarification ? "يتغيّر الحكم بحسب تفاصيل المسألة." : "وجدت جوابًا مستندًا إلى المصادر.",
-    title: record.clarification ? "أحتاج إلى توضيح" : record.correction ? "تصحيح موثّق" : "جواب موثّق"
+    status: record.clarification ? askMessage("details", "يتغيّر الحكم بحسب تفاصيل المسألة.") :
+      askMessage("trusted", "وجدت جوابًا مستندًا إلى المصادر."),
+    title: record.clarification ? askMessage("clarify", "أحتاج إلى توضيح") :
+      record.correction ? askMessage("correction", "تصحيح موثّق") : askMessage("answer", "جواب موثّق")
   };
 }
 
@@ -79,9 +96,9 @@ function reviewedAnswer(key) {
   const fatwa = exactFatwas.get(key) || exactFatwas.get(request);
   if (fatwa) {
     return {
-      status: "مقتطف من فتوى " + fatwaScholars[fatwa.scholar],
+      status: askMessage("excerpt", "مقتطف من فتوى") + " " + scholarLabel(fatwa.scholar),
       title: fatwa.title,
-      sources: [[fatwa.title + " · اقرأ الفتوى كاملة", fatwa.url]],
+      sources: [[fatwa.title + " · " + askMessage("fullFatwa", "اقرأ الفتوى كاملة"), fatwa.url]],
       answer: fatwa.excerpt.text,
       language: "ar"
     };
@@ -94,16 +111,25 @@ function reviewedAnswer(key) {
 // a reviewed result for every clause, including any clause after a question mark.
 function questionParts(question) {
   const start = "(?:هل|ما|ماذا|كيف|متى|كم|ليش|لماذا|إذا|اذا)\\s";
-  const separator = new RegExp("[؟?؛;]+|[،,]\\s*(?=و?\\s*" + start + ")|\\s+و\\s*(?=" + start + ")");
+  const separator = new RegExp("[؟?？؛;；]+|[،,]\\s*(?=و?\\s*" + start + ")|\\s+و\\s*(?=" + start + ")");
   const conjunction = new RegExp("^و\\s*(?=" + start + ")");
   return question.split(separator)
     .map(part => part.trim().replace(conjunction, ""))
     .filter(Boolean);
 }
 
+function scholarLabel(id) {
+  const key = id === "ibn-baz" ? "scholarBaz" : "scholarUthaymeen";
+  return askMessage(key, fatwaScholars[id]);
+}
+
+const categoryKeys = {
+  "الطهارة": "purity", "الصلاة": "prayer", "الزكاة": "zakat", "الصيام": "fasting", "الحج والعمرة": "pilgrimage"
+};
+
 function sourceDescription(entry) {
-  const format = entry.format === "audio" ? "تسجيل صوتي" : "فتوى مكتوبة";
-  return fatwaScholars[entry.scholar] + " · " + format;
+  const format = entry.format === "audio" ? askMessage("audio", "تسجيل صوتي") : askMessage("written", "فتوى مكتوبة");
+  return scholarLabel(entry.scholar) + " · " + format;
 }
 
 function browseFatwas() {
@@ -116,21 +142,24 @@ function browseFatwas() {
     const source = document.createElement("a");
     const author = document.createElement("small");
     source.textContent = entry.title;
+    source.lang = "ar";
+    source.dir = "auto";
     source.href = entry.url;
     author.textContent = sourceDescription(entry);
     item.append(source, author);
     fatwaList.append(item);
   }
   fatwaCount.textContent = items.length
-    ? new Intl.NumberFormat("ar-SA").format(items.length) + " نتيجة من المصادر الأصلية"
-    : "لا توجد فتاوى في هذا الاختيار. يمكنك تغيير العالم أو الموضوع.";
+    ? new Intl.NumberFormat(askLocale === "ar" ? "ar-SA" : askLocale).format(items.length) +
+      " " + askMessage("resultCount", "نتيجة من المصادر الأصلية")
+    : askMessage("empty", "لا توجد فتاوى في هذا الاختيار. يمكنك تغيير العالم أو الموضوع.");
 }
 
-fatwaScholar.add(new Option("جميع العلماء", ""));
-for (const [id, name] of Object.entries(fatwaScholars)) fatwaScholar.add(new Option(name, id));
-fatwaCategory.add(new Option("جميع الموضوعات", ""));
+fatwaScholar.add(new Option(askMessage("scholars", "جميع العلماء"), ""));
+for (const id of Object.keys(fatwaScholars)) fatwaScholar.add(new Option(scholarLabel(id), id));
+fatwaCategory.add(new Option(askMessage("topics", "جميع الموضوعات"), ""));
 for (const category of new Set(fatwaSources.map(entry => entry.category))) {
-  fatwaCategory.add(new Option(category, category));
+  fatwaCategory.add(new Option(askMessage(categoryKeys[category], category), category));
 }
 fatwaScholar.addEventListener("change", browseFatwas);
 fatwaCategory.addEventListener("change", browseFatwas);
@@ -167,10 +196,11 @@ function relevantFatwas(key, authors) {
 let submittedQuestion = "";
 let previousTopic;
 
-function showResult(status, title, sources, answer = "", language = "ar") {
+function showResult(status, title, sources, answer = "", language = askLocale) {
   askStatus.textContent = status;
   askQuestion.textContent = submittedQuestion;
   askTitle.textContent = title;
+  askTitle.dir = "auto";
   askAnswer.textContent = answer;
   askAnswer.hidden = !answer;
   askAnswer.lang = language;
@@ -181,6 +211,7 @@ function showResult(status, title, sources, answer = "", language = "ar") {
   for (const [label, url] of sources) {
     const link = document.createElement("a");
     link.textContent = label;
+    link.dir = "auto";
     link.href = url;
     askSources.append(link);
   }
@@ -196,7 +227,7 @@ function showReviewed(match) {
 function showParts(parts) {
   const sources = [...new Map(parts.flatMap(({match}) => match.sources.map(([label, url]) => [url, label])))]
     .map(([url, label]) => [label, url]);
-  showResult("وجدت أجوبة موثّقة لأجزاء السؤال.", "أجوبة موثّقة", sources);
+  showResult(askMessage("partsStatus", "وجدت أجوبة موثّقة لأجزاء السؤال."), askMessage("partsTitle", "أجوبة موثّقة"), sources);
   askAnswer.hidden = false;
   for (const {question, match} of parts) {
     const part = document.createElement("section");
@@ -219,20 +250,21 @@ function relatedTopics(key) {
   const words = " " + key + " ";
   return [...topicTerms].map(([id, terms]) => ({
     id,
-    score: terms.reduce((best, term) => words.includes(" " + term + " ")
+    score: terms.reduce((best, term) => (/\p{Script=Han}/u.test(term) ? key.includes(term) : words.includes(" " + term + " "))
       ? Math.max(best, term.split(" ").length) : best, 0)
   })).filter(topic => topic.score > 0).sort((a, b) => b.score - a.score)
     .map(({id}) => ({id, title: askEvidence[id].title}));
 }
 
-function showRelated(topics, language = "ar") {
+function showRelated(topics, language = askLocale) {
   const questions = topics.map(({id}) => askEvidence[id]).filter(record => record && !record.correction && !record.clarification)
     .map(record => record[language]?.[1]).filter(Boolean).slice(0, 3);
   for (const question of questions) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "button";
-    const label = question + (language === "ar" ? "؟" : "?");
+    const questionMark = language === "ar" || language === "ur" ? "؟" : language === "zh" ? "？" : "?";
+    const label = question + questionMark;
     button.textContent = label;
     button.lang = language;
     button.dir = "auto";
@@ -256,16 +288,17 @@ function showIntent(intent, related = [], officialSearch) {
   const clarification = intent.kind === "clarify";
   const links = sources.length ? sources.slice(0, 5) : [...referencesForHelp];
   if (officialSearch) links.push(officialSearch);
-  showResult(clarification ? "يتغيّر الجواب بحسب ما تقصده." : "هذه المسألة تحتاج إلى معرفة تفاصيلها.",
-    "أحتاج إلى توضيح", links,
+  showResult(clarification ? askMessage("clarifyIntent", "يتغيّر الجواب بحسب ما تقصده.") :
+    askMessage("clarifyDetails", "هذه المسألة تحتاج إلى معرفة تفاصيلها."),
+    askMessage("clarify", "أحتاج إلى توضيح"), links,
     intent.prompt, language);
   if (clarification) showRelated([...new Set([...ids, ...related.map(topic => topic.id)])].map(id => ({id})), language);
 }
 
 function showNoAnswer(topics, officialSearch) {
   const sources = officialSearch ? [officialSearch, ...referencesForHelp] : referencesForHelp;
-  showResult("لم أجد جوابًا موثّقًا يطابق هذا السؤال.", "كيف تحدّد سؤالك؟", sources,
-    "اذكر العبادة أو المسألة، وحدّد ما تريد معرفته عنها. يمكنك أيضًا اختيار أحد الأسئلة القريبة إن ظهر هنا.");
+  showResult(askMessage("noAnswer", "لم أجد جوابًا موثّقًا يطابق هذا السؤال."), askMessage("refine", "كيف تحدّد سؤالك؟"), sources,
+    askMessage("refineHint", "اذكر العبادة أو المسألة، وحدّد ما تريد معرفته عنها. يمكنك أيضًا اختيار أحد الأسئلة القريبة إن ظهر هنا."));
   showRelated(topics);
 }
 
@@ -298,17 +331,17 @@ function resetModel(message) {
 
 modelButton.addEventListener("click", async () => {
   if (location.protocol === "file:") {
-    modelStatus.textContent = "افتح الموقع عبر HTTPS أو خادم المعاينة المحلي لتشغيل النموذج.";
+    modelStatus.textContent = askMessage("https", "افتح الموقع عبر HTTPS أو خادم المعاينة المحلي لتشغيل النموذج.");
     return;
   }
   if (!navigator.gpu) {
-    modelStatus.textContent = "اقتراح المراجع بالذكاء الاصطناعي يتطلب جهازًا ومتصفحًا يدعمان WebGPU.";
+    modelStatus.textContent = askMessage("noGPU", "اقتراح المراجع بالذكاء الاصطناعي يتطلب جهازًا ومتصفحًا يدعمان WebGPU.");
     return;
   }
 
   modelButton.disabled = true;
-  modelStatus.textContent = "جارٍ التحقق من توافق جهازك…";
-  const unavailable = "تعذّر تشغيل النموذج. يمكنك إعادة المحاولة، والبحث عن الأجوبة الموثّقة متاح الآن.";
+  modelStatus.textContent = askMessage("check", "جارٍ التحقق من توافق جهازك…");
+  const unavailable = askMessage("unavailable", "تعذّر تشغيل النموذج. يمكنك إعادة المحاولة، والبحث عن الأجوبة الموثّقة متاح الآن.");
   const timeout = Symbol("adapter timeout");
   let adapterTimer;
   try {
@@ -317,15 +350,15 @@ modelButton.addEventListener("click", async () => {
       new Promise(resolve => { adapterTimer = setTimeout(() => resolve(timeout), 10000); })
     ]);
     if (adapter === timeout) {
-      resetModel("استغرق التحقق من توافق جهازك وقتًا طويلًا. يمكنك إعادة المحاولة.");
+      resetModel(askMessage("adapterTimeout", "استغرق التحقق من توافق جهازك وقتًا طويلًا. يمكنك إعادة المحاولة."));
       return;
     }
     if (!adapter?.features.has("shader-f16")) {
-      resetModel("يحتاج النموذج إلى جهاز يدعم WebGPU ودقة ١٦ بت. البحث عن الأجوبة الموثّقة متاح الآن.");
+      resetModel(askMessage("gpu16", "يحتاج النموذج إلى جهاز يدعم WebGPU ودقة ١٦ بت. البحث عن الأجوبة الموثّقة متاح الآن."));
       return;
     }
 
-    modelStatus.textContent = "جارٍ تحميل نموذج الذكاء الاصطناعي…";
+    modelStatus.textContent = askMessage("loadModel", "جارٍ تحميل نموذج الذكاء الاصطناعي…");
     const worker = new Worker(document.querySelector("#ask-script").dataset.worker, { type: "module" });
     modelWorker = worker;
     worker.onerror = () => {
@@ -335,18 +368,21 @@ modelButton.addEventListener("click", async () => {
       if (modelWorker !== worker || !data || typeof data !== "object") return;
       if (data.type === "progress" && !modelReady) {
         const percent = Math.round(100 * Math.min(1, Math.max(0, Number(data.progress) || 0)));
-        modelStatus.textContent = "جارٍ تحميل النموذج وإعداده… " + percent + "٪";
+        const progress = askLocale === "ar" ? percent + "٪" :
+          new Intl.NumberFormat(askLocale, {style: "percent"}).format(percent / 100);
+        modelStatus.textContent = askMessage("modelProgress", "جارٍ تحميل النموذج وإعداده…") + " " + progress;
       } else if (data.type === "ready" && !modelReady) {
         clearTimeout(startupTimer);
         modelReady = true;
-        modelStatus.textContent = "اقتراح المراجع بالذكاء الاصطناعي جاهز.";
+        modelStatus.textContent = askMessage("modelReady", "اقتراح المراجع بالذكاء الاصطناعي جاهز.");
       } else if (data.type === "topic" && pendingLookup && data.requestId === pendingLookup.id) {
         const {topics, officialSearch} = pendingLookup;
         const source = topics.some(topic => topic.id === data.id) ? askEvidence[data.id] : null;
         finishLookup();
         if (source) {
-          showResult("لم أجد جوابًا موثّقًا يطابق السؤال. قد تساعدك هذه المراجع.",
-            source.title, officialSearch ? [...source.sources, officialSearch] : source.sources);
+          const sources = source.localizedSources?.[askLocale] || source.sources;
+          showResult(askMessage("candidate", "لم أجد جوابًا موثّقًا يطابق السؤال. قد تساعدك هذه المراجع."),
+            askMessage("sources", source.title), officialSearch ? [...sources, officialSearch] : sources);
           showRelated(topics);
         } else {
           showNoAnswer(topics, officialSearch);
@@ -356,7 +392,7 @@ modelButton.addEventListener("click", async () => {
         resetModel(unavailable);
       }
     };
-    startupTimer = setTimeout(() => resetModel("استغرق تحميل النموذج وقتًا طويلًا. يمكنك إعادة المحاولة."), 300000);
+    startupTimer = setTimeout(() => resetModel(askMessage("startupTimeout", "استغرق تحميل النموذج وقتًا طويلًا. يمكنك إعادة المحاولة.")), 300000);
     worker.postMessage({ type: "init" });
   } catch {
     resetModel(unavailable);
@@ -369,7 +405,7 @@ function exactOrFollowUp(key, topic) {
   const match = reviewedAnswer(key);
   if (match) return match;
   const followUp = followUpIndex.get(topic + ":" + key.replace(questionIntro, ""));
-  if (followUp) return catalogAnswer(followUp, "ar");
+  if (followUp) return catalogAnswer(followUp.id, followUp.language);
 }
 
 function scholarAnswer(subject, intent) {
@@ -405,6 +441,7 @@ function cancelAgent() {
 function mayUseAgent(question, key, topic) {
   if (!askAgentEndpoint || reviewedAnswer(key)?.needsDetails ||
       followUpIndex.has(topic + ":" + key.replace(questionIntro, ""))) return false;
+  if (["ur", "zh"].includes(questionLanguage(key))) return false;
   const intent = resolveQuestionIntent(question, topic);
   return intent?.kind !== "refer" && !askEvidence[intent?.id]?.clarification;
 }
@@ -506,22 +543,23 @@ async function answerFromLibrary(question, key, topic) {
   }
 
   let officialSearch, relatedOnline;
-  if ((!authors.length || namedBinBaz && subject !== key) && questionParts(question).length === 1) {
+  if (questionLanguage(key) === "ar" && (!authors.length || namedBinBaz && subject !== key) &&
+      questionParts(question).length === 1) {
     const query = binBazLookupQuery(question, subject);
     if (query) {
-      officialSearch = ["بحث هذا الموضوع في موقع الشيخ ابن باز", binBazSearchURL("/search", query.text).href];
+      officialSearch = [askMessage("webSearch", "بحث هذا الموضوع في موقع الشيخ ابن باز"), binBazSearchURL("/search", query.text).href];
       const controller = new AbortController();
       agentRequest = controller;
       askButton.disabled = true;
       askResult.hidden = true;
-      askStatus.textContent = "جارٍ البحث في الموقع الرسمي للشيخ ابن باز…";
+      askStatus.textContent = askMessage("officialLoading", "جارٍ البحث في الموقع الرسمي للشيخ ابن باز…");
       const result = await searchBinBaz(query, controller);
       if (agentRequest !== controller) return;
       finishLookupAfterAgent();
       if (result?.direct) {
         const { title, url, answer } = result.direct;
-        showResult("مقتطف من بداية جواب الشيخ عبد العزيز بن باز", title,
-          [["اقرأ الفتوى كاملةً في موقع الشيخ", url]], answer);
+        showResult(askMessage("officialExcerpt", "مقتطف من بداية جواب الشيخ عبد العزيز بن باز"), title,
+          [[askMessage("officialRead", "اقرأ الفتوى كاملةً في موقع الشيخ"), url]], answer, "ar");
         return;
       }
       relatedOnline = result?.related;
@@ -540,23 +578,23 @@ async function answerFromLibrary(question, key, topic) {
   if (references.length) {
     const sources = references.map(entry => [entry.title + " · " + sourceDescription(entry), entry.url]);
     if (officialSearch) sources.push(officialSearch);
-    showResult("وجدت فتاوى مرتبطة بموضوع السؤال.", "نتائج من مواقع العلماء",
+    showResult(askMessage("relatedFatwas", "وجدت فتاوى مرتبطة بموضوع السؤال."), askMessage("scholarResults", "نتائج من مواقع العلماء"),
       sources,
-      "راجع السؤال والجواب كاملين في المصدر. إذا كانت مسألتك لها ظروف خاصة، فاسأل مختصًا يمكنه معرفة تفاصيلها.");
+      askMessage("readContext", "راجع السؤال والجواب كاملين في المصدر. إذا كانت مسألتك لها ظروف خاصة، فاسأل مختصًا يمكنه معرفة تفاصيلها."));
     askSources.classList.add("fatwa-results");
     showRelated(topics);
     return;
   }
   if (relatedOnline?.length) {
     const sources = relatedOnline.map(({title, url}) => [title, url]);
-    showResult("وجدت فتاوى مرتبطة في البحث الرسمي.", "نتائج موقع الشيخ ابن باز", [...sources, officialSearch],
-      "افتح الفتوى الأقرب إلى سؤالك لقراءة الجواب كاملًا؛ المقتطفات المتاحة لا تكفي لإجابة هذا السؤال بدقة.");
+    showResult(askMessage("relatedOnline", "وجدت فتاوى مرتبطة في البحث الرسمي."), askMessage("bazResults", "نتائج موقع الشيخ ابن باز"), [...sources, officialSearch],
+      askMessage("notEnough", "افتح الفتوى الأقرب إلى سؤالك لقراءة الجواب كاملًا؛ المقتطفات المتاحة لا تكفي لإجابة هذا السؤال بدقة."));
     return;
   }
   if (authors.length) {
-    showResult("لم أجد فتوى مطابقة من العالم المذكور في الفهرس.", "المواقع الرسمية",
+    showResult(askMessage("noScholar", "لم أجد فتوى مطابقة من العالم المذكور في الفهرس."), askMessage("officialSites", "المواقع الرسمية"),
       officialSearch ? [officialSearch, ...referencesForHelp] : referencesForHelp,
-      "يمكنك تغيير صياغة السؤال أو مراجعة الجهات الرسمية.");
+      askMessage("rephrase", "يمكنك تغيير صياغة السؤال أو مراجعة الجهات الرسمية."));
     return;
   }
 
@@ -569,12 +607,12 @@ async function answerFromLibrary(question, key, topic) {
   pendingLookup = {id: requestId, topics, officialSearch};
   askButton.disabled = true;
   askResult.hidden = true;
-  askStatus.textContent = "جارٍ البحث عن مراجع قد تفيدك…";
-  lookupTimer = setTimeout(() => resetModel("استغرق اقتراح المراجع وقتًا طويلًا. يمكنك إعادة المحاولة."), 90000);
+  askStatus.textContent = askMessage("looking", "جارٍ البحث عن مراجع قد تفيدك…");
+  lookupTimer = setTimeout(() => resetModel(askMessage("lookupTimeout", "استغرق اقتراح المراجع وقتًا طويلًا. يمكنك إعادة المحاولة.")), 90000);
   try {
     modelWorker.postMessage({ type: "ask", requestId, question, topics });
   } catch {
-    resetModel("تعذّر اقتراح المراجع. يمكنك إعادة تشغيل النموذج.");
+    resetModel(askMessage("lookupFailed", "تعذّر اقتراح المراجع. يمكنك إعادة تشغيل النموذج."));
   }
 }
 
@@ -590,7 +628,7 @@ askForm.addEventListener("submit", async event => {
   const key = normalizeQuestion(question);
   if (!key) {
     askResult.hidden = true;
-    askStatus.textContent = "اكتب سؤالًا للبحث عن إجابة.";
+    askStatus.textContent = askMessage("enterQuestion", "اكتب سؤالًا للبحث عن إجابة.");
     askInput.focus();
     return;
   }
@@ -604,15 +642,15 @@ askForm.addEventListener("submit", async event => {
     agentRequest = controller;
     askButton.disabled = true;
     askResult.hidden = true;
-    askStatus.textContent = "يبحث وكيل زاد في مواقع الفتوى المعتمدة…";
+    askStatus.textContent = askMessage("agentLooking", "يبحث وكيل زاد في مواقع الفتوى المعتمدة…");
     const result = await requestAgentAnswer(question, controller);
     if (agentRequest !== controller) return;
     finishLookupAfterAgent();
     if (result) {
       const known = reviewedAnswer(key);
       previousTopic = known?.id;
-      showResult("خلاصة من وكيل OpenAI. يمكنك فتح الفتوى من المراجع أدناه.",
-        "إجابة من المصادر", result.sources, result.answer, questionLanguage(key));
+      showResult(askMessage("agentStatus", "خلاصة من وكيل OpenAI. يمكنك فتح الفتوى من المراجع أدناه."),
+        askMessage("agentTitle", "إجابة من المصادر"), result.sources, result.answer, questionLanguage(key));
       return;
     }
   }

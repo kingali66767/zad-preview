@@ -1,0 +1,134 @@
+key	ar	en	ur	zh	fr
+brand	زاد	Zad	زاد	Zad	Zad
+platform	منصة التوعية الدينية	Islamic education platform	اسلامی آگاہی کا پلیٹ فارم	伊斯兰知识平台	Plateforme d’éducation islamique
+description	زاد، منصة عربية مستقلة للتوعية الدينية. القرآن الكريم والأحاديث الصحيحة والدروس ومواقيت الصلاة.	Zad is an independent Islamic education platform with Qur’an, authentic hadith, guides and prayer times.	زاد اسلامی آگاہی کا ایک آزاد پلیٹ فارم ہے، جہاں قرآن، صحیح احادیث، رہنما مواد اور نماز کے اوقات دستیاب ہیں۔	Zad 是独立的伊斯兰知识平台，提供《古兰经》、可靠圣训、学习指南及礼拜时间。	Zad est une plateforme indépendante d’éducation islamique proposant le Coran, des hadiths authentiques, des guides et les horaires de prière.
+home	الرئيسية	Home	ابتدائی صفحہ	首页	Accueil
+menu	الأقسام	Sections	شعبے	栏目	Rubriques
+nav_label	أقسام زاد	Zad sections	زاد کے شعبے	Zad 栏目	Rubriques de Zad
+language	اللغة	Language	زبان	语言	Langue
+skip	تجاوز إلى المحتوى	Skip to content	مواد پر جائیں	跳至内容	Aller au contenu
+independent	زاد · مبادرة توعوية مستقلة غير رسمية	Zad · Independent, unofficial educational initiative	زاد · ایک آزاد، غیر سرکاری تعلیمی اقدام	Zad · 独立、非官方的教育项目	Zad · Initiative éducative indépendante et non officielle
+quran	القرآن الكريم	The Qur’an	قرآنِ کریم	《古兰经》	Le Coran
+lessons	الخطب والدروس	Sermons and lessons	خطبات اور دروس	讲道与课程	Sermons et cours
+hadith	الأحاديث الصحيحة	Authentic hadith	صحیح احادیث	可靠圣训	Hadiths authentiques
+faq	أسئلة وأجوبة شرعية	Islamic questions and answers	شرعی سوالات و جوابات	伊斯兰常见问答	Questions et réponses religieuses
+media	المحاضرات والتلاوات	Lectures and recitations	لیکچر اور تلاوتیں	讲座与诵读	Conférences et récitations
+occasions	المناسبات الإسلامية	Islamic occasions	اسلامی مناسبتیں	伊斯兰节期	Temps forts de l’islam
+belief	العقيدة وأصول الإيمان	Creed and foundations of faith	عقیدہ اور ایمان کے اصول	信仰基础	Croyance et fondements de la foi
+seerah	السيرة النبوية	Life of the Prophet	سیرتِ نبوی	先知生平	Vie du Prophète
+ask	اسأل زاد	Ask Zad	زاد سے پوچھیں	问答助手	Poser une question à Zad
+prayer	مواقيت الصلاة	Prayer times	نماز کے اوقات	礼拜时间	Horaires de prière
+worship	الوضوء والصلاة	Ablution and prayer	وضو اور نماز	小净与礼拜	Ablutions et prière
+adhkar	الأذكار اليومية	Daily remembrance	روزمرہ اذکار	日常赞念	Invocations du quotidien
+reading	خطة القراءة	Reading plan	مطالعے کا منصوبہ	诵读计划	Programme de lecture
+discover	تعرّف على الإسلام	Discover Islam	اسلام کو جانیں	认识伊斯兰	Découvrir l’islam
+sources	مصادر المكتبة	Library sources	کتب خانے کے مآخذ	资料来源	Sources de la bibliothèque
+contact	تواصل معنا	Contact us	ہم سے رابطہ کریں	联系我们	Nous contacter
+home_ask_label	سؤالك في اسأل زاد	Your question for Ask Zad	زاد کے لیے آپ کا سوال	向 Zad 提问	Votre question pour Zad
+no_private	سؤالك دون بيانات شخصية	Your question, without personal details	سوال لکھیں، ذاتی معلومات کے بغیر	请输入问题，勿填写个人信息	Votre question, sans données personnelles
+search	ابحث	Search	تلاش کریں	搜索	Rechercher
+home_privacy	قد تُرسل كلمات السؤال إلى البحث الرسمي في موقع ابن باز.	Keywords from your question may be sent to the official Ibn Baz search.	آپ کے سوال کے کلیدی الفاظ ابن باز کی سرکاری ویب سائٹ کی تلاش کو بھیجے جا سکتے ہیں۔	问题中的关键词可能会发送至伊本·巴兹官方网站的搜索服务。	Les mots-clés de votre question peuvent être transmis au moteur de recherche du site officiel d’Ibn Baz.
+open_ask	افتح صفحة اسأل زاد	Open Ask Zad	زاد سے پوچھیں کا صفحہ کھولیں	打开 Zad 问答	Ouvrir la page de questions
+slogan_first	زَادُكَ مِنَ الْعِلْمِ،	Knowledge to sustain you,	علم آپ کا زادِ راہ،	以知识充实自己，	Le savoir pour vous nourrir,
+slogan_second	وَنُورُكَ بِالْمَعْرِفَةِ.	understanding to light your way.	اور معرفت آپ کی روشنی۔	以理解照亮前路。	la compréhension pour vous éclairer.
+hero_intro	مساحة عربية للعلم الشرعي النافع، تجمع القرآن الكريم والأحاديث الصحيحة والمواد التوعوية الموثّقة في مكان واحد.	A place to learn about Islam through the Qur’an, authentic hadith and materials with references.	اسلامی علم حاصل کرنے کی جگہ، جہاں قرآنِ کریم، صحیح احادیث اور حوالوں کے ساتھ رہنمائی ایک ہی جگہ دستیاب ہے۔	在这里学习伊斯兰知识，阅读《古兰经》、可靠圣训和附有出处的学习资料。	Un espace pour apprendre l’islam à partir du Coran, de hadiths authentiques et de ressources accompagnées de références.
+tour_start	ابدأ الجولة	Start the tour	سیر شروع کریں	开始导览	Commencer la visite
+hero_alt	أقواس معمارية إسلامية يضيئها ضوء الشمس	Sunlight illuminating Islamic arches	اسلامی طرزِ تعمیر کی محرابوں پر دھوپ	阳光照亮伊斯兰建筑的拱门	Arches d’architecture islamique éclairées par le soleil
+tour_heading	جولة في زاد	A tour of Zad	زاد کی سیر	Zad 导览	Visite de Zad
+tour_intro	اختر من الجولة ما تريد أن تقرأه أو تتعلّمه اليوم.	Choose what you’d like to read or learn today.	منتخب کریں کہ آج آپ کیا پڑھنا یا سیکھنا چاہتے ہیں۔	选择今天想阅读或学习的内容。	Choisissez ce que vous souhaitez lire ou apprendre aujourd’hui.
+tour_read_title	اقرأ وتحقّق	Read and check the sources	پڑھیں اور حوالہ دیکھیں	阅读与查证	Lire et vérifier les sources
+tour_read_intro	اقرأ في القرآن والحديث والسيرة، وافتح المصدر المرفق بالمادة لتطّلع على النصّ أو الفتوى في سياقها.	Explore the Qur’an, hadith and the Prophet’s life. Open each reference to read the text or fatwa in context.	قرآن، حدیث اور سیرت پڑھیں۔ منسلک ماخذ کھول کر نص یا فتویٰ اس کے سیاق کے ساتھ دیکھیں۔	阅读《古兰经》、圣训和先知生平，打开相关出处了解原文或教法意见的语境。	Explorez le Coran, les hadiths et la vie du Prophète. Ouvrez la référence pour lire le texte ou l’avis juridique dans son contexte.
+tour_read_action	افتح القرآن الكريم	Open the Qur’an section	قرآنِ کریم کا شعبہ کھولیں	打开《古兰经》栏目	Ouvrir la rubrique Coran
+tour_practice_title	عبادتك اليومية	Daily worship	آپ کی روزانہ عبادت	日常礼拜与功修	Le culte au quotidien
+tour_practice_intro	راجع صفة الوضوء والصلاة، واقرأ أذكار الصباح والمساء، أو اعرض مواقيت الصلاة في مدينتك السعودية.	Review ablution and prayer, read morning and evening remembrances, or check prayer times for your Saudi city.	وضو اور نماز کا طریقہ دیکھیں، صبح و شام کے اذکار پڑھیں یا سعودی عرب میں اپنے شہر کے نماز کے اوقات دیکھیں۔	复习小净和礼拜的步骤、阅读早晚赞念，或查询沙特城市的礼拜时间。	Revoyez les ablutions et la prière, lisez les invocations du matin et du soir ou consultez les horaires de votre ville en Arabie saoudite.
+tour_practice_action	افتح الوضوء والصلاة	Open ablution and prayer	وضو اور نماز کا صفحہ کھولیں	打开小净与礼拜	Ouvrir la rubrique Ablutions et prière
+tour_ask_title	اسأل أو تعرّف على الإسلام	Ask a question or discover Islam	سوال کریں یا اسلام کو جانیں	提问或认识伊斯兰	Poser une question ou découvrir l’islam
+tour_ask_intro	ابحث عن جواب موثّق في «اسأل زاد». وإذا كنت تتعرّف على الإسلام، فالدليل يشرح مبادئه وخطواته الأولى بلغات متعددة.	Find answers with references in Ask Zad. The multilingual guide explains Islam’s basics and first steps.	زاد سے پوچھیں میں حوالہ شدہ جواب تلاش کریں۔ کئی زبانوں میں دستیاب رہنما اسلام کے بنیادی اصول اور ابتدائی قدم بتاتا ہے۔	在 Zad 问答中查阅附有出处的回答。多语言指南介绍伊斯兰的基础知识和入门步骤。	Trouvez des réponses référencées dans la rubrique Questions. Le guide multilingue présente les bases de l’islam et les premières étapes.
+programming	البرمجة	Programming	پروگرامنگ	开发	Développement
+supervision	الإشراف	Supervision	نگرانی	指导	Supervision
+unit	الوحدة	Unit	یونٹ	单位	Unité
+credit_programmer	رقيب أول / علي بن محمد القرني	First Sergeant / Ali bin Mohammed Al-Qarni	رقيب اول / علی بن محمد القرنی	一级中士 / 阿里·本·穆罕默德·卡尔尼	Sergent-chef / Ali ben Mohammed Al-Qarni
+credit_supervisor	المقدم / سعود ال خالد	Lieutenant Colonel / Saud Al Khalid	لیفٹیننٹ کرنل / سعود ال خالد	中校 / 沙特·阿勒·哈立德	Lieutenant-colonel / Saoud Al Khalid
+credit_unit	مركز التدريب التكتيكي بتثليث	Tathlith Tactical Training Centre	تثلیث کا ٹیکٹیکل ٹریننگ سینٹر	塔斯利斯战术训练中心	Centre d’entraînement tactique de Tathlith
+logo_alt	شعار وزارة الدفاع السعودية	Saudi Ministry of Defense emblem	سعودی وزارتِ دفاع کا نشان	沙特阿拉伯国防部徽标	Emblème du ministère saoudien de la Défense
+adhkar_intro	اختر وقت الذكر أو مناسبته لقراءة النص وعدد التكرار الوارد ومصدره.	Choose a time or occasion to read the remembrance, its reported repetition count and its source.	ذکر کا وقت یا موقع منتخب کریں، پھر اس کا متن، منقول تعداد اور حوالہ پڑھیں۔	选择时间或场合，查看赞念原文、传述的遍数及其出处。	Choisissez un moment ou une occasion pour lire le texte, le nombre de répétitions attesté et la source.
+adhkar_all	جميع الأذكار	All remembrances	تمام اذکار	全部赞念	Toutes les invocations
+adhkar_back	العودة إلى قائمة الأذكار	Back to the list of remembrances	اذکار کی فہرست پر واپس جائیں	返回赞念列表	Retour à la liste des invocations
+meaning	المعنى	Meaning	مفہوم	含义	Sens
+reference	المصدر	Source	ماخذ	出处	Source
+hadith_bukhari	صحيح البخاري	Sahih al-Bukhari	صحیح بخاری	《布哈里圣训实录》	Sahih al-Bukhari
+hadith_muslim	صحيح مسلم	Sahih Muslim	صحیح مسلم	《穆斯林圣训实录》	Sahih Muslim
+hadith_abudawud	سنن أبي داود	Sunan Abi Dawud	سنن ابی داؤد	《艾布·达伍德圣训集》	Sunan Abi Dawud
+hadith_tirmidhi	جامع الترمذي	Jami‘ at-Tirmidhi	جامع ترمذی	《提尔密济圣训集》	Jami‘ at-Tirmidhi
+guide_intro	دليل لغير المسلمين والمسلمين الجدد، يتناول الشهادتين والوضوء والصلاة.	A guide for people exploring Islam or newly Muslim, covering the testimony of faith, ablution and prayer.	اسلام کو سمجھنے والوں اور نو مسلموں کے لیے رہنما، جس میں کلمۂ شہادت، وضو اور نماز کی وضاحت ہے۔	面向想了解伊斯兰的人和新穆斯林，介绍信仰见证、小净和礼拜。	Un guide pour découvrir l’islam ou débuter comme musulman, avec l’attestation de foi, les ablutions et la prière.
+saudi	المملكة العربية السعودية	Saudi Arabia	سعودی عرب	沙特阿拉伯	Arabie saoudite
+city	المدينة	City	شہر	城市	Ville
+show_times	عرض المواقيت	Show prayer times	نماز کے اوقات دکھائیں	查看礼拜时间	Afficher les horaires
+prayer_choose	اختر مدينتك ثم اعرض مواقيت اليوم.	Choose a city to view today’s prayer times.	آج کے اوقات دیکھنے کے لیے اپنا شہر منتخب کریں۔	选择城市查看今日礼拜时间。	Choisissez une ville pour voir les horaires du jour.
+prayer_method	طريقة أم القرى، بتوقيت السعودية.	Umm al-Qura method, Saudi local time.	ام القریٰ طریقۂ حساب، سعودی وقت کے مطابق۔	乌姆古拉计算法，采用沙特当地时间。	Méthode d’Umm al-Qura, heure locale saoudienne.
+prayer_how	كيف تُحسب المواقيت؟	How are prayer times calculated?	نماز کے اوقات کیسے طے ہوتے ہیں؟	如何计算礼拜时间？	Comment les horaires sont-ils calculés ?
+prayer_details	يحسب AlAdhan الأوقات باستخدام إحداثيات المدينة وطريقة أم القرى، ويُحسب العصر وفق مذهب الجمهور. قد تختلف المواقيت عن تقويم المسجد ببضع دقائق. عند الاختلاف أو إذا لم تجد مدينتك، راجع التقويم المحلي.	AlAdhan uses the city coordinates and the Umm al-Qura method, with Asr calculated according to the majority scholarly view. Times may differ by a few minutes from your mosque’s timetable. If they differ or your city is unavailable, consult the local timetable.	AlAdhan شہر کے جغرافیائی نقاط اور ام القریٰ طریقے سے حساب کرتا ہے۔ عصر کا وقت جمہور علما کے مطابق ہے۔ مسجد کے اوقات سے چند منٹ کا فرق ہو سکتا ہے۔ فرق ہو یا اپنا شہر نہ ملے تو مقامی جدول دیکھیں۔	AlAdhan 根据城市坐标和乌姆古拉计算法计算时间，晡礼按多数经学家采用的规则计算。结果可能与清真寺的时间表相差几分钟。如有差异或未找到您的城市，请查阅当地时间表。	AlAdhan utilise les coordonnées de la ville et la méthode d’Umm al-Qura. L’Asr est calculée selon l’avis majoritaire des savants. Les horaires peuvent différer de quelques minutes de ceux de la mosquée. En cas d’écart ou si votre ville est absente, consultez le calendrier local.
+prayer_nojs	فعّل جافاسكربت لعرض مواقيت الصلاة.	Enable JavaScript to view prayer times.	نماز کے اوقات دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔	请启用 JavaScript 查看礼拜时间。	Activez JavaScript pour afficher les horaires de prière.
+city_riyadh	الرياض	Riyadh	ریاض	利雅得	Riyad
+city_mecca	مكة المكرمة	Mecca	مکہ مکرمہ	麦加	La Mecque
+city_medina	المدينة المنورة	Medina	مدینہ منورہ	麦地那	Médine
+city_jeddah	جدة	Jeddah	جدہ	吉达	Djeddah
+city_dammam	الدمام	Dammam	دمام	达曼	Dammam
+city_khobar	الخبر	Al Khobar	الخبر	胡拜尔	Al Khobar
+city_taif	الطائف	Taif	طائف	塔伊夫	Taïf
+city_buraydah	بريدة	Buraydah	بریدہ	布赖代	Buraydah
+city_hail	حائل	Ha’il	حائل	哈伊勒	Haïl
+city_tabuk	تبوك	Tabuk	تبوک	塔布克	Tabouk
+city_abha	أبها	Abha	ابہا	艾卜哈	Abha
+city_jazan	جازان	Jazan	جازان	吉赞	Jazan
+city_najran	نجران	Najran	نجران	纳季兰	Najran
+city_albaha	الباحة	Al Bahah	الباحہ	巴哈	Al Bahah
+city_sakaka	سكاكا	Sakaka	سکاکا	塞卡卡	Sakaka
+city_arar	عرعر	Arar	عرعر	阿拉尔	Arar
+city_hofuf	الهفوف	Al Hofuf	الہفوف	胡富夫	Al Hofuf
+contact_heading	شاركنا ملاحظاتك	Share your feedback	اپنی رائے بھیجیں	分享反馈	Partagez vos remarques
+contact_intro	عند اقتراح تصحيح، اذكر عنوان المادة والنص المراد مراجعته ورابط المصدر إن وجد. سيظهر زر المراسلة عند إضافة بريد المبادرة.	When suggesting a correction, include the title, the text to review and a source link if available. The email button appears when Zad’s contact address is set.	تصحیح کی تجویز میں عنوان، نظرثانی کے لیے اصل عبارت اور دستیاب حوالہ درج کریں۔ زاد کا رابطہ ای میل درج ہونے پر پیغام بھیجنے کا بٹن ظاہر ہوگا۔	建议更正时，请注明资料标题、需要复核的文字以及可用的出处链接。Zad 设置联系邮箱后，将显示邮件按钮。	Pour proposer une correction, indiquez le titre, le passage à vérifier et, si possible, un lien vers la source. Le bouton de contact apparaît quand l’adresse de Zad est configurée.
+contact_link	راسل زاد عبر البريد	Email Zad	زاد کو ای میل کریں	给 Zad 发邮件	Écrire à Zad
+contact_live	أرسل اقتراحًا لمادة جديدة أو نبّهنا إلى تصحيح في المحتوى.	Suggest a new resource or point out something that needs correcting.	نئے مواد کی تجویز بھیجیں یا کسی عبارت کی تصحیح کی نشان دہی کریں۔	欢迎建议新资料或指出需要更正的内容。	Proposez une nouvelle ressource ou signalez un passage à corriger.
+sources_intro	تستند المواد إلى القرآن والسنة الصحيحة، وإلى تفاسير وفتاوى من أهل السنة والجماعة. تُرفق بكل مادة إحالة إلى دليلها أو مصدرها، وتُنسب ملخّصات الفتاوى إلى الجهة أو العالم المذكور.	Materials draw on the Qur’an, authentic Sunnah, and Sunni Qur’an commentaries and fatwas. Each item has a reference, and fatwa summaries identify the scholar or institution cited.	مواد قرآن، صحیح سنت اور اہلِ سنت والجماعت کی تفاسیر و فتاویٰ پر مبنی ہے۔ ہر مواد کے ساتھ حوالہ ہے، اور فتوے کے خلاصے میں متعلقہ عالم یا ادارے کی نسبت درج ہے۔	资料以《古兰经》、可靠圣行及逊尼派经注和教法意见为依据。每项资料附有出处；教法意见摘要会注明相关学者或机构。	Les contenus s’appuient sur le Coran, la Sunna authentique, ainsi que sur des commentaires coraniques et avis juridiques sunnites. Chaque contenu comporte une référence et les résumés de fatwas indiquent le savant ou l’institution cités.
+source_saadi	تفسير السعدي	Al-Sa‘di’s Qur’an commentary	تفسیر السعدی	赛尔迪《古兰经》注释	Commentaire du Coran d’al-Sa‘di
+source_dorar	الموسوعة الحديثية	Dorar hadith encyclopedia	درر السنیہ کی حدیثی موسوعہ	Dorar 圣训百科	Encyclopédie des hadiths de Dorar
+source_binbaz	مجموع فتاوى ابن باز	Collected fatwas of Ibn Baz	مجموع فتاویٰ ابن باز	伊本·巴兹教法意见集	Recueil des fatwas d’Ibn Baz
+source_islamqa	الإسلام سؤال وجواب	Islam Question & Answer	اسلام سوال و جواب	伊斯兰问答网站	Islam Questions et Réponses
+ask_eyebrow	الأسئلة والأجوبة	Questions and answers	سوالات و جوابات	常见问答	Questions et réponses
+ask_intro	اطرح سؤالك بعبارتك لقراءة جواب موثّق. إذا احتاج إلى بحث، يستعلم زاد مباشرةً من موقع الشيخ ابن باز.	Ask in your own words to look for a reviewed answer. For Arabic questions that need a search, Zad can consult Sheikh Ibn Baz’s official site.	اپنے الفاظ میں سوال کریں اور حوالہ شدہ جواب تلاش کریں۔ مزید تلاش درکار ہو تو زاد عربی سوال کے لیے شیخ ابن باز کی سرکاری ویب سائٹ سے رجوع کر سکتا ہے۔	请用自己的话提问，查找经过整理的回答。阿拉伯语问题如需进一步检索，Zad 可查询伊本·巴兹的官方网站。	Posez votre question avec vos propres mots pour rechercher une réponse vérifiée. Pour les questions en arabe nécessitant une recherche, Zad peut consulter le site officiel du cheikh Ibn Baz.
+ask_privacy	اكتب سؤالًا عامًا دون أسماء أو بيانات شخصية. قد تُرسل كلمات السؤال إلى البحث الرسمي.	Ask a general question without names or personal details. Keywords may be sent to the official search.	ذاتی نام یا معلومات کے بغیر عام سوال کریں۔ سوال کے اہم الفاظ سرکاری تلاش کو بھیجے جا سکتے ہیں۔	请提出一般性问题，不要填写姓名或个人信息。关键词可能会发送至官方搜索服务。	Posez une question générale sans nom ni données personnelles. Des mots-clés peuvent être transmis au moteur de recherche officiel.
+ask_provider	قد تُرسل الأسئلة العامة إلى OpenAI للبحث عن المصادر. تجنّب إدخال أسماء أو بيانات شخصية.	General questions may be sent to OpenAI to look up sources. Avoid names and personal details.	عام سوالات ماخذ تلاش کرنے کے لیے OpenAI کو بھیجے جا سکتے ہیں۔ نام اور ذاتی معلومات درج نہ کریں۔	一般性问题可能会发送至 OpenAI 以查找来源。请勿输入姓名或个人信息。	Des questions générales peuvent être transmises à OpenAI pour rechercher des sources. Évitez les noms et les données personnelles.
+your_question	سؤالك	Your question	آپ کا سوال	您的问题	Votre question
+ask_example	مثال: كيف أمسح على الخفين عند ابن باز؟	Example: What are the five pillars of Islam?	مثال: اسلام کے پانچ ارکان کیا ہیں؟	例如：伊斯兰教的五大支柱是什么？	Exemple : Quels sont les cinq piliers de l’islam ?
+ask_submit	أرسل السؤال	Ask your question	سوال بھیجیں	提交问题	Envoyer la question
+ask_reset	سؤال جديد	New question	نیا سوال	新问题	Nouvelle question
+ask_related	أسئلة موثّقة قريبة	Related reviewed questions	ملتے جلتے حوالہ شدہ سوالات	相关的已核对问题	Questions proches et vérifiées
+ask_fatwas	تصفّح فتاوى العلماء	Browse scholars’ fatwas	علما کے فتاویٰ دیکھیں	浏览学者的教法意见	Parcourir les fatwas des savants
+scholar	العالم	Scholar	عالم	学者	Savant
+topic	الموضوع	Topic	موضوع	主题	Sujet
+ask_ai	اقتراح مراجع بالذكاء الاصطناعي	AI-assisted reference suggestions	مصنوعی ذہانت سے ماخذ کی تجاویز	AI 辅助推荐出处	Suggestions de références par IA
+ask_ai_intro	ميزة اختيارية لاختيار مراجع مرتبطة بالسؤال من قائمة محددة. يحتاج التنزيل الأول إلى اتصال بالإنترنت ومساحة تقارب ١ غيغابايت. تبقى أسئلتك على جهازك.	This optional feature picks related references from a fixed list. The first download needs internet access and around 1 GB. Questions handled by this feature stay on your device.	یہ اختیاری سہولت ایک مقررہ فہرست سے متعلقہ حوالہ چنتی ہے۔ پہلے ڈاؤن لوڈ کے لیے انٹرنیٹ اور تقریباً ۱ گیگابائٹ درکار ہے۔ اس سہولت میں سوال آپ کے آلے پر رہتے ہیں۔	此可选功能从固定清单中选择相关出处。首次下载需要联网和约 1 GB 空间。此功能在本机处理问题。	Cette fonction facultative sélectionne des références dans une liste définie. Le premier téléchargement nécessite Internet et environ 1 Go. Les questions traitées par cette fonction restent sur votre appareil.
+ask_ai_start	تشغيل اقتراح المراجع	Enable reference suggestions	حوالہ جاتی تجاویز فعال کریں	启用出处推荐	Activer les suggestions
+ask_nojs	فعّل جافاسكربت للبحث عن الأجوبة.	Enable JavaScript to search for answers.	جوابات تلاش کرنے کے لیے جاوا اسکرپٹ فعال کریں۔	请启用 JavaScript 搜索回答。	Activez JavaScript pour rechercher des réponses.
+ask_guide_nojs	يمكنك قراءة دليل التعرّف على الإسلام دون جافاسكربت.	Read the guide to Islam without JavaScript.	اسلام کا رہنما جاوا اسکرپٹ کے بغیر پڑھیں۔	无需 JavaScript 即可阅读伊斯兰入门指南。	Lire le guide de découverte de l’islam sans JavaScript.
+library_nojs	فعّل جافاسكربت لعرض مواد القسم.	Enable JavaScript to display this section.	اس شعبے کا مواد دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔	请启用 JavaScript 查看本栏目内容。	Activez JavaScript pour afficher les contenus de la rubrique.
+filter_topic	اختر الموضوع	Choose a topic	موضوع منتخب کریں	选择主题	Choisir un sujet
+filter_all	جميع الموضوعات	All topics	تمام موضوعات	全部主题	Tous les sujets
+reading_done	تمت القراءة	Read	پڑھ لیا	已读	Lu
+reading_done_name	تمت قراءة سورة {name}	Finished reading {name}	سورۃ {name} پڑھ لی	已读完{name}	Lecture de {name} terminée
+reading_result	تمت قراءة {done} من {total}	Read {done} of {total}	{total} میں سے {done} پڑھ لی گئیں	已读 {done} / {total}	{done} lectures sur {total}
+reading_storage	تعذّر حفظ التقدّم في هذا المتصفح.	Progress could not be saved in this browser.	اس براؤزر میں پیش رفت محفوظ نہیں ہو سکی۔	此浏览器无法保存进度。	Impossible d’enregistrer la progression dans ce navigateur.
+reading_reset	ابدأ أسبوعًا جديدًا	Start a new week	نیا ہفتہ شروع کریں	开始新一周	Commencer une nouvelle semaine
+reading_note	يُحفظ التقدم في هذا المتصفح عند إتاحة التخزين.	This browser saves your progress when local storage is available.	اگر مقامی ذخیرہ دستیاب ہو تو پیش رفت اسی براؤزر میں محفوظ ہوتی ہے۔	如果可使用本地存储，浏览器会保存阅读进度。	Ce navigateur enregistre votre progression si le stockage local est disponible.
+surah_prefix	سورة {name}	{name}	سورۃ {name}	{name}	{name}
+surah_1	الفاتحة	Al-Fatihah	الفاتحہ	开端章	Al-Fatiha
+surah_103	العصر	Al-‘Asr	العصر	时光章	Al-‘Asr
+surah_108	الكوثر	Al-Kawthar	الکوثر	多福章	Al-Kawthar
+surah_110	النصر	An-Nasr	النصر	援助章	An-Nasr
+surah_112	الإخلاص	Al-Ikhlas	الاخلاص	忠诚章	Al-Ikhlas
+surah_113	الفلق	Al-Falaq	الفلق	曙光章	Al-Falaq
+surah_114	الناس	An-Nas	الناس	世人章	An-Nas
+draft_open	افتح «اسأل زاد» من القائمة أو من الأيقونة أسفل الصفحة.	Open Ask Zad from the menu or the button at the bottom of the page.	مینو یا صفحے کے نیچے بٹن سے زاد سے پوچھیں کھولیں۔	请从菜单或页面底部的按钮打开 Zad 问答。	Ouvrez la rubrique Questions depuis le menu ou le bouton en bas de page.
+draft_empty	اكتب سؤالك أولًا في حدود ٥٠٠ حرف.	Enter a question of up to 500 characters.	زیادہ سے زیادہ ۵۰۰ حروف میں سوال لکھیں۔	请输入不超过 500 个字符的问题。	Saisissez une question de 500 caractères au maximum.
+draft_failed	تعذّر نقل السؤال. افتح «اسأل زاد» واكتب سؤالك هناك.	The question could not be carried over. Open Ask Zad to enter it there.	سوال منتقل نہیں ہو سکا، زاد سے پوچھیں کھول کر وہاں لکھیں۔	无法转移问题，请打开 Zad 问答并在那里输入。	Le transfert de la question a échoué. Saisissez-la directement dans la rubrique Questions.
