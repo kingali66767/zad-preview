@@ -33,8 +33,8 @@ body[data-page] {
   color: #ffe5ac;
   border: 1px solid #f6dfa685;
   border-radius: 15px;
-  background: linear-gradient(154deg, #fff1c83b, #ecd6920e 62%), #2c493d;
-  box-shadow: inset 0 1px 1px #fff4d972, inset 0 -1px 0 #0a251c, 0 4px 14px #071b16a6;
+  background: linear-gradient(154deg, #fff1c83b, #ecd6920e 62%), #473a2e;
+  box-shadow: inset 0 1px 1px #fff4d972, inset 0 -1px 0 #22170d, 0 4px 14px #191109a6;
 }
 
 .route-brand .zad-icon {
@@ -53,9 +53,9 @@ body[data-page] {
   border: 1px solid #efce8a71;
   border-radius: 999px;
   color: #ffe3a8;
-  background: linear-gradient(156deg, #ffedb92c, #f4ce8709), #214439;
+  background: linear-gradient(156deg, #ffedb92c, #f4ce8709), #543725;
   text-decoration: none;
-  box-shadow: inset 0 1px 0 #ffedba50, 0 4px 12px #071e164f;
+  box-shadow: inset 0 1px 0 #ffedba50, 0 4px 12px #1b120a4f;
   font-weight: 800;
   font-size: .9rem;
 }
@@ -89,7 +89,7 @@ body[data-page] {
   padding: 5px 10px;
   border: 1px solid #efce8a71;
   border-radius: 999px;
-  background: #214439;
+  background: #543725;
   color: #ffe3a8;
   font-size: .87rem;
   white-space: nowrap;
@@ -117,8 +117,8 @@ body[data-page] {
   padding: 5px;
   border: 1px solid #efce8a71;
   border-radius: 14px;
-  background: #17392e;
-  box-shadow: 0 6px 22px #031c1699;
+  background: #412a1d;
+  box-shadow: 0 6px 22px #190f0699;
 }
 
 .site-language-links a {
@@ -127,7 +127,7 @@ body[data-page] {
   min-block-size: 44px;
   padding-inline: 10px;
   border-radius: 9px;
-  color: #f5f7ef;
+  color: #f8f3ee;
   text-decoration: none;
   font-size: .96rem;
 }
@@ -135,7 +135,7 @@ body[data-page] {
 .site-language-links a:hover,
 .site-language-links a[aria-current] {
   color: #ffe3a8;
-  background: #30584a;
+  background: #70482f;
 }
 
 @media (max-width: 700px) {
@@ -167,7 +167,7 @@ html:not([lang="ar"]) #home-ask-heading { white-space: normal; }
 html[lang="zh"] body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
 html[lang="ur"] body { font-family: "Noto Naskh Arabic", Tajawal, Tahoma, sans-serif; }
 html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic", Tahoma, serif; }
-.quote-meaning strong { color: var(--forest); }
+.quote-meaning strong { color: var(--brand-dark); }
 
 .route-top #nav {
   display: none;
@@ -184,7 +184,7 @@ html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic"
   gap: 4px;
   padding: 8px;
   border-radius: 19px;
-  background: linear-gradient(156deg, #31564b, #123227);
+  background: linear-gradient(156deg, #66452f, #38251b);
 }
 
 .route-top #nav[aria-expanded="true"] { display: grid; }
@@ -201,7 +201,7 @@ html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic"
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .route-top #nav {
-    background: linear-gradient(156deg, #31564be9, #123227ee);
+    background: linear-gradient(156deg, #66452fe9, #38251bee);
     -webkit-backdrop-filter: blur(16px) saturate(1.35);
     backdrop-filter: blur(16px) saturate(1.35);
   }
@@ -224,7 +224,7 @@ html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic"
 .section-main .ask { padding-block-end: 0; }
 .section-main .discover-section { margin-block-start: 0; }
 .section-main .discover-section > summary {
-  color: var(--forest);
+  color: var(--brand-dark);
   font-size: clamp(1.3rem, 3vw, 1.8rem);
 }
 
@@ -294,13 +294,13 @@ html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic"
   padding: clamp(17px, 3.3vw, 33px);
   border-color: #d4bd89;
   border-radius: var(--glass-radius);
-  background: linear-gradient(151deg, #fffef9, #f2f7ee 78%, #eaf2e7);
+  background: linear-gradient(151deg, #fffef9, #fdf4e9 78%, #f4ece5);
   box-shadow: var(--glass-shadow);
 }
 
 .adhkar-card h2 {
   margin-block-end: 10px;
-  color: var(--forest);
+  color: var(--brand-dark);
   font-size: clamp(1.46rem, 3vw, 2.05rem);
   line-height: 1.5;
 }
@@ -321,8 +321,8 @@ html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic"
 .adhkar-card .quote {
   padding: 8px 14px;
   border-radius: 10px;
-  background: #edf3e9;
-  color: #17392e;
+  background: #f4e8d8;
+  color: #412a1d;
   font-size: clamp(1.45rem, 3.8vw, 2.04rem);
   line-height: 1.85;
   overflow-wrap: anywhere;
@@ -434,7 +434,7 @@ html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic"
 
 body[data-page="home"] {
   --page-lighting:
-    radial-gradient(ellipse at 95% 8%, #d4e7d9 0%, transparent 50%),
+    radial-gradient(ellipse at 95% 8%, #ebd0b1 0%, transparent 50%),
     radial-gradient(ellipse at 4% 24%, #f6e8cc 0%, transparent 46%);
 }
 
@@ -469,12 +469,24 @@ body[data-page="home"] .route-top #nav {
 
 .hero-identity {
   container-type: inline-size;
+  position: relative;
   margin-block-end: clamp(16px, 2.2vw, 26px);
   padding: clamp(17px, 2.5vw, 34px);
   border: 1px solid #eccc869c;
-  border-radius: clamp(21px, 2.5vw, 34px);
-  background: linear-gradient(148deg, #426c5ae3, #11352dcb 61%, #0c2923e8);
-  box-shadow: 0 15px 32px #061e1673, inset 0 1px 0 #fff0c65e, inset 0 0 0 4px #f7e9bf15;
+  border-radius: clamp(15px, 1.9vw, 25px);
+  background: linear-gradient(148deg, #795036e3, #4b3022cb 61%, #352219e8);
+  box-shadow: 0 15px 32px #1b120973, inset 0 1px 0 #fff0c65e, inset 0 0 0 4px #f7e9bf15;
+}
+
+.hero-identity::before {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 14px;
+  inline-size: 64px;
+  block-size: 33px;
+  background: var(--geometry-tile) center / var(--geometry-size) repeat;
+  content: "";
+  pointer-events: none;
 }
 
 .hero-identity-label {
@@ -489,7 +501,7 @@ body[data-page="home"] .route-top #nav {
   inline-size: clamp(47px, 5.6vw, 62px);
   block-size: clamp(47px, 5.6vw, 62px);
   border-color: #ecce939e;
-  background: linear-gradient(150deg, #f9e3b24d, #1e3e31 78%);
+  background: linear-gradient(150deg, #f9e3b24d, #3a2e22 78%);
 }
 
 .hero-identity-mark .zad-icon {
@@ -508,7 +520,7 @@ body[data-page="home"] .route-top #nav {
 
 .hero-identity-name small {
   display: block;
-  color: #ebf2e8;
+  color: #fae9d7;
   font-size: .88rem;
   line-height: 1.35;
 }
@@ -523,7 +535,7 @@ body[data-page="home"] .route-top #nav {
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .hero-identity { background: #153a2f; }
+  .hero-identity { background: #40291b; }
 }
 
 .site-tour {
@@ -569,8 +581,8 @@ body[data-page="home"] .route-top #nav {
   padding: clamp(16px, 3.5vw, 34px);
   border: 1px solid #b48a42;
   border-radius: clamp(16px, 2.2vw, 25px);
-  background: linear-gradient(145deg, #fffdf4 5%, #f7fbf5 53%, #e0eee2);
-  box-shadow: 0 8px 22px #203b2b14, inset 0 0 0 1px #fff9e7;
+  background: linear-gradient(145deg, #fffdf4 5%, #fbf8f5 53%, #eedcc6);
+  box-shadow: 0 8px 22px #382d2314, inset 0 0 0 1px #fff9e7;
 }
 
 .site-tour-card .section-icon {
@@ -586,7 +598,7 @@ body[data-page="home"] .route-top #nav {
 }
 
 .site-tour-card h3 {
-  color: var(--forest);
+  color: var(--brand-dark);
   margin-block-end: 4px;
   font-size: clamp(1.12rem, 2.4vw, 1.52rem);
   line-height: 1.45;
@@ -598,7 +610,7 @@ a.site-tour-card {
 
 a.site-tour-card:hover {
   border-color: #8b6024;
-  box-shadow: 0 10px 26px #203b2b26, inset 0 0 0 1px #fff9e7;
+  box-shadow: 0 10px 26px #382d2326, inset 0 0 0 1px #fff9e7;
 }
 
 .site-tour-actions {
@@ -611,7 +623,7 @@ a.site-tour-card:hover {
 .site-tour-action {
   display: inline-flex;
   align-items: center;
-  color: #215342;
+  color: #75472d;
   font-size: .93rem;
   font-weight: 800;
   text-decoration: underline;
@@ -623,13 +635,13 @@ span.site-tour-action { margin-block-start: 8px; }
 a.site-tour-action {
   min-block-size: 44px;
   padding-inline: 12px;
-  border: 1px solid #a2bda9;
+  border: 1px solid #c0af9f;
   border-radius: 999px;
-  background: #f4f8ed;
+  background: #f9f2ec;
   text-decoration: none;
 }
 
-a.site-tour-action:hover { background: #e2f0e4; }
+a.site-tour-action:hover { background: #f2e9e0; }
 
 @media (max-width: 540px) {
   .site-tour-card { align-items: start; }
@@ -644,7 +656,7 @@ a.site-tour-action:hover { background: #e2f0e4; }
 
 @media (prefers-reduced-transparency: reduce) {
   .route-top #nav {
-    background: #17392e;
+    background: #412a1d;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -653,10 +665,10 @@ a.site-tour-action:hover { background: #e2f0e4; }
 .home-ask {
   padding-block: clamp(10px, 1.6vw, 18px);
   background:
-    radial-gradient(ellipse at 76% 0%, #244638, transparent 78%),
-    linear-gradient(#102c249e, #102c249e),
+    radial-gradient(ellipse at 76% 0%, #64432d, transparent 78%),
+    linear-gradient(#35241b9e, #35241b9e),
     var(--geometry-tile) center top / var(--geometry-size) repeat,
-    #102c24;
+    #35241b;
 }
 
 .home-ask-panel {
@@ -666,11 +678,11 @@ a.site-tour-action:hover { background: #e2f0e4; }
   gap: clamp(12px, 2.8vw, 30px);
   inline-size: min(73rem, calc(100% - 32px));
   padding: 10px clamp(10px, 2.4vw, 22px);
-  border: 1px solid #e0e7a84c;
+  border: 1px solid #e7c7a84c;
   border-radius: 19px;
   color: #fff3d5;
-  background: linear-gradient(142deg, #e8e9b317, transparent 63%), #1c3c31;
-  box-shadow: 0 8px 22px #061b155f, inset 0 1px 0 #fff4cf31;
+  background: linear-gradient(142deg, #e8e9b317, transparent 63%), #493121;
+  box-shadow: 0 8px 22px #1910085f, inset 0 1px 0 #fff4cf31;
 }
 
 #home-ask-heading {
@@ -709,16 +721,16 @@ a.site-tour-action:hover { background: #e2f0e4; }
   min-inline-size: 0;
   min-block-size: 44px;
   padding-inline: 12px;
-  border: 1px solid #d9e7c4;
+  border: 1px solid #e9d5c2;
   border-radius: 999px;
-  background: #f9fbf2;
+  background: #fff9ee;
   color: var(--ink);
   font: inherit;
   font-size: 1rem;
 }
 
 #home-ask-input::placeholder {
-  color: #506357;
+  color: #6c5947;
 }
 
 #home-ask-submit {
@@ -737,7 +749,7 @@ a.site-tour-action:hover { background: #e2f0e4; }
   overflow-wrap: anywhere;
 }
 
-#home-ask-source { color: #e2eee5; font-size: .81rem; }
+#home-ask-source { color: #f5e5d2; font-size: .81rem; }
 
 #home-ask-status:empty {
   margin: 0;
@@ -765,9 +777,9 @@ a.site-tour-action:hover { background: #e2f0e4; }
   block-size: 52px;
   border: 1px solid #efcc88;
   border-radius: 17px;
-  background: linear-gradient(145deg, #386250, #123b30 70%);
+  background: linear-gradient(145deg, #805439, #523220 70%);
   color: #ffe1a4;
-  box-shadow: 0 6px 22px #08231c66, inset 0 1px 0 #fbe3aa55;
+  box-shadow: 0 6px 22px #20150b66, inset 0 1px 0 #fbe3aa55;
   text-decoration: none;
 }
 
@@ -778,12 +790,12 @@ a.site-tour-action:hover { background: #e2f0e4; }
 .ask-shortcut:focus-visible {
   outline: 3px solid #ffd98c;
   outline-offset: 3px;
-  box-shadow: 0 0 0 7px #164535, 0 6px 22px #08231c66;
+  box-shadow: 0 0 0 7px #402d1b, 0 6px 22px #20150b66;
 }
 
 @media (hover: hover) {
   .ask-shortcut:hover {
-    background: linear-gradient(145deg, #4c7965, #1a4739 70%);
+    background: linear-gradient(145deg, #996746, #693e28 70%);
     color: #fff0c9;
   }
 }

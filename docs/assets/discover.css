@@ -1,5 +1,5 @@
 .discover-section{margin-top:16px}
-.discover-section>summary{color:#38533f}
+.discover-section>summary{color:#784825}
 .discover-section>p{color:var(--muted);margin-bottom:12px}
 .discover .discover-languages,.discover .discover-toc{position:static;background:transparent;border:0;padding:0}
 .discover .discover-languages{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;margin-bottom:12px}

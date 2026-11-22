@@ -1,16 +1,16 @@
 :root {
-  --forest: #113d31;
-  --deep: #08251e;
-  --gold: #f0ca82;
-  --ink: #123329;
-  --muted: #465c51;
-  --paper: #eff4ea;
-  --line: #d1ded3;
+  --brand-dark: #4b2f20;
+  --deep: #25170f;
+  --gold: #edbd79;
+  --ink: #3d2b22;
+  --muted: #654e40;
+  --paper: #f8eee1;
+  --line: #e0cbb6;
   --white: #fffef7;
   --glass-edge: rgba(255, 255, 247, .86);
-  --glass-rim: 0 0 0 1px rgba(36, 78, 58, .10), inset 0 1px 0 rgba(255, 255, 255, .88);
-  --glass-shadow: 0 12px 32px rgba(20, 74, 54, .08), var(--glass-rim);
-  --glass-radius: 24px;
+  --glass-rim: 0 0 0 1px rgba(73, 57, 41, .10), inset 0 1px 0 rgba(255, 255, 255, .88);
+  --glass-shadow: 0 12px 32px rgba(68, 47, 26, .08), var(--glass-rim);
+  --glass-radius: 18px;
 }
 
 html {
@@ -18,16 +18,16 @@ html {
 }
 
 body {
-  --geometry-tile: url("islamic-pattern.webp");
-  --geometry-size: 152px;
+  --geometry-tile: url("tuwaiq-triangles.webp");
+  --geometry-size: 116px;
   --page-lighting:
-    radial-gradient(ellipse at 85% 27rem, #d4e8d8 0%, transparent 38%),
+    radial-gradient(ellipse at 85% 27rem, #ecd4b8 0%, transparent 38%),
     radial-gradient(ellipse at 8% 49rem, #f5e9ce 0%, transparent 32%);
   background:
     var(--page-lighting),
-    linear-gradient(#edf4eca6, #edf4eca6),
+    linear-gradient(#f7ebdc63, #f7ebdc63),
     var(--geometry-tile) center top / var(--geometry-size) repeat,
-    #edf4ec;
+    #f7ebdc;
 }
 
 a:focus-visible,
@@ -43,8 +43,8 @@ header {
   inset-block-start: 0;
   z-index: 4;
   padding-block: 10px;
-  border-bottom: 1px solid #bde5cd26;
-  background: #102f27;
+  border-bottom: 1px solid #e7d1bb26;
+  background: #342218;
 }
 
 .top {
@@ -58,24 +58,24 @@ header {
 }
 
 .brand small {
-  color: #e2ede5;
+  color: #f0e7df;
 }
 
 .seal {
   flex: none;
   border: 1px solid #f4d99c9e;
   border-radius: 15px;
-  background: linear-gradient(157deg, #fff6d545, #c9922a0e 65%), #2b473a;
-  box-shadow: inset 0 1px 1px #fffef16b, inset 0 -1px 1px #081d17, 0 5px 14px #03140e60;
+  background: linear-gradient(157deg, #fff6d545, #c9922a0e 65%), #45392d;
+  box-shadow: inset 0 1px 1px #fffef16b, inset 0 -1px 1px #1b120a, 0 5px 14px #120b0560;
 }
 
 #nav {
   gap: clamp(0px, .4vw, 6px);
   padding: 4px;
-  border: 1px solid #ebfaed3b;
+  border: 1px solid #faf2eb3b;
   border-radius: 999px;
-  background: linear-gradient(165deg, #deffed27, #c3f2d009 62%), #204237;
-  box-shadow: inset 0 1px 1px #eafff12e, inset 0 -2px 3px #01150f28, 0 5px 15px #03150f35;
+  background: linear-gradient(165deg, #f9eee427, #f1dac409 62%), #3e3124;
+  box-shadow: inset 0 1px 1px #fbf4ee2e, inset 0 -2px 3px #110b0528, 0 5px 15px #130c0535;
 }
 
 #nav a,
@@ -90,16 +90,16 @@ header {
   padding-inline: clamp(5px, .52vw, 11px);
   border: 1px solid transparent;
   border-radius: 999px;
-  color: #ecf4ec;
+  color: #f6f0ea;
   font-size: clamp(.82rem, 1.07vw, .96rem);
 }
 
 #nav a:hover,
 #nav a:focus-visible,
 #nav a[aria-current] {
-  border-color: #eafaeb40;
+  border-color: #faf2ea40;
   color: #ffdc9c;
-  background: #d7f2db25;
+  background: #f3e4d625;
 }
 
 .prayer-link,
@@ -107,8 +107,8 @@ header {
   min-height: 44px;
   border: 1px solid #e8c57d71;
   border-radius: 999px;
-  background: linear-gradient(160deg, #fff5c536, #d9aa5011), #234034;
-  box-shadow: inset 0 1px 0 #ffefbc46, 0 4px 12px #071e1654;
+  background: linear-gradient(160deg, #fff5c536, #d9aa5011), #3d3126;
+  box-shadow: inset 0 1px 0 #ffefbc46, 0 4px 12px #1b120a54;
   color: #ffe0a4;
   font-weight: 800;
 }
@@ -130,19 +130,29 @@ footer :focus-visible {
   overflow: hidden;
   padding-block: clamp(38px, 5vw, 81px) clamp(84px, 8vw, 124px);
   background:
-    radial-gradient(ellipse at 73% -5%, #315f4c 0%, transparent 57%),
-    radial-gradient(ellipse at 14% 94%, #416c56 0%, transparent 48%),
-    linear-gradient(145deg, #0b2d24 12%, #0a211c 72%);
+    radial-gradient(ellipse at 76% -5%, #71472e 0%, transparent 59%),
+    radial-gradient(ellipse at 12% 100%, #62422d 0%, transparent 52%),
+    linear-gradient(152deg, #3d281c 8%, #291a13 76%);
 }
 
 .hero::before {
   position: absolute;
   z-index: -1;
   inset: 0;
-  --geometry-fade: radial-gradient(ellipse at 13% 14%, #000 6%, #000b 46%, #0005 76%, #0003);
+  --geometry-fade: linear-gradient(112deg, #000 5%, #000d 44%, #0008 76%, #000b);
   background: var(--geometry-tile) center top / var(--geometry-size) repeat;
   -webkit-mask-image: var(--geometry-fade);
   mask-image: var(--geometry-fade);
+  content: "";
+  pointer-events: none;
+}
+
+.hero::after {
+  position: absolute;
+  z-index: -2;
+  inset: 18% 0 0;
+  background: linear-gradient(153deg, #aa71404f, #73472205 76%);
+  clip-path: polygon(0 66%, 25% 33%, 39% 53%, 63% 11%, 76% 39%, 100% 22%, 100% 100%, 0 100%);
   content: "";
   pointer-events: none;
 }
@@ -156,8 +166,8 @@ footer :focus-visible {
   position: relative;
   overflow: hidden;
   border: 1px solid #f7e9ba91;
-  border-radius: clamp(26px, 4vw, 52px);
-  box-shadow: 0 28px 50px #051a148a, 0 0 0 7px #ecf9d923, 0 0 0 8px #fff6ce37;
+  border-radius: clamp(15px, 2.5vw, 30px);
+  box-shadow: 0 28px 50px #180f078a, 0 0 0 7px #f7e9db23, 0 0 0 8px #fff6ce37;
 }
 
 .hero-image::after {
@@ -165,18 +175,18 @@ footer :focus-visible {
   inset: 0;
   border: 1px solid #f8f5d62e;
   border-radius: inherit;
-  background: linear-gradient(152deg, #fffbd23d, transparent 34% 68%, #122f2466);
-  box-shadow: inset 0 1px 1px #fffdf3c2, inset 0 -1px 3px #091f16c2;
+  background: linear-gradient(152deg, #fffbd23d, transparent 34% 68%, #2c201566);
+  box-shadow: inset 0 1px 1px #fffdf3c2, inset 0 -1px 3px #1d140bc2;
   content: "";
   pointer-events: none;
 }
 
 .hero .intro {
-  color: #e3f0e5;
+  color: #f4e7d8;
 }
 
 .button {
-  border-radius: 999px;
+  border-radius: 12px;
 }
 
 .button:hover {
@@ -194,23 +204,23 @@ footer :focus-visible {
 }
 
 .button.outline {
-  border-color: #def2e580;
-  background: linear-gradient(158deg, #eaffee2e, #c3f2d111), #214537;
-  box-shadow: inset 0 1px 0 #edfff04d, 0 9px 23px #10151035;
+  border-color: #f3e8dd80;
+  background: linear-gradient(158deg, #fbf4ee2e, #f1dac411), #413325;
+  box-shadow: inset 0 1px 0 #fcf6f04d, 0 9px 23px #16120f35;
 }
 
 .button.outline:hover {
-  background-color: #305f4d;
+  background-color: #5a4735;
 }
 
 .button.green {
-  border-color: #315f49;
-  background: linear-gradient(154deg, #2d674f, #10372c 73%);
-  box-shadow: inset 0 1px 0 #c8ffe354, 0 6px 14px #173f2f24;
+  border-color: #5a4836;
+  background: linear-gradient(154deg, #855334, #532f1d 73%);
+  box-shadow: inset 0 1px 0 #f5e3d254, 0 6px 14px #3b2b1b24;
 }
 
 .button.green:hover {
-  background: linear-gradient(154deg, #36785b, #174636 73%);
+  background: linear-gradient(154deg, #96603a, #643b25 73%);
 }
 
 .button:disabled {
@@ -229,14 +239,14 @@ footer :focus-visible {
 .contact {
   border: 1px solid var(--glass-edge);
   border-radius: var(--glass-radius);
-  background-color: #f8fbf5;
-  background-image: linear-gradient(154deg, #fffdfbe8 1%, #f7f9ef42 64%, #cde8d242);
+  background-color: #fff8ee;
+  background-image: linear-gradient(154deg, #fffdfbe8 1%, #f9f4ef42 64%, #eadacb42);
   box-shadow: var(--glass-shadow);
 }
 
 .prayer {
   --glass-radius: 29px;
-  box-shadow: 0 18px 45px #123d2929, var(--glass-rim);
+  box-shadow: 0 18px 45px #38271729, var(--glass-rim);
 }
 
 .prayer-note,
@@ -247,7 +257,7 @@ footer :focus-visible {
 .discover-content section {
   border-color: var(--glass-edge);
   border-radius: 17px;
-  background: linear-gradient(150deg, #fffefb, #f0f5eade);
+  background: linear-gradient(150deg, #fffefb, #f6efe9de);
   box-shadow: var(--glass-rim);
 }
 
@@ -287,24 +297,24 @@ details[open] > summary::before {
 }
 
 .times div {
-  border: 1px solid #f8fff6;
+  border: 1px solid #fdfaf8;
   border-radius: 13px;
-  background: linear-gradient(154deg, #f4faf0, #e2eee2);
+  background: linear-gradient(154deg, #faf5f0, #f0e8e0);
   box-shadow: var(--glass-rim);
 }
 
 select,
 .ask-form input {
-  border-color: #98b4a4;
+  border-color: #b9a693;
   border-radius: 13px;
   background: #fffef9;
 }
 
 .ask-reset,
 #ask-related-questions button {
-  border: 1px solid #96b19e;
+  border: 1px solid #b7a390;
   border-radius: 999px;
-  background: linear-gradient(155deg, #fffef9, #e7f1e6);
+  background: linear-gradient(155deg, #fffef9, #f3ebe4);
 }
 
 .section-heading,
@@ -323,9 +333,9 @@ select,
   block-size: clamp(37px, 4.4vw, 54px);
   border: 1px solid #fffef6b5;
   border-radius: 15px;
-  background: linear-gradient(143deg, #fffdf4, #e7e5cd 68%, #d6e5d1);
-  box-shadow: 0 4px 12px #17453216, 0 0 0 1px #758d7460, inset 0 1px 1px white;
-  color: #315e47;
+  background: linear-gradient(143deg, #fffdf4, #e7e5cd 68%, #e9dbcd);
+  box-shadow: 0 4px 12px #402e1c16, 0 0 0 1px #9b806660, inset 0 1px 1px white;
+  color: #594736;
 }
 
 .tiles > a {
@@ -339,21 +349,21 @@ select,
 
 .tiles > a:hover {
   border-color: #fffcf2;
-  background-color: #f7fbed;
-  background-image: linear-gradient(154deg, #fffcea, #e2f1de);
-  box-shadow: 0 16px 32px #164e3521, var(--glass-rim);
+  background-color: #fbf4ed;
+  background-image: linear-gradient(154deg, #fffcea, #f2e7dd);
+  box-shadow: 0 16px 32px #48321c21, var(--glass-rim);
 }
 
 .collection {
-  border-color: #aac6b685;
+  border-color: #c7b8a985;
   background:
-    radial-gradient(ellipse at 15% 22rem, #e5eacf, transparent 58%),
-    radial-gradient(ellipse at 92% 70rem, #d5e9db, transparent 56%),
-    #e4efe5;
+    radial-gradient(ellipse at 15% 22rem, #ecdccd, transparent 58%),
+    radial-gradient(ellipse at 92% 70rem, #ecdfd2, transparent 56%),
+    #f1e9e2;
 }
 
 .feature {
-  border-color: #b6cbbb;
+  border-color: #cec0b3;
 }
 
 .source-policy,
@@ -367,13 +377,13 @@ select,
 }
 
 footer {
-  border-top: 1px solid #ddeddd55;
-  background: linear-gradient(150deg, #173e32, #09281f);
+  border-top: 1px solid #efe5db55;
+  background: linear-gradient(150deg, #3a2a1b, #25180c);
 }
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   header {
-    background: rgba(10, 35, 29, .87);
+    background: rgba(32, 22, 13, .87);
     -webkit-backdrop-filter: blur(19px) saturate(1.4);
     backdrop-filter: blur(19px) saturate(1.4);
   }
@@ -381,13 +391,13 @@ footer {
   .prayer,
   .ask-panel,
   .discover-section {
-    background-color: rgba(242, 248, 239, .83);
+    background-color: rgba(249, 243, 238, .83);
     -webkit-backdrop-filter: blur(16px) saturate(1.28);
     backdrop-filter: blur(16px) saturate(1.28);
   }
 
   .tiles > a {
-    background-color: rgba(247, 251, 245, .57);
+    background-color: rgba(251, 248, 245, .57);
   }
 }
 
@@ -437,8 +447,8 @@ footer {
     gap: 3px;
     padding: 8px;
     border-radius: 20px;
-    background: linear-gradient(164deg, #31564a, #15382e);
-    box-shadow: inset 0 1px 0 #eafff12e, 0 14px 30px #06201967;
+    background: linear-gradient(164deg, #524335, #342619);
+    box-shadow: inset 0 1px 0 #fbf4ee2e, 0 14px 30px #1d130967;
   }
 
   #nav a {
@@ -451,7 +461,7 @@ footer {
 
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     #nav {
-      background: linear-gradient(164deg, #31564ae8, #15382ef0);
+      background: linear-gradient(164deg, #524335e8, #342619f0);
       -webkit-backdrop-filter: blur(15px) saturate(1.3);
       backdrop-filter: blur(15px) saturate(1.3);
     }
@@ -482,7 +492,7 @@ footer {
     padding-block: 34px 74px;
   }
 
-  body { --geometry-size: 116px; }
+  body { --geometry-size: 96px; }
 
   .hero::before {
     --geometry-fade: radial-gradient(ellipse at 0% 12%, #000 6%, #0009 48%, #0005 74%, #0003);
@@ -493,7 +503,7 @@ footer {
   }
 
   .hero-image {
-    box-shadow: 0 18px 34px #051a1470, 0 0 0 4px #ecf9d923, 0 0 0 5px #fff6ce37;
+    box-shadow: 0 18px 34px #180f0770, 0 0 0 4px #f7e9db23, 0 0 0 5px #fff6ce37;
   }
 
   .prayer {
@@ -542,14 +552,14 @@ footer {
 @media (prefers-reduced-transparency: reduce) {
   header,
   #nav {
-    background: #102f27;
+    background: #342218;
   }
 
   .prayer,
   .ask-panel,
   .discover-section,
   .tiles > a {
-    background-color: #f8fbf5;
+    background-color: #fff8ee;
   }
 
   header,
@@ -564,4 +574,5 @@ footer {
 
 @media (forced-colors: active), (prefers-reduced-transparency: reduce) {
   body { --geometry-tile: none; }
+  .hero::after { content: none; }
 }
