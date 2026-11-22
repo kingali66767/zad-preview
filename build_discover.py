@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-4"
+REVISION = "20261122-5"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -335,12 +335,12 @@ def render_header(slug, base, root, route_path, locale, *, subsection=False):
     language_label = escape(labels["language"])
     if slug == "home":
         brand = (
-            f'<div class="launcher-brand"><span class="route-brand" aria-hidden="true">{icon("brand")}</span>'
+            '<div class="launcher-brand"><span class="route-brand" aria-hidden="true"></span>'
             f'<span class="launcher-wordmark">{brand_label}</span></div>'
         )
     else:
         brand = f'''<a class="route-back" href="{base}" aria-label="{home_label}">{icon("home")}<span>{home_label}</span></a>
-<a class="route-brand" href="{base}" aria-label="{brand_label} · {home_label}">{icon("brand")}</a>'''
+<a class="route-brand" href="{base}" aria-label="{brand_label} · {home_label}"></a>'''
     items = []
     for route in SECTIONS:
         shape = "" if slug == "home" else icon("discover-islam" if route == "discover" else route)

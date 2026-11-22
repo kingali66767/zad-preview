@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  --ministry-watermark: url("ministry-of-defense-logo.jpg");
+  --ministry-logo: url("ministry-of-defense-logo.jpg");
   --watermark-width: min(112vw, 90rem);
   --geometry-tile: url("tuwaiq-triangles.webp");
   --geometry-size: 116px;
@@ -34,7 +34,7 @@ body::before,
 .hero::before {
   z-index: -1;
   inset: 0;
-  background: var(--ministry-watermark) center / var(--watermark-width) auto no-repeat;
+  background: var(--ministry-logo) center / var(--watermark-width) auto no-repeat;
   pointer-events: none;
   content: "";
 }

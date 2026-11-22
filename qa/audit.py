@@ -127,7 +127,10 @@ def verify_homepage(page):
     identity = hero.locator(".hero-identity")
     expect(identity.locator(".hero-identity-name strong")).to_have_text("زاد")
     expect(identity.locator(".hero-identity-name small")).to_have_text("منصة التوعية الدينية")
-    expect(identity.locator('[data-icon="ministry-audience"]')).to_be_visible()
+    for brand_mark in (page.locator(".launcher-brand .route-brand"), identity.locator(".hero-identity-mark")):
+        expect(brand_mark).to_be_visible()
+        assert brand_mark.evaluate("""element => getComputedStyle(element, '::before').backgroundImage
+            .includes('/assets/ministry-of-defense-logo.jpg')""")
     expect(identity.locator(".hero-audience strong")).to_have_text("فرع الشؤون الدينية")
     expect(identity.locator(".hero-audience span")).to_have_text("خدمة توعوية لضباط وأفراد وزارة الدفاع")
     ministry_logo = identity.get_by_role("img", name="شعار وزارة الدفاع السعودية", exact=True)

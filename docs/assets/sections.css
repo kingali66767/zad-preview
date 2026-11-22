@@ -37,8 +37,13 @@ body[data-page] {
   box-shadow: inset 0 1px 1px #fff4d972, inset 0 -1px 0 #22170d, 0 4px 14px #191109a6;
 }
 
-.route-brand .zad-icon {
-  --zad-icon-size: 1.65rem;
+.route-brand::before {
+  inline-size: calc(100% - 4px);
+  block-size: calc(100% - 4px);
+  border-radius: 11px;
+  /* Frame the emblem within the original 1200 × 720 logo. */
+  background: #fff var(--ministry-logo) 84.7% 34.6% / 343% auto no-repeat;
+  content: "";
 }
 
 .route-back,
@@ -502,10 +507,6 @@ body[data-page="home"] .route-top #nav {
   block-size: clamp(47px, 5.6vw, 62px);
   border-color: #ecce939e;
   background: linear-gradient(150deg, #f9e3b24d, #3a2e22 78%);
-}
-
-.hero-identity-mark .zad-icon {
-  --zad-icon-size: clamp(1.66rem, 2.8vw, 2.25rem);
 }
 
 .hero-identity-name {
