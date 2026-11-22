@@ -453,7 +453,7 @@ body[data-page="home"] .route-top #nav {
   gap: 11px;
   color: var(--gold);
 }
-.launcher-wordmark { font: 700 2.1rem/1 Amiri, Georgia, serif; }
+.launcher-wordmark { font: 700 2.1rem/1 var(--heading-font); }
 
 .launcher-shell {
   flex: 1;
@@ -515,7 +515,7 @@ body[data-page="home"] .route-top #nav {
 
 .hero-identity-name strong {
   display: block;
-  font: 700 clamp(2rem, 4vw, 2.85rem)/1 Amiri, Georgia, serif;
+  font: 700 clamp(2rem, 4vw, 2.85rem)/1 var(--heading-font);
 }
 
 .hero-identity-name small {
@@ -532,6 +532,10 @@ body[data-page="home"] .route-top #nav {
   font-size: clamp(1.2rem, 3.1vw, 2.85rem);
   font-size: clamp(1.15rem, 9.15cqi, 2.85rem);
   line-height: 1.5;
+}
+
+html[lang="ar"] .hero-identity h1 {
+  font-size: clamp(1rem, 8cqi, 2.85rem);
 }
 
 @media (prefers-reduced-transparency: reduce) {
