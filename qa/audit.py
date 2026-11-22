@@ -18,7 +18,7 @@ from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
-SECTIONS = ("quran", "lessons", "hadith", "faq", "ask", "media", "occasions", "belief", "seerah",
+SECTIONS = ("military", "quran", "lessons", "hadith", "faq", "ask", "media", "occasions", "belief", "seerah",
             "worship", "adhkar", "reading", "prayer", "discover", "sources", "contact")
 SAUDI_CITIES = ("riyadh", "mecca", "medina", "jeddah", "dammam", "khobar", "taif", "buraydah", "hail",
                 "tabuk", "abha", "jazan", "najran", "albaha", "sakaka", "arar", "hofuf")
@@ -273,6 +273,18 @@ def browser_checks(origin, output, live):
             assert not missing_anchors, missing_anchors
             assert page.locator('meta[http-equiv="Content-Security-Policy"]').count() == 1
             assert page.locator('meta[name="referrer"]').get_attribute("content") == "no-referrer"
+            if width in (320, 1440):
+                page.goto(section_address(origin, "military"))
+                expect(page.locator(".military-cards > a")).to_have_count(4)
+                for route in ("service", "southern-border"):
+                    page.locator(f'.military-cards > a[href="{route}/"]').click()
+                    expect(page).to_have_url(section_address(origin, f"military/{route}"))
+                    expect(page.locator(".military-tab[aria-current=page]")).to_have_count(1)
+                    assert page.locator(".military-card").evaluate_all(
+                        "cards => cards.length > 0 && cards.every(card => card.querySelector('.references a'))"
+                    )
+                    without_overflow(page)
+                    page.go_back(wait_until="domcontentloaded")
             if width == 1440:
                 for section in SECTIONS:
                     page.goto(section_address(origin, section))

@@ -1,0 +1,382 @@
+{
+  "ar": {
+    "title": "العبادة أثناء الخدمة",
+    "intro": "دليل للمناوبات وسفر العمل والطهارة والأذكار، مع روابط للمواقيت والمراجع.",
+    "items": [
+      {
+        "title": "الصلاة أثناء المناوبات",
+        "text": "الصلاة لها أوقات معلومة. استخدم مواقيت المدينة للتخطيط لأدائها. إذا عجزت في حالة خاصة عن الصلاة على الوجه المعتاد، فاسأل المرشد الديني عن الحكم المناسب لحالتك.",
+        "links": [
+          [
+            "النساء ١٠٣",
+            "https://quran.com/4/103"
+          ],
+          [
+            "مواقيت الصلاة للمدن السعودية",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "الفرق بين الجمع والقصر",
+        "text": "القصر يكون في الصلاة الرباعية، كالظهر والعصر والعشاء، فتُصلّى ركعتين. والجمع يكون بين الظهر والعصر أو بين المغرب والعشاء في وقت إحداهما عند وجود سبب معتبر. لكلٍّ منهما حكمه.",
+        "links": [
+          [
+            "فتوى ابن باز في الجمع والقصر",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "التيمم عند تعذّر استعمال الماء",
+        "text": "إذا تعذّر الحصول على الماء أو استعماله بسبب عذر معتبر، فالتيمم رخصة للطهارة. راجع نص الآية واسأل عن حالتك إذا اشتبه عليك تحقق العذر.",
+        "links": [
+          [
+            "المائدة ٦",
+            "https://quran.com/5/6"
+          ],
+          [
+            "فتوى ابن باز في جواز التيمم",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "دليل الوضوء والصلاة",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "أذكار الصباح والمساء",
+        "text": "اختر أحد القسمين لقراءة الأذكار مع العدد الوارد والمصدر. يمكنك الرجوع لكل ذكر أثناء يومك من القائمة.",
+        "links": [
+          [
+            "أذكار الصباح",
+            "../../adhkar/morning/"
+          ],
+          [
+            "أذكار المساء",
+            "../../adhkar/evening/"
+          ]
+        ]
+      },
+      {
+        "title": "كيف تسأل عن حالتك؟",
+        "text": "للمسائل الخاصة، اسأل المرشد الديني أو جهة إفتاء مؤهلة. في البحث العام اذكر وصف الحالة الذي يتوقف عليه الحكم، مثل السفر أو الإقامة، دون أسماء أو معلومات عن الوحدة أو موقع العمل.",
+        "links": [
+          [
+            "اسأل زاد",
+            "../../ask/"
+          ],
+          [
+            "فهرس فتاوى ابن باز",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "Worship during service",
+    "intro": "Practical guidance on shifts, travel, purification and remembrance, with links to timetables and sources.",
+    "items": [
+      {
+        "title": "Prayer times during shifts",
+        "text": "Prayer has appointed times. Use the city timetable to plan around them. If a particular situation prevents you from praying in the ordinary manner, ask a religious adviser about your case.",
+        "links": [
+          [
+            "Qur’an 4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "Prayer times for Saudi cities",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "Combining and shortening prayers",
+        "text": "Shortening reduces the four-unit prayers of Dhuhr, Asr and Isha to two units. Combining means performing Dhuhr with Asr or Maghrib with Isha in one of their appointed times when there is a valid reason. The two have separate rulings.",
+        "links": [
+          [
+            "Ibn Baz on combining and shortening",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "Dry ablution when water cannot be used",
+        "text": "Dry ablution is a concession when water cannot be obtained or used for a valid reason. Read the verse and seek guidance if you are unsure whether the concession applies to your situation.",
+        "links": [
+          [
+            "Qur’an 5:6",
+            "https://quran.com/5/6"
+          ],
+          [
+            "Ibn Baz on when dry ablution is permitted",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "Ablution and prayer guide",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "Morning and evening remembrances",
+        "text": "Choose a collection to read the remembrances with their reported repetition counts and sources.",
+        "links": [
+          [
+            "Morning remembrances",
+            "../../adhkar/morning/"
+          ],
+          [
+            "Evening remembrances",
+            "../../adhkar/evening/"
+          ]
+        ]
+      },
+      {
+        "title": "How to ask about your situation",
+        "text": "For personal rulings, consult a religious adviser or a qualified fatwa authority. In public search, describe the relevant circumstance, such as travel or a stay, without names or details about your unit or duty location.",
+        "links": [
+          [
+            "Ask Zad",
+            "../../ask/"
+          ],
+          [
+            "Ibn Baz fatwa archive",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "ur": {
+    "title": "دورانِ خدمت عبادت",
+    "intro": "ڈیوٹی کی شفٹوں، سفر، طہارت اور اذکار کے لیے رہنما، اوقات اور حوالے بھی شامل ہیں۔",
+    "items": [
+      {
+        "title": "ڈیوٹی کی شفٹوں میں نماز",
+        "text": "نماز کے مقررہ اوقات ہیں۔ نماز کی منصوبہ بندی کے لیے شہر کے اوقات دیکھیں۔ اگر کسی خاص حالت میں معمول کے مطابق نماز ادا کرنا ممکن نہ ہو تو دینی رہنما سے دریافت کریں۔",
+        "links": [
+          [
+            "النساء ۱۰۳",
+            "https://quran.com/4/103"
+          ],
+          [
+            "سعودی شہروں کے نماز کے اوقات",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "جمع اور قصر کا فرق",
+        "text": "قصر میں ظہر، عصر اور عشاء کی چار رکعتیں دو پڑھی جاتی ہیں۔ جمع میں معتبر عذر کی صورت میں ظہر اور عصر یا مغرب اور عشاء میں سے دونوں نمازیں کسی ایک کے وقت میں پڑھی جاتی ہیں۔ دونوں کا حکم الگ ہے۔",
+        "links": [
+          [
+            "جمع اور قصر پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "پانی استعمال نہ کر سکنے پر تیمم",
+        "text": "پانی نہ ملے یا معتبر عذر کی وجہ سے استعمال نہ ہو سکے تو طہارت کے لیے تیمم کی رخصت ہے۔ اگر عذر کے بارے میں شک ہو تو آیت دیکھیں اور اپنی صورت کے بارے میں رہنمائی لیں۔",
+        "links": [
+          [
+            "المائدہ ۶",
+            "https://quran.com/5/6"
+          ],
+          [
+            "تیمم کے جواز پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "وضو اور نماز کا رہنما",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "صبح و شام کے اذکار",
+        "text": "ثابت شدہ تعداد اور حوالوں کے ساتھ اذکار پڑھنے کے لیے صبح یا شام کا شعبہ منتخب کریں۔",
+        "links": [
+          [
+            "صبح کے اذکار",
+            "../../adhkar/morning/"
+          ],
+          [
+            "شام کے اذکار",
+            "../../adhkar/evening/"
+          ]
+        ]
+      },
+      {
+        "title": "اپنی حالت پر سوال کیسے کریں؟",
+        "text": "ذاتی مسائل کے لیے دینی رہنما یا مستند دارالافتاء سے رجوع کریں۔ عمومی تلاش میں ضروری صورت، مثلاً سفر یا قیام، لکھیں اور نام، یونٹ کی تفصیل یا تعیناتی کی جگہ درج نہ کریں۔",
+        "links": [
+          [
+            "زاد سے پوچھیں",
+            "../../ask/"
+          ],
+          [
+            "ابن باز کے فتاویٰ کا اشاریہ",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "zh": {
+    "title": "服役期间的礼拜与功修",
+    "intro": "提供轮班、出差、洁净与赞念的实用指南，附礼拜时刻和出处。",
+    "items": [
+      {
+        "title": "轮班时的礼拜安排",
+        "text": "礼拜有规定的时间。可以用城市时刻表安排礼拜。如遇特殊情况而无法按通常方式礼拜，请向宗教指导人员咨询自己的情况。",
+        "links": [
+          [
+            "《古兰经》4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "沙特城市礼拜时间",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "合并与缩短礼拜的区别",
+        "text": "缩短是把晌礼、晡礼和宵礼的四拜缩为两拜。合并是在有正当事由时，在其中一礼的时段一并完成晌礼与晡礼，或昏礼与宵礼。两者适用规则各自独立。",
+        "links": [
+          [
+            "伊本·巴兹：合并与缩短礼拜",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "无法用水时的土净",
+        "text": "无法取得水，或因正当事由不能用水时，可以按规定做土净。请阅读经文，若不确定自身情况是否符合条件，可咨询宗教指导人员。",
+        "links": [
+          [
+            "《古兰经》5:6",
+            "https://quran.com/5/6"
+          ],
+          [
+            "伊本·巴兹：土净允许条件",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "小净与礼拜指南",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "早晚赞念",
+        "text": "选择晨间或晚间赞念，查看正文、传述次数与出处。",
+        "links": [
+          [
+            "晨间赞念",
+            "../../adhkar/morning/"
+          ],
+          [
+            "晚间赞念",
+            "../../adhkar/evening/"
+          ]
+        ]
+      },
+      {
+        "title": "如何咨询自身情况",
+        "text": "具体问题请咨询宗教指导人员或有资质的教法咨询机构。公开搜索时只描述与教法判断有关的一般情况，如旅行或居留，请勿填写姓名、部队或工作地点。",
+        "links": [
+          [
+            "问答助手",
+            "../../ask/"
+          ],
+          [
+            "伊本·巴兹教法意见索引",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "fr": {
+    "title": "Le culte pendant le service",
+    "intro": "Des repères pour les gardes, les déplacements, la purification et les invocations, avec horaires et sources.",
+    "items": [
+      {
+        "title": "Les horaires de prière pendant les gardes",
+        "text": "Les prières ont des horaires prescrits. Consultez les horaires de votre ville pour vous organiser. Si une situation particulière vous empêche de prier de la manière habituelle, consultez un conseiller religieux.",
+        "links": [
+          [
+            "Coran 4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "Horaires de prière des villes saoudiennes",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "Regrouper et raccourcir les prières",
+        "text": "Le raccourcissement ramène à deux unités les prières de quatre unités, Dhohr, Asr et Icha. Le regroupement consiste à accomplir Dhohr avec Asr ou Maghrib avec Icha au temps de l’une des deux, en présence d’un motif valable. Les règles sont distinctes.",
+        "links": [
+          [
+            "Avis d’Ibn Baz sur le regroupement et le raccourcissement",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "Les ablutions sèches quand l’eau ne peut pas être utilisée",
+        "text": "Les ablutions sèches constituent une dispense lorsque l’eau est introuvable ou ne peut être utilisée pour un motif valable. Lisez le verset et demandez conseil si vous hésitez sur votre situation.",
+        "links": [
+          [
+            "Coran 5:6",
+            "https://quran.com/5/6"
+          ],
+          [
+            "Avis d’Ibn Baz sur les conditions des ablutions sèches",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "Guide des ablutions et de la prière",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "Invocations du matin et du soir",
+        "text": "Ouvrez l’un des recueils pour lire les invocations et consulter le nombre de répétitions rapporté ainsi que leurs sources.",
+        "links": [
+          [
+            "Invocations du matin",
+            "../../adhkar/morning/"
+          ],
+          [
+            "Invocations du soir",
+            "../../adhkar/evening/"
+          ]
+        ]
+      },
+      {
+        "title": "Comment poser une question sur votre situation",
+        "text": "Pour un avis individuel, consultez un conseiller religieux ou une autorité qualifiée. Dans une recherche publique, décrivez la circonstance pertinente, comme un voyage ou un séjour, sans nom ni détail sur votre unité ou lieu d’affectation.",
+        "links": [
+          [
+            "Poser une question à Zad",
+            "../../ask/"
+          ],
+          [
+            "Répertoire des avis d’Ibn Baz",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  }
+}

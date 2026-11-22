@@ -1,0 +1,242 @@
+{
+  "ar": {
+    "title": "زاد المستجد",
+    "intro": "خطوات أولى لمن بدأ الخدمة أو يريد تعلّم أساسيات العبادة.",
+    "items": [
+      {
+        "title": "تعلّم الأساسيات",
+        "text": "ابدأ بما تحتاجه اليوم: تعلّم خطوات الوضوء والصلاة. وإن كنت جديدًا في الإسلام، افتح دليل التعرّف على الإسلام بلغتك.",
+        "links": [
+          [
+            "تعلّم الوضوء والصلاة",
+            "../../worship/"
+          ],
+          [
+            "دليل التعرّف على الإسلام",
+            "../../discover/"
+          ]
+        ]
+      },
+      {
+        "title": "اعرف وقت الصلاة واقرأ الأذكار",
+        "text": "حدد المدينة من القائمة للاطلاع على مواقيت الصلاة. ثم اختر من الأذكار اليومية ما يلائم الوقت أو المناسبة.",
+        "links": [
+          [
+            "مواقيت الصلاة",
+            "../../prayer/"
+          ],
+          [
+            "الأذكار اليومية",
+            "../../adhkar/"
+          ]
+        ]
+      },
+      {
+        "title": "اطرح سؤالك بوضوح",
+        "text": "ابدأ بالأسئلة الشائعة، أو اكتب في «اسأل زاد» المسألة التي تريد فهمها بعبارة عامة. إذا كان سؤالك متعلّقًا بظرفك الخاص، فاعرض التفاصيل اللازمة على جهة إفتاء موثوقة.",
+        "links": [
+          [
+            "الأسئلة الشائعة",
+            "../../faq/"
+          ],
+          [
+            "اسأل زاد",
+            "../../ask/"
+          ]
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "Zad for new recruits",
+    "intro": "First steps for people starting service or learning the basics of worship.",
+    "items": [
+      {
+        "title": "Learn the basics",
+        "text": "Start with what you need today. Learn the steps of ablution and prayer. If you are new to Islam, open the introductory guide in your language.",
+        "links": [
+          [
+            "Learn ablution and prayer",
+            "../../worship/"
+          ],
+          [
+            "Introduction to Islam",
+            "../../discover/"
+          ]
+        ]
+      },
+      {
+        "title": "Find prayer times and daily remembrances",
+        "text": "Choose your city from the list to see prayer times. Then choose a daily remembrance for the relevant time or occasion.",
+        "links": [
+          [
+            "Prayer times",
+            "../../prayer/"
+          ],
+          [
+            "Daily remembrances",
+            "../../adhkar/"
+          ]
+        ]
+      },
+      {
+        "title": "Ask a clear question",
+        "text": "Start with the frequently asked questions, or describe the issue in general terms in Ask Zad. If the answer depends on your circumstances, consult a trusted religious advisory body with the details it needs.",
+        "links": [
+          [
+            "Frequently asked questions",
+            "../../faq/"
+          ],
+          [
+            "Ask Zad",
+            "../../ask/"
+          ]
+        ]
+      }
+    ]
+  },
+  "ur": {
+    "title": "نئے اہلکاروں کے لیے زاد",
+    "intro": "خدمت شروع کرنے والوں یا عبادت کی بنیادی باتیں سیکھنے والوں کے لیے ابتدائی رہنمائی۔",
+    "items": [
+      {
+        "title": "بنیادی باتیں سیکھیں",
+        "text": "آج کی ضرورت سے شروع کریں۔ وضو اور نماز کا طریقہ سیکھیں۔ اگر آپ اسلام سے نئے واقف ہوئے ہیں تو اپنی زبان میں تعارفی رہنما کھولیں۔",
+        "links": [
+          [
+            "وضو اور نماز سیکھیں",
+            "../../worship/"
+          ],
+          [
+            "اسلام کا تعارف",
+            "../../discover/"
+          ]
+        ]
+      },
+      {
+        "title": "نماز کے اوقات معلوم کریں اور روزانہ کے اذکار پڑھیں",
+        "text": "نماز کے اوقات دیکھنے کے لیے فہرست سے اپنا شہر منتخب کریں۔ پھر وقت یا موقع کے مطابق روزانہ کا ذکر منتخب کریں۔",
+        "links": [
+          [
+            "نماز کے اوقات",
+            "../../prayer/"
+          ],
+          [
+            "روزانہ کے اذکار",
+            "../../adhkar/"
+          ]
+        ]
+      },
+      {
+        "title": "اپنا سوال واضح کریں",
+        "text": "عام سوالات پڑھیں یا «زاد سے پوچھیں» میں اپنا مسئلہ عام الفاظ میں بیان کریں۔ اگر جواب آپ کی ذاتی صورتِ حال پر منحصر ہے تو ضروری تفصیل کے ساتھ کسی معتبر دارالافتاء سے رجوع کریں۔",
+        "links": [
+          [
+            "عام سوالات",
+            "../../faq/"
+          ],
+          [
+            "زاد سے پوچھیں",
+            "../../ask/"
+          ]
+        ]
+      }
+    ]
+  },
+  "zh": {
+    "title": "新入伍人员指南",
+    "intro": "为刚开始服役或希望学习功修基础的人提供入门指引。",
+    "items": [
+      {
+        "title": "先学基础",
+        "text": "从今天需要的内容开始，学习小净与礼拜的步骤。如果你刚接触伊斯兰，可以打开你所用语言的入门指南。",
+        "links": [
+          [
+            "学习小净与礼拜",
+            "../../worship/"
+          ],
+          [
+            "认识伊斯兰",
+            "../../discover/"
+          ]
+        ]
+      },
+      {
+        "title": "查阅礼拜时间与每日赞念",
+        "text": "从列表中选择你的城市，查看礼拜时间。再按当前时间或场合选读每日赞念。",
+        "links": [
+          [
+            "礼拜时间",
+            "../../prayer/"
+          ],
+          [
+            "每日赞念",
+            "../../adhkar/"
+          ]
+        ]
+      },
+      {
+        "title": "把问题说清楚",
+        "text": "可以先读常见问题，或到“问答助手”用概括性的措辞描述想了解的问题。如果答案取决于个人情形，请向可信的教法咨询机构说明必要的细节。",
+        "links": [
+          [
+            "常见问题",
+            "../../faq/"
+          ],
+          [
+            "问答助手",
+            "../../ask/"
+          ]
+        ]
+      }
+    ]
+  },
+  "fr": {
+    "title": "Zad pour les nouvelles recrues",
+    "intro": "Les premières étapes pour les personnes qui commencent leur service ou apprennent les bases du culte.",
+    "items": [
+      {
+        "title": "Apprendre les bases",
+        "text": "Commencez par ce dont vous avez besoin aujourd’hui. Apprenez les étapes des ablutions et de la prière. Si vous découvrez l’islam, ouvrez le guide d’introduction dans votre langue.",
+        "links": [
+          [
+            "Apprendre les ablutions et la prière",
+            "../../worship/"
+          ],
+          [
+            "Découvrir l’islam",
+            "../../discover/"
+          ]
+        ]
+      },
+      {
+        "title": "Consulter les horaires des prières et lire les invocations",
+        "text": "Sélectionnez une ville dans la liste pour afficher les horaires des prières. Choisissez ensuite une invocation adaptée au moment ou à la situation.",
+        "links": [
+          [
+            "Horaires des prières",
+            "../../prayer/"
+          ],
+          [
+            "Invocations quotidiennes",
+            "../../adhkar/"
+          ]
+        ]
+      },
+      {
+        "title": "Poser une question claire",
+        "text": "Consultez d’abord les questions fréquentes, ou décrivez le sujet en termes généraux dans « Demander à Zad ». Si la réponse dépend de votre situation personnelle, présentez les détails nécessaires à un organisme religieux de confiance.",
+        "links": [
+          [
+            "Questions fréquentes",
+            "../../faq/"
+          ],
+          [
+            "Demander à Zad",
+            "../../ask/"
+          ]
+        ]
+      }
+    ]
+  }
+}

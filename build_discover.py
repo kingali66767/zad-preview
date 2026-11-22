@@ -14,10 +14,11 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-11"
+REVISION = "20261122-12"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
+    "military": "زاد العسكري",
     "quran": "القرآن الكريم",
     "lessons": "الخطب والدروس",
     "hadith": "الأحاديث الصحيحة",
@@ -36,6 +37,7 @@ SECTIONS = {
     "contact": "تواصل معنا",
 }
 TEMPLATED_SECTIONS = {"ask", "prayer", "sources", "contact"}
+MILITARY_ROUTES = ("service", "ethics", "starter", "southern-border")
 STYLES = ("style.css", "discover.css", "section-icons.css", "glass.css", "sections.css")
 ASK_SCRIPTS = ("ask-evidence.js", "fatwa-sources.js", "ask-intents.js", "ask-baz.js", "locale-services.js", "ask.js")
 SITE_LANGUAGES = {"ar": "العربية", "en": "English", "ur": "اردو", "zh": "简体中文", "fr": "Français"}
@@ -326,6 +328,37 @@ def language_href(root, language, route):
     return root + prefix + route or "./"
 
 
+def render_military(locale, content, subsection=None):
+    labels = INTERFACE[locale]
+    groups = {slug: translations[locale] for slug, translations in content.items()}
+    base = "../" if subsection else "./"
+    overview_state = '' if subsection else ' aria-current="page"'
+    tabs = [link(base, labels["military_overview"], ' class="military-tab"' + overview_state)]
+    for slug, group in groups.items():
+        active = ' aria-current="page"' if slug == subsection else ""
+        tabs.append(link(base + slug + "/", group["title"], ' class="military-tab"' + active))
+
+    if subsection:
+        group = groups[subsection]
+        title, intro = group["title"], group["intro"]
+        cards = []
+        for item in group["items"]:
+            references = "".join(link(url, label) for label, url in item["links"])
+            cards.append(f'<article class="military-card"><h2>{escape(item["title"])}</h2>'
+                         f'<p>{escape(item["text"])}</p><div class="references">{references}</div></article>')
+    else:
+        title, intro = labels["military"], labels["military_intro"]
+        cards = [f'<a class="military-card" href="{slug}/"><h2>{escape(group["title"])}</h2>'
+                 f'<p>{escape(group["intro"])}</p></a>' for slug, group in groups.items()]
+
+    return f'''<section class="wrap military-hub" id="military" aria-labelledby="military-heading">
+<h1 id="military-heading" class="section-heading"><span class="section-icon" aria-hidden="true">{icon("daily")}</span>{escape(title)}</h1>
+<p class="military-intro">{escape(intro)}</p>
+<div class="military-tabs" role="navigation" aria-label="{escape(labels["military_nav"])}">{"".join(tabs)}</div>
+<div class="military-cards">{"".join(cards)}</div>
+</section>'''
+
+
 def render_header(slug, base, root, route_path, locale, *, subsection=False):
     labels = INTERFACE[locale]
     brand_label = escape(labels["brand"])
@@ -342,7 +375,7 @@ def render_header(slug, base, root, route_path, locale, *, subsection=False):
 <a class="route-brand" href="{base}" aria-label="{brand_label} · {home_label}"></a>'''
     items = []
     for route in SECTIONS:
-        shape = "" if slug == "home" else icon("discover-islam" if route == "discover" else route)
+        shape = "" if slug == "home" else icon({"discover": "discover-islam", "military": "daily"}.get(route, route))
         selected = f' aria-current="{"location" if subsection else "page"}"' if route == slug else ""
         items.append(f'<a href="{base}{route}/" data-section-link="{route}"{selected}>{shape}<span>{escape(labels[route])}</span></a>')
     links = "\n".join(items)
@@ -378,7 +411,7 @@ def render_page(slug, body, *, locale="ar", subsection_slug=None, subsection_tit
     alternates = "\n".join(f'<link rel="alternate" hreflang="{code}" href="{language_href(root, code, route_path)}">' for code in SITE_LANGUAGES)
     styles = "\n".join(f'<link rel="stylesheet" href="{assets}{name}?v={REVISION}">' for name in STYLES)
     scripts = []
-    if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug not in {"discover", "adhkar"}):
+    if slug == "contact" or (slug in SECTIONS and slug not in TEMPLATED_SECTIONS and slug not in {"discover", "adhkar", "military"}):
         scripts.extend(("content.js", "library-content.js"))
     if locale != "ar":
         scripts.append(f"locales/{locale}.js")
@@ -456,6 +489,8 @@ def main():
     if any(language not in languages for language in SITE_LANGUAGES):
         parser.error("Add a Discover Islam guide for every Zad language")
     adhkar = load_adhkar()
+    military = {slug: json.loads((ROOT / "military-content" / f"{slug}.json").read_text(encoding="utf-8"))
+                for slug in MILITARY_ROUTES}
     docs = ROOT / "docs"
     outputs = {}
     for locale in SITE_LANGUAGES:
@@ -475,6 +510,8 @@ def main():
                 body = f'<h1 class="visually-hidden">{escape(labels[slug])}</h1>\n' + render_guide(languages, locale)
             elif slug == "adhkar":
                 body = render_adhkar_index(categories, locale)
+            elif slug == "military":
+                body = render_military(locale, military)
             elif slug in TEMPLATED_SECTIONS:
                 body = render_template(slug, locale)
             else:
@@ -485,6 +522,11 @@ def main():
             outputs[local_docs / "adhkar" / slug / "index.html"] = render_page(
                 "adhkar", render_adhkar_category(category, locale), locale=locale,
                 subsection_slug=slug, subsection_title=category["title"]
+            )
+        for slug, translations in military.items():
+            outputs[local_docs / "military" / slug / "index.html"] = render_page(
+                "military", render_military(locale, military, slug), locale=locale,
+                subsection_slug=slug, subsection_title=translations[locale]["title"]
             )
     for code, data in languages.items():
         outputs[docs / "discover" / code / "index.html"] = render_redirect(code, data)

@@ -1,0 +1,522 @@
+{
+  "ar": {
+    "title": "المرابطون على الحد الجنوبي",
+    "intro": "مراجع شرعية للمرابطين على الحد الجنوبي في مسائل صلاة الخوف والسفر والطهارة.",
+    "items": [
+      {
+        "title": "صلاة الخوف",
+        "text": "تدل آية البقرة على رخصة في هيئة الصلاة عند الخوف المعتبر، وعلى الرجوع إلى الهيئة المعتادة عند الأمن. تحديد انطباق هذه الرخصة على حالة بعينها يحتاج إلى مرشد ديني أو جهة إفتاء.",
+        "links": [
+          [
+            "البقرة ٢٣٩",
+            "https://quran.com/2/239"
+          ],
+          [
+            "النساء ١٠٣",
+            "https://quran.com/4/103"
+          ],
+          [
+            "تفسير السعدي للآية",
+            "https://quran.ksu.edu.sa/tafseer/saadi/sura2-aya239.html"
+          ]
+        ]
+      },
+      {
+        "title": "الفرق بين الجمع والقصر",
+        "text": "القصر يكون في الصلاة الرباعية، كالظهر والعصر والعشاء، فتُصلّى ركعتين. والجمع يكون بين الظهر والعصر أو بين المغرب والعشاء في وقت إحداهما عند وجود سبب معتبر. لكلٍّ منهما حكمه.",
+        "links": [
+          [
+            "فتوى ابن باز في الجمع والقصر",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "السفر والإقامة وأثرهما في القصر",
+        "text": "رخصة القصر مرتبطة بحكم السفر. يبيّن ابن باز الفرق بين من نوى مدة إقامة محددة ومن ينتظر انتهاء حاجته دون مدة معلومة، ويذكر الخلاف في بعض صور الإقامة. اذكر مدة الإقامة المقصودة عند سؤال المرشد عن الحكم.",
+        "links": [
+          [
+            "فتوى ابن باز في الجمع والقصر للوحدات العسكرية",
+            "https://binbaz.org.sa/fatwas/5092/حكم-الجمع-والقصر-للوحدات-العسكرية-في-الخطوط-الامامية"
+          ],
+          [
+            "فتوى ابن باز في مدة القصر",
+            "https://binbaz.org.sa/fatwas/20701/بيان-المدة-التي-يقصر-فيها-المسافر"
+          ]
+        ]
+      },
+      {
+        "title": "التيمم عند تعذّر استعمال الماء",
+        "text": "إذا تعذّر الحصول على الماء أو استعماله بسبب عذر معتبر، فالتيمم رخصة للطهارة. راجع نص الآية واسأل عن حالتك إذا اشتبه عليك تحقق العذر.",
+        "links": [
+          [
+            "المائدة ٦",
+            "https://quran.com/5/6"
+          ],
+          [
+            "فتوى ابن باز في جواز التيمم",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "دليل الوضوء والصلاة",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "المسح على الخفين والجوربين",
+        "text": "من شروط المسح أن يُلبس الخف أو الجورب بعد الطهارة وأن يستر محل الفرض. يشرح ابن باز مدة المسح للمقيم والمسافر وبقية الشروط في الفتوى.",
+        "links": [
+          [
+            "فتوى ابن باز في شروط المسح",
+            "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"
+          ]
+        ]
+      },
+      {
+        "title": "الصلاة أثناء المناوبات",
+        "text": "الصلاة لها أوقات معلومة. استخدم مواقيت المدينة للتخطيط لأدائها. إذا عجزت في حالة خاصة عن الصلاة على الوجه المعتاد، فاسأل المرشد الديني عن الحكم المناسب لحالتك.",
+        "links": [
+          [
+            "النساء ١٠٣",
+            "https://quran.com/4/103"
+          ],
+          [
+            "مواقيت الصلاة للمدن السعودية",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "كيف تسأل عن حالتك؟",
+        "text": "للمسائل الخاصة، اسأل المرشد الديني أو جهة إفتاء مؤهلة. في البحث العام اذكر وصف الحالة الذي يتوقف عليه الحكم، مثل السفر أو الإقامة، دون أسماء أو معلومات عن الوحدة أو موقع العمل.",
+        "links": [
+          [
+            "اسأل زاد",
+            "../../ask/"
+          ],
+          [
+            "فهرس فتاوى ابن باز",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "For personnel on the southern border",
+    "intro": "Religious references on prayer in a state of fear, travel and purification for personnel serving on the southern border.",
+    "items": [
+      {
+        "title": "Prayer in a state of fear",
+        "text": "The verse in Al-Baqarah establishes a concession in the manner of prayer in circumstances of genuine fear and calls for ordinary worship to resume when safe. Seek qualified religious guidance about applying this to a specific situation.",
+        "links": [
+          [
+            "Qur’an 2:239",
+            "https://quran.com/2/239"
+          ],
+          [
+            "Qur’an 4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "Al-Sa’di’s commentary in Arabic",
+            "https://quran.ksu.edu.sa/tafseer/saadi/sura2-aya239.html"
+          ]
+        ]
+      },
+      {
+        "title": "Combining and shortening prayers",
+        "text": "Shortening reduces the four-unit prayers of Dhuhr, Asr and Isha to two units. Combining means performing Dhuhr with Asr or Maghrib with Isha in one of their appointed times when there is a valid reason. The two have separate rulings.",
+        "links": [
+          [
+            "Ibn Baz on combining and shortening",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "Travel, residence and shortening prayer",
+        "text": "Shortening is tied to traveler status. Ibn Baz distinguishes a planned stay of a known duration from staying until a need is met without a known end date. He also notes disagreement on some cases. Include your intended length of stay when asking for guidance.",
+        "links": [
+          [
+            "Ibn Baz on combining and shortening for military personnel",
+            "https://binbaz.org.sa/fatwas/5092/حكم-الجمع-والقصر-للوحدات-العسكرية-في-الخطوط-الامامية"
+          ],
+          [
+            "Ibn Baz on the duration of shortening",
+            "https://binbaz.org.sa/fatwas/20701/بيان-المدة-التي-يقصر-فيها-المسافر"
+          ]
+        ]
+      },
+      {
+        "title": "Dry ablution when water cannot be used",
+        "text": "Dry ablution is a concession when water cannot be obtained or used for a valid reason. Read the verse and seek guidance if you are unsure whether the concession applies to your situation.",
+        "links": [
+          [
+            "Qur’an 5:6",
+            "https://quran.com/5/6"
+          ],
+          [
+            "Ibn Baz on when dry ablution is permitted",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "Ablution and prayer guide",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "Wiping over leather socks or socks",
+        "text": "Among the conditions for wiping are putting on the footwear after purification and covering the area required to be washed. Ibn Baz explains the time limits for residents and travelers and the other conditions.",
+        "links": [
+          [
+            "Ibn Baz on wiping over footwear",
+            "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"
+          ]
+        ]
+      },
+      {
+        "title": "Prayer times during shifts",
+        "text": "Prayer has appointed times. Use the city timetable to plan around them. If a particular situation prevents you from praying in the ordinary manner, ask a religious adviser about your case.",
+        "links": [
+          [
+            "Qur’an 4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "Prayer times for Saudi cities",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "How to ask about your situation",
+        "text": "For personal rulings, consult a religious adviser or a qualified fatwa authority. In public search, describe the relevant circumstance, such as travel or a stay, without names or details about your unit or duty location.",
+        "links": [
+          [
+            "Ask Zad",
+            "../../ask/"
+          ],
+          [
+            "Ibn Baz fatwa archive",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "ur": {
+    "title": "جنوبی سرحد پر تعینات اہلکار",
+    "intro": "جنوبی سرحد پر تعینات اہلکاروں کے لیے صلاۃ الخوف، سفر اور طہارت کے شرعی حوالے۔",
+    "items": [
+      {
+        "title": "صلاۃ الخوف",
+        "text": "سورۃ البقرہ کی آیت معتبر خوف میں ادائیگی کی صورت میں رخصت، اور امن ملنے پر معمول کی طرف واپسی بیان کرتی ہے۔ اپنی خاص صورت میں اطلاق کے لیے دینی رہنما یا دارالافتاء سے رجوع کریں۔",
+        "links": [
+          [
+            "البقرہ ۲۳۹",
+            "https://quran.com/2/239"
+          ],
+          [
+            "النساء ۱۰۳",
+            "https://quran.com/4/103"
+          ],
+          [
+            "تفسیر السعدی (عربی)",
+            "https://quran.ksu.edu.sa/tafseer/saadi/sura2-aya239.html"
+          ]
+        ]
+      },
+      {
+        "title": "جمع اور قصر کا فرق",
+        "text": "قصر میں ظہر، عصر اور عشاء کی چار رکعتیں دو پڑھی جاتی ہیں۔ جمع میں معتبر عذر کی صورت میں ظہر اور عصر یا مغرب اور عشاء میں سے دونوں نمازیں کسی ایک کے وقت میں پڑھی جاتی ہیں۔ دونوں کا حکم الگ ہے۔",
+        "links": [
+          [
+            "جمع اور قصر پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "سفر، اقامت اور قصر",
+        "text": "قصر کی رخصت سفر کے حکم سے وابستہ ہے۔ ابن باز طے شدہ مدت کی اقامت اور کسی کام کے ختم ہونے تک غیر معینہ قیام میں فرق بیان کرتے ہیں، اور بعض صورتوں میں اختلاف کا ذکر کرتے ہیں۔ رہنمائی لیتے ہوئے قیام کی متوقع مدت بتائیں۔",
+        "links": [
+          [
+            "فوجی اہلکاروں کی جمع اور قصر پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/5092/حكم-الجمع-والقصر-للوحدات-العسكرية-في-الخطوط-الامامية"
+          ],
+          [
+            "قصر کی مدت پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/20701/بيان-المدة-التي-يقصر-فيها-المسافر"
+          ]
+        ]
+      },
+      {
+        "title": "پانی استعمال نہ کر سکنے پر تیمم",
+        "text": "پانی نہ ملے یا معتبر عذر کی وجہ سے استعمال نہ ہو سکے تو طہارت کے لیے تیمم کی رخصت ہے۔ اگر عذر کے بارے میں شک ہو تو آیت دیکھیں اور اپنی صورت کے بارے میں رہنمائی لیں۔",
+        "links": [
+          [
+            "المائدہ ۶",
+            "https://quran.com/5/6"
+          ],
+          [
+            "تیمم کے جواز پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "وضو اور نماز کا رہنما",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "خفین اور جرابوں پر مسح",
+        "text": "مسح کی شرائط میں یہ ہے کہ خف یا جراب طہارت کے بعد پہنی گئی ہو اور فرض جگہ کو ڈھانپتی ہو۔ ابن باز کے فتویٰ میں مقیم اور مسافر کے لیے مدت اور باقی شرائط بیان ہیں۔",
+        "links": [
+          [
+            "مسح کی شرائط پر ابن باز کا فتویٰ",
+            "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"
+          ]
+        ]
+      },
+      {
+        "title": "ڈیوٹی کی شفٹوں میں نماز",
+        "text": "نماز کے مقررہ اوقات ہیں۔ نماز کی منصوبہ بندی کے لیے شہر کے اوقات دیکھیں۔ اگر کسی خاص حالت میں معمول کے مطابق نماز ادا کرنا ممکن نہ ہو تو دینی رہنما سے دریافت کریں۔",
+        "links": [
+          [
+            "النساء ۱۰۳",
+            "https://quran.com/4/103"
+          ],
+          [
+            "سعودی شہروں کے نماز کے اوقات",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "اپنی حالت پر سوال کیسے کریں؟",
+        "text": "ذاتی مسائل کے لیے دینی رہنما یا مستند دارالافتاء سے رجوع کریں۔ عمومی تلاش میں ضروری صورت، مثلاً سفر یا قیام، لکھیں اور نام، یونٹ کی تفصیل یا تعیناتی کی جگہ درج نہ کریں۔",
+        "links": [
+          [
+            "زاد سے پوچھیں",
+            "../../ask/"
+          ],
+          [
+            "ابن باز کے فتاویٰ کا اشاریہ",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "zh": {
+    "title": "南部边境服役人员指南",
+    "intro": "为南部边境服役人员提供恐惧时的礼拜、旅行及洁净方面的宗教资料。",
+    "items": [
+      {
+        "title": "恐惧时的礼拜",
+        "text": "《黄牛章》经文说明，在确有危险时，礼拜的形式可以灵活处理，安全恢复后回到通常方式。具体情况是否适用，可向有资质的宗教指导人员咨询。",
+        "links": [
+          [
+            "《古兰经》2:239",
+            "https://quran.com/2/239"
+          ],
+          [
+            "《古兰经》4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "赛尔迪注释（阿拉伯语）",
+            "https://quran.ksu.edu.sa/tafseer/saadi/sura2-aya239.html"
+          ]
+        ]
+      },
+      {
+        "title": "合并与缩短礼拜的区别",
+        "text": "缩短是把晌礼、晡礼和宵礼的四拜缩为两拜。合并是在有正当事由时，在其中一礼的时段一并完成晌礼与晡礼，或昏礼与宵礼。两者适用规则各自独立。",
+        "links": [
+          [
+            "伊本·巴兹：合并与缩短礼拜",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "旅行、居留与缩短礼拜",
+        "text": "缩短礼拜与旅行身份有关。伊本·巴兹区分预先确定期限的居留和等待事务完成、期限未定的居留，并说明某些情况存在不同意见。咨询时可以说明计划停留的时间。",
+        "links": [
+          [
+            "伊本·巴兹：军人合并和缩短礼拜的条件",
+            "https://binbaz.org.sa/fatwas/5092/حكم-الجمع-والقصر-للوحدات-العسكرية-في-الخطوط-الامامية"
+          ],
+          [
+            "伊本·巴兹：缩短礼拜的期限",
+            "https://binbaz.org.sa/fatwas/20701/بيان-المدة-التي-يقصر-فيها-المسافر"
+          ]
+        ]
+      },
+      {
+        "title": "无法用水时的土净",
+        "text": "无法取得水，或因正当事由不能用水时，可以按规定做土净。请阅读经文，若不确定自身情况是否符合条件，可咨询宗教指导人员。",
+        "links": [
+          [
+            "《古兰经》5:6",
+            "https://quran.com/5/6"
+          ],
+          [
+            "伊本·巴兹：土净允许条件",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "小净与礼拜指南",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "抹皮袜或袜子",
+        "text": "条件包括在洁净状态下穿上皮袜或袜子，并覆盖应清洗的部位。伊本·巴兹的教法意见说明了居民与旅行者的期限和其他条件。",
+        "links": [
+          [
+            "伊本·巴兹：抹靴袜的条件",
+            "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"
+          ]
+        ]
+      },
+      {
+        "title": "轮班时的礼拜安排",
+        "text": "礼拜有规定的时间。可以用城市时刻表安排礼拜。如遇特殊情况而无法按通常方式礼拜，请向宗教指导人员咨询自己的情况。",
+        "links": [
+          [
+            "《古兰经》4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "沙特城市礼拜时间",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "如何咨询自身情况",
+        "text": "具体问题请咨询宗教指导人员或有资质的教法咨询机构。公开搜索时只描述与教法判断有关的一般情况，如旅行或居留，请勿填写姓名、部队或工作地点。",
+        "links": [
+          [
+            "问答助手",
+            "../../ask/"
+          ],
+          [
+            "伊本·巴兹教法意见索引",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  },
+  "fr": {
+    "title": "Pour les militaires à la frontière sud",
+    "intro": "Références religieuses sur la prière en situation de crainte, le voyage et la purification pour les militaires à la frontière sud.",
+    "items": [
+      {
+        "title": "La prière en situation de crainte",
+        "text": "Le verset d’Al-Baqara prévoit une dispense quant à la manière de prier en cas de crainte réelle et invite à revenir à la pratique habituelle une fois en sécurité. Consultez un conseiller religieux qualifié sur votre situation.",
+        "links": [
+          [
+            "Coran 2:239",
+            "https://quran.com/2/239"
+          ],
+          [
+            "Coran 4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "Commentaire d’Al-Saadi en arabe",
+            "https://quran.ksu.edu.sa/tafseer/saadi/sura2-aya239.html"
+          ]
+        ]
+      },
+      {
+        "title": "Regrouper et raccourcir les prières",
+        "text": "Le raccourcissement ramène à deux unités les prières de quatre unités, Dhohr, Asr et Icha. Le regroupement consiste à accomplir Dhohr avec Asr ou Maghrib avec Icha au temps de l’une des deux, en présence d’un motif valable. Les règles sont distinctes.",
+        "links": [
+          [
+            "Avis d’Ibn Baz sur le regroupement et le raccourcissement",
+            "https://binbaz.org.sa/fatwas/6628/كيفية-جمع-الصلوات-في-السفر"
+          ]
+        ]
+      },
+      {
+        "title": "Voyage, séjour et raccourcissement",
+        "text": "Le raccourcissement dépend du statut de voyageur. Ibn Baz distingue un séjour prévu pour une durée connue d’un séjour qui prend fin avec l’accomplissement d’un besoin sans date fixée. Il signale aussi des divergences. Précisez la durée envisagée en demandant conseil.",
+        "links": [
+          [
+            "Avis d’Ibn Baz sur le regroupement et le raccourcissement pour les militaires",
+            "https://binbaz.org.sa/fatwas/5092/حكم-الجمع-والقصر-للوحدات-العسكرية-في-الخطوط-الامامية"
+          ],
+          [
+            "Avis d’Ibn Baz sur la durée du raccourcissement",
+            "https://binbaz.org.sa/fatwas/20701/بيان-المدة-التي-يقصر-فيها-المسافر"
+          ]
+        ]
+      },
+      {
+        "title": "Les ablutions sèches quand l’eau ne peut pas être utilisée",
+        "text": "Les ablutions sèches constituent une dispense lorsque l’eau est introuvable ou ne peut être utilisée pour un motif valable. Lisez le verset et demandez conseil si vous hésitez sur votre situation.",
+        "links": [
+          [
+            "Coran 5:6",
+            "https://quran.com/5/6"
+          ],
+          [
+            "Avis d’Ibn Baz sur les conditions des ablutions sèches",
+            "https://binbaz.org.sa/fatwas/9133/حكم-التيمم-حال-وجود-الماء-ووقت-جوازه"
+          ],
+          [
+            "Guide des ablutions et de la prière",
+            "../../worship/"
+          ]
+        ]
+      },
+      {
+        "title": "L’essuyage des chaussons de cuir ou chaussettes",
+        "text": "Il faut notamment enfiler les chaussons ou les chaussettes en état de pureté et couvrir la partie à laver. Ibn Baz indique les durées permises au résident et au voyageur ainsi que les autres conditions.",
+        "links": [
+          [
+            "Avis d’Ibn Baz sur les conditions de l’essuyage",
+            "https://binbaz.org.sa/fatwas/12430/شروط-المسح-على-الخفين-او-الجوربين"
+          ]
+        ]
+      },
+      {
+        "title": "Les horaires de prière pendant les gardes",
+        "text": "Les prières ont des horaires prescrits. Consultez les horaires de votre ville pour vous organiser. Si une situation particulière vous empêche de prier de la manière habituelle, consultez un conseiller religieux.",
+        "links": [
+          [
+            "Coran 4:103",
+            "https://quran.com/4/103"
+          ],
+          [
+            "Horaires de prière des villes saoudiennes",
+            "../../prayer/"
+          ]
+        ]
+      },
+      {
+        "title": "Comment poser une question sur votre situation",
+        "text": "Pour un avis individuel, consultez un conseiller religieux ou une autorité qualifiée. Dans une recherche publique, décrivez la circonstance pertinente, comme un voyage ou un séjour, sans nom ni détail sur votre unité ou lieu d’affectation.",
+        "links": [
+          [
+            "Poser une question à Zad",
+            "../../ask/"
+          ],
+          [
+            "Répertoire des avis d’Ibn Baz",
+            "https://binbaz.org.sa/fatwas"
+          ]
+        ]
+      }
+    ]
+  }
+}

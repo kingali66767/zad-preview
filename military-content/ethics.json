@@ -1,0 +1,202 @@
+{
+  "ar": {
+    "title": "أخلاق الخدمة",
+    "intro": "تطبيقات يوميّة للأمانة والعدل وحفظ كرامة الزملاء أثناء الخدمة.",
+    "items": [
+      {
+        "title": "أدِّ الأمانة",
+        "text": "أعد ما اؤتمنت عليه إلى صاحبه، وكن واضحًا في نقل ما تعرفه. يقرن القرآن أداء الأمانات بالحكم بين الناس بالعدل.",
+        "links": [
+          [
+            "النساء 4:58",
+            "https://quran.com/4/58"
+          ]
+        ]
+      },
+      {
+        "title": "اعدل في المعاملة",
+        "text": "احكم على القول أو التصرف بإنصاف. لا تجعل الخلاف الشخصي سببًا لظلم زميل. تأمر الآية بالعدل ولو مع وجود خلاف أو نفور.",
+        "links": [
+          [
+            "المائدة 5:8",
+            "https://quran.com/5/8"
+          ]
+        ]
+      },
+      {
+        "title": "احفظ الخصوصية واختر كلامك",
+        "text": "تجنّب الغيبة والتجسّس. عند طلب المشورة في مسألة عامة، صفها دون نشر أسماء الأشخاص أو معلوماتهم أو تفاصيل الوحدة ومكانها.",
+        "links": [
+          [
+            "الحجرات 49:12",
+            "https://quran.com/49/12"
+          ],
+          [
+            "صحيح البخاري 6018",
+            "https://sunnah.com/bukhari:6018"
+          ]
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "Ethics in service",
+    "intro": "Everyday ways to honour trusts, act fairly, and preserve the dignity of colleagues.",
+    "items": [
+      {
+        "title": "Honour what you are entrusted with",
+        "text": "Return what was entrusted to you to its owner, and be clear about what you know when passing on information. The Qur’an pairs honouring trusts with judging fairly between people.",
+        "links": [
+          [
+            "Qur’an 4:58",
+            "https://quran.com/4/58"
+          ]
+        ]
+      },
+      {
+        "title": "Treat people fairly",
+        "text": "Assess what people say and do fairly. Personal disagreements should never lead to unfair treatment. The verse calls for justice even when there is hostility.",
+        "links": [
+          [
+            "Qur’an 5:8",
+            "https://quran.com/5/8"
+          ]
+        ]
+      },
+      {
+        "title": "Respect privacy and speak carefully",
+        "text": "Avoid backbiting and spying. When seeking advice on a general question, describe the issue without posting people’s names or personal information, or the unit’s details or location.",
+        "links": [
+          [
+            "Qur’an 49:12",
+            "https://quran.com/49/12"
+          ],
+          [
+            "Sahih al-Bukhari 6018",
+            "https://sunnah.com/bukhari:6018"
+          ]
+        ]
+      }
+    ]
+  },
+  "ur": {
+    "title": "خدمت کے اخلاق",
+    "intro": "خدمت کے دوران امانت داری، انصاف اور ساتھیوں کی عزت برقرار رکھنے کے روزمرہ طریقے۔",
+    "items": [
+      {
+        "title": "امانت ادا کریں",
+        "text": "جو چیز آپ کے سپرد کی گئی ہے اسے اس کے مالک کو واپس کریں، اور بات آگے پہنچاتے وقت یہ واضح رکھیں کہ آپ کیا جانتے ہیں۔ قرآن میں امانتیں ادا کرنے کے ساتھ لوگوں کے درمیان انصاف کرنے کا حکم بھی دیا گیا ہے۔",
+        "links": [
+          [
+            "النساء 4:58",
+            "https://quran.com/4/58"
+          ]
+        ]
+      },
+      {
+        "title": "معاملے میں انصاف کریں",
+        "text": "بات اور عمل کو انصاف سے پرکھیں۔ ذاتی اختلاف کسی ساتھی کے ساتھ ناانصافی کا سبب نہ بنے۔ یہ آیت مخالفت کے باوجود انصاف کرنے کا حکم دیتی ہے۔",
+        "links": [
+          [
+            "المائدہ 5:8",
+            "https://quran.com/5/8"
+          ]
+        ]
+      },
+      {
+        "title": "رازداری کا خیال رکھیں اور سوچ کر بولیں",
+        "text": "غیبت اور جاسوسی سے بچیں۔ کسی عام مسئلے پر مشورہ لیتے وقت نام، ذاتی معلومات، یونٹ کی تفصیلات یا اس کا مقام بتائے بغیر سوال بیان کریں۔",
+        "links": [
+          [
+            "الحجرات 49:12",
+            "https://quran.com/49/12"
+          ],
+          [
+            "صحیح بخاری 6018",
+            "https://sunnah.com/bukhari:6018"
+          ]
+        ]
+      }
+    ]
+  },
+  "zh": {
+    "title": "服役中的品德",
+    "intro": "在服役日常中恪守信托、公平待人，并维护同事的尊严。",
+    "items": [
+      {
+        "title": "履行受托之责",
+        "text": "把受托保管的物品归还给其主人，转述消息时说清楚自己知道什么。《古兰经》把归还信托和公正地处理人与人之间的事务并列提到。",
+        "links": [
+          [
+            "《古兰经》4:58",
+            "https://quran.com/4/58"
+          ]
+        ]
+      },
+      {
+        "title": "公平待人",
+        "text": "公正地看待他人的言行。不要因个人分歧而不公正地对待同事。这节经文教导，即便有敌意，也要持守公正。",
+        "links": [
+          [
+            "《古兰经》5:8",
+            "https://quran.com/5/8"
+          ]
+        ]
+      },
+      {
+        "title": "尊重隐私，谨慎言辞",
+        "text": "避免背后议论或窥探他人。咨询一般问题时，只描述问题本身，勿公开姓名、个人信息、单位细节或所在地点。",
+        "links": [
+          [
+            "《古兰经》49:12",
+            "https://quran.com/49/12"
+          ],
+          [
+            "《布哈里圣训实录》6018",
+            "https://sunnah.com/bukhari:6018"
+          ]
+        ]
+      }
+    ]
+  },
+  "fr": {
+    "title": "Éthique en service",
+    "intro": "Des façons concrètes d’honorer la confiance, d’agir avec équité et de préserver la dignité des collègues.",
+    "items": [
+      {
+        "title": "Honorer ce qui vous est confié",
+        "text": "Rendez à son propriétaire ce qui vous a été confié. Lorsque vous transmettez une information, dites clairement ce que vous savez. Le Coran associe la restitution des dépôts à l’obligation de juger avec équité.",
+        "links": [
+          [
+            "Coran 4:58",
+            "https://quran.com/4/58"
+          ]
+        ]
+      },
+      {
+        "title": "Traiter les autres avec équité",
+        "text": "Appréciez les paroles et les actes avec équité. Un différend personnel ne justifie pas de traiter un collègue injustement. Ce verset appelle à la justice même en cas d’hostilité.",
+        "links": [
+          [
+            "Coran 5:8",
+            "https://quran.com/5/8"
+          ]
+        ]
+      },
+      {
+        "title": "Respecter la vie privée et peser ses mots",
+        "text": "Évitez la médisance et l’espionnage. Pour demander conseil sur une question générale, décrivez le problème sans publier de noms, de renseignements personnels, de détails sur l’unité ni sur sa localisation.",
+        "links": [
+          [
+            "Coran 49:12",
+            "https://quran.com/49/12"
+          ],
+          [
+            "Sahih al-Bukhari 6018",
+            "https://sunnah.com/bukhari:6018"
+          ]
+        ]
+      }
+    ]
+  }
+}

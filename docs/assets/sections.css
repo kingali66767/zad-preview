@@ -947,3 +947,116 @@ a.site-tour-action:hover { background: var(--green-tint); }
     color: var(--ink);
   }
 }
+
+.military-hub {
+  inline-size: min(73rem, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.military-intro {
+  max-inline-size: 65ch;
+  margin-block-end: clamp(18px, 3vw, 32px);
+  color: var(--muted);
+}
+
+.military-tabs {
+  display: grid;
+  position: static;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 8px;
+  margin-block: 0 clamp(20px, 3.4vw, 36px);
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: var(--white);
+}
+
+.military-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: var(--brand-dark);
+  font-size: clamp(.91rem, 1.4vw, 1rem);
+  font-weight: 700;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.military-tab[aria-current]:not([aria-current="false"]) {
+  border-color: var(--accent);
+  background: var(--green-tint);
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .military-tab:hover {
+    background: var(--green-tint);
+    color: var(--accent);
+  }
+}
+
+.military-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.5rem), 1fr));
+  align-items: stretch;
+  gap: clamp(12px, 2vw, 22px);
+}
+
+.military-card {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-inline-size: 0;
+  padding: clamp(16px, 2.4vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: var(--glass-radius);
+  background: var(--white);
+  box-shadow: var(--glass-shadow);
+  overflow-wrap: anywhere;
+}
+
+.military-card :is(h2, h3) {
+  margin: 0;
+  color: var(--brand-dark);
+  font-size: clamp(1.2rem, 2vw, 1.48rem);
+  line-height: 1.45;
+}
+
+.military-card p {
+  max-inline-size: 65ch;
+  margin: 0;
+  color: var(--muted);
+}
+
+a.military-card {
+  min-block-size: 44px;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  a.military-card:hover {
+    border-color: var(--accent);
+    background: var(--green-tint);
+  }
+}
+
+@media (max-width: 760px) {
+  .military-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .military-tabs > :first-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 380px) {
+  .military-tabs { gap: 4px; padding: 5px; }
+  .military-tab { padding-inline: 8px; }
+}
