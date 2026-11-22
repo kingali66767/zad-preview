@@ -123,6 +123,7 @@ def verify_adhkar_navigation(page, *, categories=ADHKAR_CATEGORIES):
 def verify_homepage(page):
     hero = page.locator("main .hero")
     expect(hero).to_be_visible()
+    assert page.locator("body").evaluate("element => getComputedStyle(element).backgroundColor === 'rgb(255, 255, 255)'")
     expect(page.get_by_role("heading", level=1)).to_have_count(1)
     identity = hero.locator(".hero-identity")
     expect(identity.locator(".hero-identity-name strong")).to_have_text("زاد")
@@ -140,6 +141,10 @@ def verify_homepage(page):
         assert layer.evaluate("""element => getComputedStyle(element, '::before').backgroundImage
             .includes('/assets/ministry-of-defense-logo.jpg')""")
     headline = identity.get_by_role("heading", level=1)
+    assert headline.evaluate("""element => {
+        const style = getComputedStyle(element);
+        return style.color === 'rgb(41, 80, 77)' && style.fontFamily.includes('IBM Plex Sans Arabic');
+    }""")
     expect(headline).to_have_text("زَادُكَ مِنَ الْعِلْمِ، وَنُورُكَ بِالْمَعْرِفَةِ.")
     photo = hero.locator(".hero-image")
     expect(photo).to_be_visible()

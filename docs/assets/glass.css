@@ -1,33 +1,20 @@
 :root {
-  --brand-dark: #4b2f20;
-  --deep: #25170f;
-  --gold: #edbd79;
-  --ink: #3d2b22;
-  --muted: #654e40;
-  --paper: #f8eee1;
-  --line: #e0cbb6;
-  --white: #fffef7;
-  --glass-edge: rgba(255, 255, 247, .86);
-  --glass-rim: 0 0 0 1px rgba(73, 57, 41, .10), inset 0 1px 0 rgba(255, 255, 255, .88);
-  --glass-shadow: 0 12px 32px rgba(68, 47, 26, .08), var(--glass-rim);
+  --glass-edge: #d6e5dc;
+  --glass-rim: 0 0 0 1px #29504d09, inset 0 1px 0 #fff;
+  --glass-shadow: 0 12px 32px #29504d0c, var(--glass-rim);
   --glass-radius: 18px;
 }
 
 html {
   scroll-padding-block-start: 102px;
-  background: #f7ebdc;
+  background: var(--paper);
 }
 
 body {
   --ministry-logo: url("ministry-of-defense-logo.jpg");
   --watermark-width: min(112vw, 90rem);
-  --geometry-tile: url("tuwaiq-triangles.webp");
-  --geometry-size: 116px;
-  --page-lighting:
-    radial-gradient(ellipse at 85% 27rem, #ecd4b8 0%, transparent 38%),
-    radial-gradient(ellipse at 8% 49rem, #f5e9ce 0%, transparent 32%);
   isolation: isolate;
-  background: var(--page-lighting), #f7ebdc;
+  background: var(--paper);
 }
 
 body::before,
@@ -39,18 +26,20 @@ body::before,
   content: "";
 }
 
-body::before {
-  position: fixed;
+body::before,
+.hero::before {
   mix-blend-mode: multiply;
-  opacity: .17;
+  opacity: .11;
 }
+
+body::before { position: fixed; }
 
 a:focus-visible,
 button:focus-visible,
 select:focus-visible,
 input:focus-visible,
 summary:focus-visible {
-  outline-color: #8b6024;
+  outline-color: var(--accent);
 }
 
 header {
@@ -58,8 +47,8 @@ header {
   inset-block-start: 0;
   z-index: 4;
   padding-block: 10px;
-  border-bottom: 1px solid #e7d1bb26;
-  background: #342218;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
 }
 
 .top {
@@ -73,24 +62,24 @@ header {
 }
 
 .brand small {
-  color: #f0e7df;
+  color: var(--muted);
 }
 
 .seal {
   flex: none;
-  border: 1px solid #f4d99c9e;
+  border: 1px solid var(--line);
   border-radius: 15px;
-  background: linear-gradient(157deg, #fff6d545, #c9922a0e 65%), #45392d;
-  box-shadow: inset 0 1px 1px #fffef16b, inset 0 -1px 1px #1b120a, 0 5px 14px #120b0560;
+  background: var(--white);
+  box-shadow: var(--glass-shadow);
 }
 
 #nav {
   gap: clamp(0px, .4vw, 6px);
   padding: 4px;
-  border: 1px solid #faf2eb3b;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: linear-gradient(165deg, #f9eee427, #f1dac409 62%), #3e3124;
-  box-shadow: inset 0 1px 1px #fbf4ee2e, inset 0 -2px 3px #110b0528, 0 5px 15px #130c0535;
+  background: var(--white);
+  box-shadow: var(--glass-shadow);
 }
 
 #nav a,
@@ -105,26 +94,26 @@ header {
   padding-inline: clamp(5px, .52vw, 11px);
   border: 1px solid transparent;
   border-radius: 999px;
-  color: #f6f0ea;
+  color: var(--brand-dark);
   font-size: clamp(.82rem, 1.07vw, .96rem);
 }
 
 #nav a:hover,
 #nav a:focus-visible,
 #nav a[aria-current] {
-  border-color: #faf2ea40;
-  color: #ffdc9c;
-  background: #f3e4d625;
+  border-color: var(--line);
+  color: var(--accent);
+  background: var(--green-tint);
 }
 
 .prayer-link,
 .menu {
   min-height: 44px;
-  border: 1px solid #e8c57d71;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: linear-gradient(160deg, #fff5c536, #d9aa5011), #3d3126;
-  box-shadow: inset 0 1px 0 #ffefbc46, 0 4px 12px #1b120a54;
-  color: #ffe0a4;
+  background: var(--green-tint);
+  box-shadow: var(--glass-rim);
+  color: var(--accent);
   font-weight: 800;
 }
 
@@ -133,29 +122,17 @@ header {
   font-size: .87rem;
 }
 
-header :focus-visible,
-.hero :focus-visible,
-footer :focus-visible {
-  outline-color: #ffdc9c;
-}
-
 .hero {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   padding-block: clamp(38px, 5vw, 81px) clamp(84px, 8vw, 124px);
-  background:
-    radial-gradient(ellipse at 76% -5%, #71472e 0%, transparent 59%),
-    radial-gradient(ellipse at 12% 100%, #62422d 0%, transparent 52%),
-    linear-gradient(152deg, #3d281c 8%, #291a13 76%);
+  background: var(--white);
 }
 
 .hero::before {
   position: absolute;
   background-position: center 56%;
-  filter: grayscale(1) invert(1) sepia(.75);
-  mix-blend-mode: screen;
-  opacity: .28;
 }
 
 .hero-copy {
@@ -166,25 +143,22 @@ footer :focus-visible {
 .hero-image {
   position: relative;
   overflow: hidden;
-  border: 1px solid #f7e9ba91;
+  border: 1px solid var(--line);
   border-radius: clamp(15px, 2.5vw, 30px);
-  box-shadow: 0 28px 50px #180f078a, 0 0 0 7px #f7e9db23, 0 0 0 8px #fff6ce37;
+  box-shadow: 0 24px 42px #173e2f24, 0 0 0 5px var(--green-tint);
 }
 
 .hero-image::after {
   position: absolute;
   inset: 0;
-  border: 1px solid #f8f5d62e;
+  border: 1px solid #ffffff66;
   border-radius: inherit;
-  background: linear-gradient(152deg, #fffbd23d, transparent 34% 68%, #2c201566);
-  box-shadow: inset 0 1px 1px #fffdf3c2, inset 0 -1px 3px #1d140bc2;
   content: "";
   pointer-events: none;
 }
 
 .hero .intro {
-  color: #f4e7d8;
-  text-shadow: 0 1px 4px #291a13;
+  color: var(--muted);
 }
 
 .button {
@@ -195,34 +169,20 @@ footer :focus-visible {
   filter: none;
 }
 
-.button.gold {
-  border-color: #fff1c4;
-  background: linear-gradient(158deg, #ffe9ae, #e9b96b);
-  box-shadow: inset 0 1px 0 #fff7dc, 0 9px 23px #110e0b45;
-}
-
-.button.gold:hover {
-  background: linear-gradient(158deg, #fff0c0, #f4c47a);
-}
-
-.button.outline {
-  border-color: #f3e8dd80;
-  background: linear-gradient(158deg, #fbf4ee2e, #f1dac411), #413325;
-  box-shadow: inset 0 1px 0 #fcf6f04d, 0 9px 23px #16120f35;
-}
-
-.button.outline:hover {
-  background-color: #5a4735;
-}
-
+.button.gold,
+.button.outline,
 .button.green {
-  border-color: #5a4836;
-  background: linear-gradient(154deg, #855334, #532f1d 73%);
-  box-shadow: inset 0 1px 0 #f5e3d254, 0 6px 14px #3b2b1b24;
+  border-color: #648b7c;
+  color: var(--accent);
+  background: var(--green-tint);
+  box-shadow: 0 4px 12px #29504d10;
 }
 
+.button.gold:hover,
+.button.outline:hover,
 .button.green:hover {
-  background: linear-gradient(154deg, #96603a, #643b25 73%);
+  border-color: var(--accent);
+  background: #dceee4;
 }
 
 .button:disabled {
@@ -241,14 +201,13 @@ footer :focus-visible {
 .contact {
   border: 1px solid var(--glass-edge);
   border-radius: var(--glass-radius);
-  background-color: #fff8ee;
-  background-image: linear-gradient(154deg, #fffdfbe8 1%, #f9f4ef42 64%, #eadacb42);
+  background-color: var(--white);
   box-shadow: var(--glass-shadow);
 }
 
 .prayer {
   --glass-radius: 29px;
-  box-shadow: 0 18px 45px #38271729, var(--glass-rim);
+  box-shadow: var(--glass-shadow);
 }
 
 .prayer-note,
@@ -259,7 +218,7 @@ footer :focus-visible {
 .discover-content section {
   border-color: var(--glass-edge);
   border-radius: 17px;
-  background: linear-gradient(150deg, #fffefb, #f6efe9de);
+  background: var(--white);
   box-shadow: var(--glass-rim);
 }
 
@@ -294,29 +253,29 @@ details[open] > summary::before {
 }
 
 .discover-content .discover-shahada {
-  border-color: #eed4a1;
-  background: linear-gradient(150deg, #fffcf3, #f4e6c6);
+  border-color: var(--line);
+  background: var(--green-tint);
 }
 
 .times div {
-  border: 1px solid #fdfaf8;
+  border: 1px solid var(--glass-edge);
   border-radius: 13px;
-  background: linear-gradient(154deg, #faf5f0, #f0e8e0);
+  background: var(--green-tint);
   box-shadow: var(--glass-rim);
 }
 
 select,
 .ask-form input {
-  border-color: #b9a693;
+  border-color: #8cb29f;
   border-radius: 13px;
-  background: #fffef9;
+  background: var(--white);
 }
 
 .ask-reset,
 #ask-related-questions button {
-  border: 1px solid #b7a390;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: linear-gradient(155deg, #fffef9, #f3ebe4);
+  background: var(--green-tint);
 }
 
 .section-heading,
@@ -333,11 +292,11 @@ select,
   place-items: center;
   inline-size: clamp(37px, 4.4vw, 54px);
   block-size: clamp(37px, 4.4vw, 54px);
-  border: 1px solid #fffef6b5;
+  border: 1px solid var(--line);
   border-radius: 15px;
-  background: linear-gradient(143deg, #fffdf4, #e7e5cd 68%, #e9dbcd);
-  box-shadow: 0 4px 12px #402e1c16, 0 0 0 1px #9b806660, inset 0 1px 1px white;
-  color: #594736;
+  background: var(--green-tint);
+  box-shadow: var(--glass-rim);
+  color: var(--accent);
 }
 
 .tiles > a {
@@ -350,22 +309,18 @@ select,
 }
 
 .tiles > a:hover {
-  border-color: #fffcf2;
-  background-color: #fbf4ed;
-  background-image: linear-gradient(154deg, #fffcea, #f2e7dd);
-  box-shadow: 0 16px 32px #48321c21, var(--glass-rim);
+  border-color: #8cb29f;
+  background-color: var(--green-tint);
+  box-shadow: var(--glass-shadow);
 }
 
 .collection {
-  border-color: #c7b8a985;
-  background:
-    radial-gradient(ellipse at 15% 22rem, #ecdccd, transparent 58%),
-    radial-gradient(ellipse at 92% 70rem, #ecdfd2, transparent 56%),
-    #f1e9e2;
+  border-color: var(--glass-edge);
+  background: transparent;
 }
 
 .feature {
-  border-color: #cec0b3;
+  border-color: var(--line);
 }
 
 .source-policy,
@@ -375,17 +330,17 @@ select,
 }
 
 .quote {
-  border-color: #a77d37;
+  border-color: #7fac94;
 }
 
 footer {
-  border-top: 1px solid #efe5db55;
-  background: linear-gradient(150deg, #3a2a1b, #25180c);
+  border-top: 1px solid var(--line);
+  background: var(--white);
 }
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   header {
-    background: rgba(32, 22, 13, .87);
+    background: #fffffff5;
     -webkit-backdrop-filter: blur(19px) saturate(1.4);
     backdrop-filter: blur(19px) saturate(1.4);
   }
@@ -393,13 +348,13 @@ footer {
   .prayer,
   .ask-panel,
   .discover-section {
-    background-color: rgba(249, 243, 238, .83);
+    background-color: #ffffffed;
     -webkit-backdrop-filter: blur(16px) saturate(1.28);
     backdrop-filter: blur(16px) saturate(1.28);
   }
 
   .tiles > a {
-    background-color: rgba(251, 248, 245, .57);
+    background-color: #fffffff0;
   }
 }
 
@@ -449,8 +404,8 @@ footer {
     gap: 3px;
     padding: 8px;
     border-radius: 20px;
-    background: linear-gradient(164deg, #524335, #342619);
-    box-shadow: inset 0 1px 0 #fbf4ee2e, 0 14px 30px #1d130967;
+    background: var(--white);
+    box-shadow: var(--glass-shadow);
   }
 
   #nav a {
@@ -463,7 +418,7 @@ footer {
 
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     #nav {
-      background: linear-gradient(164deg, #524335e8, #342619f0);
+      background: #fffffff5;
       -webkit-backdrop-filter: blur(15px) saturate(1.3);
       backdrop-filter: blur(15px) saturate(1.3);
     }
@@ -495,7 +450,6 @@ footer {
   }
 
   body {
-    --geometry-size: 96px;
     --watermark-width: 124vw;
   }
 
@@ -504,7 +458,7 @@ footer {
   }
 
   .hero-image {
-    box-shadow: 0 18px 34px #180f0770, 0 0 0 4px #f7e9db23, 0 0 0 5px #fff6ce37;
+    box-shadow: 0 16px 26px #173e2f1c, 0 0 0 4px var(--green-tint);
   }
 
   .prayer {
@@ -553,14 +507,14 @@ footer {
 @media (prefers-reduced-transparency: reduce) {
   header,
   #nav {
-    background: #342218;
+    background: var(--white);
   }
 
   .prayer,
   .ask-panel,
   .discover-section,
   .tiles > a {
-    background-color: #fff8ee;
+    background-color: var(--white);
   }
 
   header,
@@ -574,7 +528,6 @@ footer {
 }
 
 @media (forced-colors: active), (prefers-reduced-transparency: reduce) {
-  body { --geometry-tile: none; }
   body::before,
   .hero::before { content: none; }
 }

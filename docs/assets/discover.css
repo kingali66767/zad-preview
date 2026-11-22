@@ -1,10 +1,10 @@
 .discover-section{margin-top:16px}
-.discover-section>summary{color:#784825}
+.discover-section>summary{color:var(--accent)}
 .discover-section>p{color:var(--muted);margin-bottom:12px}
 .discover .discover-languages,.discover .discover-toc{position:static;background:transparent;border:0;padding:0}
 .discover .discover-languages{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;margin-bottom:12px}
-.discover-languages a{padding:4px 9px;border:1px solid #a99c83;border-radius:7px;color:var(--ink)}
-.discover-languages a:hover{background:#f1ead8;color:var(--ink)}
+.discover-languages a{padding:4px 9px;border:1px solid var(--line);border-radius:7px;color:var(--ink)}
+.discover-languages a:hover{background:var(--green-tint);color:var(--ink)}
 .discover-locale{margin-top:8px}
 .discover-intro h3{font:700 clamp(1.65rem,4vw,2.2rem)/1.25 var(--heading-font);margin:0 0 8px}
 .discover-intro p{max-width:62ch;margin-bottom:14px}
@@ -12,21 +12,21 @@
 .discover-layout{display:grid;grid-template-columns:minmax(155px,225px) minmax(0,1fr);gap:clamp(12px,2vw,25px);padding-block:20px 4px}
 .discover .discover-toc{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;font-size:1rem}
 .discover-toc a{white-space:normal;text-decoration:underline;text-underline-offset:3px}
-.discover-toc a:hover{color:#765016}
+.discover-toc a:hover{color:var(--accent)}
 .discover-content section{padding:clamp(12px,2.5vw,22px);border:1px solid var(--line);border-radius:12px;background:var(--white);margin-bottom:12px}
 .discover-content h4{font:700 clamp(1.35rem,3.2vw,1.9rem)/1.3 var(--heading-font);margin:0 0 10px}
 .discover-content h5{font-size:1.05rem;margin:14px 0 8px}
 .discover-content ol,.discover-content ul{padding-inline-start:1.45em}
 .discover-content li+li{margin-top:.35em}
-.discover-content .discover-shahada{border-color:#a38346;background:#f3ecda}
+.discover-content .discover-shahada{border-color:var(--line);background:var(--green-tint)}
 .discover-shahada blockquote{font:700 clamp(1.4rem,4vw,2rem)/1.6 Amiri,serif;margin:0 0 8px}
 .discover-transliteration{font-style:italic}
 .discover-sources,.discover-bath-source{font-size:.95rem;color:var(--muted)}
 .discover-sources{margin-bottom:0}
 .discover-sources a,.discover-bath-source a{text-underline-offset:3px}
-.discover-outline{border-color:#ab9e7e}
+.discover-outline{border-color:var(--line)}
 .discover-content .shahada-lines{list-style:none;padding:0}
-.shahada-lines li{border:1px solid #d9c697;border-radius:10px;background:#fffaf1;padding:10px 12px}
+.shahada-lines li{border:1px solid var(--line);border-radius:10px;background:var(--white);padding:10px 12px}
 .shahada-lines li + li{margin-top:8px}
 .shahada-lines li p:last-child{font-weight:700;margin-bottom:0}
 .shahada-lines .discover-transliteration{margin-bottom:6px}
