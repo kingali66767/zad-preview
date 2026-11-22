@@ -606,13 +606,15 @@ body[data-page="home"] .route-top #nav {
 
 .hero-verse {
   position: relative;
+  display: grid;
+  align-content: center;
+  min-block-size: clamp(8rem, 36cqi, 10.5rem);
   margin: 0;
   padding: clamp(15px, 5cqi, 25px) clamp(12px, 3cqi, 20px);
   border: 1px solid #8cb29f;
   border-radius: 12px;
-  background: linear-gradient(#ffffffa6, #ffffffbc), url("bradley-backdrop.webp") center / contain no-repeat, var(--white);
+  background: linear-gradient(#ffffffa6, #ffffffbc), url("bradley-backdrop.webp") center 55% / cover no-repeat, var(--white);
   text-align: center;
-  box-shadow: inset 0 0 0 3px var(--white);
 }
 
 .hero-verse::before {
@@ -639,15 +641,9 @@ body[data-page="home"] .route-top #nav {
 .hero-verse blockquote p { margin: 0; }
 
 .hero-verse figcaption {
-  margin-block-start: 6px;
+  margin-block-start: 10px;
   color: var(--muted);
   font-size: .86rem;
-}
-
-.hero-verse figcaption a {
-  display: inline-block;
-  padding-block: 8px;
-  text-underline-offset: .2em;
 }
 
 .hero-audience {

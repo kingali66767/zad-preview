@@ -150,10 +150,13 @@ def verify_homepage(page):
     expect(verse).to_have_text("﴿وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم مِّن قُوَّةٍ﴾")
     expect(verse).to_have_attribute("lang", "ar")
     expect(verse).to_have_attribute("dir", "rtl")
-    expect(identity.get_by_role("link", name="سورة الأنفال، الآية ٦٠")).to_have_attribute("href", "https://quran.com/8/60")
-    assert identity.locator(".hero-verse").evaluate("""async frame => {
+    frame = identity.locator(".hero-verse")
+    expect(frame.locator("figcaption")).to_have_text("سورة الأنفال، الآية ٦٠")
+    expect(frame.locator("a, blockquote[cite]")).to_have_count(0)
+    assert frame.evaluate("""async frame => {
         const url = new URL('assets/bradley-backdrop.webp', location.href);
-        if (!getComputedStyle(frame).backgroundImage.includes(url.href)) return false;
+        const style = getComputedStyle(frame);
+        if (!style.backgroundImage.includes(url.href) || style.backgroundSize.split(',')[1].trim() !== 'cover') return false;
         const image = new Image();
         image.src = url;
         await image.decode();
