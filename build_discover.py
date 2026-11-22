@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-12"
+REVISION = "20261122-13"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -48,9 +48,9 @@ with (ROOT / "locale-content" / "interface.tsv").open(encoding="utf-8", newline=
 INTERFACE = {lang: {row["key"]: row[lang] for row in interface_rows} for lang in SITE_LANGUAGES}
 
 
-def render_template(name, locale, root=""):
+def render_template(name, locale, root="", **extra_labels):
     source = (ROOT / "page-templates" / f"{name}.html").read_text(encoding="utf-8").strip()
-    labels = INTERFACE[locale]
+    labels = INTERFACE[locale] | extra_labels
     return LOCALE_TOKEN.sub(lambda match: escape(labels[match[1]]), source).replace("{{root}}", root)
 
 
@@ -238,8 +238,13 @@ def icon(key):
     return f'<span class="zad-icon" data-icon="{escape(key)}" aria-hidden="true"></span>'
 
 
-def render_home(locale):
-    return "\n".join(render_template(f"home-{part}", locale) for part in ("ask", "hero", "tour"))
+def render_home(locale, border_title):
+    root = "" if locale == "ar" else "../"
+    return "\n".join((
+        render_template("home-ask", locale),
+        render_template("home-hero", locale, root, military_border_shortcut=border_title),
+        render_template("home-tour", locale),
+    ))
 
 
 def load_adhkar():
@@ -504,7 +509,8 @@ def main():
             outputs[docs / "assets" / "locales" / f"{locale}.js"] = (
                 '"use strict";\nconst zadLocale = ' + json.dumps(local_library, ensure_ascii=False, separators=(",", ":")) + ";\n"
             )
-        outputs[local_docs / "index.html"] = render_page("home", render_home(locale), locale=locale)
+        home = render_home(locale, military["southern-border"][locale]["title"])
+        outputs[local_docs / "index.html"] = render_page("home", home, locale=locale)
         for slug in SECTIONS:
             if slug == "discover":
                 body = f'<h1 class="visually-hidden">{escape(labels[slug])}</h1>\n' + render_guide(languages, locale)

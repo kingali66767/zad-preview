@@ -167,14 +167,23 @@ def verify_homepage(page):
     expect(hijri).to_have_attribute("datetime", gregorian.get_attribute("datetime"))
     expect(hijri).to_be_visible()
     expect(hero.locator(".hero-image")).to_have_count(0)
+    military_shortcut = hero.get_by_role("link", name="زاد العسكري", exact=True)
+    border_shortcut = hero.get_by_role("link", name="المرابطون على الحد الجنوبي", exact=True)
+    expect(military_shortcut).to_have_attribute("href", "military/")
+    expect(border_shortcut).to_have_attribute("href", "military/southern-border/")
+    portrait = military_shortcut.locator("img")
+    assert portrait.evaluate("async image => { await image.decode(); return image.naturalWidth === 384; }")
     tour = page.locator("details#site-tour")
     action = tour.locator(":scope > summary")
     expect(action).to_be_visible()
     expect(action).to_have_text("ابدأ الجولة")
     expect(tour).not_to_have_attribute("open", "")
     expect(tour.locator("#site-tour-heading")).to_be_hidden()
-    calendar_bounds = calendar.bounding_box()
-    assert calendar_bounds["y"] + calendar_bounds["height"] <= action.bounding_box()["y"], "The calendar must precede the tour control"
+    previous_bounds = calendar.bounding_box()
+    for following in (military_shortcut, border_shortcut, action):
+        bounds = following.bounding_box()
+        assert previous_bounds["y"] + previous_bounds["height"] <= bounds["y"], "The military shortcuts must follow the calendar and precede the tour"
+        previous_bounds = bounds
     form = page.locator("main #home-ask-form")
     field = form.locator("#home-ask-input")
     expect(form).to_be_visible()
@@ -194,7 +203,7 @@ def verify_homepage(page):
     expect(page.locator("#sections, #section-launcher, .launcher-link, " +
                         ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
     links_outside_menu = page.locator("a[href]").evaluate_all(
-        "links => links.filter(link => !link.closest('header #nav, .ask-shortcut, #site-tour')).map(link => link.href)"
+        "links => links.filter(link => !link.closest('header #nav, .ask-shortcut, #site-tour, .military-shortcut')).map(link => link.href)"
     )
     destinations = {urljoin(page.url, section + "/") for section in SECTIONS}
     assert not destinations.intersection(links_outside_menu), links_outside_menu
