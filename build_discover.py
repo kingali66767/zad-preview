@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-3"
+REVISION = "20261122-4"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -237,7 +237,8 @@ def icon(key):
 
 
 def render_home(locale):
-    return "\n".join(render_template(f"home-{part}", locale) for part in ("ask", "hero", "tour"))
+    root = "" if locale == "ar" else "../"
+    return "\n".join(render_template(f"home-{part}", locale, root) for part in ("ask", "hero", "tour"))
 
 
 def load_adhkar():

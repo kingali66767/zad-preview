@@ -15,19 +15,34 @@
 
 html {
   scroll-padding-block-start: 102px;
+  background: #f7ebdc;
 }
 
 body {
+  --ministry-watermark: url("ministry-of-defense-logo.jpg");
+  --watermark-width: min(112vw, 90rem);
   --geometry-tile: url("tuwaiq-triangles.webp");
   --geometry-size: 116px;
   --page-lighting:
     radial-gradient(ellipse at 85% 27rem, #ecd4b8 0%, transparent 38%),
     radial-gradient(ellipse at 8% 49rem, #f5e9ce 0%, transparent 32%);
-  background:
-    var(--page-lighting),
-    linear-gradient(#f7ebdc63, #f7ebdc63),
-    var(--geometry-tile) center top / var(--geometry-size) repeat,
-    #f7ebdc;
+  isolation: isolate;
+  background: var(--page-lighting), #f7ebdc;
+}
+
+body::before,
+.hero::before {
+  z-index: -1;
+  inset: 0;
+  background: var(--ministry-watermark) center / var(--watermark-width) auto no-repeat;
+  pointer-events: none;
+  content: "";
+}
+
+body::before {
+  position: fixed;
+  mix-blend-mode: multiply;
+  opacity: .17;
 }
 
 a:focus-visible,
@@ -137,24 +152,10 @@ footer :focus-visible {
 
 .hero::before {
   position: absolute;
-  z-index: -1;
-  inset: 0;
-  --geometry-fade: linear-gradient(112deg, #000 5%, #000d 44%, #0008 76%, #000b);
-  background: var(--geometry-tile) center top / var(--geometry-size) repeat;
-  -webkit-mask-image: var(--geometry-fade);
-  mask-image: var(--geometry-fade);
-  content: "";
-  pointer-events: none;
-}
-
-.hero::after {
-  position: absolute;
-  z-index: -2;
-  inset: 18% 0 0;
-  background: linear-gradient(153deg, #aa71404f, #73472205 76%);
-  clip-path: polygon(0 66%, 25% 33%, 39% 53%, 63% 11%, 76% 39%, 100% 22%, 100% 100%, 0 100%);
-  content: "";
-  pointer-events: none;
+  background-position: center 56%;
+  filter: grayscale(1) invert(1) sepia(.75);
+  mix-blend-mode: screen;
+  opacity: .28;
 }
 
 .hero-copy {
@@ -183,6 +184,7 @@ footer :focus-visible {
 
 .hero .intro {
   color: #f4e7d8;
+  text-shadow: 0 1px 4px #291a13;
 }
 
 .button {
@@ -492,10 +494,9 @@ footer {
     padding-block: 34px 74px;
   }
 
-  body { --geometry-size: 96px; }
-
-  .hero::before {
-    --geometry-fade: radial-gradient(ellipse at 0% 12%, #000 6%, #0009 48%, #0005 74%, #0003);
+  body {
+    --geometry-size: 96px;
+    --watermark-width: 124vw;
   }
 
   .hero-grid {
@@ -574,5 +575,6 @@ footer {
 
 @media (forced-colors: active), (prefers-reduced-transparency: reduce) {
   body { --geometry-tile: none; }
-  .hero::after { content: none; }
+  body::before,
+  .hero::before { content: none; }
 }

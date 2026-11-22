@@ -130,6 +130,12 @@ def verify_homepage(page):
     expect(identity.locator('[data-icon="ministry-audience"]')).to_be_visible()
     expect(identity.locator(".hero-audience strong")).to_have_text("فرع الشؤون الدينية")
     expect(identity.locator(".hero-audience span")).to_have_text("خدمة توعوية لضباط وأفراد وزارة الدفاع")
+    ministry_logo = identity.get_by_role("img", name="شعار وزارة الدفاع السعودية", exact=True)
+    expect(ministry_logo).to_be_visible()
+    assert ministry_logo.evaluate("async image => { await image.decode(); return image.naturalWidth === 1200; }")
+    for layer in (page.locator("body"), hero):
+        assert layer.evaluate("""element => getComputedStyle(element, '::before').backgroundImage
+            .includes('/assets/ministry-of-defense-logo.jpg')""")
     headline = identity.get_by_role("heading", level=1)
     expect(headline).to_have_text("زَادُكَ مِنَ الْعِلْمِ، وَنُورُكَ بِالْمَعْرِفَةِ.")
     photo = hero.locator(".hero-image")
