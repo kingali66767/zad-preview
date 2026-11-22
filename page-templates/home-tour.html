@@ -5,23 +5,27 @@
 </div>
 <div class="site-tour-stops">
 <a class="site-tour-card" href="quran/" aria-labelledby="tour-read-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="quran"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-explore"></span></span>
 <div>
 <h3>{{t:tour_read_title}}</h3>
 <p>{{t:tour_read_intro}}</p>
 <span class="site-tour-action" id="tour-read-action">{{t:tour_read_action}}</span>
 </div>
 </a>
-<a class="site-tour-card" href="worship/" aria-labelledby="tour-worship-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="worship"></span></span>
+<section class="site-tour-card" aria-labelledby="tour-practice-heading">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-practice"></span></span>
 <div>
-<h3>{{t:tour_practice_title}}</h3>
+<h3 id="tour-practice-heading">{{t:tour_practice_title}}</h3>
 <p>{{t:tour_practice_intro}}</p>
-<span class="site-tour-action" id="tour-worship-action">{{t:tour_practice_action}}</span>
+<div class="site-tour-actions">
+<a class="site-tour-action" href="worship/"><span class="zad-icon" data-icon="worship" aria-hidden="true"></span>{{t:worship}}</a>
+<a class="site-tour-action" href="prayer/"><span class="zad-icon" data-icon="prayer" aria-hidden="true"></span>{{t:prayer}}</a>
+<a class="site-tour-action" href="adhkar/travel/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>{{t:travel_adhkar}}</a>
 </div>
-</a>
+</div>
+</section>
 <section class="site-tour-card">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
 <h3>{{t:tour_ask_title}}</h3>
 <p>{{t:tour_ask_intro}}</p>

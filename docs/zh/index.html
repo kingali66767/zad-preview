@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zad 是独立的伊斯兰知识平台，提供《古兰经》、可靠圣训、学习指南及礼拜时间。">
+<meta name="description" content="Zad 为沙特阿拉伯国防部军官和士兵提供伊斯兰学习资料，包括《古兰经》、可靠圣训和礼拜时间。">
 <meta name="theme-color" content="#342218">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
@@ -13,13 +13,13 @@
 <link rel="alternate" hreflang="ur" href="../ur/">
 <link rel="alternate" hreflang="zh" href="../zh/">
 <link rel="alternate" hreflang="fr" href="../fr/">
-<link rel="stylesheet" href="../assets/style.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/discover.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/glass.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/sections.css?v=20261122-2">
-<script src="../assets/locales/zh.js?v=20261122-2" defer></script>
-<script src="../assets/site.js?v=20261122-2" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/discover.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/glass.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/sections.css?v=20261122-3">
+<script src="../assets/locales/zh.js?v=20261122-3" defer></script>
+<script src="../assets/site.js?v=20261122-3" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">跳至内容</a>
@@ -67,7 +67,7 @@
 <input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="请输入问题，勿填写个人信息">
 <button class="button gold" id="home-ask-submit" type="submit" disabled>搜索</button>
 </form>
-<p id="home-ask-source">问题中的关键词可能会发送至伊本·巴兹官方网站的搜索服务。</p>
+<p id="home-ask-source">请提出一般性问题，勿填写个人或所在部队的信息。问题中的关键词可能会发送至伊本·巴兹网站进行搜索。</p>
 <p id="home-ask-status" role="status"></p>
 <noscript><p class="home-ask-noscript"><a href="ask/">打开 Zad 问答</a></p></noscript>
 </div>
@@ -78,10 +78,14 @@
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
-<span class="route-brand hero-identity-mark" aria-hidden="true"><span class="zad-icon" data-icon="brand"></span></span>
+<span class="route-brand hero-identity-mark" aria-hidden="true"><span class="zad-icon" data-icon="ministry-audience"></span></span>
 <p class="hero-identity-name"><strong>Zad</strong><small>伊斯兰知识平台</small></p>
 </div>
 <h1 id="home-heading">以知识充实自己， <em>以理解照亮前路。</em></h1>
+<div class="hero-audience">
+<strong>宗教事务分部</strong>
+<span>面向沙特阿拉伯国防部军官和士兵的伊斯兰学习服务</span>
+</div>
 </div>
 <p class="intro">在这里学习伊斯兰知识，阅读《古兰经》、可靠圣训和附有出处的学习资料。</p>
 <div class="actions"><a class="button gold" href="#site-tour">开始导览</a></div>
@@ -96,23 +100,27 @@
 </div>
 <div class="site-tour-stops">
 <a class="site-tour-card" href="quran/" aria-labelledby="tour-read-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="quran"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-explore"></span></span>
 <div>
 <h3>阅读与查证</h3>
 <p>阅读《古兰经》、圣训和先知生平，打开相关出处了解原文或教法意见的语境。</p>
 <span class="site-tour-action" id="tour-read-action">打开《古兰经》栏目</span>
 </div>
 </a>
-<a class="site-tour-card" href="worship/" aria-labelledby="tour-worship-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="worship"></span></span>
+<section class="site-tour-card" aria-labelledby="tour-practice-heading">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-practice"></span></span>
 <div>
-<h3>日常礼拜与功修</h3>
-<p>复习小净和礼拜的步骤、阅读早晚赞念，或查询沙特城市的礼拜时间。</p>
-<span class="site-tour-action" id="tour-worship-action">打开小净与礼拜</span>
+<h3 id="tour-practice-heading">日常礼拜与功修</h3>
+<p>复习小净和礼拜的步骤，查询沙特城市的礼拜时间，并阅读出行赞念。</p>
+<div class="site-tour-actions">
+<a class="site-tour-action" href="worship/"><span class="zad-icon" data-icon="worship" aria-hidden="true"></span>小净与礼拜</a>
+<a class="site-tour-action" href="prayer/"><span class="zad-icon" data-icon="prayer" aria-hidden="true"></span>礼拜时间</a>
+<a class="site-tour-action" href="adhkar/travel/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>出行赞念</a>
 </div>
-</a>
+</div>
+</section>
 <section class="site-tour-card">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
 <h3>提问或认识伊斯兰</h3>
 <p>在 Zad 问答中查阅附有出处的回答。多语言指南介绍伊斯兰的基础知识和入门步骤。</p>
@@ -128,7 +136,7 @@
 <footer id="site-footer" class="section-footer home-footer">
 <div class="wrap home-footer-inner">
 <div class="home-footer-info">
-<p>Zad · 独立、非官方的教育项目</p>
+<p>Zad · 预览版</p>
 <dl class="home-footer-credits">
 <div><dt>开发</dt><dd>一级中士 / 阿里·本·穆罕默德·卡尔尼</dd></div>
 <div><dt>指导</dt><dd>中校 / 沙特·阿勒·哈立德</dd></div>

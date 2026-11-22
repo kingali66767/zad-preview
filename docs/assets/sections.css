@@ -538,6 +538,23 @@ html[lang="ar"] .hero-identity h1 {
   font-size: clamp(1rem, 8cqi, 2.85rem);
 }
 
+.hero-audience {
+  display: grid;
+  gap: 3px;
+  margin-block-start: 13px;
+  padding: 9px 12px;
+  border: 1px solid #eccc8673;
+  border-inline-start: 3px solid #edca89;
+  border-radius: 9px;
+  background: #2c2c20;
+  color: #fff3e1;
+  font-size: .875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.hero-audience strong { color: #ffe2a2; }
+
 @media (prefers-reduced-transparency: reduce) {
   .hero-identity { background: #40291b; }
 }
@@ -638,12 +655,15 @@ span.site-tour-action { margin-block-start: 8px; }
 
 a.site-tour-action {
   min-block-size: 44px;
+  gap: 6px;
   padding-inline: 12px;
   border: 1px solid #c0af9f;
   border-radius: 999px;
   background: #f9f2ec;
   text-decoration: none;
 }
+
+a.site-tour-action .zad-icon { --zad-icon-size: 1rem; }
 
 a.site-tour-action:hover { background: #f2e9e0; }
 

@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-2"
+REVISION = "20261122-3"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -407,7 +407,7 @@ def render_page(slug, body, *, locale="ar", subsection_slug=None, subsection_tit
     if is_home:
         footer = render_template("home-footer", locale, root)
     else:
-        footer = f'<footer class="section-footer"><p>{escape(labels["independent"])}</p></footer>'
+        footer = f'<footer class="section-footer"><p>{escape(labels["preview_identity"])}</p></footer>'
     shortcut = "" if slug == "ask" else f'<a class="ask-shortcut" href="{base}ask/" aria-label="{escape(labels["ask"])}">{icon("ask")}</a>'
     main_class = "launcher-shell" if is_home else "section-main"
     return f'''<!doctype html>

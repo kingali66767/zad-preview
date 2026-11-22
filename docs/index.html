@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="زاد، منصة عربية مستقلة للتوعية الدينية. القرآن الكريم والأحاديث الصحيحة والدروس ومواقيت الصلاة.">
+<meta name="description" content="زاد، منصة للتوعية الدينية لضباط وأفراد وزارة الدفاع. القرآن الكريم والأحاديث الصحيحة والدروس ومواقيت الصلاة.">
 <meta name="theme-color" content="#342218">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
@@ -13,12 +13,12 @@
 <link rel="alternate" hreflang="ur" href="ur/">
 <link rel="alternate" hreflang="zh" href="zh/">
 <link rel="alternate" hreflang="fr" href="fr/">
-<link rel="stylesheet" href="assets/style.css?v=20261122-2">
-<link rel="stylesheet" href="assets/discover.css?v=20261122-2">
-<link rel="stylesheet" href="assets/section-icons.css?v=20261122-2">
-<link rel="stylesheet" href="assets/glass.css?v=20261122-2">
-<link rel="stylesheet" href="assets/sections.css?v=20261122-2">
-<script src="assets/site.js?v=20261122-2" defer></script>
+<link rel="stylesheet" href="assets/style.css?v=20261122-3">
+<link rel="stylesheet" href="assets/discover.css?v=20261122-3">
+<link rel="stylesheet" href="assets/section-icons.css?v=20261122-3">
+<link rel="stylesheet" href="assets/glass.css?v=20261122-3">
+<link rel="stylesheet" href="assets/sections.css?v=20261122-3">
+<script src="assets/site.js?v=20261122-3" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">تجاوز إلى المحتوى</a>
@@ -66,7 +66,7 @@
 <input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="سؤالك دون بيانات شخصية">
 <button class="button gold" id="home-ask-submit" type="submit" disabled>ابحث</button>
 </form>
-<p id="home-ask-source">قد تُرسل كلمات السؤال إلى البحث الرسمي في موقع ابن باز.</p>
+<p id="home-ask-source">اطرح سؤالًا عامًا دون بيانات شخصية أو معلومات عن وحدتك. قد تُرسل كلمات السؤال إلى البحث في موقع ابن باز.</p>
 <p id="home-ask-status" role="status"></p>
 <noscript><p class="home-ask-noscript"><a href="ask/">افتح صفحة اسأل زاد</a></p></noscript>
 </div>
@@ -77,10 +77,14 @@
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
-<span class="route-brand hero-identity-mark" aria-hidden="true"><span class="zad-icon" data-icon="brand"></span></span>
+<span class="route-brand hero-identity-mark" aria-hidden="true"><span class="zad-icon" data-icon="ministry-audience"></span></span>
 <p class="hero-identity-name"><strong>زاد</strong><small>منصة التوعية الدينية</small></p>
 </div>
 <h1 id="home-heading">زَادُكَ مِنَ الْعِلْمِ، <em>وَنُورُكَ بِالْمَعْرِفَةِ.</em></h1>
+<div class="hero-audience">
+<strong>فرع الشؤون الدينية</strong>
+<span>خدمة توعوية لضباط وأفراد وزارة الدفاع</span>
+</div>
 </div>
 <p class="intro">مساحة عربية للعلم الشرعي النافع، تجمع القرآن الكريم والأحاديث الصحيحة والمواد التوعوية الموثّقة في مكان واحد.</p>
 <div class="actions"><a class="button gold" href="#site-tour">ابدأ الجولة</a></div>
@@ -95,23 +99,27 @@
 </div>
 <div class="site-tour-stops">
 <a class="site-tour-card" href="quran/" aria-labelledby="tour-read-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="quran"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-explore"></span></span>
 <div>
 <h3>اقرأ وتحقّق</h3>
 <p>اقرأ في القرآن والحديث والسيرة، وافتح المصدر المرفق بالمادة لتطّلع على النصّ أو الفتوى في سياقها.</p>
 <span class="site-tour-action" id="tour-read-action">افتح القرآن الكريم</span>
 </div>
 </a>
-<a class="site-tour-card" href="worship/" aria-labelledby="tour-worship-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="worship"></span></span>
+<section class="site-tour-card" aria-labelledby="tour-practice-heading">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-practice"></span></span>
 <div>
-<h3>عبادتك اليومية</h3>
-<p>راجع صفة الوضوء والصلاة، واقرأ أذكار الصباح والمساء، أو اعرض مواقيت الصلاة في مدينتك السعودية.</p>
-<span class="site-tour-action" id="tour-worship-action">افتح الوضوء والصلاة</span>
+<h3 id="tour-practice-heading">عبادتك اليومية</h3>
+<p>راجع صفة الوضوء والصلاة، واعرض المواقيت في مدينتك السعودية، واقرأ أذكار السفر عند التنقّل.</p>
+<div class="site-tour-actions">
+<a class="site-tour-action" href="worship/"><span class="zad-icon" data-icon="worship" aria-hidden="true"></span>الوضوء والصلاة</a>
+<a class="site-tour-action" href="prayer/"><span class="zad-icon" data-icon="prayer" aria-hidden="true"></span>مواقيت الصلاة</a>
+<a class="site-tour-action" href="adhkar/travel/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>أذكار السفر</a>
 </div>
-</a>
+</div>
+</section>
 <section class="site-tour-card">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
 <h3>اسأل أو تعرّف على الإسلام</h3>
 <p>ابحث عن جواب موثّق في «اسأل زاد». وإذا كنت تتعرّف على الإسلام، فالدليل يشرح مبادئه وخطواته الأولى بلغات متعددة.</p>
@@ -127,7 +135,7 @@
 <footer id="site-footer" class="section-footer home-footer">
 <div class="wrap home-footer-inner">
 <div class="home-footer-info">
-<p>زاد · مبادرة توعوية مستقلة غير رسمية</p>
+<p>زاد · النسخة التجريبية</p>
 <dl class="home-footer-credits">
 <div><dt>البرمجة</dt><dd>رقيب أول / علي بن محمد القرني</dd></div>
 <div><dt>الإشراف</dt><dd>المقدم / سعود ال خالد</dd></div>

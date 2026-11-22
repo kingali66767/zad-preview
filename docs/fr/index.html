@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zad est une plateforme indépendante d’éducation islamique proposant le Coran, des hadiths authentiques, des guides et les horaires de prière.">
+<meta name="description" content="Zad propose aux officiers, sous-officiers et militaires du rang du ministère saoudien de la Défense le Coran, des hadiths authentiques et les horaires de prière.">
 <meta name="theme-color" content="#342218">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
@@ -13,13 +13,13 @@
 <link rel="alternate" hreflang="ur" href="../ur/">
 <link rel="alternate" hreflang="zh" href="../zh/">
 <link rel="alternate" hreflang="fr" href="../fr/">
-<link rel="stylesheet" href="../assets/style.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/discover.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/glass.css?v=20261122-2">
-<link rel="stylesheet" href="../assets/sections.css?v=20261122-2">
-<script src="../assets/locales/fr.js?v=20261122-2" defer></script>
-<script src="../assets/site.js?v=20261122-2" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/discover.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/glass.css?v=20261122-3">
+<link rel="stylesheet" href="../assets/sections.css?v=20261122-3">
+<script src="../assets/locales/fr.js?v=20261122-3" defer></script>
+<script src="../assets/site.js?v=20261122-3" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">Aller au contenu</a>
@@ -67,7 +67,7 @@
 <input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="Votre question, sans données personnelles">
 <button class="button gold" id="home-ask-submit" type="submit" disabled>Rechercher</button>
 </form>
-<p id="home-ask-source">Les mots-clés de votre question peuvent être transmis au moteur de recherche du site officiel d’Ibn Baz.</p>
+<p id="home-ask-source">Posez une question générale sans données personnelles ni détails sur votre unité. Les mots-clés peuvent être envoyés au site d’Ibn Baz pour la recherche.</p>
 <p id="home-ask-status" role="status"></p>
 <noscript><p class="home-ask-noscript"><a href="ask/">Ouvrir la page de questions</a></p></noscript>
 </div>
@@ -78,10 +78,14 @@
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
-<span class="route-brand hero-identity-mark" aria-hidden="true"><span class="zad-icon" data-icon="brand"></span></span>
+<span class="route-brand hero-identity-mark" aria-hidden="true"><span class="zad-icon" data-icon="ministry-audience"></span></span>
 <p class="hero-identity-name"><strong>Zad</strong><small>Plateforme d’éducation islamique</small></p>
 </div>
 <h1 id="home-heading">Le savoir pour vous nourrir, <em>la compréhension pour vous éclairer.</em></h1>
+<div class="hero-audience">
+<strong>Service des affaires religieuses</strong>
+<span>Ressources islamiques pour les officiers, sous-officiers et militaires du rang du ministère saoudien de la Défense</span>
+</div>
 </div>
 <p class="intro">Un espace pour apprendre l’islam à partir du Coran, de hadiths authentiques et de ressources accompagnées de références.</p>
 <div class="actions"><a class="button gold" href="#site-tour">Commencer la visite</a></div>
@@ -96,23 +100,27 @@
 </div>
 <div class="site-tour-stops">
 <a class="site-tour-card" href="quran/" aria-labelledby="tour-read-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="quran"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-explore"></span></span>
 <div>
 <h3>Lire et vérifier les sources</h3>
 <p>Explorez le Coran, les hadiths et la vie du Prophète. Ouvrez la référence pour lire le texte ou l’avis juridique dans son contexte.</p>
 <span class="site-tour-action" id="tour-read-action">Ouvrir la rubrique Coran</span>
 </div>
 </a>
-<a class="site-tour-card" href="worship/" aria-labelledby="tour-worship-action">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="worship"></span></span>
+<section class="site-tour-card" aria-labelledby="tour-practice-heading">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-practice"></span></span>
 <div>
-<h3>Le culte au quotidien</h3>
-<p>Revoyez les ablutions et la prière, lisez les invocations du matin et du soir ou consultez les horaires de votre ville en Arabie saoudite.</p>
-<span class="site-tour-action" id="tour-worship-action">Ouvrir la rubrique Ablutions et prière</span>
+<h3 id="tour-practice-heading">Le culte au quotidien</h3>
+<p>Revoyez les ablutions et la prière, consultez les horaires d’une ville saoudienne et retrouvez les invocations du voyage.</p>
+<div class="site-tour-actions">
+<a class="site-tour-action" href="worship/"><span class="zad-icon" data-icon="worship" aria-hidden="true"></span>Ablutions et prière</a>
+<a class="site-tour-action" href="prayer/"><span class="zad-icon" data-icon="prayer" aria-hidden="true"></span>Horaires de prière</a>
+<a class="site-tour-action" href="adhkar/travel/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>Invocations du voyage</a>
 </div>
-</a>
+</div>
+</section>
 <section class="site-tour-card">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
 <h3>Poser une question ou découvrir l’islam</h3>
 <p>Trouvez des réponses référencées dans la rubrique Questions. Le guide multilingue présente les bases de l’islam et les premières étapes.</p>
@@ -128,7 +136,7 @@
 <footer id="site-footer" class="section-footer home-footer">
 <div class="wrap home-footer-inner">
 <div class="home-footer-info">
-<p>Zad · Initiative éducative indépendante et non officielle</p>
+<p>Zad · Version de démonstration</p>
 <dl class="home-footer-credits">
 <div><dt>Développement</dt><dd>Sergent-chef / Ali ben Mohammed Al-Qarni</dd></div>
 <div><dt>Supervision</dt><dd>Lieutenant-colonel / Saoud Al Khalid</dd></div>

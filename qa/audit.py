@@ -127,7 +127,9 @@ def verify_homepage(page):
     identity = hero.locator(".hero-identity")
     expect(identity.locator(".hero-identity-name strong")).to_have_text("زاد")
     expect(identity.locator(".hero-identity-name small")).to_have_text("منصة التوعية الدينية")
-    expect(identity.locator('[data-icon="brand"]')).to_be_visible()
+    expect(identity.locator('[data-icon="ministry-audience"]')).to_be_visible()
+    expect(identity.locator(".hero-audience strong")).to_have_text("فرع الشؤون الدينية")
+    expect(identity.locator(".hero-audience span")).to_have_text("خدمة توعوية لضباط وأفراد وزارة الدفاع")
     headline = identity.get_by_role("heading", level=1)
     expect(headline).to_have_text("زَادُكَ مِنَ الْعِلْمِ، وَنُورُكَ بِالْمَعْرِفَةِ.")
     photo = hero.locator(".hero-image")
@@ -165,7 +167,7 @@ def verify_homepage(page):
         expect(body).to_be_visible()
         assert all(re.search(r"[\u0621-\u064a]", text.inner_text()) for text in (heading, body))
     assert tour.get_by_role("link").evaluate_all("links => links.map(link => link.getAttribute('href'))") == [
-        "quran/", "worship/", "ask/", "discover/"
+        "quran/", "worship/", "prayer/", "adhkar/travel/", "ask/", "discover/"
     ]
     expect(page.locator("#sections, #section-launcher, .launcher-link, " +
                         ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
