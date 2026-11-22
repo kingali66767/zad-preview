@@ -132,11 +132,8 @@ def verify_homepage(page):
         expect(brand_mark).to_be_visible()
         assert brand_mark.evaluate("""element => getComputedStyle(element, '::before').backgroundImage
             .includes('/assets/ministry-of-defense-logo.jpg')""")
-    expect(identity.locator(".hero-audience strong")).to_have_text("فرع الشؤون الدينية")
-    expect(identity.locator(".hero-audience span")).to_have_text("خدمة توعوية لضباط وأفراد وزارة الدفاع")
-    ministry_logo = identity.get_by_role("img", name="شعار وزارة الدفاع السعودية", exact=True)
-    expect(ministry_logo).to_be_visible()
-    assert ministry_logo.evaluate("async image => { await image.decode(); return image.naturalWidth === 1200; }")
+    expect(hero.locator(".hero-audience")).to_have_count(0)
+    expect(hero).not_to_contain_text("فرع الشؤون الدينية")
     for layer in (page.locator("body"), hero):
         assert layer.evaluate("""element => getComputedStyle(element, '::before').backgroundImage
             .includes('/assets/ministry-of-defense-logo.jpg')""")

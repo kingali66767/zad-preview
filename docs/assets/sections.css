@@ -646,47 +646,6 @@ body[data-page="home"] .route-top #nav {
   font-size: .86rem;
 }
 
-.hero-audience {
-  display: grid;
-  align-items: center;
-  gap: 10px 14px;
-  margin-block-start: 13px;
-  padding: 9px 12px;
-  border: 1px solid var(--line);
-  border-inline-start: 3px solid #00a05a;
-  border-radius: 9px;
-  background: var(--white);
-  color: var(--muted);
-  font-size: .875rem;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.hero-audience-copy {
-  display: grid;
-  gap: 3px;
-  min-inline-size: 0;
-}
-
-.hero-audience strong { color: var(--brand-dark); }
-
-.hero-audience-logo {
-  display: block;
-  justify-self: center;
-  inline-size: min(100%, 13rem);
-  block-size: auto;
-  aspect-ratio: 8 / 3;
-  object-fit: cover;
-  object-position: center 37%;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--white);
-}
-
-@container (min-width: 25rem) {
-  .hero-audience { grid-template-columns: minmax(0, 1fr) min(40%, 13rem); }
-}
-
 @media (prefers-reduced-transparency: reduce) {
   .hero-identity { background: var(--white); }
 }
