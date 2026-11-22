@@ -13,13 +13,13 @@
 <link rel="alternate" hreflang="ur" href="../ur/">
 <link rel="alternate" hreflang="zh" href="../zh/">
 <link rel="alternate" hreflang="fr" href="../fr/">
-<link rel="stylesheet" href="../assets/style.css?v=20261122-6">
-<link rel="stylesheet" href="../assets/discover.css?v=20261122-6">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261122-6">
-<link rel="stylesheet" href="../assets/glass.css?v=20261122-6">
-<link rel="stylesheet" href="../assets/sections.css?v=20261122-6">
-<script src="../assets/locales/en.js?v=20261122-6" defer></script>
-<script src="../assets/site.js?v=20261122-6" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261122-7">
+<link rel="stylesheet" href="../assets/discover.css?v=20261122-7">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261122-7">
+<link rel="stylesheet" href="../assets/glass.css?v=20261122-7">
+<link rel="stylesheet" href="../assets/sections.css?v=20261122-7">
+<script src="../assets/locales/en.js?v=20261122-7" defer></script>
+<script src="../assets/site.js?v=20261122-7" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">Skip to content</a>
@@ -93,7 +93,30 @@
 <p class="intro">A place to learn about Islam through the Qur’an, authentic hadith and materials with references.</p>
 <div class="actions"><a class="button gold" href="#site-tour">Start the tour</a></div>
 </div>
-<div class="hero-image" role="img" aria-label="Sunlight illuminating Islamic arches"></div>
+<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="Today’s date is unavailable in this browser.">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading">Daily calendar</h2>
+<p class="daily-calendar-timezone">Saudi Arabia time</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<p class="daily-calendar-weekday" data-calendar-weekday></p>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>Hijri · Umm al-Qura</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>The Umm al-Qura calendar is unavailable in this browser.</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>Gregorian</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">Enable JavaScript to see today’s date.</p></noscript>
+</section>
 </div>
 </section>
 <section class="wrap site-tour" id="site-tour" aria-labelledby="site-tour-heading" tabindex="-1">

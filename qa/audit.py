@@ -146,17 +146,14 @@ def verify_homepage(page):
         return style.color === 'rgb(41, 80, 77)' && style.fontFamily.includes('IBM Plex Sans Arabic');
     }""")
     expect(headline).to_have_text("زَادُكَ مِنَ الْعِلْمِ، وَنُورُكَ بِالْمَعْرِفَةِ.")
-    photo = hero.locator(".hero-image")
-    expect(photo).to_be_visible()
-    expect(photo).to_have_accessible_name(re.compile("أقواس"))
-    assert photo.evaluate("""async element => {
-        const url = new URL("assets/hero.webp", location.href);
-        if (!getComputedStyle(element).backgroundImage.includes(url.href)) return false;
-        const image = new Image();
-        image.src = url;
-        await image.decode();
-        return image.naturalWidth > 0 && image.naturalHeight > 0;
-    }"""), "The original hero photograph did not render"
+    calendar = hero.get_by_role("region", name="التقويم اليومي")
+    expect(calendar.locator("[data-calendar-weekday]")).to_have_text(re.compile(r"\S"))
+    gregorian = calendar.locator("[data-calendar-gregorian]")
+    hijri = calendar.locator("[data-calendar-hijri]")
+    expect(gregorian).to_have_attribute("datetime", re.compile(r"^\d{4}-\d{2}-\d{2}$"))
+    expect(hijri).to_have_attribute("datetime", gregorian.get_attribute("datetime"))
+    expect(hijri).to_be_visible()
+    expect(hero.locator(".hero-image")).to_have_count(0)
     action = hero.get_by_role("link", name="ابدأ الجولة", exact=True)
     expect(action).to_be_visible()
     expect(action).to_have_attribute("href", "#site-tour")
@@ -505,7 +502,7 @@ def browser_checks(origin, output, live):
 
 def load_checks(port):
     assets = ["/", "/assets/style.css", "/assets/content.js", "/assets/site.js",
-              "/assets/ask.js", "/assets/hero.webp", "/assets/discover.css", "/assets/library-content.js"]
+              "/assets/ask.js", "/assets/ministry-of-defense-logo.jpg", "/assets/discover.css", "/assets/library-content.js"]
     results = []
     for clients in (10, 30, 60, 120, 240):
         start_gate = threading.Barrier(clients)

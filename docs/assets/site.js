@@ -244,6 +244,72 @@ function handleFragment() {
 window.addEventListener("hashchange", handleFragment);
 handleFragment();
 
+function initializeDailyCalendar(calendar) {
+  const dates = calendar.querySelector("[data-calendar-dates]");
+  const status = calendar.querySelector("[data-calendar-status]");
+  const weekday = calendar.querySelector("[data-calendar-weekday]");
+  const gregorian = calendar.querySelector("[data-calendar-gregorian]");
+  const hijri = calendar.querySelector("[data-calendar-hijri]");
+  const hijriFallback = calendar.querySelector("[data-calendar-hijri-fallback]");
+  const locale = siteLocale === "ar" ? "ar-SA" : siteLocale;
+  const timeZone = "Asia/Riyadh";
+  const dateOptions = {timeZone, day: "numeric", month: "long", year: "numeric"};
+  const hijriCalendar = "islamic-umalqura";
+
+  let hijriFormat;
+  try {
+    const candidate = new Intl.DateTimeFormat(locale, {...dateOptions, calendar: hijriCalendar});
+    if (candidate.resolvedOptions().calendar === hijriCalendar) hijriFormat = candidate;
+  } catch {
+    // Keep the Gregorian date available when the browser cannot format Umm al-Qura.
+  }
+
+  try {
+    const weekdayFormat = new Intl.DateTimeFormat(locale, {timeZone, weekday: "long", calendar: "gregory"});
+    const gregorianFormat = new Intl.DateTimeFormat(locale, {...dateOptions, calendar: "gregory"});
+    const gregorianOptions = gregorianFormat.resolvedOptions();
+    if (gregorianOptions.calendar !== "gregory" || gregorianOptions.timeZone !== timeZone) {
+      throw new Error("The Gregorian calendar or Saudi time zone is unavailable");
+    }
+    const isoFormat = new Intl.DateTimeFormat("en", {
+      timeZone, calendar: "gregory", numberingSystem: "latn", day: "2-digit", month: "2-digit", year: "numeric"
+    });
+
+    function renderToday() {
+      const now = new Date();
+      const parts = Object.fromEntries(isoFormat.formatToParts(now).map(({type, value}) => [type, value]));
+      const date = `${parts.year.padStart(4, "0")}-${parts.month}-${parts.day}`;
+      if (gregorian.dateTime === date) return;
+
+      weekday.textContent = weekdayFormat.format(now);
+      gregorian.textContent = gregorianFormat.format(now);
+      gregorian.dateTime = date;
+      if (hijriFormat) {
+        hijri.textContent = hijriFormat.format(now);
+        hijri.dateTime = date;
+      }
+      hijri.hidden = !hijriFormat;
+      hijriFallback.hidden = !!hijriFormat;
+      dates.hidden = false;
+      status.hidden = true;
+    }
+
+    renderToday();
+    window.setInterval(renderToday, 60_000);
+    window.addEventListener("pageshow", renderToday);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) renderToday();
+    });
+  } catch {
+    dates.hidden = true;
+    status.textContent = calendar.dataset.calendarUnavailable;
+    status.hidden = false;
+  }
+}
+
+const dailyCalendar = document.querySelector("[data-daily-calendar]");
+if (dailyCalendar) initializeDailyCalendar(dailyCalendar);
+
 const askDraftKey = "zad-ask-draft-v1";
 const homeAskForm = document.querySelector("#home-ask-form");
 if (homeAskForm) {

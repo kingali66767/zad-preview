@@ -35,7 +35,13 @@ slogan_first	زَادُكَ مِنَ الْعِلْمِ،	Knowledge to sustain y
 slogan_second	وَنُورُكَ بِالْمَعْرِفَةِ.	understanding to light your way.	اور معرفت آپ کی روشنی۔	以理解照亮前路。	la compréhension pour vous éclairer.
 hero_intro	مساحة عربية للعلم الشرعي النافع، تجمع القرآن الكريم والأحاديث الصحيحة والمواد التوعوية الموثّقة في مكان واحد.	A place to learn about Islam through the Qur’an, authentic hadith and materials with references.	اسلامی علم حاصل کرنے کی جگہ، جہاں قرآنِ کریم، صحیح احادیث اور حوالوں کے ساتھ رہنمائی ایک ہی جگہ دستیاب ہے۔	在这里学习伊斯兰知识，阅读《古兰经》、可靠圣训和附有出处的学习资料。	Un espace pour apprendre l’islam à partir du Coran, de hadiths authentiques et de ressources accompagnées de références.
 tour_start	ابدأ الجولة	Start the tour	سیر شروع کریں	开始导览	Commencer la visite
-hero_alt	أقواس معمارية إسلامية يضيئها ضوء الشمس	Sunlight illuminating Islamic arches	اسلامی طرزِ تعمیر کی محرابوں پر دھوپ	阳光照亮伊斯兰建筑的拱门	Arches d’architecture islamique éclairées par le soleil
+calendar_heading	التقويم اليومي	Daily calendar	روزانہ تقویم	今日历法	Calendrier du jour
+calendar_timezone	بتوقيت السعودية	Saudi Arabia time	سعودی عرب کے وقت کے مطابق	沙特阿拉伯时间	Heure d’Arabie saoudite
+calendar_hijri	الهجري · أم القرى	Hijri · Umm al-Qura	ہجری · ام القریٰ	伊斯兰历 · 乌姆古拉	Hégirien · Oumm al-Qoura
+calendar_gregorian	الميلادي	Gregorian	عیسوی	公历	Grégorien
+calendar_nojs	فعّل جافاسكربت لعرض تاريخ اليوم.	Enable JavaScript to see today’s date.	آج کی تاریخ دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔	启用 JavaScript 查看今天的日期。	Activez JavaScript pour afficher la date du jour.
+calendar_hijri_unavailable	تقويم أم القرى غير متاح في هذا المتصفح.	The Umm al-Qura calendar is unavailable in this browser.	اس براؤزر میں ام القریٰ تقویم دستیاب نہیں ہے۔	此浏览器不支持乌姆古拉历法。	Le calendrier Oumm al-Qoura est indisponible dans ce navigateur.
+calendar_unavailable	تعذّر عرض تاريخ اليوم في هذا المتصفح.	Today’s date is unavailable in this browser.	اس براؤزر میں آج کی تاریخ دکھائی نہیں جا سکی۔	此浏览器无法显示今天的日期。	La date du jour est indisponible dans ce navigateur.
 tour_heading	جولة في زاد	A tour of Zad	زاد کی سیر	Zad 导览	Visite de Zad
 tour_intro	اختر من الجولة ما تريد أن تقرأه أو تتعلّمه اليوم.	Choose what you’d like to read or learn today.	منتخب کریں کہ آج آپ کیا پڑھنا یا سیکھنا چاہتے ہیں۔	选择今天想阅读或学习的内容。	Choisissez ce que vous souhaitez lire ou apprendre aujourd’hui.
 tour_read_title	اقرأ وتحقّق	Read and check the sources	پڑھیں اور حوالہ دیکھیں	阅读与查证	Lire et vérifier les sources

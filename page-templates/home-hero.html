@@ -18,6 +18,29 @@
 <p class="intro">{{t:hero_intro}}</p>
 <div class="actions"><a class="button gold" href="#site-tour">{{t:tour_start}}</a></div>
 </div>
-<div class="hero-image" role="img" aria-label="{{t:hero_alt}}"></div>
+<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="{{t:calendar_unavailable}}">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading">{{t:calendar_heading}}</h2>
+<p class="daily-calendar-timezone">{{t:calendar_timezone}}</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<p class="daily-calendar-weekday" data-calendar-weekday></p>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>{{t:calendar_hijri}}</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>{{t:calendar_hijri_unavailable}}</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>{{t:calendar_gregorian}}</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">{{t:calendar_nojs}}</p></noscript>
+</section>
 </div>
 </section>

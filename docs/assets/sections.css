@@ -472,6 +472,99 @@ body[data-page="home"] .route-top #nav {
   inline-size: min(73rem, calc(100% - 32px));
 }
 
+.daily-calendar {
+  container-type: inline-size;
+  min-inline-size: 0;
+  padding: clamp(18px, 3.2vw, 46px);
+  border: 1px solid var(--line);
+  border-radius: clamp(18px, 2.5vw, 30px);
+  background: var(--white);
+  box-shadow: var(--glass-shadow);
+}
+
+.daily-calendar-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 18px);
+}
+
+.daily-calendar-head h2 {
+  margin: 0;
+  color: var(--brand-dark);
+  font-size: clamp(1.26rem, 2.3vw, 1.85rem);
+  line-height: 1.35;
+}
+
+.daily-calendar-timezone {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.daily-calendar-status {
+  margin: 14px 0 0;
+  color: var(--muted);
+}
+
+.daily-calendar-dates {
+  margin-block-start: clamp(14px, 3vw, 27px);
+  padding-block-start: clamp(12px, 2.4vw, 22px);
+  border-block-start: 1px solid var(--line);
+}
+
+.daily-calendar-weekday {
+  margin: 0 0 clamp(12px, 2.3vw, 22px);
+  color: var(--accent);
+  font-size: clamp(1.95rem, 4.6vw, 3.45rem);
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.daily-calendar-formats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 1.6vw, 15px);
+  margin: 0;
+}
+
+.daily-calendar-date {
+  min-inline-size: 0;
+  padding: clamp(10px, 1.6vw, 18px);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+
+.daily-calendar-date:first-child {
+  background: var(--green-tint);
+}
+
+.daily-calendar-date dt {
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.daily-calendar-date dd {
+  margin: 4px 0 0;
+  color: var(--brand-dark);
+  font-size: clamp(1.03rem, 1.7vw, 1.32rem);
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.daily-calendar-date dd p {
+  margin: 0;
+  font-size: .91rem;
+  font-weight: 500;
+}
+
+@container (max-width: 17.5rem) {
+  .daily-calendar-formats { grid-template-columns: minmax(0, 1fr); }
+}
+
 .hero-identity {
   container-type: inline-size;
   position: relative;

@@ -13,12 +13,12 @@
 <link rel="alternate" hreflang="ur" href="ur/">
 <link rel="alternate" hreflang="zh" href="zh/">
 <link rel="alternate" hreflang="fr" href="fr/">
-<link rel="stylesheet" href="assets/style.css?v=20261122-6">
-<link rel="stylesheet" href="assets/discover.css?v=20261122-6">
-<link rel="stylesheet" href="assets/section-icons.css?v=20261122-6">
-<link rel="stylesheet" href="assets/glass.css?v=20261122-6">
-<link rel="stylesheet" href="assets/sections.css?v=20261122-6">
-<script src="assets/site.js?v=20261122-6" defer></script>
+<link rel="stylesheet" href="assets/style.css?v=20261122-7">
+<link rel="stylesheet" href="assets/discover.css?v=20261122-7">
+<link rel="stylesheet" href="assets/section-icons.css?v=20261122-7">
+<link rel="stylesheet" href="assets/glass.css?v=20261122-7">
+<link rel="stylesheet" href="assets/sections.css?v=20261122-7">
+<script src="assets/site.js?v=20261122-7" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">تجاوز إلى المحتوى</a>
@@ -92,7 +92,30 @@
 <p class="intro">مساحة عربية للعلم الشرعي النافع، تجمع القرآن الكريم والأحاديث الصحيحة والمواد التوعوية الموثّقة في مكان واحد.</p>
 <div class="actions"><a class="button gold" href="#site-tour">ابدأ الجولة</a></div>
 </div>
-<div class="hero-image" role="img" aria-label="أقواس معمارية إسلامية يضيئها ضوء الشمس"></div>
+<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="تعذّر عرض تاريخ اليوم في هذا المتصفح.">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading">التقويم اليومي</h2>
+<p class="daily-calendar-timezone">بتوقيت السعودية</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<p class="daily-calendar-weekday" data-calendar-weekday></p>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>الهجري · أم القرى</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>تقويم أم القرى غير متاح في هذا المتصفح.</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>الميلادي</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">فعّل جافاسكربت لعرض تاريخ اليوم.</p></noscript>
+</section>
 </div>
 </section>
 <section class="wrap site-tour" id="site-tour" aria-labelledby="site-tour-heading" tabindex="-1">
