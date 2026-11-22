@@ -145,7 +145,20 @@ def verify_homepage(page):
         const style = getComputedStyle(element);
         return style.color === 'rgb(41, 80, 77)' && style.fontFamily.includes('IBM Plex Sans Arabic');
     }""")
-    expect(headline).to_have_text("زَادُكَ مِنَ الْعِلْمِ، وَنُورُكَ بِالْمَعْرِفَةِ.")
+    expect(headline).to_have_text("زاد منصة التوعية الدينية")
+    verse = identity.locator(".hero-verse blockquote")
+    expect(verse).to_have_text("﴿وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم مِّن قُوَّةٍ﴾")
+    expect(verse).to_have_attribute("lang", "ar")
+    expect(verse).to_have_attribute("dir", "rtl")
+    expect(identity.get_by_role("link", name="سورة الأنفال، الآية ٦٠")).to_have_attribute("href", "https://quran.com/8/60")
+    assert identity.locator(".hero-verse").evaluate("""async frame => {
+        const url = new URL('assets/bradley-backdrop.webp', location.href);
+        if (!getComputedStyle(frame).backgroundImage.includes(url.href)) return false;
+        const image = new Image();
+        image.src = url;
+        await image.decode();
+        return image.naturalWidth > 0;
+    }""")
     calendar = hero.get_by_role("region", name="التقويم اليومي")
     expect(calendar.locator("[data-calendar-weekday]")).to_have_text(re.compile(r"\S"))
     gregorian = calendar.locator("[data-calendar-gregorian]")

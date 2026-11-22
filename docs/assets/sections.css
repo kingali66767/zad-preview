@@ -163,11 +163,6 @@ body[data-page] {
   .site-language > summary { padding-inline: 6px; font-size: .78rem; }
 }
 
-html:not([lang="ar"]) .hero-identity h1 {
-  font-size: clamp(1.25rem, 6.8cqi, 2.45rem);
-  line-height: 1.35;
-}
-
 html:not([lang="ar"]) #home-ask-heading { white-space: normal; }
 html[lang="zh"] { --heading-font: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
 html[lang="ur"] body { font-family: "Noto Naskh Arabic", Tajawal, Tahoma, sans-serif; }
@@ -609,17 +604,50 @@ body[data-page="home"] .route-top #nav {
   line-height: 1.35;
 }
 
-.hero-identity h1 {
+.hero-verse {
+  position: relative;
   margin: 0;
-  border-block-start: 1px solid var(--line);
-  padding-block-start: 12px;
-  font-size: clamp(1.2rem, 3.1vw, 2.85rem);
-  font-size: clamp(1.15rem, 9.15cqi, 2.85rem);
-  line-height: 1.5;
+  padding: clamp(15px, 5cqi, 25px) clamp(12px, 3cqi, 20px);
+  border: 1px solid #8cb29f;
+  border-radius: 12px;
+  background: linear-gradient(#ffffffa6, #ffffffbc), url("bradley-backdrop.webp") center / contain no-repeat, var(--white);
+  text-align: center;
+  box-shadow: inset 0 0 0 3px var(--white);
 }
 
-html[lang="ar"] .hero-identity h1 {
-  font-size: clamp(1rem, 8cqi, 2.85rem);
+.hero-verse::before {
+  position: absolute;
+  inset-block-start: -5px;
+  inset-inline: 0;
+  inline-size: 9px;
+  block-size: 9px;
+  margin-inline: auto;
+  border: 1px solid #8cb29f;
+  background: var(--white);
+  transform: rotate(45deg);
+  content: "";
+}
+
+.hero-verse blockquote {
+  margin: 0;
+  color: var(--accent);
+  font: 700 clamp(1.53rem, 7.5cqi, 2.65rem)/1.62 Amiri, 'IBM Plex Sans Arabic', serif;
+  text-shadow: 0 1px 4px var(--white);
+  text-wrap: balance;
+}
+
+.hero-verse blockquote p { margin: 0; }
+
+.hero-verse figcaption {
+  margin-block-start: 6px;
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.hero-verse figcaption a {
+  display: inline-block;
+  padding-block: 8px;
+  text-underline-offset: .2em;
 }
 
 .hero-audience {

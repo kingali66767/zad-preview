@@ -314,8 +314,7 @@ def guide_history(page):
 
 
 TRANSLATED_HEADINGS = {
-    "": {"en": "Knowledge to sustain you", "ur": "علم آپ کا زادِ راہ", "zh": "以知识充实自己",
-         "fr": "Le savoir pour vous nourrir", "ar": "زَادُكَ مِنَ الْعِلْمِ"},
+    "": {"en": "Zad", "ur": "زاد", "zh": "Zad", "fr": "Zad", "ar": "زاد"},
     "quran/": {"en": "Quran", "ur": "قرآن کریم", "zh": "古兰经", "fr": "Coran", "ar": "القرآن الكريم"},
     "adhkar/morning/": {"en": "Morning remembrances", "ur": "صبح کے اذکار", "zh": "晨间赞念",
                         "fr": "Rappels du matin", "ar": "أذكار الصباح"},
