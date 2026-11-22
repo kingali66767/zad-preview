@@ -167,9 +167,14 @@ def verify_homepage(page):
     expect(hijri).to_have_attribute("datetime", gregorian.get_attribute("datetime"))
     expect(hijri).to_be_visible()
     expect(hero.locator(".hero-image")).to_have_count(0)
-    action = hero.get_by_role("link", name="ابدأ الجولة", exact=True)
+    tour = page.locator("details#site-tour")
+    action = tour.locator(":scope > summary")
     expect(action).to_be_visible()
-    expect(action).to_have_attribute("href", "#site-tour")
+    expect(action).to_have_text("ابدأ الجولة")
+    expect(tour).not_to_have_attribute("open", "")
+    expect(tour.locator("#site-tour-heading")).to_be_hidden()
+    calendar_bounds = calendar.bounding_box()
+    assert calendar_bounds["y"] + calendar_bounds["height"] <= action.bounding_box()["y"], "The calendar must precede the tour control"
     form = page.locator("main #home-ask-form")
     field = form.locator("#home-ask-input")
     expect(form).to_be_visible()
@@ -177,20 +182,13 @@ def verify_homepage(page):
     expect(field).to_have_accessible_name(re.compile("سؤال"))
     assert field.get_attribute("name") is None, "Submitting without JavaScript must not put the question in a URL"
     expect(form.locator("#home-ask-submit")).to_be_enabled()
-    tour = page.locator("#site-tour")
-    expect(tour.get_by_role("heading", level=2)).to_be_visible()
-    assert hero.bounding_box()["y"] < tour.bounding_box()["y"], "The hero must appear above the tour"
     assert form.bounding_box()["y"] < tour.bounding_box()["y"], "The question form must appear above the tour"
     items = tour.locator(".site-tour-stops > .site-tour-card")
     expect(items).to_have_count(3)
     for item in items.all():
-        expect(item).to_be_visible()
-        heading = item.get_by_role("heading", level=3)
-        body = item.locator("p")
-        expect(heading).to_be_visible()
-        expect(body).to_be_visible()
-        assert all(re.search(r"[\u0621-\u064a]", text.inner_text()) for text in (heading, body))
-    assert tour.get_by_role("link").evaluate_all("links => links.map(link => link.getAttribute('href'))") == [
+        expect(item).to_be_hidden()
+        assert all(re.search(r"[\u0621-\u064a]", item.locator(selector).text_content()) for selector in ("h3", "p"))
+    assert tour.locator("a[href]").evaluate_all("links => links.map(link => link.getAttribute('href'))") == [
         "quran/", "worship/", "prayer/", "adhkar/travel/", "ask/", "discover/"
     ]
     expect(page.locator("#sections, #section-launcher, .launcher-link, " +

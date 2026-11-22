@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-10"
+REVISION = "20261122-11"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {

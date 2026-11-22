@@ -119,19 +119,21 @@ def verify_sections(page):
 def homepage_transitions(page):
     verify_homepage(page)
     home = page.url
-    page.locator('main .hero a[href="#site-tour"]').click()
+    tour = page.locator("details#site-tour")
+    toggle = tour.locator(":scope > summary")
+    toggle.press("Enter")
     expect(page).to_have_url(home + "#site-tour")
-    tour = page.locator("#site-tour")
-    expect(tour.get_by_role("heading", level=2)).to_be_in_viewport()
-    for label, route in (("افتح القرآن الكريم", "quran"), ("افتح الوضوء والصلاة", "worship"),
-                         ("اسأل زاد", "ask"), ("تعرّف على الإسلام", "discover")):
-        tour.get_by_role("link", name=label, exact=True).click()
+    expect(tour.locator("#site-tour-heading")).to_be_visible()
+    for route in ("quran", "worship", "prayer", "adhkar/travel", "ask", "discover"):
+        tour.locator(f'a[href="{route}/"]').click()
         expect(page).to_have_url(section_address(home, route))
         expect(page.locator("main h1")).to_be_visible()
         page.go_back(wait_until="domcontentloaded")
         expect(page).to_have_url(home + "#site-tour")
-    page.go_back(wait_until="domcontentloaded")
+        expect(tour).to_have_attribute("open", "")
+    toggle.click()
     expect(page).to_have_url(home)
+    expect(tour.locator("#site-tour-heading")).to_be_hidden()
     verify_home_menu(page, sections=SECTIONS)
 
 
@@ -216,7 +218,8 @@ def legacy_home_links(page):
     home = page.url
     page.goto(home + "#section-launcher", wait_until="domcontentloaded")
     expect(page).to_have_url(home + "#site-tour")
-    expect(page.locator("#site-tour")).to_be_in_viewport()
+    expect(page.locator("details#site-tour")).to_have_attribute("open", "")
+    expect(page.locator("#site-tour-heading")).to_be_in_viewport()
     page.goto(home + "#ask", wait_until="domcontentloaded")
     expect(page).to_have_url(section_address(home, "ask"))
     expect(page.locator("#ask-submit")).to_be_enabled()

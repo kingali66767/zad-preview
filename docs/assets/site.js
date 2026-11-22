@@ -207,11 +207,25 @@ if (contactLink && typeof zadContent !== "undefined" && zadContent.contactEmail)
   if (contactNote) contactNote.textContent = siteText("contact_live", "أرسل اقتراحًا لمادة جديدة أو نبّهنا إلى تصحيح في المحتوى.");
 }
 
+const siteTour = document.querySelector("#site-tour");
+siteTour?.addEventListener("toggle", () => {
+  if (siteTour.open && !location.hash) {
+    history.replaceState(history.state, "", "#site-tour");
+  } else if (!siteTour.open && location.hash === "#site-tour") {
+    history.replaceState(history.state, "", location.pathname + location.search);
+  }
+});
+
 function redirectLegacySection() {
   if (document.body.dataset.page !== "home") return false;
   const fragment = location.hash.slice(1);
   if (fragment === "section-launcher") {
     location.replace("#site-tour");
+    return true;
+  }
+  if (fragment === "site-tour" && siteTour) {
+    siteTour.open = true;
+    siteTour.scrollIntoView();
     return true;
   }
   const route = fragment.startsWith("discover-") ? "discover" : fragment;
