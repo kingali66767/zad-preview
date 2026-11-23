@@ -6,20 +6,22 @@
 <meta name="description" content="Zad 为沙特阿拉伯国防部军官和士兵提供伊斯兰学习资料，包括《古兰经》、可靠圣训和礼拜时间。">
 <meta name="theme-color" content="#ffffff">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.aladhan.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Zad | 伊斯兰知识平台</title>
 <link rel="alternate" hreflang="ar" href="../">
 <link rel="alternate" hreflang="en" href="../en/">
 <link rel="alternate" hreflang="ur" href="../ur/">
 <link rel="alternate" hreflang="zh" href="../zh/">
 <link rel="alternate" hreflang="fr" href="../fr/">
-<link rel="stylesheet" href="../assets/style.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/discover.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/glass.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/sections.css?v=20261123-1">
-<script src="../assets/locales/zh.js?v=20261123-1" defer></script>
-<script src="../assets/site.js?v=20261123-1" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/discover.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/glass.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/sections.css?v=20261123-2">
+<script src="../assets/locales/zh.js?v=20261123-2" defer></script>
+<script src="../assets/site.js?v=20261123-2" defer></script>
+<script src="../assets/locale-services.js?v=20261123-2" defer></script>
+<script src="../assets/prayer.js?v=20261123-2" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">跳至内容</a>
@@ -59,23 +61,74 @@
 </div>
 </header>
 <main id="main" class="launcher-shell">
-<section class="home-ask" aria-labelledby="home-ask-heading">
-<div class="wrap home-ask-panel">
-<h2 id="home-ask-heading"><span class="home-ask-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>问答助手</h2>
-<div class="home-ask-controls">
-<form id="home-ask-form" action="ask/" role="search" aria-labelledby="home-ask-heading">
-<label class="visually-hidden" for="home-ask-input">向 Zad 提问</label>
-<input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="请输入问题，勿填写个人信息">
-<button class="button gold" id="home-ask-submit" type="submit" disabled>搜索</button>
-</form>
-<p id="home-ask-source">请提出一般性问题，勿填写个人或所在部队的信息。问题中的关键词可能会发送至伊本·巴兹网站进行搜索。</p>
-<p id="home-ask-status" role="status"></p>
-<noscript><p class="home-ask-noscript"><a href="ask/">打开 Zad 问答</a></p></noscript>
-</div>
-</div>
-</section>
 <section id="home" class="hero" aria-labelledby="home-heading">
 <div class="wrap hero-grid">
+<div class="hero-calendar-panel">
+<section class="daily-calendar home-date-prayer" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="此浏览器无法显示今天的日期。">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading" class="daily-calendar-weekday" data-calendar-weekday>今天</h2>
+<p class="daily-calendar-timezone">沙特阿拉伯时间</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>伊斯兰历 · 乌姆古拉</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>此浏览器不支持显示按乌姆古拉计算的伊斯兰历日期。</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>公历</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">启用 JavaScript 查看今天的日期。</p></noscript>
+<section class="home-prayer" id="home-prayer" aria-labelledby="home-prayer-heading" data-prayer-widget data-prayer-compact>
+<div class="home-prayer-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>
+<h2 id="home-prayer-heading">礼拜时间</h2>
+</div>
+<form class="home-prayer-form" id="home-prayer-form">
+<label class="home-prayer-city" for="home-prayer-city">城市
+<select id="home-prayer-city" data-prayer-city>
+<option value="riyadh" data-latitude="24.7136" data-longitude="46.6753">利雅得</option>
+<option value="mecca" data-latitude="21.3891" data-longitude="39.8579">麦加</option>
+<option value="medina" data-latitude="24.4539" data-longitude="39.6142">麦地那</option>
+<option value="jeddah" data-latitude="21.4858" data-longitude="39.1925">吉达</option>
+<option value="dammam" data-latitude="26.4207" data-longitude="50.0888">达曼</option>
+<option value="khobar" data-latitude="26.2172" data-longitude="50.1971">胡拜尔</option>
+<option value="taif" data-latitude="21.2703" data-longitude="40.4158">塔伊夫</option>
+<option value="buraydah" data-latitude="26.3592" data-longitude="43.9818">布赖代</option>
+<option value="hail" data-latitude="27.5114" data-longitude="41.7208">哈伊勒</option>
+<option value="tabuk" data-latitude="28.3835" data-longitude="36.5662">塔布克</option>
+<option value="abha" data-latitude="18.2164" data-longitude="42.5053">艾卜哈</option>
+<option value="jazan" data-latitude="16.8892" data-longitude="42.5511">吉赞</option>
+<option value="najran" data-latitude="17.5656" data-longitude="44.2289">纳季兰</option>
+<option value="albaha" data-latitude="20.0000" data-longitude="41.4687">巴哈</option>
+<option value="sakaka" data-latitude="29.9697" data-longitude="40.2064">塞卡卡</option>
+<option value="arar" data-latitude="30.9753" data-longitude="41.0381">阿拉尔</option>
+<option value="hofuf" data-latitude="25.3833" data-longitude="49.5833">胡富夫</option>
+</select>
+</label>
+<button class="home-prayer-retry button green" data-prayer-retry type="submit" hidden>查看礼拜时间</button>
+</form>
+<ul class="home-prayer-times" id="home-prayer-times" data-prayer-times hidden></ul>
+<p class="home-prayer-status" id="home-prayer-status" data-prayer-status role="status">选择城市查看今日礼拜时间。</p>
+<p class="home-prayer-source">乌姆古拉计算法，采用沙特当地时间。 <a href="prayer/">如何计算礼拜时间？</a></p>
+<noscript><p class="home-prayer-status">请启用 JavaScript 查看礼拜时间。</p></noscript>
+</section>
+</section>
+<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
+<h2 id="adhkar-reminder-heading">别忘了日常赞念</h2>
+<div class="adhkar-reminder-links">
+<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>晨间赞念</a>
+<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>晚间赞念</a>
+</div>
+</section>
+</div>
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
@@ -91,43 +144,12 @@
 </div>
 <p class="intro">在这里学习伊斯兰知识，阅读《古兰经》、可靠圣训和附有出处的学习资料。</p>
 </div>
-<div class="hero-calendar-panel">
-<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="此浏览器无法显示今天的日期。">
-<div class="daily-calendar-head">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
-<div>
-<h2 id="daily-calendar-heading">今日历法</h2>
-<p class="daily-calendar-timezone">沙特阿拉伯时间</p>
-</div>
-</div>
-<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
-<div class="daily-calendar-dates" data-calendar-dates hidden>
-<p class="daily-calendar-weekday" data-calendar-weekday></p>
-<dl class="daily-calendar-formats">
-<div class="daily-calendar-date">
-<dt>伊斯兰历 · 乌姆古拉</dt>
-<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>此浏览器不支持乌姆古拉历法。</p></dd>
-</div>
-<div class="daily-calendar-date">
-<dt>公历</dt>
-<dd><time data-calendar-gregorian></time></dd>
-</div>
-</dl>
-</div>
-<noscript><p class="daily-calendar-status">启用 JavaScript 查看今天的日期。</p></noscript>
-</section>
-<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
-<h2 id="adhkar-reminder-heading">别忘了日常赞念</h2>
-<div class="adhkar-reminder-links">
-<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>晨间赞念</a>
-<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>晚间赞念</a>
-</div>
-</section>
+<div class="hero-military-shortcuts">
 <a class="military-shortcut" href="military/">
 <img class="military-shortcut-image" src="../assets/military-portrait.webp" alt="" width="320" height="384" decoding="async">
 <span class="military-shortcut-label">军人专栏</span>
 </a>
-<a class="military-shortcut" href="military/southern-border/">
+<a class="military-shortcut military-shortcut-border" href="military/southern-border/">
 <img class="military-shortcut-image" src="../assets/southern-border-photo.webp" alt="" width="500" height="288" decoding="async">
 <span class="military-shortcut-label">南部边境服役人员指南</span>
 </a>
@@ -168,11 +190,10 @@
 <section class="site-tour-card">
 <span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
-<h3>提问或认识伊斯兰</h3>
-<p>在 Zad 问答中查阅附有出处的回答。多语言指南介绍伊斯兰的基础知识和入门步骤。</p>
+<h3>认识伊斯兰</h3>
+<p>面向想了解伊斯兰的人和新穆斯林，介绍信仰见证、小净和礼拜。</p>
 <div class="site-tour-actions">
-<a class="site-tour-action" href="ask/">问答助手</a>
-<a class="site-tour-action" href="discover/">认识伊斯兰</a>
+<a class="site-tour-action" href="discover/">打开指南</a>
 </div>
 </div>
 </section>
@@ -193,6 +214,6 @@
 <img class="home-footer-logo" src="../assets/ministry-of-defense-logo.jpg" alt="沙特阿拉伯国防部徽标" width="305" height="183" loading="lazy" decoding="async">
 </div>
 </footer>
-<a class="ask-shortcut" href="ask/" aria-label="问答助手"><span class="zad-icon" data-icon="ask" aria-hidden="true"></span></a>
+
 </body>
 </html>

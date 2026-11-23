@@ -159,13 +159,21 @@ def verify_homepage(page):
         await image.decode();
         return image.naturalWidth > 0;
     }""")
-    calendar = hero.get_by_role("region", name="التقويم اليومي")
+    calendar = page.locator(".home-date-prayer[data-daily-calendar]")
+    expect(calendar).to_be_visible()
     expect(calendar.locator("[data-calendar-weekday]")).to_have_text(re.compile(r"\S"))
     gregorian = calendar.locator("[data-calendar-gregorian]")
     hijri = calendar.locator("[data-calendar-hijri]")
     expect(gregorian).to_have_attribute("datetime", re.compile(r"^\d{4}-\d{2}-\d{2}$"))
     expect(hijri).to_have_attribute("datetime", gregorian.get_attribute("datetime"))
     expect(hijri).to_be_visible()
+    prayer = calendar.locator("#home-prayer")
+    expect(prayer).to_be_visible()
+    expect(prayer.locator("#home-prayer-city")).to_be_enabled()
+    assert prayer.locator("#home-prayer-city option").evaluate_all(
+        "options => options.map(option => option.value)"
+    ) == list(SAUDI_CITIES)
+    expect(prayer.locator('a[href="prayer/"]')).to_be_visible()
     expect(hero.locator(".hero-image")).to_have_count(0)
     reminder = hero.get_by_role("region", name="لا تنسَ الأذكار")
     expect(reminder.get_by_role("link", name="أذكار الصباح")).to_have_attribute("href", "adhkar/morning/")
@@ -183,37 +191,45 @@ def verify_homepage(page):
             images[1].naturalWidth === 500 && images[1].naturalHeight === 288 &&
             images[1].currentSrc.endsWith('/southern-border-photo.webp');
     }""")
+    assert portraits.evaluate_all("""images => images.every(image => {
+        const bounds = image.getBoundingClientRect();
+        const frame = image.closest('.military-shortcut').getBoundingClientRect();
+        return getComputedStyle(image).objectFit === 'cover' &&
+            Math.abs(bounds.left - frame.left) <= 2 && Math.abs(bounds.right - frame.right) <= 2 &&
+            Math.abs(bounds.top - frame.top) <= 2 && Math.abs(bounds.bottom - frame.bottom) <= 2;
+    })"""), "Each photograph must fill its shortcut frame"
     tour = page.locator("details#site-tour")
     action = tour.locator(":scope > summary")
     expect(action).to_be_visible()
     expect(action).to_have_text("ابدأ الجولة")
     expect(tour).not_to_have_attribute("open", "")
     expect(tour.locator("#site-tour-heading")).to_be_hidden()
-    previous_bounds = calendar.bounding_box()
-    for following in (reminder, military_shortcut, border_shortcut, action):
-        bounds = following.bounding_box()
-        assert previous_bounds["y"] + previous_bounds["height"] <= bounds["y"], "The reminder and military shortcuts must follow the calendar"
-        previous_bounds = bounds
-    form = page.locator("main #home-ask-form")
-    field = form.locator("#home-ask-input")
-    expect(form).to_be_visible()
-    expect(field).to_be_editable()
-    expect(field).to_have_accessible_name(re.compile("سؤال"))
-    assert field.get_attribute("name") is None, "Submitting without JavaScript must not put the question in a URL"
-    expect(form.locator("#home-ask-submit")).to_be_enabled()
-    assert form.bounding_box()["y"] < tour.bounding_box()["y"], "The question form must appear above the tour"
+    date_bounds = (calendar.bounding_box(), reminder.bounding_box())
+    date_end = max(bounds["y"] + bounds["height"] for bounds in date_bounds)
+    assert date_bounds[0]["width"] >= hero.locator(".hero-grid").bounding_box()["width"] - 2
+    assert date_end <= verse.bounding_box()["y"] + 1, "The date and reminders must precede the verse"
+    for shortcut in (military_shortcut, border_shortcut):
+        bounds = shortcut.bounding_box()
+        assert date_end <= bounds["y"] + 1, "The date and reminders must precede the shortcuts"
+        assert bounds["y"] + bounds["height"] <= action.bounding_box()["y"], "The shortcuts must precede the tour"
+    if page.evaluate("innerWidth") <= 680:
+        verse_box = frame.bounding_box()
+        assert verse_box["y"] + verse_box["height"] <= military_shortcut.bounding_box()["y"] + 1
+    expect(page.locator("#home-ask-form, .ask-shortcut")).to_have_count(0)
+    expect(page.locator('header #nav a[href="ask/"]')).to_have_count(1)
+    expect(page.locator('a[href="ask/"]:not(header #nav a)')).to_have_count(0)
     items = tour.locator(".site-tour-stops > .site-tour-card")
     expect(items).to_have_count(3)
     for item in items.all():
         expect(item).to_be_hidden()
         assert all(re.search(r"[\u0621-\u064a]", item.locator(selector).text_content()) for selector in ("h3", "p"))
     assert tour.locator("a[href]").evaluate_all("links => links.map(link => link.getAttribute('href'))") == [
-        "quran/", "worship/", "prayer/", "adhkar/travel/", "ask/", "discover/"
+        "quran/", "worship/", "prayer/", "adhkar/travel/", "discover/"
     ]
     expect(page.locator("#sections, #section-launcher, .launcher-link, " +
                         ", ".join(f"#{section}" for section in SECTIONS))).to_have_count(0)
     links_outside_menu = page.locator("a[href]").evaluate_all(
-        "links => links.filter(link => !link.closest('header #nav, .ask-shortcut, #site-tour, .military-shortcut')).map(link => link.href)"
+        "links => links.filter(link => !link.closest('header #nav, #site-tour, .military-shortcut, #home-prayer')).map(link => link.href)"
     )
     destinations = {urljoin(page.url, section + "/") for section in SECTIONS}
     assert not destinations.intersection(links_outside_menu), links_outside_menu

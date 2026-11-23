@@ -1,0 +1,18 @@
+<section class="home-prayer" id="home-prayer" aria-labelledby="home-prayer-heading" data-prayer-widget data-prayer-compact>
+<div class="home-prayer-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>
+<h2 id="home-prayer-heading">{{t:prayer}}</h2>
+</div>
+<form class="home-prayer-form" id="home-prayer-form">
+<label class="home-prayer-city" for="home-prayer-city">{{t:city}}
+<select id="home-prayer-city" data-prayer-city>
+{{prayer_cities}}
+</select>
+</label>
+<button class="home-prayer-retry button green" data-prayer-retry type="submit" hidden>{{t:show_times}}</button>
+</form>
+<ul class="home-prayer-times" id="home-prayer-times" data-prayer-times hidden></ul>
+<p class="home-prayer-status" id="home-prayer-status" data-prayer-status role="status">{{t:prayer_choose}}</p>
+<p class="home-prayer-source">{{t:prayer_method}} <a href="prayer/">{{t:prayer_how}}</a></p>
+<noscript><p class="home-prayer-status">{{t:prayer_nojs}}</p></noscript>
+</section>

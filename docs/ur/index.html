@@ -6,20 +6,22 @@
 <meta name="description" content="زاد سعودی وزارتِ دفاع کے افسران اور جوانوں کے لیے اسلامی آگاہی کا پلیٹ فارم ہے، جس میں قرآن، صحیح احادیث اور نماز کے اوقات شامل ہیں۔">
 <meta name="theme-color" content="#ffffff">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.aladhan.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>زاد | اسلامی آگاہی کا پلیٹ فارم</title>
 <link rel="alternate" hreflang="ar" href="../">
 <link rel="alternate" hreflang="en" href="../en/">
 <link rel="alternate" hreflang="ur" href="../ur/">
 <link rel="alternate" hreflang="zh" href="../zh/">
 <link rel="alternate" hreflang="fr" href="../fr/">
-<link rel="stylesheet" href="../assets/style.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/discover.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/glass.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/sections.css?v=20261123-1">
-<script src="../assets/locales/ur.js?v=20261123-1" defer></script>
-<script src="../assets/site.js?v=20261123-1" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/discover.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/glass.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/sections.css?v=20261123-2">
+<script src="../assets/locales/ur.js?v=20261123-2" defer></script>
+<script src="../assets/site.js?v=20261123-2" defer></script>
+<script src="../assets/locale-services.js?v=20261123-2" defer></script>
+<script src="../assets/prayer.js?v=20261123-2" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">مواد پر جائیں</a>
@@ -59,23 +61,74 @@
 </div>
 </header>
 <main id="main" class="launcher-shell">
-<section class="home-ask" aria-labelledby="home-ask-heading">
-<div class="wrap home-ask-panel">
-<h2 id="home-ask-heading"><span class="home-ask-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>زاد سے پوچھیں</h2>
-<div class="home-ask-controls">
-<form id="home-ask-form" action="ask/" role="search" aria-labelledby="home-ask-heading">
-<label class="visually-hidden" for="home-ask-input">زاد کے لیے آپ کا سوال</label>
-<input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="سوال لکھیں، ذاتی معلومات کے بغیر">
-<button class="button gold" id="home-ask-submit" type="submit" disabled>تلاش کریں</button>
-</form>
-<p id="home-ask-source">ذاتی معلومات یا اپنی یونٹ کی تفصیلات کے بغیر عمومی سوال پوچھیں۔ سوال کے کلیدی الفاظ ابن باز کی ویب سائٹ پر تلاش کے لیے بھیجے جا سکتے ہیں۔</p>
-<p id="home-ask-status" role="status"></p>
-<noscript><p class="home-ask-noscript"><a href="ask/">زاد سے پوچھیں کا صفحہ کھولیں</a></p></noscript>
-</div>
-</div>
-</section>
 <section id="home" class="hero" aria-labelledby="home-heading">
 <div class="wrap hero-grid">
+<div class="hero-calendar-panel">
+<section class="daily-calendar home-date-prayer" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="اس براؤزر میں آج کی تاریخ دکھائی نہیں جا سکی۔">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading" class="daily-calendar-weekday" data-calendar-weekday>آج</h2>
+<p class="daily-calendar-timezone">سعودی عرب کے وقت کے مطابق</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>ہجری · ام القریٰ</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>اس براؤزر میں ام القریٰ کے مطابق ہجری تاریخ دستیاب نہیں۔</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>عیسوی</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">آج کی تاریخ دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔</p></noscript>
+<section class="home-prayer" id="home-prayer" aria-labelledby="home-prayer-heading" data-prayer-widget data-prayer-compact>
+<div class="home-prayer-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>
+<h2 id="home-prayer-heading">نماز کے اوقات</h2>
+</div>
+<form class="home-prayer-form" id="home-prayer-form">
+<label class="home-prayer-city" for="home-prayer-city">شہر
+<select id="home-prayer-city" data-prayer-city>
+<option value="riyadh" data-latitude="24.7136" data-longitude="46.6753">ریاض</option>
+<option value="mecca" data-latitude="21.3891" data-longitude="39.8579">مکہ مکرمہ</option>
+<option value="medina" data-latitude="24.4539" data-longitude="39.6142">مدینہ منورہ</option>
+<option value="jeddah" data-latitude="21.4858" data-longitude="39.1925">جدہ</option>
+<option value="dammam" data-latitude="26.4207" data-longitude="50.0888">دمام</option>
+<option value="khobar" data-latitude="26.2172" data-longitude="50.1971">الخبر</option>
+<option value="taif" data-latitude="21.2703" data-longitude="40.4158">طائف</option>
+<option value="buraydah" data-latitude="26.3592" data-longitude="43.9818">بریدہ</option>
+<option value="hail" data-latitude="27.5114" data-longitude="41.7208">حائل</option>
+<option value="tabuk" data-latitude="28.3835" data-longitude="36.5662">تبوک</option>
+<option value="abha" data-latitude="18.2164" data-longitude="42.5053">ابہا</option>
+<option value="jazan" data-latitude="16.8892" data-longitude="42.5511">جازان</option>
+<option value="najran" data-latitude="17.5656" data-longitude="44.2289">نجران</option>
+<option value="albaha" data-latitude="20.0000" data-longitude="41.4687">الباحہ</option>
+<option value="sakaka" data-latitude="29.9697" data-longitude="40.2064">سکاکا</option>
+<option value="arar" data-latitude="30.9753" data-longitude="41.0381">عرعر</option>
+<option value="hofuf" data-latitude="25.3833" data-longitude="49.5833">الہفوف</option>
+</select>
+</label>
+<button class="home-prayer-retry button green" data-prayer-retry type="submit" hidden>نماز کے اوقات دکھائیں</button>
+</form>
+<ul class="home-prayer-times" id="home-prayer-times" data-prayer-times hidden></ul>
+<p class="home-prayer-status" id="home-prayer-status" data-prayer-status role="status">آج کے اوقات دیکھنے کے لیے اپنا شہر منتخب کریں۔</p>
+<p class="home-prayer-source">ام القریٰ طریقۂ حساب، سعودی وقت کے مطابق۔ <a href="prayer/">نماز کے اوقات کیسے طے ہوتے ہیں؟</a></p>
+<noscript><p class="home-prayer-status">نماز کے اوقات دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔</p></noscript>
+</section>
+</section>
+<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
+<h2 id="adhkar-reminder-heading">اذکار یاد رکھیں</h2>
+<div class="adhkar-reminder-links">
+<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>صبح کے اذکار</a>
+<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>شام کے اذکار</a>
+</div>
+</section>
+</div>
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
@@ -91,43 +144,12 @@
 </div>
 <p class="intro">اسلامی علم حاصل کرنے کی جگہ، جہاں قرآنِ کریم، صحیح احادیث اور حوالوں کے ساتھ رہنمائی ایک ہی جگہ دستیاب ہے۔</p>
 </div>
-<div class="hero-calendar-panel">
-<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="اس براؤزر میں آج کی تاریخ دکھائی نہیں جا سکی۔">
-<div class="daily-calendar-head">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
-<div>
-<h2 id="daily-calendar-heading">روزانہ تقویم</h2>
-<p class="daily-calendar-timezone">سعودی عرب کے وقت کے مطابق</p>
-</div>
-</div>
-<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
-<div class="daily-calendar-dates" data-calendar-dates hidden>
-<p class="daily-calendar-weekday" data-calendar-weekday></p>
-<dl class="daily-calendar-formats">
-<div class="daily-calendar-date">
-<dt>ہجری · ام القریٰ</dt>
-<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>اس براؤزر میں ام القریٰ تقویم دستیاب نہیں ہے۔</p></dd>
-</div>
-<div class="daily-calendar-date">
-<dt>عیسوی</dt>
-<dd><time data-calendar-gregorian></time></dd>
-</div>
-</dl>
-</div>
-<noscript><p class="daily-calendar-status">آج کی تاریخ دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔</p></noscript>
-</section>
-<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
-<h2 id="adhkar-reminder-heading">اذکار یاد رکھیں</h2>
-<div class="adhkar-reminder-links">
-<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>صبح کے اذکار</a>
-<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>شام کے اذکار</a>
-</div>
-</section>
+<div class="hero-military-shortcuts">
 <a class="military-shortcut" href="military/">
 <img class="military-shortcut-image" src="../assets/military-portrait.webp" alt="" width="320" height="384" decoding="async">
 <span class="military-shortcut-label">زاد برائے فوجی اہلکار</span>
 </a>
-<a class="military-shortcut" href="military/southern-border/">
+<a class="military-shortcut military-shortcut-border" href="military/southern-border/">
 <img class="military-shortcut-image" src="../assets/southern-border-photo.webp" alt="" width="500" height="288" decoding="async">
 <span class="military-shortcut-label">جنوبی سرحد پر تعینات اہلکار</span>
 </a>
@@ -168,11 +190,10 @@
 <section class="site-tour-card">
 <span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
-<h3>سوال کریں یا اسلام کو جانیں</h3>
-<p>زاد سے پوچھیں میں حوالہ شدہ جواب تلاش کریں۔ کئی زبانوں میں دستیاب رہنما اسلام کے بنیادی اصول اور ابتدائی قدم بتاتا ہے۔</p>
+<h3>اسلام کو جانیں</h3>
+<p>اسلام کو سمجھنے والوں اور نو مسلموں کے لیے رہنما، جس میں کلمۂ شہادت، وضو اور نماز کی وضاحت ہے۔</p>
 <div class="site-tour-actions">
-<a class="site-tour-action" href="ask/">زاد سے پوچھیں</a>
-<a class="site-tour-action" href="discover/">اسلام کو جانیں</a>
+<a class="site-tour-action" href="discover/">رہنما کھولیں</a>
 </div>
 </div>
 </section>
@@ -193,6 +214,6 @@
 <img class="home-footer-logo" src="../assets/ministry-of-defense-logo.jpg" alt="سعودی وزارتِ دفاع کا نشان" width="305" height="183" loading="lazy" decoding="async">
 </div>
 </footer>
-<a class="ask-shortcut" href="ask/" aria-label="زاد سے پوچھیں"><span class="zad-icon" data-icon="ask" aria-hidden="true"></span></a>
+
 </body>
 </html>

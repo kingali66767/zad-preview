@@ -308,8 +308,15 @@ function initializeDailyCalendar(calendar) {
       status.hidden = true;
     }
 
+    function scheduleDateRefresh() {
+      window.setTimeout(() => {
+        renderToday();
+        scheduleDateRefresh();
+      }, 60_000 - Date.now() % 60_000);
+    }
+
     renderToday();
-    window.setInterval(renderToday, 60_000);
+    scheduleDateRefresh();
     window.addEventListener("pageshow", renderToday);
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) renderToday();
@@ -323,35 +330,3 @@ function initializeDailyCalendar(calendar) {
 
 const dailyCalendar = document.querySelector("[data-daily-calendar]");
 if (dailyCalendar) initializeDailyCalendar(dailyCalendar);
-
-const askDraftKey = "zad-ask-draft-v1";
-const homeAskForm = document.querySelector("#home-ask-form");
-if (homeAskForm) {
-  const input = document.querySelector("#home-ask-input");
-  const status = document.querySelector("#home-ask-status");
-  const submit = document.querySelector("#home-ask-submit");
-  const destination = new URL(homeAskForm.action);
-  if (destination.origin === location.origin && /^https?:$/.test(location.protocol)) {
-    submit.disabled = false;
-  } else {
-    status.textContent = siteText("draft_open", "افتح «اسأل زاد» من القائمة أو من الأيقونة أسفل الصفحة.");
-  }
-  homeAskForm.addEventListener("submit", event => {
-    event.preventDefault();
-    if (submit.disabled) return;
-    const question = input.value.trim();
-    if (!question || question.length > input.maxLength) {
-      status.textContent = siteText("draft_empty", "اكتب سؤالك أولًا في حدود ٥٠٠ حرف.");
-      input.focus();
-      return;
-    }
-    try {
-      sessionStorage.setItem(askDraftKey, JSON.stringify({question, expiresAt: Date.now() + 120000}));
-    } catch {
-      status.textContent = siteText("draft_failed", "تعذّر نقل السؤال عبر هذا المتصفح. افتح «اسأل زاد» من الأيقونة أسفل الصفحة.");
-      return;
-    }
-    input.value = "";
-    location.assign(destination);
-  });
-}

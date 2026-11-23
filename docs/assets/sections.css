@@ -163,7 +163,6 @@ body[data-page] {
   .site-language > summary { padding-inline: 6px; font-size: .78rem; }
 }
 
-html:not([lang="ar"]) #home-ask-heading { white-space: normal; }
 html[lang="zh"] { --heading-font: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
 html[lang="ur"] body { font-family: "Noto Naskh Arabic", Tajawal, Tahoma, sans-serif; }
 html[lang="ur"] h1, html[lang="ur"] h2 { font-family: Amiri, "Noto Naskh Arabic", Tahoma, serif; }
@@ -460,75 +459,173 @@ body[data-page="home"] .route-top #nav {
 }
 
 .launcher-shell .hero {
-  padding-block-end: clamp(14px, 2.4vw, 30px);
+  padding-block: clamp(12px, 2.8vw, 34px) clamp(14px, 2.4vw, 30px);
 }
 
 .launcher-shell .hero-grid {
   inline-size: min(73rem, calc(100% - 32px));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(14px, 2.2vw, 30px);
 }
 
-.hero-calendar-panel {
+.hero-calendar-panel,
+.hero-military-shortcuts {
   display: grid;
   gap: clamp(10px, 1.5vw, 18px);
   min-inline-size: 0;
 }
 
+.hero-calendar-panel {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 680px) {
+  .launcher-shell .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .military-shortcut {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: clamp(10px, 1.7vw, 20px);
+  grid-template-columns: minmax(0, 1fr);
+  align-content: end;
   min-inline-size: 0;
-  min-block-size: 44px;
+  min-block-size: clamp(10.75rem, 23vw, 15rem);
+  overflow: hidden;
   padding: clamp(10px, 1.45vw, 16px);
-  border: 1px solid var(--line);
+  border: 1px solid #f7e7c9a6;
   border-radius: clamp(15px, 2.1vw, 23px);
-  background: linear-gradient(145deg, var(--white) 55%, #f2f8f4);
-  color: var(--brand-dark);
-  box-shadow: var(--glass-shadow);
+  background: #233028;
+  color: #fffaf0;
+  box-shadow: 0 13px 28px #152e2350, 0 0 0 1px #25342b28;
   text-decoration: none;
 }
 
 .military-shortcut-image {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
   display: block;
-  inline-size: clamp(100px, 11vw, 135px);
-  block-size: auto;
-  aspect-ratio: 1 / 1;
-  padding: 4px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--white);
-  object-fit: contain;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 66% 30%;
+}
+
+.military-shortcut-border .military-shortcut-image {
+  object-position: 48% 14%;
+}
+
+.military-shortcut::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, transparent 40%, #101f190f 60%, #111e17b8);
+  box-shadow: inset 0 1px 1px #fff0d95e, inset 0 0 0 1px #fff9e326;
+  pointer-events: none;
+  content: "";
 }
 
 .military-shortcut-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 7px clamp(11px, 2vw, 18px);
+  border: 1px solid #fff3d76b;
+  border-radius: 11px;
+  background: #172921ef;
+  color: inherit;
+  box-shadow: inset 0 1px 0 #fff9e938, 0 3px 12px #0c1b1545;
   font-size: clamp(1.04rem, 2.4vw, 1.37rem);
   font-weight: 700;
   line-height: 1.45;
   overflow-wrap: anywhere;
-  text-wrap: balance;
 }
 
-.military-shortcut::after {
+.military-shortcut-label::after {
+  flex: none;
   inline-size: 10px;
   block-size: 10px;
   margin-inline-end: 4px;
   border-block-start: 2px solid currentColor;
   border-inline-end: 2px solid currentColor;
-  color: var(--accent);
+  color: #f6daad;
   transform: rotate(45deg);
   content: "";
 }
 
-.military-shortcut:dir(rtl)::after {
+.military-shortcut:dir(rtl) .military-shortcut-label::after {
   transform: rotate(-45deg);
 }
 
 .military-shortcut:is(:hover, :focus-visible) {
-  border-color: var(--accent);
-  background: var(--green-tint);
-  color: var(--accent);
+  border-color: #e9c47f;
+  box-shadow: 0 14px 30px #10271d65, 0 0 0 1px #b4935838;
+}
+
+.military-shortcut:focus-visible {
+  outline: 3px solid #326552;
+  outline-offset: 4px;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .military-shortcut-label {
+    background: #14261ed6;
+    -webkit-backdrop-filter: blur(10px) saturate(1.25);
+    backdrop-filter: blur(10px) saturate(1.25);
+  }
+}
+
+@media (max-width: 680px) {
+  .military-shortcut-image {
+    object-position: 65% 31%;
+  }
+
+  .military-shortcut-border .military-shortcut-image {
+    object-position: 49% 15%;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .military-shortcut-image {
+    transition: transform 220ms ease;
+  }
+
+  .military-shortcut:hover .military-shortcut-image {
+    transform: scale(1.025);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .military-shortcut-label {
+    background: #172921;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .military-shortcut-label {
+    border-color: LinkText;
+    background: Canvas;
+    color: LinkText;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .military-shortcut-label::after {
+    color: inherit;
+  }
+
+  .military-shortcut:focus-visible {
+    outline-color: Highlight;
+  }
 }
 
 .daily-calendar,
@@ -929,106 +1026,6 @@ a.site-tour-action:hover { background: var(--green-tint); }
     background: var(--white);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-  }
-}
-
-.home-ask {
-  padding-block: clamp(10px, 1.6vw, 18px);
-  background: var(--white);
-}
-
-.home-ask-panel {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(12px, 2.8vw, 30px);
-  inline-size: min(73rem, calc(100% - 32px));
-  padding: 10px clamp(10px, 2.4vw, 22px);
-  border: 1px solid var(--line);
-  border-radius: 19px;
-  color: var(--brand-dark);
-  background: linear-gradient(142deg, var(--white) 57%, #f3faf5);
-  box-shadow: 0 8px 22px #173e2f14, inset 0 1px 0 var(--white);
-}
-
-#home-ask-heading {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-block-size: 44px;
-  margin: 0;
-  font-family: inherit;
-  font-size: clamp(1.04rem, 2.2vw, 1.26rem);
-  line-height: 1.3;
-  white-space: nowrap;
-}
-
-.home-ask-icon {
-  display: inline-grid;
-  place-items: center;
-  inline-size: 34px;
-  block-size: 34px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  background: var(--green-tint);
-  color: var(--accent);
-}
-
-#home-ask-form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: stretch;
-  gap: 8px;
-}
-
-#home-ask-input {
-  appearance: none;
-  inline-size: 100%;
-  min-inline-size: 0;
-  min-block-size: 44px;
-  padding-inline: 12px;
-  border: 1px solid #71988a;
-  border-radius: 999px;
-  background: var(--white);
-  color: var(--ink);
-  font: inherit;
-  font-size: 1rem;
-}
-
-#home-ask-input::placeholder {
-  color: var(--muted);
-}
-
-#home-ask-submit {
-  padding-inline: clamp(12px, 2.4vw, 24px);
-}
-
-.home-ask :focus-visible {
-  outline-color: var(--accent);
-}
-
-#home-ask-status,
-#home-ask-source,
-.home-ask-noscript {
-  margin: 6px 2px 0;
-  font-size: .9rem;
-  overflow-wrap: anywhere;
-}
-
-#home-ask-source { color: var(--muted); font-size: .81rem; }
-
-#home-ask-status:empty {
-  margin: 0;
-}
-
-@media (max-width: 600px) {
-  .home-ask-panel {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 7px;
-  }
-
-  #home-ask-heading {
-    min-block-size: 34px;
   }
 }
 

@@ -3,6 +3,14 @@
   --glass-rim: 0 0 0 1px #29504d09, inset 0 1px 0 #fff;
   --glass-shadow: 0 12px 32px #29504d0c, var(--glass-rim);
   --glass-radius: 18px;
+  --card-glass-edge: #b4d0c2;
+  --card-glass-base: #f4faf6;
+  --card-glass-tint: #f7fcf8bc;
+  --card-glass-glaze: linear-gradient(151deg, #fff 3%, #f6fcf7c7 57%, #e1f1e6a3 100%);
+  --card-glass-emphasis: linear-gradient(151deg, #fffdf3, #ebf5e8ce 70%, #e2f1e4);
+  --card-glass-hover: linear-gradient(151deg, #fff 1%, #f1faf3 59%, #d9eee0 100%);
+  --card-glass-depth: 0 12px 30px #28564014, inset 0 1px 0 #fff, inset 0 0 0 1px #fff9;
+  --card-glass-filter: blur(14px) saturate(1.25);
 }
 
 html {
@@ -176,21 +184,25 @@ header {
 .prayer,
 .ask-panel,
 .tiles > a,
-.collection .card,
-.collection details,
 .reading-panel,
 .discover-section,
 .source-policy,
-.contact {
-  border: 1px solid var(--glass-edge);
+.contact,
+.section-main .card,
+.section-main .military-card,
+.section-main .faq-list > details,
+.launcher-shell .hero-identity,
+.launcher-shell .site-tour,
+.launcher-shell .site-tour-card,
+.launcher-shell .adhkar-reminder {
+  border: 1px solid var(--card-glass-edge);
   border-radius: var(--glass-radius);
-  background-color: var(--white);
-  box-shadow: var(--glass-shadow);
+  background: var(--card-glass-glaze) var(--card-glass-base);
+  box-shadow: var(--card-glass-depth);
 }
 
 .prayer {
   --glass-radius: 29px;
-  box-shadow: var(--glass-shadow);
 }
 
 .prayer-note,
@@ -198,10 +210,12 @@ header {
 .ask-optional,
 .ask-result,
 .discover-locale,
-.discover-content section {
-  border-color: var(--glass-edge);
+.discover-content section,
+.section-main .discover-content .discover-shahada,
+.discover .shahada-lines > li {
+  border-color: var(--card-glass-edge);
   border-radius: 17px;
-  background: var(--white);
+  background: var(--card-glass-glaze) var(--card-glass-base);
   box-shadow: var(--glass-rim);
 }
 
@@ -235,15 +249,20 @@ details[open] > summary::before {
   transform: rotate(135deg);
 }
 
-.discover-content .discover-shahada {
-  border-color: var(--line);
-  background: var(--green-tint);
+.section-main .discover-content .discover-shahada {
+  --card-glass-glaze: var(--card-glass-emphasis);
 }
 
-.times div {
-  border: 1px solid var(--glass-edge);
+.launcher-shell .hero-verse {
+  border-color: var(--card-glass-edge);
+  box-shadow: var(--card-glass-depth);
+}
+
+.section-main .prayer .times > div,
+.launcher-shell .adhkar-reminder-links > a {
+  border: 1px solid var(--card-glass-edge);
   border-radius: 13px;
-  background: var(--green-tint);
+  background: var(--card-glass-glaze) var(--card-glass-base);
   box-shadow: var(--glass-rim);
 }
 
@@ -291,10 +310,13 @@ select,
   padding: clamp(15px, 2vw, 26px);
 }
 
-.tiles > a:hover {
-  border-color: #8cb29f;
-  background-color: var(--green-tint);
-  box-shadow: var(--glass-shadow);
+.tiles > a:is(:hover, :focus-visible),
+.launcher-shell a.site-tour-card:is(:hover, :focus-visible),
+.launcher-shell .adhkar-reminder-links > a:is(:hover, :focus-visible),
+.section-main a.military-card:is(:hover, :focus-visible) {
+  border-color: var(--accent);
+  background-image: var(--card-glass-hover);
+  box-shadow: var(--card-glass-depth);
 }
 
 .collection {
@@ -330,14 +352,13 @@ footer {
 
   .prayer,
   .ask-panel,
-  .discover-section {
-    background-color: #ffffffed;
-    -webkit-backdrop-filter: blur(16px) saturate(1.28);
-    backdrop-filter: blur(16px) saturate(1.28);
-  }
-
-  .tiles > a {
-    background-color: #fffffff0;
+  .discover-section,
+  .launcher-shell .hero-identity,
+  .launcher-shell .site-tour-card,
+  .launcher-shell .adhkar-reminder {
+    background-color: var(--card-glass-tint);
+    -webkit-backdrop-filter: var(--card-glass-filter);
+    backdrop-filter: var(--card-glass-filter);
   }
 }
 
@@ -484,23 +505,22 @@ footer {
 }
 
 @media (prefers-reduced-transparency: reduce) {
+  :root {
+    --card-glass-base: var(--white);
+    --card-glass-tint: var(--white);
+    --card-glass-glaze: none;
+    --card-glass-emphasis: none;
+    --card-glass-hover: none;
+    --card-glass-filter: none;
+  }
+
   header,
   #nav {
     background: var(--white);
   }
 
-  .prayer,
-  .ask-panel,
-  .discover-section,
-  .tiles > a {
-    background-color: var(--white);
-  }
-
   header,
-  #nav,
-  .prayer,
-  .ask-panel,
-  .discover-section {
+  #nav {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -509,4 +529,16 @@ footer {
 @media (forced-colors: active), (prefers-reduced-transparency: reduce) {
   body::before,
   .hero::before { content: none; }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --card-glass-base: Canvas;
+    --card-glass-tint: Canvas;
+    --card-glass-glaze: none;
+    --card-glass-emphasis: none;
+    --card-glass-hover: none;
+    --card-glass-filter: none;
+    --card-glass-edge: CanvasText;
+  }
 }

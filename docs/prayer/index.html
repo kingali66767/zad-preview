@@ -13,14 +13,14 @@
 <link rel="alternate" hreflang="ur" href="../ur/prayer/">
 <link rel="alternate" hreflang="zh" href="../zh/prayer/">
 <link rel="alternate" hreflang="fr" href="../fr/prayer/">
-<link rel="stylesheet" href="../assets/style.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/discover.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/glass.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/sections.css?v=20261123-1">
-<script src="../assets/site.js?v=20261123-1" defer></script>
-<script src="../assets/locale-services.js?v=20261123-1" defer></script>
-<script src="../assets/prayer.js?v=20261123-1" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/discover.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/glass.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/sections.css?v=20261123-2">
+<script src="../assets/site.js?v=20261123-2" defer></script>
+<script src="../assets/locale-services.js?v=20261123-2" defer></script>
+<script src="../assets/prayer.js?v=20261123-2" defer></script>
 </head>
 <body data-page="prayer">
 <a class="skip" href="#main">تجاوز إلى المحتوى</a>
@@ -61,7 +61,7 @@
 </div>
 </header>
 <main id="main" class="section-main">
-<section class="wrap prayer" id="prayer" aria-labelledby="prayer-heading">
+<section class="wrap prayer" id="prayer" aria-labelledby="prayer-heading" data-prayer-widget>
 <div class="prayer-head">
 <div>
 <p class="eyebrow"><span></span> المملكة العربية السعودية</p>
@@ -69,7 +69,7 @@
 </div>
 <form id="prayer-form">
 <label for="city">المدينة
-<select id="city">
+<select id="city" data-prayer-city>
 <option value="riyadh" data-latitude="24.7136" data-longitude="46.6753">الرياض</option>
 <option value="mecca" data-latitude="21.3891" data-longitude="39.8579">مكة المكرمة</option>
 <option value="medina" data-latitude="24.4539" data-longitude="39.6142">المدينة المنورة</option>
@@ -92,8 +92,8 @@
 <button class="button green" type="submit">عرض المواقيت</button>
 </form>
 </div>
-<div class="times" id="times"></div>
-<p id="prayer-status" role="status">اختر مدينتك ثم اعرض مواقيت اليوم.</p>
+<div class="times" id="times" data-prayer-times></div>
+<p id="prayer-status" data-prayer-status role="status">اختر مدينتك ثم اعرض مواقيت اليوم.</p>
 <p class="time-source">المصدر <a href="https://aladhan.com/prayer-times-api">AlAdhan</a> · طريقة أم القرى، بتوقيت السعودية.</p>
 <details class="prayer-note">
 <summary>كيف تُحسب المواقيت؟</summary>

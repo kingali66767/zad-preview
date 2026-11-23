@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import re
 import threading
-from urllib.parse import parse_qs, unquote_plus, urljoin, urlsplit
+from urllib.parse import parse_qs, urljoin, urlsplit
 
 from audit import (GUIDE_LANGUAGES, SITE_LANGUAGES, Handler, SAUDI_CITIES, SECTIONS, Server, SITE, prayer_payload, section_address,
                    verify_adhkar_navigation, verify_home_menu, verify_homepage, without_overflow)
@@ -20,11 +20,6 @@ TIMINGS = {"Fajr": "05:10", "Dhuhr": "12:10", "Asr": "15:10", "Maghrib": "18:10"
 COMPATIBLE = "Object.defineProperty(navigator, 'gpu', {value: {requestAdapter: async () => ({features: new Set(['shader-f16'])})}})"
 DIRECT_ANSWER = re.compile("^(?:تصحيح|جواب|أجوبة) موثّق")
 MODEL_QUESTION = "أريد مرجعًا يساعدني على قراءة القرآن باتقان."
-BLOCKED_QUESTION_STORAGE = """
-Object.defineProperty(window, 'sessionStorage', {
-  get() { throw new DOMException('Denied by browser settings', 'SecurityError'); }
-});
-"""
 WORKER = """
 self.onmessage = ({data}) => {
   const send = (message) => self.postMessage({...message, requestId:data.requestId});
@@ -124,7 +119,7 @@ def homepage_transitions(page):
     toggle.press("Enter")
     expect(page).to_have_url(home + "#site-tour")
     expect(tour.locator("#site-tour-heading")).to_be_visible()
-    for route in ("quran", "worship", "prayer", "adhkar/travel", "ask", "discover"):
+    for route in ("quran", "worship", "prayer", "adhkar/travel", "discover"):
         tour.locator(f'a[href="{route}/"]').click()
         expect(page).to_have_url(section_address(home, route))
         expect(page.locator("main h1")).to_be_visible()
@@ -137,77 +132,28 @@ def homepage_transitions(page):
     verify_home_menu(page, sections=SECTIONS)
 
 
-def homepage_ask(page):
-    home = page.url
-    question = "كيف أتوضأ؟"
-    field = page.locator("#home-ask-input")
-    submit = page.locator("#home-ask-submit")
-    expect(field).to_be_editable()
-
-    field.fill("   ")
-    submit.click()
-    expect(page).to_have_url(home)
-    expect(page.locator("#home-ask-status")).to_contain_text(re.compile("سؤال"))
-
-    requests = []
-    page.on("request", lambda request: requests.append((request.url, request.post_data or "")))
-    field.fill(question)
-    submit.click()
-    expect(page).to_have_url(urljoin(home, "ask/"))
-    expect(page.locator("#ask-input")).to_have_value(question)
-    expect(page.locator("#ask-question")).to_contain_text(question)
-    expect(page.locator("#ask-answer-heading")).to_have_text("جواب موثّق")
-    expect(page.locator("#ask-answer")).to_contain_text("المرفقين")
-    expect(page.locator('#ask-sources a[href="https://quran.com/5/6"]')).to_be_visible()
-    question_text = question.rstrip("؟")
-    assert requests and all(question_text not in unquote_plus(url) and question_text not in unquote_plus(body)
-                            for url, body in requests), "The reviewed question traveled in a network request"
-    assert page.evaluate("(text) => !Object.values(sessionStorage).some(value => value.includes(text))", question)
-    without_overflow(page)
-    page.reload(wait_until="domcontentloaded")
-    expect(page.locator("#ask-submit")).to_be_enabled()
-    expect(page.locator("#ask-result")).to_be_hidden()
-
-
-def homepage_ask_without_storage(page):
-    home = page.url
-    question = "كيف أتوضأ؟"
-    field = page.locator("#home-ask-input")
-    field.fill(question)
-    page.locator("#home-ask-submit").click()
-    expect(page).to_have_url(home)
-    expect(page.locator("#home-ask-status")).to_contain_text(re.compile("تعذّر|نقل|تعطّل"))
-    expect(field).to_have_value(question)
-    expect(page.locator("#home-ask-submit")).to_be_enabled()
-
-
-def homepage_ask_without_js(page):
-    home = page.url
-    submit = page.locator("#home-ask-submit")
-    assert not submit.is_visible() or submit.is_disabled()
-    fallback = page.locator('main noscript a[href="ask/"]')
-    expect(fallback).to_be_visible()
-    fallback.click()
-    expect(page).to_have_url(urljoin(home, "ask/"))
-    expect(page.locator("body")).to_have_attribute("data-page", "ask")
-
-
-def ask_shortcut(page):
+def ask_entry_points(page):
     home = page.url
     destination = urljoin(home, "ask/")
     shortcut = page.locator("a.ask-shortcut")
-    for address in (home, urljoin(home, "quran/")):
-        page.goto(address, wait_until="domcontentloaded")
-        expect(shortcut).to_be_visible()
-        expect(shortcut).to_have_accessible_name(re.compile("اسأل زاد"))
-        assert shortcut.evaluate("(link) => link.href") == destination
-        expect(shortcut.locator(".zad-icon")).to_be_visible()
-        bounds = shortcut.bounding_box()
-        bottom = page.evaluate("window.innerHeight") - bounds["y"] - bounds["height"]
-        assert 0 <= bounds["x"] <= 64 and 0 <= bottom <= 64, (bounds, bottom)
-        assert bounds["width"] >= 44 and bounds["height"] >= 44, bounds
-        assert shortcut.evaluate("(link) => getComputedStyle(link).position") == "fixed"
-        without_overflow(page)
+    expect(page.locator("#home-ask-form, a.ask-shortcut")).to_have_count(0)
+    page.locator("#menu").click()
+    page.locator('header #nav a[href="ask/"]').click()
+    expect(page).to_have_url(destination)
+    expect(page.locator("#ask-submit")).to_be_enabled()
+    expect(shortcut).to_have_count(0)
+
+    page.goto(urljoin(home, "quran/"), wait_until="domcontentloaded")
+    expect(shortcut).to_be_visible()
+    expect(shortcut).to_have_accessible_name(re.compile("اسأل زاد"))
+    assert shortcut.evaluate("(link) => link.href") == destination
+    expect(shortcut.locator(".zad-icon")).to_be_visible()
+    bounds = shortcut.bounding_box()
+    bottom = page.evaluate("window.innerHeight") - bounds["y"] - bounds["height"]
+    assert 0 <= bounds["x"] <= 64 and 0 <= bottom <= 64, (bounds, bottom)
+    assert bounds["width"] >= 44 and bounds["height"] >= 44, bounds
+    assert shortcut.evaluate("(link) => getComputedStyle(link).position") == "fixed"
+    without_overflow(page)
     shortcut.click()
     expect(page).to_have_url(destination)
     expect(page.locator("#ask-submit")).to_be_enabled()
@@ -396,12 +342,17 @@ def public_cases(suite, browser, device):
 
     suite.run("عام | الصورة والجولة التعريفية والتنقل إلى الأقسام الستة عشر من القائمة",
               lambda: visit("", homepage_transitions, device=device))
-    suite.run("عام | تمرير سؤال الرئيسية إلى جواب موثّق دون وضعه في الرابط أو إعادة إرساله",
-              lambda: visit("", homepage_ask, device=device))
-    suite.run("عام | رابط اسأل زاد عند تعطيل JavaScript",
-              lambda: visit("", homepage_ask_without_js, java_script_enabled=False))
-    suite.run("عام | أيقونة اسأل زاد الثابتة أسفل الصفحة والانتقال إلى النموذج",
-              lambda: visit("", ask_shortcut, device=device))
+    suite.run("عام | اسأل زاد عبر قائمة الرئيسية وأيقونة صفحة القرآن",
+              lambda: visit("", ask_entry_points, device=device))
+
+    def home_prayer_live(page):
+        expect(page.locator("#home-prayer-city")).to_have_value("riyadh")
+        times = page.locator("#home-prayer-times time")
+        expect(times).to_have_count(5, timeout=12_000)
+        expect(page.locator("#home-prayer-status")).to_contain_text("الرياض")
+        assert all(re.fullmatch(r"\d{2}:\d{2}", value) for value in times.all_text_contents())
+    suite.run("عام | ظهور مواقيت الرياض في الرئيسية تلقائيًا",
+              lambda: visit("", home_prayer_live, device=device))
     suite.run("عام | دعم روابط الواجهة القديمة للجولة والأسئلة والدليل",
               lambda: visit("", legacy_home_links))
     suite.run("عام | فتح الزائر دون حساب وعرض 90 مادة", lambda: new_visit(browser, PUBLIC, verify_sections))
@@ -800,15 +751,60 @@ def local_cases(suite, browser, origin):
 
     run("الصورة والجولة التعريفية والتنقل إلى جميع الأقسام من القائمة",
         homepage_transitions, section="")
-    run("تمرير سؤال الرئيسية خصوصيًا وإظهار الجواب الموثّق دون تكراره بعد إعادة التحميل",
-        homepage_ask, section="")
-    run("رابط اسأل زاد البديل عند تعطيل JavaScript",
-        homepage_ask_without_js, section="", java_script_enabled=False)
-    run("تعذر التخزين يبقي سؤال الرئيسية ظاهرًا مع رسالة توضيح",
-        homepage_ask_without_storage, section="", init=BLOCKED_QUESTION_STORAGE)
-    run("أيقونة اسأل زاد ثابتة أسفل الرئيسية والقرآن وتفتح القسم",
-        ask_shortcut, section="")
+    run("اسأل زاد عبر قائمة الرئيسية وأيقونة صفحة القرآن", ask_entry_points, section="")
     run("دعم روابط الواجهة القديمة للجولة والأسئلة والدليل", legacy_home_links, section="")
+
+    home_prayer_calls = []
+    jeddah_times = TIMINGS | {"Fajr": "05:20"}
+
+    def mock_home_prayer(page):
+        page.clock.set_fixed_time(datetime(2026, 11, 22, 21, 35, tzinfo=timezone.utc))
+
+        def respond(route):
+            request = urlsplit(route.request.url)
+            home_prayer_calls.append(request)
+            if len(home_prayer_calls) == 2:
+                route.fulfill(status=503, json={})
+                return
+            timings = TIMINGS if len(home_prayer_calls) == 1 else jeddah_times
+            route.fulfill(json=prayer_payload(route.request.url, timings))
+
+        page.route(PRAYER_API, respond)
+
+    def home_prayer_retry_and_save(page):
+        city = page.locator("#home-prayer-city")
+        times = page.locator("#home-prayer-times time")
+        status = page.locator("#home-prayer-status")
+        retry = page.locator("#home-prayer-form .home-prayer-retry")
+        expect(city).to_have_value("riyadh")
+        expect(times).to_have_text(list(TIMINGS.values()))
+        expect(status).to_contain_text("الرياض")
+        expect(retry).to_be_hidden()
+        expect(page.locator(".home-date-prayer [data-calendar-gregorian]")).to_have_attribute("datetime", "2026-11-23")
+
+        city.select_option("jeddah")
+        expect(times).to_have_count(0)
+        expect(status).to_contain_text("تعذر تحميل")
+        expect(retry).to_be_visible()
+        retry.click()
+        expect(times).to_have_text(list(jeddah_times.values()))
+        expect(status).to_contain_text("جدة")
+        expect(retry).to_be_hidden()
+
+        page.reload(wait_until="domcontentloaded")
+        expect(city).to_have_value("jeddah")
+        expect(times).to_have_text(list(jeddah_times.values()))
+        assert [call.path for call in home_prayer_calls] == ["/v1/timings/23-11-2026"] * 4
+        query_parameters = [parse_qs(call.query) for call in home_prayer_calls]
+        assert [(float(params["latitude"][0]), float(params["longitude"][0])) for params in query_parameters] == [
+            (24.7136, 46.6753), (21.4858, 39.1925), (21.4858, 39.1925), (21.4858, 39.1925)
+        ]
+        assert all(params["timezonestring"] == ["Asia/Riyadh"] and params["method"] == ["4"] and
+                   params["school"] == ["0"] for params in query_parameters)
+        without_overflow(page)
+
+    run("مواقيت الرئيسية بعد منتصف الليل واختيار جدة وإعادة المحاولة وحفظ المدينة",
+        home_prayer_retry_and_save, section="", setup=mock_home_prayer)
 
     def unavailable_storage(page):
         page.locator("#reading input").first.check()

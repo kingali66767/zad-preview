@@ -6,20 +6,22 @@
 <meta name="description" content="Zad propose aux officiers, sous-officiers et militaires du rang du ministère saoudien de la Défense le Coran, des hadiths authentiques et les horaires de prière.">
 <meta name="theme-color" content="#ffffff">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.aladhan.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Zad | Plateforme d’éducation islamique</title>
 <link rel="alternate" hreflang="ar" href="../">
 <link rel="alternate" hreflang="en" href="../en/">
 <link rel="alternate" hreflang="ur" href="../ur/">
 <link rel="alternate" hreflang="zh" href="../zh/">
 <link rel="alternate" hreflang="fr" href="../fr/">
-<link rel="stylesheet" href="../assets/style.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/discover.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/glass.css?v=20261123-1">
-<link rel="stylesheet" href="../assets/sections.css?v=20261123-1">
-<script src="../assets/locales/fr.js?v=20261123-1" defer></script>
-<script src="../assets/site.js?v=20261123-1" defer></script>
+<link rel="stylesheet" href="../assets/style.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/discover.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/section-icons.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/glass.css?v=20261123-2">
+<link rel="stylesheet" href="../assets/sections.css?v=20261123-2">
+<script src="../assets/locales/fr.js?v=20261123-2" defer></script>
+<script src="../assets/site.js?v=20261123-2" defer></script>
+<script src="../assets/locale-services.js?v=20261123-2" defer></script>
+<script src="../assets/prayer.js?v=20261123-2" defer></script>
 </head>
 <body data-page="home">
 <a class="skip" href="#main">Aller au contenu</a>
@@ -59,23 +61,74 @@
 </div>
 </header>
 <main id="main" class="launcher-shell">
-<section class="home-ask" aria-labelledby="home-ask-heading">
-<div class="wrap home-ask-panel">
-<h2 id="home-ask-heading"><span class="home-ask-icon" aria-hidden="true"><span class="zad-icon" data-icon="ask"></span></span>Poser une question à Zad</h2>
-<div class="home-ask-controls">
-<form id="home-ask-form" action="ask/" role="search" aria-labelledby="home-ask-heading">
-<label class="visually-hidden" for="home-ask-input">Votre question pour Zad</label>
-<input id="home-ask-input" type="search" dir="auto" maxlength="500" required autocomplete="off" enterkeyhint="search" aria-describedby="home-ask-source" placeholder="Votre question, sans données personnelles">
-<button class="button gold" id="home-ask-submit" type="submit" disabled>Rechercher</button>
-</form>
-<p id="home-ask-source">Posez une question générale sans données personnelles ni détails sur votre unité. Les mots-clés peuvent être envoyés au site d’Ibn Baz pour la recherche.</p>
-<p id="home-ask-status" role="status"></p>
-<noscript><p class="home-ask-noscript"><a href="ask/">Ouvrir la page de questions</a></p></noscript>
-</div>
-</div>
-</section>
 <section id="home" class="hero" aria-labelledby="home-heading">
 <div class="wrap hero-grid">
+<div class="hero-calendar-panel">
+<section class="daily-calendar home-date-prayer" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="La date du jour est indisponible dans ce navigateur.">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading" class="daily-calendar-weekday" data-calendar-weekday>Aujourd’hui</h2>
+<p class="daily-calendar-timezone">Heure d’Arabie saoudite</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>Hégirien · Oumm al-Qoura</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>La date hégirienne selon Oumm al-Qoura est indisponible dans ce navigateur.</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>Grégorien</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">Activez JavaScript pour afficher la date du jour.</p></noscript>
+<section class="home-prayer" id="home-prayer" aria-labelledby="home-prayer-heading" data-prayer-widget data-prayer-compact>
+<div class="home-prayer-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>
+<h2 id="home-prayer-heading">Horaires de prière</h2>
+</div>
+<form class="home-prayer-form" id="home-prayer-form">
+<label class="home-prayer-city" for="home-prayer-city">Ville
+<select id="home-prayer-city" data-prayer-city>
+<option value="riyadh" data-latitude="24.7136" data-longitude="46.6753">Riyad</option>
+<option value="mecca" data-latitude="21.3891" data-longitude="39.8579">La Mecque</option>
+<option value="medina" data-latitude="24.4539" data-longitude="39.6142">Médine</option>
+<option value="jeddah" data-latitude="21.4858" data-longitude="39.1925">Djeddah</option>
+<option value="dammam" data-latitude="26.4207" data-longitude="50.0888">Dammam</option>
+<option value="khobar" data-latitude="26.2172" data-longitude="50.1971">Al Khobar</option>
+<option value="taif" data-latitude="21.2703" data-longitude="40.4158">Taïf</option>
+<option value="buraydah" data-latitude="26.3592" data-longitude="43.9818">Buraydah</option>
+<option value="hail" data-latitude="27.5114" data-longitude="41.7208">Haïl</option>
+<option value="tabuk" data-latitude="28.3835" data-longitude="36.5662">Tabouk</option>
+<option value="abha" data-latitude="18.2164" data-longitude="42.5053">Abha</option>
+<option value="jazan" data-latitude="16.8892" data-longitude="42.5511">Jazan</option>
+<option value="najran" data-latitude="17.5656" data-longitude="44.2289">Najran</option>
+<option value="albaha" data-latitude="20.0000" data-longitude="41.4687">Al Bahah</option>
+<option value="sakaka" data-latitude="29.9697" data-longitude="40.2064">Sakaka</option>
+<option value="arar" data-latitude="30.9753" data-longitude="41.0381">Arar</option>
+<option value="hofuf" data-latitude="25.3833" data-longitude="49.5833">Al Hofuf</option>
+</select>
+</label>
+<button class="home-prayer-retry button green" data-prayer-retry type="submit" hidden>Afficher les horaires</button>
+</form>
+<ul class="home-prayer-times" id="home-prayer-times" data-prayer-times hidden></ul>
+<p class="home-prayer-status" id="home-prayer-status" data-prayer-status role="status">Choisissez une ville pour voir les horaires du jour.</p>
+<p class="home-prayer-source">Méthode d’Umm al-Qura, heure locale saoudienne. <a href="prayer/">Comment les horaires sont-ils calculés ?</a></p>
+<noscript><p class="home-prayer-status">Activez JavaScript pour afficher les horaires de prière.</p></noscript>
+</section>
+</section>
+<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
+<h2 id="adhkar-reminder-heading">Pensez à vos invocations</h2>
+<div class="adhkar-reminder-links">
+<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>Rappels du matin</a>
+<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>Rappels du soir</a>
+</div>
+</section>
+</div>
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
@@ -91,43 +144,12 @@
 </div>
 <p class="intro">Un espace pour apprendre l’islam à partir du Coran, de hadiths authentiques et de ressources accompagnées de références.</p>
 </div>
-<div class="hero-calendar-panel">
-<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="La date du jour est indisponible dans ce navigateur.">
-<div class="daily-calendar-head">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
-<div>
-<h2 id="daily-calendar-heading">Calendrier du jour</h2>
-<p class="daily-calendar-timezone">Heure d’Arabie saoudite</p>
-</div>
-</div>
-<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
-<div class="daily-calendar-dates" data-calendar-dates hidden>
-<p class="daily-calendar-weekday" data-calendar-weekday></p>
-<dl class="daily-calendar-formats">
-<div class="daily-calendar-date">
-<dt>Hégirien · Oumm al-Qoura</dt>
-<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>Le calendrier Oumm al-Qoura est indisponible dans ce navigateur.</p></dd>
-</div>
-<div class="daily-calendar-date">
-<dt>Grégorien</dt>
-<dd><time data-calendar-gregorian></time></dd>
-</div>
-</dl>
-</div>
-<noscript><p class="daily-calendar-status">Activez JavaScript pour afficher la date du jour.</p></noscript>
-</section>
-<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
-<h2 id="adhkar-reminder-heading">Pensez à vos invocations</h2>
-<div class="adhkar-reminder-links">
-<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>Rappels du matin</a>
-<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>Rappels du soir</a>
-</div>
-</section>
+<div class="hero-military-shortcuts">
 <a class="military-shortcut" href="military/">
 <img class="military-shortcut-image" src="../assets/military-portrait.webp" alt="" width="320" height="384" decoding="async">
 <span class="military-shortcut-label">Zad pour les militaires</span>
 </a>
-<a class="military-shortcut" href="military/southern-border/">
+<a class="military-shortcut military-shortcut-border" href="military/southern-border/">
 <img class="military-shortcut-image" src="../assets/southern-border-photo.webp" alt="" width="500" height="288" decoding="async">
 <span class="military-shortcut-label">Pour les militaires à la frontière sud</span>
 </a>
@@ -168,11 +190,10 @@
 <section class="site-tour-card">
 <span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="path-start"></span></span>
 <div>
-<h3>Poser une question ou découvrir l’islam</h3>
-<p>Trouvez des réponses référencées dans la rubrique Questions. Le guide multilingue présente les bases de l’islam et les premières étapes.</p>
+<h3>Découvrir l’islam</h3>
+<p>Un guide pour découvrir l’islam ou débuter comme musulman, avec l’attestation de foi, les ablutions et la prière.</p>
 <div class="site-tour-actions">
-<a class="site-tour-action" href="ask/">Poser une question à Zad</a>
-<a class="site-tour-action" href="discover/">Découvrir l’islam</a>
+<a class="site-tour-action" href="discover/">Ouvrir le guide</a>
 </div>
 </div>
 </section>
@@ -193,6 +214,6 @@
 <img class="home-footer-logo" src="../assets/ministry-of-defense-logo.jpg" alt="Emblème du ministère saoudien de la Défense" width="305" height="183" loading="lazy" decoding="async">
 </div>
 </footer>
-<a class="ask-shortcut" href="ask/" aria-label="Poser une question à Zad"><span class="zad-icon" data-icon="ask" aria-hidden="true"></span></a>
+
 </body>
 </html>

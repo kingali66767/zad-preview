@@ -24,20 +24,15 @@ reading	خطة القراءة	Reading plan	مطالعے کا منصوبہ	诵读
 discover	تعرّف على الإسلام	Discover Islam	اسلام کو جانیں	认识伊斯兰	Découvrir l’islam
 sources	مصادر المكتبة	Library sources	کتب خانے کے مآخذ	资料来源	Sources de la bibliothèque
 contact	تواصل معنا	Contact us	ہم سے رابطہ کریں	联系我们	Nous contacter
-home_ask_label	سؤالك في اسأل زاد	Your question for Ask Zad	زاد کے لیے آپ کا سوال	向 Zad 提问	Votre question pour Zad
-no_private	سؤالك دون بيانات شخصية	Your question, without personal details	سوال لکھیں، ذاتی معلومات کے بغیر	请输入问题，勿填写个人信息	Votre question, sans données personnelles
-search	ابحث	Search	تلاش کریں	搜索	Rechercher
-home_privacy	اطرح سؤالًا عامًا دون بيانات شخصية أو معلومات عن وحدتك. قد تُرسل كلمات السؤال إلى البحث في موقع ابن باز.	Ask a general question without personal or unit details. Keywords may be sent to Ibn Baz’s website for a search.	ذاتی معلومات یا اپنی یونٹ کی تفصیلات کے بغیر عمومی سوال پوچھیں۔ سوال کے کلیدی الفاظ ابن باز کی ویب سائٹ پر تلاش کے لیے بھیجے جا سکتے ہیں۔	请提出一般性问题，勿填写个人或所在部队的信息。问题中的关键词可能会发送至伊本·巴兹网站进行搜索。	Posez une question générale sans données personnelles ni détails sur votre unité. Les mots-clés peuvent être envoyés au site d’Ibn Baz pour la recherche.
-open_ask	افتح صفحة اسأل زاد	Open Ask Zad	زاد سے پوچھیں کا صفحہ کھولیں	打开 Zad 问答	Ouvrir la page de questions
 home_verse_ref	سورة الأنفال، الآية ٦٠	Qur’an 8:60 · Al-Anfal	سورۃ الانفال، آیت ۶۰	《古兰经》8:60 · 战利品章	Coran, Al-Anfâl (8:60)
 hero_intro	مساحة عربية للعلم الشرعي النافع، تجمع القرآن الكريم والأحاديث الصحيحة والمواد التوعوية الموثّقة في مكان واحد.	A place to learn about Islam through the Qur’an, authentic hadith and materials with references.	اسلامی علم حاصل کرنے کی جگہ، جہاں قرآنِ کریم، صحیح احادیث اور حوالوں کے ساتھ رہنمائی ایک ہی جگہ دستیاب ہے۔	在这里学习伊斯兰知识，阅读《古兰经》、可靠圣训和附有出处的学习资料。	Un espace pour apprendre l’islam à partir du Coran, de hadiths authentiques et de ressources accompagnées de références.
 tour_start	ابدأ الجولة	Start the tour	سیر شروع کریں	开始导览	Commencer la visite
-calendar_heading	التقويم اليومي	Daily calendar	روزانہ تقویم	今日历法	Calendrier du jour
+today_label	اليوم	Today	آج	今天	Aujourd’hui
 calendar_timezone	بتوقيت السعودية	Saudi Arabia time	سعودی عرب کے وقت کے مطابق	沙特阿拉伯时间	Heure d’Arabie saoudite
 calendar_hijri	الهجري · أم القرى	Hijri · Umm al-Qura	ہجری · ام القریٰ	伊斯兰历 · 乌姆古拉	Hégirien · Oumm al-Qoura
 calendar_gregorian	الميلادي	Gregorian	عیسوی	公历	Grégorien
 calendar_nojs	فعّل جافاسكربت لعرض تاريخ اليوم.	Enable JavaScript to see today’s date.	آج کی تاریخ دیکھنے کے لیے جاوا اسکرپٹ فعال کریں۔	启用 JavaScript 查看今天的日期。	Activez JavaScript pour afficher la date du jour.
-calendar_hijri_unavailable	تقويم أم القرى غير متاح في هذا المتصفح.	The Umm al-Qura calendar is unavailable in this browser.	اس براؤزر میں ام القریٰ تقویم دستیاب نہیں ہے۔	此浏览器不支持乌姆古拉历法。	Le calendrier Oumm al-Qoura est indisponible dans ce navigateur.
+calendar_hijri_unavailable	التاريخ الهجري وفق أم القرى غير متاح في هذا المتصفح.	The Umm al-Qura Hijri date is unavailable in this browser.	اس براؤزر میں ام القریٰ کے مطابق ہجری تاریخ دستیاب نہیں۔	此浏览器不支持显示按乌姆古拉计算的伊斯兰历日期。	La date hégirienne selon Oumm al-Qoura est indisponible dans ce navigateur.
 calendar_unavailable	تعذّر عرض تاريخ اليوم في هذا المتصفح.	Today’s date is unavailable in this browser.	اس براؤزر میں آج کی تاریخ دکھائی نہیں جا سکی۔	此浏览器无法显示今天的日期。	La date du jour est indisponible dans ce navigateur.
 tour_heading	جولة في زاد	A tour of Zad	زاد کی سیر	Zad 导览	Visite de Zad
 tour_intro	اختر من الجولة ما تريد أن تقرأه أو تتعلّمه اليوم.	Choose what you’d like to read or learn today.	منتخب کریں کہ آج آپ کیا پڑھنا یا سیکھنا چاہتے ہیں۔	选择今天想阅读或学习的内容。	Choisissez ce que vous souhaitez lire ou apprendre aujourd’hui.
@@ -48,8 +43,7 @@ tour_practice_title	عبادتك اليومية	Daily worship	آپ کی روزا
 tour_practice_intro	راجع صفة الوضوء والصلاة، واعرض المواقيت في مدينتك السعودية، واقرأ أذكار السفر عند التنقّل.	Review ablution and prayer, check prayer times for a Saudi city, and find remembrances to recite while travelling.	وضو اور نماز کا طریقہ دیکھیں، سعودی شہر کے نماز کے اوقات معلوم کریں اور سفر کے اذکار پڑھیں۔	复习小净和礼拜的步骤，查询沙特城市的礼拜时间，并阅读出行赞念。	Revoyez les ablutions et la prière, consultez les horaires d’une ville saoudienne et retrouvez les invocations du voyage.
 tour_practice_action	افتح الوضوء والصلاة	Open ablution and prayer	وضو اور نماز کا صفحہ کھولیں	打开小净与礼拜	Ouvrir la rubrique Ablutions et prière
 travel_adhkar	أذكار السفر	Travel remembrances	سفر کے اذکار	出行赞念	Invocations du voyage
-tour_ask_title	اسأل أو تعرّف على الإسلام	Ask a question or discover Islam	سوال کریں یا اسلام کو جانیں	提问或认识伊斯兰	Poser une question ou découvrir l’islam
-tour_ask_intro	ابحث عن جواب موثّق في «اسأل زاد». وإذا كنت تتعرّف على الإسلام، فالدليل يشرح مبادئه وخطواته الأولى بلغات متعددة.	Find answers with references in Ask Zad. The multilingual guide explains Islam’s basics and first steps.	زاد سے پوچھیں میں حوالہ شدہ جواب تلاش کریں۔ کئی زبانوں میں دستیاب رہنما اسلام کے بنیادی اصول اور ابتدائی قدم بتاتا ہے۔	在 Zad 问答中查阅附有出处的回答。多语言指南介绍伊斯兰的基础知识和入门步骤。	Trouvez des réponses référencées dans la rubrique Questions. Le guide multilingue présente les bases de l’islam et les premières étapes.
+tour_guide_action	افتح الدليل	Open the guide	رہنما کھولیں	打开指南	Ouvrir le guide
 programming	البرمجة	Programming	پروگرامنگ	开发	Développement
 supervision	الإشراف	Supervision	نگرانی	指导	Supervision
 unit	الوحدة	Unit	یونٹ	单位	Unité
@@ -135,9 +129,6 @@ surah_110	النصر	An-Nasr	النصر	援助章	An-Nasr
 surah_112	الإخلاص	Al-Ikhlas	الاخلاص	忠诚章	Al-Ikhlas
 surah_113	الفلق	Al-Falaq	الفلق	曙光章	Al-Falaq
 surah_114	الناس	An-Nas	الناس	世人章	An-Nas
-draft_open	افتح «اسأل زاد» من القائمة أو من الأيقونة أسفل الصفحة.	Open Ask Zad from the menu or the button at the bottom of the page.	مینو یا صفحے کے نیچے بٹن سے زاد سے پوچھیں کھولیں۔	请从菜单或页面底部的按钮打开 Zad 问答。	Ouvrez la rubrique Questions depuis le menu ou le bouton en bas de page.
-draft_empty	اكتب سؤالك أولًا في حدود ٥٠٠ حرف.	Enter a question of up to 500 characters.	زیادہ سے زیادہ ۵۰۰ حروف میں سوال لکھیں۔	请输入不超过 500 个字符的问题。	Saisissez une question de 500 caractères au maximum.
-draft_failed	تعذّر نقل السؤال. افتح «اسأل زاد» واكتب سؤالك هناك.	The question could not be carried over. Open Ask Zad to enter it there.	سوال منتقل نہیں ہو سکا، زاد سے پوچھیں کھول کر وہاں لکھیں۔	无法转移问题，请打开 Zad 问答并在那里输入。	Le transfert de la question a échoué. Saisissez-la directement dans la rubrique Questions.
 military	زاد العسكري	Zad for service members	زاد برائے فوجی اہلکار	军人专栏	Zad pour les militaires
 military_overview	نظرة عامة	Overview	جائزہ	概览	Vue d’ensemble
 military_nav	تبويبات زاد العسكري	Service member resources	فوجی اہلکاروں کے لیے شعبے	军人专栏导航	Rubriques pour les militaires

@@ -659,6 +659,7 @@ askForm.addEventListener("submit", async event => {
 
 askButton.disabled = false;
 
+const askDraftKey = "zad-ask-draft-v1";
 try {
   const rawDraft = sessionStorage.getItem(askDraftKey);
   sessionStorage.removeItem(askDraftKey);

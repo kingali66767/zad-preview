@@ -1,4 +1,4 @@
-<section class="wrap prayer" id="prayer" aria-labelledby="prayer-heading">
+<section class="wrap prayer" id="prayer" aria-labelledby="prayer-heading" data-prayer-widget>
 <div class="prayer-head">
 <div>
 <p class="eyebrow"><span></span> {{t:saudi}}</p>
@@ -6,31 +6,15 @@
 </div>
 <form id="prayer-form">
 <label for="city">{{t:city}}
-<select id="city">
-<option value="riyadh" data-latitude="24.7136" data-longitude="46.6753">{{t:city_riyadh}}</option>
-<option value="mecca" data-latitude="21.3891" data-longitude="39.8579">{{t:city_mecca}}</option>
-<option value="medina" data-latitude="24.4539" data-longitude="39.6142">{{t:city_medina}}</option>
-<option value="jeddah" data-latitude="21.4858" data-longitude="39.1925">{{t:city_jeddah}}</option>
-<option value="dammam" data-latitude="26.4207" data-longitude="50.0888">{{t:city_dammam}}</option>
-<option value="khobar" data-latitude="26.2172" data-longitude="50.1971">{{t:city_khobar}}</option>
-<option value="taif" data-latitude="21.2703" data-longitude="40.4158">{{t:city_taif}}</option>
-<option value="buraydah" data-latitude="26.3592" data-longitude="43.9818">{{t:city_buraydah}}</option>
-<option value="hail" data-latitude="27.5114" data-longitude="41.7208">{{t:city_hail}}</option>
-<option value="tabuk" data-latitude="28.3835" data-longitude="36.5662">{{t:city_tabuk}}</option>
-<option value="abha" data-latitude="18.2164" data-longitude="42.5053">{{t:city_abha}}</option>
-<option value="jazan" data-latitude="16.8892" data-longitude="42.5511">{{t:city_jazan}}</option>
-<option value="najran" data-latitude="17.5656" data-longitude="44.2289">{{t:city_najran}}</option>
-<option value="albaha" data-latitude="20.0000" data-longitude="41.4687">{{t:city_albaha}}</option>
-<option value="sakaka" data-latitude="29.9697" data-longitude="40.2064">{{t:city_sakaka}}</option>
-<option value="arar" data-latitude="30.9753" data-longitude="41.0381">{{t:city_arar}}</option>
-<option value="hofuf" data-latitude="25.3833" data-longitude="49.5833">{{t:city_hofuf}}</option>
+<select id="city" data-prayer-city>
+{{prayer_cities}}
 </select>
 </label>
 <button class="button green" type="submit">{{t:show_times}}</button>
 </form>
 </div>
-<div class="times" id="times"></div>
-<p id="prayer-status" role="status">{{t:prayer_choose}}</p>
+<div class="times" id="times" data-prayer-times></div>
+<p id="prayer-status" data-prayer-status role="status">{{t:prayer_choose}}</p>
 <p class="time-source">{{t:reference}} <a href="https://aladhan.com/prayer-times-api">AlAdhan</a> · {{t:prayer_method}}</p>
 <details class="prayer-note">
 <summary>{{t:prayer_how}}</summary>

@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261123-1"
+REVISION = "20261123-2"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -238,12 +238,16 @@ def icon(key):
     return f'<span class="zad-icon" data-icon="{escape(key)}" aria-hidden="true"></span>'
 
 
+def render_prayer_template(name, locale):
+    return render_template(name, locale).replace("{{prayer_cities}}", render_template("prayer-cities", locale))
+
+
 def render_home(locale, border_title, categories):
     root = "" if locale == "ar" else "../"
     return "\n".join((
-        render_template("home-ask", locale),
         render_template("home-hero", locale, root, military_border_shortcut=border_title,
-                        morning_shortcut=categories["morning"]["title"], evening_shortcut=categories["evening"]["title"]),
+                        morning_shortcut=categories["morning"]["title"], evening_shortcut=categories["evening"]["title"])
+        .replace("{{home_prayer}}", render_prayer_template("home-prayer", locale)),
         render_template("home-tour", locale),
     ))
 
@@ -434,7 +438,7 @@ def render_page(slug, body, *, locale="ar", subsection_slug=None, subsection_tit
     if locale != "ar":
         scripts.append(f"locales/{locale}.js")
     scripts.append("site.js")
-    if slug == "prayer":
+    if slug in {"home", "prayer"}:
         scripts.extend(("locale-services.js", "prayer.js"))
     if slug == "ask":
         scripts.extend(ASK_SCRIPTS)
@@ -443,7 +447,7 @@ def render_page(slug, body, *, locale="ar", subsection_slug=None, subsection_tit
         attributes = f' id="ask-script" data-worker="{assets}ask-worker.js?v={REVISION}"' if name == "ask.js" else ""
         script_tags.append(f'<script{attributes} src="{assets}{name}?v={REVISION}" defer></script>')
     scripts_markup = "\n".join(script_tags)
-    capabilities = {"prayer": "connect-src https://api.aladhan.com; ", "ask": "worker-src 'self'; "}.get(slug, "")
+    capabilities = "connect-src https://api.aladhan.com; " if slug in {"home", "prayer"} else ""
     ask_connections = "https://binbaz.org.sa"
     if slug == "ask" and ASK_AGENT_ENDPOINT:
         endpoint = urlsplit(ASK_AGENT_ENDPOINT)
@@ -452,14 +456,14 @@ def render_page(slug, body, *, locale="ar", subsection_slug=None, subsection_tit
             raise ValueError("ASK_AGENT_ENDPOINT must be an HTTPS URL ending in /ask.")
         ask_connections += f" https://{endpoint.netloc}"
     if slug == "ask":
-        capabilities += f"connect-src {ask_connections}; "
+        capabilities += f"worker-src 'self'; connect-src {ask_connections}; "
         body = body.replace("{{ASK_AGENT_ENDPOINT}}", escape(ASK_AGENT_ENDPOINT, quote=True))
     header = render_header(slug, base, root, route_path, locale, subsection=bool(subsection_slug))
     if is_home:
         footer = render_template("home-footer", locale, root)
     else:
         footer = f'<footer class="section-footer"><p>{escape(labels["preview_identity"])}</p></footer>'
-    shortcut = "" if slug == "ask" else f'<a class="ask-shortcut" href="{base}ask/" aria-label="{escape(labels["ask"])}">{icon("ask")}</a>'
+    shortcut = "" if slug in {"home", "ask"} else f'<a class="ask-shortcut" href="{base}ask/" aria-label="{escape(labels["ask"])}">{icon("ask")}</a>'
     main_class = "launcher-shell" if is_home else "section-main"
     return f'''<!doctype html>
 <html lang="{locale}" dir="{direction}">
@@ -531,6 +535,8 @@ def main():
                 body = render_adhkar_index(categories, locale)
             elif slug == "military":
                 body = render_military(locale, military)
+            elif slug == "prayer":
+                body = render_prayer_template("prayer", locale)
             elif slug in TEMPLATED_SECTIONS:
                 body = render_template(slug, locale)
             else:

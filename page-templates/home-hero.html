@@ -1,5 +1,38 @@
 <section id="home" class="hero" aria-labelledby="home-heading">
 <div class="wrap hero-grid">
+<div class="hero-calendar-panel">
+<section class="daily-calendar home-date-prayer" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="{{t:calendar_unavailable}}">
+<div class="daily-calendar-head">
+<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
+<div>
+<h2 id="daily-calendar-heading" class="daily-calendar-weekday" data-calendar-weekday>{{t:today_label}}</h2>
+<p class="daily-calendar-timezone">{{t:calendar_timezone}}</p>
+</div>
+</div>
+<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
+<div class="daily-calendar-dates" data-calendar-dates hidden>
+<dl class="daily-calendar-formats">
+<div class="daily-calendar-date">
+<dt>{{t:calendar_hijri}}</dt>
+<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>{{t:calendar_hijri_unavailable}}</p></dd>
+</div>
+<div class="daily-calendar-date">
+<dt>{{t:calendar_gregorian}}</dt>
+<dd><time data-calendar-gregorian></time></dd>
+</div>
+</dl>
+</div>
+<noscript><p class="daily-calendar-status">{{t:calendar_nojs}}</p></noscript>
+{{home_prayer}}
+</section>
+<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
+<h2 id="adhkar-reminder-heading">{{t:adhkar_reminder}}</h2>
+<div class="adhkar-reminder-links">
+<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>{{t:morning_shortcut}}</a>
+<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>{{t:evening_shortcut}}</a>
+</div>
+</section>
+</div>
 <div class="hero-copy">
 <div class="hero-identity">
 <div class="hero-identity-label">
@@ -15,43 +48,12 @@
 </div>
 <p class="intro">{{t:hero_intro}}</p>
 </div>
-<div class="hero-calendar-panel">
-<section class="daily-calendar" aria-labelledby="daily-calendar-heading" data-daily-calendar data-calendar-unavailable="{{t:calendar_unavailable}}">
-<div class="daily-calendar-head">
-<span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="occasions"></span></span>
-<div>
-<h2 id="daily-calendar-heading">{{t:calendar_heading}}</h2>
-<p class="daily-calendar-timezone">{{t:calendar_timezone}}</p>
-</div>
-</div>
-<p class="daily-calendar-status" data-calendar-status role="status" hidden></p>
-<div class="daily-calendar-dates" data-calendar-dates hidden>
-<p class="daily-calendar-weekday" data-calendar-weekday></p>
-<dl class="daily-calendar-formats">
-<div class="daily-calendar-date">
-<dt>{{t:calendar_hijri}}</dt>
-<dd><time data-calendar-hijri></time><p data-calendar-hijri-fallback hidden>{{t:calendar_hijri_unavailable}}</p></dd>
-</div>
-<div class="daily-calendar-date">
-<dt>{{t:calendar_gregorian}}</dt>
-<dd><time data-calendar-gregorian></time></dd>
-</div>
-</dl>
-</div>
-<noscript><p class="daily-calendar-status">{{t:calendar_nojs}}</p></noscript>
-</section>
-<section class="adhkar-reminder" aria-labelledby="adhkar-reminder-heading">
-<h2 id="adhkar-reminder-heading">{{t:adhkar_reminder}}</h2>
-<div class="adhkar-reminder-links">
-<a href="adhkar/morning/"><span class="zad-icon" data-icon="daily" aria-hidden="true"></span>{{t:morning_shortcut}}</a>
-<a href="adhkar/evening/"><span class="zad-icon" data-icon="adhkar" aria-hidden="true"></span>{{t:evening_shortcut}}</a>
-</div>
-</section>
+<div class="hero-military-shortcuts">
 <a class="military-shortcut" href="military/">
 <img class="military-shortcut-image" src="{{root}}assets/military-portrait.webp" alt="" width="320" height="384" decoding="async">
 <span class="military-shortcut-label">{{t:military}}</span>
 </a>
-<a class="military-shortcut" href="military/southern-border/">
+<a class="military-shortcut military-shortcut-border" href="military/southern-border/">
 <img class="military-shortcut-image" src="{{root}}assets/southern-border-photo.webp" alt="" width="500" height="288" decoding="async">
 <span class="military-shortcut-label">{{t:military_border_shortcut}}</span>
 </a>
