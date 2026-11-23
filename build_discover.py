@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261122-13"
+REVISION = "20261123-1"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -238,11 +238,12 @@ def icon(key):
     return f'<span class="zad-icon" data-icon="{escape(key)}" aria-hidden="true"></span>'
 
 
-def render_home(locale, border_title):
+def render_home(locale, border_title, categories):
     root = "" if locale == "ar" else "../"
     return "\n".join((
         render_template("home-ask", locale),
-        render_template("home-hero", locale, root, military_border_shortcut=border_title),
+        render_template("home-hero", locale, root, military_border_shortcut=border_title,
+                        morning_shortcut=categories["morning"]["title"], evening_shortcut=categories["evening"]["title"]),
         render_template("home-tour", locale),
     ))
 
@@ -305,11 +306,11 @@ def render_adhkar_card(item, locale):
     quote = escape(item.get("quote", "")).replace("\n", "<br>")
     quotation = f'<blockquote class="quote" lang="ar" dir="rtl">{quote}</blockquote>' if quote else ""
     meaning = f'<p class="quote-meaning"><strong>{escape(INTERFACE[locale]["meaning"])}</strong> {escape(item["meaning"])}</p>' if item.get("meaning") else ""
+    note = f'<p>{escape(item["text"])}</p>' if item.get("text") else ""
     references = " ".join(link(href, source_caption(locale, href, label)) for label, href in item["links"])
     return f'''<article class="card adhkar-card">
 <h2>{escape(item["title"])}</h2>
-{repeat}{quotation}{meaning}
-<p>{escape(item["text"])}</p>
+{repeat}{quotation}{meaning}{note}
 <div class="references">{references}</div>
 </article>'''
 
@@ -317,10 +318,22 @@ def render_adhkar_card(item, locale):
 def render_adhkar_category(category, locale):
     cards = "\n".join(render_adhkar_card(item, locale) for item in category["items"])
     labels = INTERFACE[locale]
+    chapter = ""
+    if category.get("hisn_chapter"):
+        source = link(f"https://risala.prh.gov.sa/{locale}/content/51", labels["hisn_full_chapter"])
+        reviews = "".join(
+            f'<li>{escape(labels[f"hisn_review_{number}"])} '
+            + link(f"https://binwahaf.com/ar/audio-book-lesson/{number + 1040}/", labels["reference"])
+            + "</li>" for number in (80, 81, 89)
+        )
+        chapter = (f'<p class="section-intro">{escape(labels["hisn_context"])} {source}</p>'
+                   f'<details class="prayer-note hisn-review"><summary>{escape(labels["hisn_review_heading"])}</summary>'
+                   f'<ul>{reviews}</ul></details>')
     return f'''<section class="wrap adhkar-detail" id="adhkar-category" aria-labelledby="adhkar-heading">
 <a class="adhkar-back" href="../">{escape(labels["adhkar_all"])}</a>
 <h1 class="section-heading" id="adhkar-heading"><span class="section-icon">{icon(category["icon"])}</span>{escape(category["title"])}</h1>
 <p class="section-intro">{escape(category["intro"])}</p>
+{chapter}
 <div class="cards adhkar-cards">
 {cards}
 </div>
@@ -509,7 +522,7 @@ def main():
             outputs[docs / "assets" / "locales" / f"{locale}.js"] = (
                 '"use strict";\nconst zadLocale = ' + json.dumps(local_library, ensure_ascii=False, separators=(",", ":")) + ";\n"
             )
-        home = render_home(locale, military["southern-border"][locale]["title"])
+        home = render_home(locale, military["southern-border"][locale]["title"], categories)
         outputs[local_docs / "index.html"] = render_page("home", home, locale=locale)
         for slug in SECTIONS:
             if slug == "discover":

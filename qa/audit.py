@@ -167,12 +167,22 @@ def verify_homepage(page):
     expect(hijri).to_have_attribute("datetime", gregorian.get_attribute("datetime"))
     expect(hijri).to_be_visible()
     expect(hero.locator(".hero-image")).to_have_count(0)
+    reminder = hero.get_by_role("region", name="لا تنسَ الأذكار")
+    expect(reminder.get_by_role("link", name="أذكار الصباح")).to_have_attribute("href", "adhkar/morning/")
+    expect(reminder.get_by_role("link", name="أذكار المساء")).to_have_attribute("href", "adhkar/evening/")
     military_shortcut = hero.get_by_role("link", name="زاد العسكري", exact=True)
     border_shortcut = hero.get_by_role("link", name="المرابطون على الحد الجنوبي", exact=True)
     expect(military_shortcut).to_have_attribute("href", "military/")
     expect(border_shortcut).to_have_attribute("href", "military/southern-border/")
-    portrait = military_shortcut.locator("img")
-    assert portrait.evaluate("async image => { await image.decode(); return image.naturalWidth === 384; }")
+    portraits = hero.locator(".military-shortcut .military-shortcut-image")
+    expect(portraits).to_have_count(2)
+    assert portraits.evaluate_all("""async images => {
+        await Promise.all(images.map(image => image.decode()));
+        return images[0].naturalWidth === 320 && images[0].naturalHeight === 384 &&
+            images[0].currentSrc.endsWith('/military-portrait.webp') &&
+            images[1].naturalWidth === 500 && images[1].naturalHeight === 288 &&
+            images[1].currentSrc.endsWith('/southern-border-photo.webp');
+    }""")
     tour = page.locator("details#site-tour")
     action = tour.locator(":scope > summary")
     expect(action).to_be_visible()
@@ -180,9 +190,9 @@ def verify_homepage(page):
     expect(tour).not_to_have_attribute("open", "")
     expect(tour.locator("#site-tour-heading")).to_be_hidden()
     previous_bounds = calendar.bounding_box()
-    for following in (military_shortcut, border_shortcut, action):
+    for following in (reminder, military_shortcut, border_shortcut, action):
         bounds = following.bounding_box()
-        assert previous_bounds["y"] + previous_bounds["height"] <= bounds["y"], "The military shortcuts must follow the calendar and precede the tour"
+        assert previous_bounds["y"] + previous_bounds["height"] <= bounds["y"], "The reminder and military shortcuts must follow the calendar"
         previous_bounds = bounds
     form = page.locator("main #home-ask-form")
     field = form.locator("#home-ask-input")

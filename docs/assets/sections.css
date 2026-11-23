@@ -491,28 +491,14 @@ body[data-page="home"] .route-top #nav {
 
 .military-shortcut-image {
   display: block;
-  inline-size: clamp(86px, 9vw, 112px);
+  inline-size: clamp(100px, 11vw, 135px);
   block-size: auto;
   aspect-ratio: 1 / 1;
+  padding: 4px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--green-tint);
-  object-fit: cover;
-}
-
-.military-shortcut-symbol {
-  display: grid;
-  place-items: center;
-  inline-size: clamp(42px, 5vw, 54px);
-  block-size: clamp(42px, 5vw, 54px);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--green-tint);
-  color: var(--accent);
-}
-
-.military-shortcut-symbol .zad-icon {
-  --zad-icon-size: 1.38rem;
+  background: var(--white);
+  object-fit: contain;
 }
 
 .military-shortcut-label {
@@ -545,7 +531,8 @@ body[data-page="home"] .route-top #nav {
   color: var(--accent);
 }
 
-.daily-calendar {
+.daily-calendar,
+.adhkar-reminder {
   container-type: inline-size;
   min-inline-size: 0;
   padding: clamp(18px, 3.2vw, 46px);
@@ -636,6 +623,59 @@ body[data-page="home"] .route-top #nav {
 
 @container (max-width: 17.5rem) {
   .daily-calendar-formats { grid-template-columns: minmax(0, 1fr); }
+}
+
+.adhkar-reminder {
+  padding: clamp(14px, 2.2vw, 28px);
+}
+
+.adhkar-reminder h2 {
+  margin: 0 0 10px;
+  color: var(--brand-dark);
+  font-size: clamp(1.23rem, 2.1vw, 1.65rem);
+  line-height: 1.4;
+}
+
+.adhkar-reminder-links {
+  display: grid;
+  position: static;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.adhkar-reminder-links a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--green-tint);
+  color: var(--accent);
+  font-size: .97rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.adhkar-reminder-links a:is(:hover, :focus-visible) {
+  border-color: var(--accent);
+  background: var(--white);
+}
+
+.adhkar-reminder-links .zad-icon {
+  --zad-icon-size: 1.14rem;
+}
+
+@container (max-width: 17.5rem) {
+  .adhkar-reminder-links { grid-template-columns: minmax(0, 1fr); }
 }
 
 .hero-identity {

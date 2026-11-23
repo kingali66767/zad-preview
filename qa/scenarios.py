@@ -321,6 +321,8 @@ TRANSLATED_HEADINGS = {
     "quran/": {"en": "Quran", "ur": "قرآن کریم", "zh": "古兰经", "fr": "Coran", "ar": "القرآن الكريم"},
     "adhkar/morning/": {"en": "Morning remembrances", "ur": "صبح کے اذکار", "zh": "晨间赞念",
                         "fr": "Rappels du matin", "ar": "أذكار الصباح"},
+    "adhkar/evening/": {"en": "Evening remembrances", "ur": "شام کے اذکار", "zh": "晚间赞念",
+                        "fr": "Rappels du soir", "ar": "أذكار المساء"},
 }
 
 
@@ -357,9 +359,9 @@ def language_navigation(page, *, routes=TRANSLATED_HEADINGS):
                 if code != "ar":
                     expect(first_heading).not_to_have_text(original_entry)
                 expect(cards.first.locator('a[href^="https://"]').first).to_be_visible()
-            elif route == "adhkar/morning/":
+            elif route in ("adhkar/morning/", "adhkar/evening/"):
                 cards = page.locator("#adhkar-category article.card")
-                expect(cards).to_have_count(9)
+                expect(cards).to_have_count(20 if route == "adhkar/morning/" else 16)
                 expect(cards.first.locator('blockquote[lang="ar"][dir="rtl"]')).to_be_visible()
                 if code != "ar":
                     expect(cards.first.locator(".quote-meaning")).to_be_visible()

@@ -442,8 +442,21 @@
   "adhkar": {
     "morning": {
       "title": "Morning remembrances",
-      "intro": "Supplications and recitations for the morning.",
+      "intro": "Morning remembrances drawn from Hisn al-Muslim, with Arabic texts and repetition counts where established.",
       "items": [
+        {
+          "title": "The Throne Verse",
+          "meaning": "Allah alone deserves worship. He lives forever, sustains everything, and preserves the heavens and earth without rest or effort.",
+          "text": "",
+          "sourceTitle": "آية الكرسي"
+        },
+        {
+          "title": "Al-Ikhlas, al-Falaq, and al-Nas",
+          "text": "Recite the three surahs in the morning and evening. Abdullah ibn Khubayb’s hadith gives the number of repetitions.",
+          "repeat": "3 times for each surah",
+          "meaning": "Al-Ikhlas affirms that Allah is One, the One on whom all depend. He neither begets nor was born, and none is equal to Him. Al-Falaq asks the Lord of daybreak for protection from the evil of what He created, the darkness when it settles, those who blow on knots, and an envier when they envy. Al-Nas asks the Lord, King, and God of humankind for protection from the retreating whisperer who whispers into people’s hearts, whether from among jinn or humankind.",
+          "sourceTitle": "الإخلاص والمعوّذتان"
+        },
         {
           "title": "We have entered the morning",
           "text": "This is the morning wording given by Sheikh Ibn Baz in his fatwa. Ibn Mas‘ud’s hadith gives the opening words for the morning.",
@@ -457,24 +470,23 @@
           "sourceTitle": "اللهم بك أصبحنا"
         },
         {
-          "title": "Al-Ikhlas, al-Falaq, and al-Nas",
-          "text": "Recite the three surahs in the morning and evening. Abdullah ibn Khubayb’s hadith gives the number of repetitions.",
-          "repeat": "3 times for each surah",
-          "meaning": "Al-Ikhlas affirms that Allah is One, the One on whom all depend. He neither begets nor was born, and none is equal to Him. Al-Falaq asks the Lord of daybreak for protection from the evil of what He created, the darkness when it settles, those who blow on knots, and an envier when they envy. Al-Nas asks the Lord, King, and God of humankind for protection from the retreating whisperer who whispers into people’s hearts, whether from among jinn or humankind.",
-          "sourceTitle": "الإخلاص والمعوّذتان"
-        },
-        {
           "title": "The foremost prayer for forgiveness",
           "text": "Shaddad ibn Aws’s hadith describes the merit of saying this with conviction during the day or at night.",
           "meaning": "O Allah, You are my Lord. None is worthy of worship but You. You created me and I am Your servant. I hold to Your covenant and promise as far as I can. I seek refuge in You from the evil I have done. I acknowledge Your blessings upon me and I acknowledge my sin. Forgive me, for none forgives sins but You.",
           "sourceTitle": "سيّد الاستغفار"
         },
         {
-          "title": "In Allah’s name, with whose name nothing can harm",
-          "text": "Say this three times each morning and evening, as narrated by Uthman ibn Affan.",
+          "title": "Asking for health and protection",
+          "meaning": "Asks Allah to preserve one’s body, hearing and sight and to protect one from unbelief, poverty and punishment in the grave.",
+          "text": "",
           "repeat": "3 times",
-          "meaning": "In the name of Allah, with whose name nothing on earth or in heaven can harm. He is the All-Hearing, the All-Knowing.",
-          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+          "sourceTitle": "سؤال العافية في البدن والسمع والبصر"
+        },
+        {
+          "title": "Allah is sufficient for me",
+          "meaning": "Allah alone is sufficient for me and deserves worship. I place my trust in Him, the Lord of the mighty Throne.",
+          "text": "A Qur’anic remembrance. No count is specified here.",
+          "sourceTitle": "حسبي الله عليه توكلت"
         },
         {
           "title": "Asking for pardon and well-being",
@@ -487,6 +499,25 @@
           "text": "The Prophet taught Abu Bakr al-Siddiq to say this in the morning, in the evening, and when going to bed.",
           "meaning": "O Allah, Creator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of all things, I testify that none is worthy of worship but You. I seek refuge in You from the evil of my own self, the evil of Satan, and the association of partners with You to which he calls.",
           "sourceTitle": "الاستعاذة من شر النفس والشيطان"
+        },
+        {
+          "title": "In Allah’s name, with whose name nothing can harm",
+          "text": "Say this three times each morning and evening, as narrated by Uthman ibn Affan.",
+          "repeat": "3 times",
+          "meaning": "In the name of Allah, with whose name nothing on earth or in heaven can harm. He is the All-Hearing, the All-Knowing.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Content with Allah, Islam and Muhammad",
+          "meaning": "Accepts Allah as Lord, Islam as religion and Muhammad as prophet.",
+          "text": "A general remembrance affirming contentment with Allah as Lord, Islam as religion and Muhammad as Prophet.",
+          "sourceTitle": "رضيت بالله ربًّا"
+        },
+        {
+          "title": "Calling on the Ever-Living, the Sustainer",
+          "meaning": "Seeks help through Allah’s mercy, asking Him to set all one’s affairs right and never leave one to oneself.",
+          "text": "",
+          "sourceTitle": "يا حي يا قيوم برحمتك أستغيث"
         },
         {
           "title": "Beginning the day upon Islam",
@@ -500,24 +531,57 @@
           "repeat": "100 times",
           "meaning": "Glory and praise be to Allah.",
           "sourceTitle": "التسبيح والتحميد"
+        },
+        {
+          "title": "Morning and evening affirmation of oneness",
+          "meaning": "None deserves worship except Allah alone. Sovereignty and praise belong to Him, and He is able to do all things.",
+          "text": "Wording from Abu Ayyash’s morning and evening narration, which specifies no count in this version.",
+          "sourceTitle": "التهليل في الصباح والمساء"
+        },
+        {
+          "title": "Affirming Allah’s oneness in the daily remembrance",
+          "meaning": "Affirms that Allah has no partner in worship, that sovereignty and praise belong to Him, and that nothing is beyond His power.",
+          "text": "One hundred times during the day, as worded in the two Sahih collections.",
+          "repeat": "100 times during the day",
+          "sourceTitle": "التهليل مائة مرة"
+        },
+        {
+          "title": "Glorification beyond measure",
+          "meaning": "Glorifies Allah by the number of His creatures, in keeping with His pleasure, by the weight of His Throne and the extent of His words.",
+          "text": "",
+          "repeat": "3 times",
+          "sourceTitle": "التسبيح عدد خلق الله"
+        },
+        {
+          "title": "Beneficial knowledge, good provision and accepted deeds",
+          "meaning": "Asks Allah for knowledge that benefits, good and pure provision, and deeds that He accepts.",
+          "text": "Said after completing the dawn prayer.",
+          "sourceTitle": "سؤال العلم النافع والرزق الطيب والعمل المتقبل"
+        },
+        {
+          "title": "Asking Allah for forgiveness and turning to Him",
+          "meaning": "Asks Allah to forgive one’s sins and expresses the intention to turn back to Him in repentance.",
+          "text": "Sahih Muslim reports repentance a hundred times in a day, without fixing a particular hour in the morning.",
+          "repeat": "100 times during the day",
+          "sourceTitle": "أستغفر الله وأتوب إليه"
+        },
+        {
+          "title": "Sending blessings upon the Prophet",
+          "meaning": "Asks Allah to bless the Prophet Muhammad and grant him peace.",
+          "text": "A general prayer for blessings and peace upon the Prophet, without a fixed morning or evening count.",
+          "sourceTitle": "الصلاة والسلام على النبي ﷺ"
         }
       ]
     },
     "evening": {
       "title": "Evening remembrances",
-      "intro": "Supplications and recitations for the evening.",
+      "intro": "Evening remembrances drawn from Hisn al-Muslim, with evening wording, Arabic texts and established repetition counts.",
       "items": [
         {
-          "title": "We have entered the evening",
-          "text": "This evening supplication in the hadith of Abdullah ibn Mas‘ud asks for the good of the night and seeks refuge from its evil.",
-          "meaning": "We have entered the evening, and all dominion belongs to Allah. All praise belongs to Allah. None is worthy of worship but Allah alone, without partner. His is the dominion and the praise, and He has power over all things. My Lord, I ask You for the good of this night and what follows it, and I seek refuge in You from the evil of this night and what follows it. My Lord, I seek refuge in You from laziness and the ills of old age. My Lord, I seek refuge in You from punishment in the Fire and in the grave.",
-          "sourceTitle": "أمسينا وأمسى الملك لله"
-        },
-        {
-          "title": "O Allah, by You we enter the evening",
-          "text": "The evening wording narrated by Abu Dawud from Abu Hurayrah.",
-          "meaning": "O Allah, by You we enter the evening, by You we live and by You we die, and to You is the resurrection.",
-          "sourceTitle": "اللهم بك أمسينا"
+          "title": "The Throne Verse",
+          "meaning": "Allah alone deserves worship. He lives forever, sustains everything, and preserves the heavens and earth without rest or effort.",
+          "text": "",
+          "sourceTitle": "آية الكرسي"
         },
         {
           "title": "Al-Ikhlas, al-Falaq, and al-Nas",
@@ -527,17 +591,35 @@
           "sourceTitle": "الإخلاص والمعوّذتان"
         },
         {
+          "title": "We have entered the evening",
+          "text": "This evening supplication in the hadith of Abdullah ibn Mas‘ud asks for the good of the night and seeks refuge from its evil.",
+          "meaning": "We have entered the evening, and all dominion belongs to Allah. All praise belongs to Allah. None is worthy of worship but Allah alone, without partner. His is the dominion and the praise, and He has power over all things. My Lord, I ask You for the good of this night and what follows it, and I seek refuge in You from the evil of this night and what follows it. My Lord, I seek refuge in You from laziness and the ills of old age. My Lord, I seek refuge in You from punishment in the Fire and in the grave.",
+          "sourceTitle": "أمسينا وأمسى الملك لله"
+        },
+        {
+          "title": "O Allah, by You we enter the evening",
+          "text": "Evening wording from Al-Adab al-Mufrad.",
+          "meaning": "By You we enter the evening and the morning. By You we live and die. To You is the final return.",
+          "sourceTitle": "اللهم بك أمسينا"
+        },
+        {
           "title": "The foremost prayer for forgiveness",
           "text": "Shaddad ibn Aws’s hadith describes the merit of saying this with conviction during the day or at night.",
           "meaning": "O Allah, You are my Lord. None is worthy of worship but You. You created me and I am Your servant. I hold to Your covenant and promise as far as I can. I seek refuge in You from the evil I have done. I acknowledge Your blessings upon me and I acknowledge my sin. Forgive me, for none forgives sins but You.",
           "sourceTitle": "سيّد الاستغفار"
         },
         {
-          "title": "In Allah’s name, with whose name nothing can harm",
-          "text": "Say this three times each morning and evening, as narrated by Uthman ibn Affan.",
+          "title": "Asking for health and protection",
+          "meaning": "Asks Allah to preserve one’s body, hearing and sight and to protect one from unbelief, poverty and punishment in the grave.",
+          "text": "",
           "repeat": "3 times",
-          "meaning": "In the name of Allah, with whose name nothing on earth or in heaven can harm. He is the All-Hearing, the All-Knowing.",
-          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+          "sourceTitle": "سؤال العافية في البدن والسمع والبصر"
+        },
+        {
+          "title": "Allah is sufficient for me",
+          "meaning": "Allah alone is sufficient for me and deserves worship. I place my trust in Him, the Lord of the mighty Throne.",
+          "text": "A Qur’anic remembrance. No count is specified here.",
+          "sourceTitle": "حسبي الله عليه توكلت"
         },
         {
           "title": "Asking for pardon and well-being",
@@ -552,11 +634,23 @@
           "sourceTitle": "الاستعاذة من شر النفس والشيطان"
         },
         {
-          "title": "Seeking refuge in the perfect words of Allah",
-          "text": "Say this in the evening. The remembrance is narrated in Sahih Muslim. The three repetitions are given in al-Tirmidhi’s narration, which al-Albani graded authentic.",
+          "title": "In Allah’s name, with whose name nothing can harm",
+          "text": "Say this three times each morning and evening, as narrated by Uthman ibn Affan.",
           "repeat": "3 times",
-          "meaning": "I seek refuge in the perfect words of Allah from the evil of what He created.",
-          "sourceTitle": "التعوّذ بكلمات الله التامّات"
+          "meaning": "In the name of Allah, with whose name nothing on earth or in heaven can harm. He is the All-Hearing, the All-Knowing.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Content with Allah, Islam and Muhammad",
+          "meaning": "Accepts Allah as Lord, Islam as religion and Muhammad as prophet.",
+          "text": "A general remembrance affirming contentment with Allah as Lord, Islam as religion and Muhammad as Prophet.",
+          "sourceTitle": "رضيت بالله ربًّا"
+        },
+        {
+          "title": "Calling on the Ever-Living, the Sustainer",
+          "meaning": "Seeks help through Allah’s mercy, asking Him to set all one’s affairs right and never leave one to oneself.",
+          "text": "",
+          "sourceTitle": "يا حي يا قيوم برحمتك أستغيث"
         },
         {
           "title": "Glorifying and praising Allah",
@@ -564,6 +658,25 @@
           "repeat": "100 times",
           "meaning": "Glory and praise be to Allah.",
           "sourceTitle": "التسبيح والتحميد"
+        },
+        {
+          "title": "Morning and evening affirmation of oneness",
+          "meaning": "None deserves worship except Allah alone. Sovereignty and praise belong to Him, and He is able to do all things.",
+          "text": "Wording from Abu Ayyash’s morning and evening narration, which specifies no count in this version.",
+          "sourceTitle": "التهليل في الصباح والمساء"
+        },
+        {
+          "title": "Seeking refuge in the perfect words of Allah",
+          "text": "Say this in the evening. The remembrance is narrated in Sahih Muslim. The three repetitions are given in al-Tirmidhi’s narration, which al-Albani graded authentic.",
+          "repeat": "3 times",
+          "meaning": "I seek refuge in the perfect words of Allah from the evil of what He created.",
+          "sourceTitle": "التعوّذ بكلمات الله التامّات"
+        },
+        {
+          "title": "Sending blessings upon the Prophet",
+          "meaning": "Asks Allah to bless the Prophet Muhammad and grant him peace.",
+          "text": "A general prayer for blessings and peace upon the Prophet, without a fixed morning or evening count.",
+          "sourceTitle": "الصلاة والسلام على النبي ﷺ"
         }
       ]
     },

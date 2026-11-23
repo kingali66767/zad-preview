@@ -442,8 +442,21 @@
   "adhkar": {
     "morning": {
       "title": "Rappels du matin",
-      "intro": "Invocations et récitations à dire le matin.",
+      "intro": "Invocations du matin d’après le Hisn al-Muslim, avec le texte arabe et les répétitions établies.",
       "items": [
+        {
+          "title": "Le verset du Trône",
+          "meaning": "Dieu seul mérite l’adoration. Il vit éternellement, maintient toute chose et préserve les cieux et la terre sans sommeil ni effort.",
+          "text": "",
+          "sourceTitle": "آية الكرسي"
+        },
+        {
+          "title": "Al-Ikhlas et les deux sourates de protection",
+          "text": "Les trois sourates se récitent le matin et le soir. Le récit transmis par Abdallah ibn Khoubayb précise le nombre de récitations.",
+          "repeat": "3 fois par sourate",
+          "meaning": "Dis « Il est Dieu, l’Unique. Dieu, Celui dont tous dépendent. Il n’a pas engendré et n’a pas été engendré. Nul ne Lui est égal. »\nDis « Je cherche refuge auprès du Seigneur de l’aube contre le mal de ce qu’Il a créé, contre le mal de l’obscurité lorsqu’elle se répand, contre le mal de celles qui soufflent sur les nœuds et contre le mal de l’envieux quand il envie. »\nDis « Je cherche refuge auprès du Seigneur des humains, du Souverain des humains, du Dieu des humains, contre le mal du tentateur qui se dérobe et souffle dans les cœurs des humains, qu’il soit parmi les djinns ou les humains. »",
+          "sourceTitle": "الإخلاص والمعوّذتان"
+        },
         {
           "title": "Au matin, la souveraineté appartient à Dieu",
           "text": "Le cheikh Ibn Baz cite cette formule du matin dans son avis. Le récit transmis par Ibn Massoud indique comment commence ce rappel au matin.",
@@ -457,24 +470,23 @@
           "sourceTitle": "اللهم بك أصبحنا"
         },
         {
-          "title": "Al-Ikhlas et les deux sourates de protection",
-          "text": "Les trois sourates se récitent le matin et le soir. Le récit transmis par Abdallah ibn Khoubayb précise le nombre de récitations.",
-          "repeat": "3 fois par sourate",
-          "meaning": "Dis « Il est Dieu, l’Unique. Dieu, Celui dont tous dépendent. Il n’a pas engendré et n’a pas été engendré. Nul ne Lui est égal. »\nDis « Je cherche refuge auprès du Seigneur de l’aube contre le mal de ce qu’Il a créé, contre le mal de l’obscurité lorsqu’elle se répand, contre le mal de celles qui soufflent sur les nœuds et contre le mal de l’envieux quand il envie. »\nDis « Je cherche refuge auprès du Seigneur des humains, du Souverain des humains, du Dieu des humains, contre le mal du tentateur qui se dérobe et souffle dans les cœurs des humains, qu’il soit parmi les djinns ou les humains. »",
-          "sourceTitle": "الإخلاص والمعوّذتان"
-        },
-        {
           "title": "La meilleure demande de pardon",
           "text": "Le Prophète a exposé le mérite de dire cette formule avec conviction, de jour comme de nuit, dans le récit transmis par Chaddad ibn Aws.",
           "meaning": "Ô Dieu, Tu es mon Seigneur. Nul n’est digne d’adoration si ce n’est Toi. Tu m’as créé et je suis Ton serviteur. Je respecte autant que je le peux mon engagement envers Toi et Ta promesse. Je cherche refuge auprès de Toi contre le mal de mes actes. Je reconnais Tes bienfaits envers moi et je reconnais ma faute. Pardonne-moi, car nul autre que Toi ne pardonne les péchés.",
           "sourceTitle": "سيّد الاستغفار"
         },
         {
-          "title": "Au nom de Dieu, avec le nom duquel rien ne nuit",
-          "text": "À dire trois fois chaque matin et chaque soir, selon le hadith transmis par Othman ibn Affan.",
+          "title": "Demander la santé et la protection",
+          "meaning": "On demande à Dieu de préserver le corps, l’ouïe et la vue, et de protéger contre la mécréance, la pauvreté et le châtiment de la tombe.",
+          "text": "",
           "repeat": "3 fois",
-          "meaning": "Au nom de Dieu, avec le nom duquel rien sur terre ni dans le ciel ne peut nuire. Il est Celui qui entend et qui sait toute chose.",
-          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+          "sourceTitle": "سؤال العافية في البدن والسمع والبصر"
+        },
+        {
+          "title": "Dieu me suffit",
+          "meaning": "Dieu seul me suffit et mérite l’adoration. Je place ma confiance en Lui, le Seigneur de l’immense Trône.",
+          "text": "Rappel coranique sans nombre de répétitions indiqué ici.",
+          "sourceTitle": "حسبي الله عليه توكلت"
         },
         {
           "title": "Demander le pardon et la préservation",
@@ -487,6 +499,25 @@
           "text": "Le Prophète a enseigné cette formule à Abou Bakr al-Siddiq. Il lui a conseillé de la dire le matin, le soir et au moment de se coucher.",
           "meaning": "Ô Dieu, Créateur des cieux et de la terre, Toi qui connais l’invisible et le visible, Seigneur et Souverain de toute chose, j’atteste que nul n’est digne d’adoration si ce n’est Toi. Je cherche refuge auprès de Toi contre le mal de mon âme, contre le mal de Satan et contre l’association à Dieu à laquelle il incite.",
           "sourceTitle": "الاستعاذة من شر النفس والشيطان"
+        },
+        {
+          "title": "Au nom de Dieu, avec le nom duquel rien ne nuit",
+          "text": "À dire trois fois chaque matin et chaque soir, selon le hadith transmis par Othman ibn Affan.",
+          "repeat": "3 fois",
+          "meaning": "Au nom de Dieu, avec le nom duquel rien sur terre ni dans le ciel ne peut nuire. Il est Celui qui entend et qui sait toute chose.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Agréer Dieu, l’islam et Muhammad",
+          "meaning": "On agrée Dieu comme Seigneur, l’islam comme religion et Muhammad comme prophète.",
+          "text": "Rappel général de l’agrément d’Allah comme Seigneur, de l’islam comme religion et de Muhammad comme prophète.",
+          "sourceTitle": "رضيت بالله ربًّا"
+        },
+        {
+          "title": "Invoquer le Vivant, Celui qui subsiste par Lui-même",
+          "meaning": "On implore le secours de Dieu par Sa miséricorde, en Lui demandant d’arranger toutes ses affaires et de ne jamais nous abandonner à nous-mêmes.",
+          "text": "",
+          "sourceTitle": "يا حي يا قيوم برحمتك أستغيث"
         },
         {
           "title": "Commencer le jour dans la disposition naturelle de l’islam",
@@ -500,24 +531,57 @@
           "repeat": "100 fois",
           "meaning": "Gloire et louange à Dieu.",
           "sourceTitle": "التسبيح والتحميد"
+        },
+        {
+          "title": "Affirmer l’unicité matin et soir",
+          "meaning": "Nul ne mérite l’adoration en dehors de Dieu seul. La souveraineté et la louange Lui appartiennent, et Il est capable de toute chose.",
+          "text": "Formule d’Abou Ayyach pour le matin et le soir. Cette version ne précise aucun nombre.",
+          "sourceTitle": "التهليل في الصباح والمساء"
+        },
+        {
+          "title": "Rappeler chaque jour l’unicité de Dieu",
+          "meaning": "On affirme que Dieu n’a pas d’associé dans l’adoration, que la souveraineté et la louange Lui appartiennent et que rien n’échappe à Sa puissance.",
+          "text": "Cent fois dans la journée, conformément au texte des deux recueils authentiques.",
+          "repeat": "100 fois dans la journée",
+          "sourceTitle": "التهليل مائة مرة"
+        },
+        {
+          "title": "Glorifier Dieu sans mesure",
+          "meaning": "On glorifie Dieu autant que le nombre de Ses créatures, à la mesure de Son agrément, du poids de Son Trône et de l’étendue de Ses paroles.",
+          "text": "",
+          "repeat": "3 fois",
+          "sourceTitle": "التسبيح عدد خلق الله"
+        },
+        {
+          "title": "Un savoir utile, une subsistance bonne et des œuvres agréées",
+          "meaning": "On demande à Dieu un savoir utile, une subsistance bonne et pure, et des œuvres qu’Il agrée.",
+          "text": "À dire après avoir terminé la prière de l’aube.",
+          "sourceTitle": "سؤال العلم النافع والرزق الطيب والعمل المتقبل"
+        },
+        {
+          "title": "Demander le pardon de Dieu et se repentir",
+          "meaning": "On demande à Dieu de pardonner ses fautes et on exprime sa volonté de revenir à Lui en se repentant.",
+          "text": "Le Sahih de Muslim rapporte cent repentirs dans la journée, sans heure précise le matin.",
+          "repeat": "100 fois dans la journée",
+          "sourceTitle": "أستغفر الله وأتوب إليه"
+        },
+        {
+          "title": "Prier Dieu de bénir le Prophète",
+          "meaning": "On demande à Dieu de bénir le prophète Muhammad et de lui accorder la paix.",
+          "text": "Prière générale de bénédiction et de paix sur le Prophète, sans nombre fixé pour le matin ou le soir.",
+          "sourceTitle": "الصلاة والسلام على النبي ﷺ"
         }
       ]
     },
     "evening": {
       "title": "Rappels du soir",
-      "intro": "Invocations et récitations à dire le soir.",
+      "intro": "Invocations du soir d’après le Hisn al-Muslim, avec la formule arabe du soir et les répétitions établies.",
       "items": [
         {
-          "title": "Au soir, la souveraineté appartient à Dieu",
-          "text": "Cette invocation du soir est rapportée par Abdallah ibn Massoud. Elle demande le bien de la nuit et la protection contre son mal.",
-          "meaning": "Nous sommes entrés dans le soir, et la souveraineté appartient à Dieu. Louange à Dieu. Nul n’est digne d’adoration si ce n’est Dieu, seul, sans associé. À Lui la souveraineté et la louange, et Il est capable de toute chose. Seigneur, je Te demande le bien de cette nuit et de ce qui la suit. Je cherche refuge auprès de Toi contre le mal de cette nuit et de ce qui la suit. Seigneur, je cherche refuge auprès de Toi contre la paresse et les maux de la vieillesse. Seigneur, je cherche refuge auprès de Toi contre le châtiment du Feu et celui de la tombe.",
-          "sourceTitle": "أمسينا وأمسى الملك لله"
-        },
-        {
-          "title": "Ô Dieu, par Toi nous arrivons au soir",
-          "text": "Formule du soir transmise par Abou Hourayra dans le recueil d’Abou Daoud.",
-          "meaning": "Ô Dieu, par Toi nous arrivons au soir, par Toi nous vivons et par Toi nous mourons. C’est vers Toi que se fera la résurrection.",
-          "sourceTitle": "اللهم بك أمسينا"
+          "title": "Le verset du Trône",
+          "meaning": "Dieu seul mérite l’adoration. Il vit éternellement, maintient toute chose et préserve les cieux et la terre sans sommeil ni effort.",
+          "text": "",
+          "sourceTitle": "آية الكرسي"
         },
         {
           "title": "Al-Ikhlas et les deux sourates de protection",
@@ -527,17 +591,35 @@
           "sourceTitle": "الإخلاص والمعوّذتان"
         },
         {
+          "title": "Au soir, la souveraineté appartient à Dieu",
+          "text": "Cette invocation du soir est rapportée par Abdallah ibn Massoud. Elle demande le bien de la nuit et la protection contre son mal.",
+          "meaning": "Nous sommes entrés dans le soir, et la souveraineté appartient à Dieu. Louange à Dieu. Nul n’est digne d’adoration si ce n’est Dieu, seul, sans associé. À Lui la souveraineté et la louange, et Il est capable de toute chose. Seigneur, je Te demande le bien de cette nuit et de ce qui la suit. Je cherche refuge auprès de Toi contre le mal de cette nuit et de ce qui la suit. Seigneur, je cherche refuge auprès de Toi contre la paresse et les maux de la vieillesse. Seigneur, je cherche refuge auprès de Toi contre le châtiment du Feu et celui de la tombe.",
+          "sourceTitle": "أمسينا وأمسى الملك لله"
+        },
+        {
+          "title": "Ô Dieu, par Toi nous arrivons au soir",
+          "text": "Formule du soir dans Al-Adab al-Mufrad.",
+          "meaning": "Par Toi nous entrons dans le soir et le matin, nous vivons et nous mourons. Vers Toi est le retour.",
+          "sourceTitle": "اللهم بك أمسينا"
+        },
+        {
           "title": "La meilleure demande de pardon",
           "text": "Le Prophète a exposé le mérite de dire cette formule avec conviction, de jour comme de nuit, dans le récit transmis par Chaddad ibn Aws.",
           "meaning": "Ô Dieu, Tu es mon Seigneur. Nul n’est digne d’adoration si ce n’est Toi. Tu m’as créé et je suis Ton serviteur. Je respecte autant que je le peux mon engagement envers Toi et Ta promesse. Je cherche refuge auprès de Toi contre le mal de mes actes. Je reconnais Tes bienfaits envers moi et je reconnais ma faute. Pardonne-moi, car nul autre que Toi ne pardonne les péchés.",
           "sourceTitle": "سيّد الاستغفار"
         },
         {
-          "title": "Au nom de Dieu, avec le nom duquel rien ne nuit",
-          "text": "À dire trois fois chaque matin et chaque soir, selon le hadith transmis par Othman ibn Affan.",
+          "title": "Demander la santé et la protection",
+          "meaning": "On demande à Dieu de préserver le corps, l’ouïe et la vue, et de protéger contre la mécréance, la pauvreté et le châtiment de la tombe.",
+          "text": "",
           "repeat": "3 fois",
-          "meaning": "Au nom de Dieu, avec le nom duquel rien sur terre ni dans le ciel ne peut nuire. Il est Celui qui entend et qui sait toute chose.",
-          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+          "sourceTitle": "سؤال العافية في البدن والسمع والبصر"
+        },
+        {
+          "title": "Dieu me suffit",
+          "meaning": "Dieu seul me suffit et mérite l’adoration. Je place ma confiance en Lui, le Seigneur de l’immense Trône.",
+          "text": "Rappel coranique sans nombre de répétitions indiqué ici.",
+          "sourceTitle": "حسبي الله عليه توكلت"
         },
         {
           "title": "Demander le pardon et la préservation",
@@ -552,11 +634,23 @@
           "sourceTitle": "الاستعاذة من شر النفس والشيطان"
         },
         {
-          "title": "Chercher refuge dans les paroles parfaites de Dieu",
-          "text": "Cette formule se dit le soir. Le recueil authentique de Mouslim en rapporte la formule de base. Le récit d’al-Tirmidhi, authentifié par al-Albani, indique la répétition trois fois.",
+          "title": "Au nom de Dieu, avec le nom duquel rien ne nuit",
+          "text": "À dire trois fois chaque matin et chaque soir, selon le hadith transmis par Othman ibn Affan.",
           "repeat": "3 fois",
-          "meaning": "Je cherche refuge dans les paroles parfaites de Dieu contre le mal de ce qu’Il a créé.",
-          "sourceTitle": "التعوّذ بكلمات الله التامّات"
+          "meaning": "Au nom de Dieu, avec le nom duquel rien sur terre ni dans le ciel ne peut nuire. Il est Celui qui entend et qui sait toute chose.",
+          "sourceTitle": "بسم الله الذي لا يضرّ مع اسمه شيء"
+        },
+        {
+          "title": "Agréer Dieu, l’islam et Muhammad",
+          "meaning": "On agrée Dieu comme Seigneur, l’islam comme religion et Muhammad comme prophète.",
+          "text": "Rappel général de l’agrément d’Allah comme Seigneur, de l’islam comme religion et de Muhammad comme prophète.",
+          "sourceTitle": "رضيت بالله ربًّا"
+        },
+        {
+          "title": "Invoquer le Vivant, Celui qui subsiste par Lui-même",
+          "meaning": "On implore le secours de Dieu par Sa miséricorde, en Lui demandant d’arranger toutes ses affaires et de ne jamais nous abandonner à nous-mêmes.",
+          "text": "",
+          "sourceTitle": "يا حي يا قيوم برحمتك أستغيث"
         },
         {
           "title": "Glorifier et louer Dieu",
@@ -564,6 +658,25 @@
           "repeat": "100 fois",
           "meaning": "Gloire et louange à Dieu.",
           "sourceTitle": "التسبيح والتحميد"
+        },
+        {
+          "title": "Affirmer l’unicité matin et soir",
+          "meaning": "Nul ne mérite l’adoration en dehors de Dieu seul. La souveraineté et la louange Lui appartiennent, et Il est capable de toute chose.",
+          "text": "Formule d’Abou Ayyach pour le matin et le soir. Cette version ne précise aucun nombre.",
+          "sourceTitle": "التهليل في الصباح والمساء"
+        },
+        {
+          "title": "Chercher refuge dans les paroles parfaites de Dieu",
+          "text": "Cette formule se dit le soir. Le recueil authentique de Mouslim en rapporte la formule de base. Le récit d’al-Tirmidhi, authentifié par al-Albani, indique la répétition trois fois.",
+          "repeat": "3 fois",
+          "meaning": "Je cherche refuge dans les paroles parfaites de Dieu contre le mal de ce qu’Il a créé.",
+          "sourceTitle": "التعوّذ بكلمات الله التامّات"
+        },
+        {
+          "title": "Prier Dieu de bénir le Prophète",
+          "meaning": "On demande à Dieu de bénir le prophète Muhammad et de lui accorder la paix.",
+          "text": "Prière générale de bénédiction et de paix sur le Prophète, sans nombre fixé pour le matin ou le soir.",
+          "sourceTitle": "الصلاة والسلام على النبي ﷺ"
         }
       ]
     },
