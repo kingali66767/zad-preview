@@ -5,6 +5,11 @@
 <h1 id="prayer-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>{{t:prayer}}</h1>
 </div>
 <form id="prayer-form">
+<div class="prayer-city-search" data-city-search hidden>
+<label for="city-search">{{t:city_search}}</label>
+<input id="city-search" type="search" enterkeyhint="search" maxlength="80" aria-controls="city" autocomplete="off" placeholder="{{t:city_search_hint}}">
+<small role="status" data-empty="{{t:city_search_empty}}"></small>
+</div>
 <label for="city">{{t:city}}
 <select id="city" data-prayer-city>
 {{prayer_cities}}
@@ -21,4 +26,5 @@
 <p>{{t:prayer_details}}</p>
 </details>
 <noscript><p>{{t:prayer_nojs}}</p></noscript>
+<p class="city-directory-source">{{t:city_directory}} <a href="https://www.geonames.org/">GeoNames</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
 </section>

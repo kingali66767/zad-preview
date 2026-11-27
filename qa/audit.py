@@ -170,9 +170,10 @@ def verify_homepage(page):
     prayer = calendar.locator("#home-prayer")
     expect(prayer).to_be_visible()
     expect(prayer.locator("#home-prayer-city")).to_be_enabled()
-    assert prayer.locator("#home-prayer-city option").evaluate_all(
-        "options => options.map(option => option.value)"
-    ) == list(SAUDI_CITIES)
+    city_options = prayer.locator("#home-prayer-city option")
+    assert city_options.count() >= 4000
+    assert city_options.evaluate_all("options => options.slice(0, 17).map(option => option.value)") == list(SAUDI_CITIES)
+    expect(prayer.locator("#home-prayer-city-search")).to_be_visible()
     expect(prayer.locator('a[href="prayer/"]')).to_be_visible()
     expect(hero.locator(".hero-image")).to_have_count(0)
     reminder = hero.get_by_role("region", name="لا تنسَ الأذكار")
@@ -445,7 +446,10 @@ def browser_checks(origin, output, live):
 
         page.goto(section_address(origin, "prayer"))
         page.route("https://api.aladhan.com/**", prayer)
-        assert page.locator("#city option").evaluate_all("items => items.map(option => option.value)") == list(SAUDI_CITIES)
+        assert page.locator("#city option").count() >= 4000
+        assert page.locator("#city option").evaluate_all(
+            "items => items.slice(0, 17).map(option => option.value)"
+        ) == list(SAUDI_CITIES)
         for city in SAUDI_CITIES:
             if city == "riyadh":
                 page.locator('#prayer-form button').click()
@@ -455,11 +459,20 @@ def browser_checks(origin, output, live):
             assert calls[-1]["method"] == ["4"]
             assert calls[-1]["timezonestring"] == ["Asia/Riyadh"]
             assert calls[-1]["school"] == ["0"]
+        city_search = page.locator("#city-search")
+        city_search.fill("تَثْلِيث")
+        expect(page.locator('#city option[value="geo-101547"]')).to_have_count(1)
+        page.locator("#city").select_option("geo-101547")
+        expect(page.locator("#times strong")).to_have_count(5)
+        assert calls[-1]["latitude"] == ["19.53185"] and calls[-1]["longitude"] == ["43.51972"]
+        city_search.fill("not-a-locality-123")
+        expect(page.locator(".prayer-city-search [role=status]")).to_contain_text("لا توجد نتيجة")
+        expect(page.locator("#city")).to_have_value("geo-101547")
         state["fail"] = True
         page.locator('#prayer-form button').click()
         expect(page.locator("#prayer-status")).to_contain_text("تعذر تحميل")
         expect(page.locator("#times strong")).to_have_count(0)
-        results.append("Prayer UI: 17 Saudi cities, parameters, five times and 503 recovery (simulated provider)")
+        results.append("Prayer UI: Saudi directory, diacritic-insensitive search, Tathlith and 503 recovery (simulated provider)")
 
         worker_script = """
             self.onmessage = ({data}) => {

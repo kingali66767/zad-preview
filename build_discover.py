@@ -14,7 +14,7 @@ ARABIC_SHAHADA = (
     "وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
 )
 CONVERSION_GUIDE = "https://www.islamreligion.com/articles/204/how-to-convert-to-islam-and-become-muslim"
-REVISION = "20261127-1"
+REVISION = "20261127-2"
 # Set an HTTPS /ask endpoint only after authorizing the Responses API costs.
 ASK_AGENT_ENDPOINT = ""
 SECTIONS = {
@@ -439,7 +439,7 @@ def render_page(slug, body, *, locale="ar", subsection_slug=None, subsection_tit
         scripts.append(f"locales/{locale}.js")
     scripts.append("site.js")
     if slug in {"home", "prayer"}:
-        scripts.extend(("locale-services.js", "prayer.js"))
+        scripts.extend(("locale-services.js", "saudi-places.js", "prayer.js"))
     if slug == "ask":
         scripts.extend(ASK_SCRIPTS)
     script_tags = []

@@ -1192,3 +1192,61 @@ a.military-card {
 .launcher-shell .adhkar-reminder-links a:is(:hover, :focus-visible) {
   border-color: var(--card-glass-edge-active);
 }
+
+.route-top #nav a {
+  border: 1px solid var(--card-glass-edge);
+  background: var(--card-glass-glaze) var(--card-glass-base);
+  box-shadow: inset 0 1px 0 #fff9;
+}
+
+.route-top #nav a:is(:hover, :focus-visible, [aria-current]) {
+  border-color: var(--card-glass-edge-active);
+  background: var(--card-glass-hover) var(--green-tint);
+}
+
+.prayer-city-search {
+  display: grid;
+  gap: 4px;
+  min-inline-size: 0;
+  flex: 1 1 13rem;
+}
+
+.prayer-city-search label,
+.prayer-city-search small,
+.city-directory-source {
+  font-size: .88rem;
+}
+
+.prayer-city-search small:empty { display: none; }
+
+.prayer-city-search input {
+  min-inline-size: 0;
+  inline-size: 100%;
+  min-block-size: 44px;
+  border: 1px solid var(--card-glass-edge);
+  border-radius: 13px;
+  padding-inline: 10px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+}
+
+.prayer-head form:has(.prayer-city-search) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.home-prayer-form:has(.prayer-city-search) {
+  align-items: end;
+}
+
+.prayer-head select,
+.home-prayer-city select {
+  max-inline-size: min(100%, 15rem);
+}
+
+.city-directory-source {
+  margin: 6px 0 0;
+  color: var(--muted);
+}

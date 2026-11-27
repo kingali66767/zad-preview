@@ -60,6 +60,70 @@
     });
   }
 
+  function searchableCityName(name) {
+    return name.normalize("NFKD").replace(/\p{M}|ـ/g, "")
+      .replace(/[أإآٱ]/g, "ا").replace(/[ىيی]/g, "ي").replace(/[ةہ]/g, "ه")
+      .replace(/[’‘'`-]/g, "").toLowerCase().trim().replace(/\s+/g, " ");
+  }
+
+  function setupCityDirectory(widget, select) {
+    const search = widget.querySelector("[data-city-search]");
+    const input = search.querySelector("input");
+    const feedback = search.querySelector("small");
+    const entries = [...select.options].map(option => ({
+      option, names: [searchableCityName(option.textContent), searchableCityName(option.value)]
+    }));
+    const regions = {
+      "02": ["الباحة", "Al Bahah"], "05": ["المدينة المنورة", "Medina"],
+      "06": ["الشرقية", "Eastern Province"], "08": ["القصيم", "Al Qassim"],
+      "10": ["الرياض", "Riyadh"], "11": ["عسير", "Asir"],
+      "13": ["حائل", "Hail"], "14": ["مكة المكرمة", "Mecca"],
+      "15": ["الحدود الشمالية", "Northern Borders"], "16": ["نجران", "Najran"],
+      "17": ["جازان", "Jazan"], "19": ["تبوك", "Tabuk"], "20": ["الجوف", "Al Jawf"]
+    };
+    if (typeof zadSaudiPlaces !== "undefined") {
+      for (const [id, latin, arabic, chinese, latitude, longitude, region] of zadSaudiPlaces) {
+        const name = (locale === "ar" || locale === "ur") && arabic ? arabic :
+          locale === "zh" && chinese ? chinese : latin;
+        const area = regions[region];
+        const areaLabel = area?.[locale === "ar" || locale === "ur" ? 0 : 1];
+        const option = new Option(areaLabel ? name + " · " + areaLabel : name, "geo-" + id);
+        option.dataset.latitude = latitude;
+        option.dataset.longitude = longitude;
+        entries.push({option, names: [name, latin, arabic, chinese, ...(area || [])].map(searchableCityName)});
+      }
+      search.hidden = false;
+    }
+    const ids = new Map(entries.map(entry => [entry.option.value, entry.option]));
+
+    function show(value = select.value) {
+      const words = searchableCityName(input.value).split(" ").filter(Boolean);
+      const matches = entries.filter(({names}) =>
+        words.every(word => names.some(name => name.includes(word))));
+      const options = matches.map(({option}) => option);
+      const selected = ids.get(value);
+      if (selected && !options.includes(selected)) options.unshift(selected);
+      select.replaceChildren(...options);
+      if (selected) select.value = value;
+      feedback.textContent = matches.length ? "" : feedback.dataset.empty;
+      return matches;
+    }
+
+    input.addEventListener("input", () => show());
+    input.addEventListener("keydown", event => {
+      if (event.key !== "Enter" || event.isComposing) return;
+      event.preventDefault();
+      const matches = show();
+      if (input.value.trim() && matches.length === 1) {
+        select.value = matches[0].option.value;
+        select.dispatchEvent(new Event("change"));
+      }
+      select.focus();
+    });
+    show();
+    return {ids, show};
+  }
+
   function initializePrayer(widget) {
     const compact = widget.hasAttribute("data-prayer-compact");
     const form = widget.querySelector("form");
@@ -67,7 +131,8 @@
     const times = widget.querySelector("[data-prayer-times]");
     const status = widget.querySelector("[data-prayer-status]");
     const retry = widget.querySelector("[data-prayer-retry]");
-    const cityIds = new Set([...citySelect.options].map(option => option.value));
+    const cityDirectory = setupCityDirectory(widget, citySelect);
+    const cityIds = cityDirectory.ids;
     let currentRequest;
     let requestedDay;
 
@@ -75,7 +140,7 @@
       try {
         const saved = localStorage.getItem(cityKey);
         if (cityIds.has(saved) && saved !== citySelect.value) {
-          citySelect.value = saved;
+          cityDirectory.show(saved);
           return true;
         }
       } catch {

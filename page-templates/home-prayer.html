@@ -4,6 +4,11 @@
 <h2 id="home-prayer-heading">{{t:prayer}}</h2>
 </div>
 <form class="home-prayer-form" id="home-prayer-form">
+<div class="prayer-city-search" data-city-search hidden>
+<label for="home-prayer-city-search">{{t:city_search}}</label>
+<input id="home-prayer-city-search" type="search" enterkeyhint="search" maxlength="80" aria-controls="home-prayer-city" autocomplete="off" placeholder="{{t:city_search_hint}}">
+<small role="status" data-empty="{{t:city_search_empty}}"></small>
+</div>
 <label class="home-prayer-city" for="home-prayer-city">{{t:city}}
 <select id="home-prayer-city" data-prayer-city>
 {{prayer_cities}}
@@ -15,4 +20,5 @@
 <p class="home-prayer-status" id="home-prayer-status" data-prayer-status role="status">{{t:prayer_choose}}</p>
 <p class="home-prayer-source">{{t:prayer_method}} <a href="prayer/">{{t:prayer_how}}</a></p>
 <noscript><p class="home-prayer-status">{{t:prayer_nojs}}</p></noscript>
+<p class="city-directory-source">{{t:city_directory}} <a href="https://www.geonames.org/">GeoNames</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
 </section>

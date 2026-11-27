@@ -13,15 +13,16 @@
 <link rel="alternate" hreflang="ur" href="../../ur/prayer/">
 <link rel="alternate" hreflang="zh" href="../../zh/prayer/">
 <link rel="alternate" hreflang="fr" href="../../fr/prayer/">
-<link rel="stylesheet" href="../../assets/style.css?v=20261127-1">
-<link rel="stylesheet" href="../../assets/discover.css?v=20261127-1">
-<link rel="stylesheet" href="../../assets/section-icons.css?v=20261127-1">
-<link rel="stylesheet" href="../../assets/glass.css?v=20261127-1">
-<link rel="stylesheet" href="../../assets/sections.css?v=20261127-1">
-<script src="../../assets/locales/zh.js?v=20261127-1" defer></script>
-<script src="../../assets/site.js?v=20261127-1" defer></script>
-<script src="../../assets/locale-services.js?v=20261127-1" defer></script>
-<script src="../../assets/prayer.js?v=20261127-1" defer></script>
+<link rel="stylesheet" href="../../assets/style.css?v=20261127-2">
+<link rel="stylesheet" href="../../assets/discover.css?v=20261127-2">
+<link rel="stylesheet" href="../../assets/section-icons.css?v=20261127-2">
+<link rel="stylesheet" href="../../assets/glass.css?v=20261127-2">
+<link rel="stylesheet" href="../../assets/sections.css?v=20261127-2">
+<script src="../../assets/locales/zh.js?v=20261127-2" defer></script>
+<script src="../../assets/site.js?v=20261127-2" defer></script>
+<script src="../../assets/locale-services.js?v=20261127-2" defer></script>
+<script src="../../assets/saudi-places.js?v=20261127-2" defer></script>
+<script src="../../assets/prayer.js?v=20261127-2" defer></script>
 </head>
 <body data-page="prayer">
 <a class="skip" href="#main">跳至内容</a>
@@ -69,6 +70,11 @@
 <h1 id="prayer-heading" class="section-heading"><span class="section-icon" aria-hidden="true"><span class="zad-icon" data-icon="prayer"></span></span>礼拜时间</h1>
 </div>
 <form id="prayer-form">
+<div class="prayer-city-search" data-city-search hidden>
+<label for="city-search">搜索城市或城镇</label>
+<input id="city-search" type="search" enterkeyhint="search" maxlength="80" aria-controls="city" autocomplete="off" placeholder="例如：塔斯利斯或延布">
+<small role="status" data-empty="未找到匹配地点，请换一种拼写。"></small>
+</div>
 <label for="city">城市
 <select id="city" data-prayer-city>
 <option value="riyadh" data-latitude="24.7136" data-longitude="46.6753">利雅得</option>
@@ -83,7 +89,7 @@
 <option value="tabuk" data-latitude="28.3835" data-longitude="36.5662">塔布克</option>
 <option value="abha" data-latitude="18.2164" data-longitude="42.5053">艾卜哈</option>
 <option value="jazan" data-latitude="16.8892" data-longitude="42.5511">吉赞</option>
-<option value="najran" data-latitude="17.5656" data-longitude="44.2289">纳季兰</option>
+<option value="najran" data-latitude="17.49326" data-longitude="44.12766">纳季兰</option>
 <option value="albaha" data-latitude="20.0000" data-longitude="41.4687">巴哈</option>
 <option value="sakaka" data-latitude="29.9697" data-longitude="40.2064">塞卡卡</option>
 <option value="arar" data-latitude="30.9753" data-longitude="41.0381">阿拉尔</option>
@@ -101,6 +107,7 @@
 <p>AlAdhan 根据城市坐标和乌姆古拉计算法计算时间，晡礼按多数经学家采用的规则计算。结果可能与清真寺的时间表相差几分钟。如有差异或未找到您的城市，请查阅当地时间表。</p>
 </details>
 <noscript><p>请启用 JavaScript 查看礼拜时间。</p></noscript>
+<p class="city-directory-source">沙特地名资料 <a href="https://www.geonames.org/">GeoNames</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
 </section>
 </main>
 <footer class="section-footer"><p>Zad · 预览版</p></footer>
