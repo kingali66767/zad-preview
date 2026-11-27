@@ -1175,3 +1175,20 @@ a.military-card {
   .military-tabs { gap: 4px; padding: 5px; }
   .military-tab { padding-inline: 8px; }
 }
+
+/* A shared gold rim for framed content and its nested glass cards. */
+.launcher-shell :is(.home-date-prayer, .adhkar-reminder, .hero-identity, .hero-verse, .site-tour, .military-shortcut) {
+  border-width: 2px;
+  border-color: var(--card-glass-edge);
+}
+
+.launcher-shell :is(.daily-calendar-date, .home-prayer-times li, .adhkar-reminder-links a, .site-tour-card, .site-tour-action, .hero-identity-mark, .military-shortcut-label),
+.launcher-shell .hero-verse::before,
+.section-main :is(.military-tabs, .military-tab[aria-current], .prayer-note, .fatwa-library, .ask-optional, .ask-result, .discover-locale) {
+  border-color: var(--card-glass-edge);
+}
+
+.launcher-shell .military-shortcut:is(:hover, :focus-visible),
+.launcher-shell .adhkar-reminder-links a:is(:hover, :focus-visible) {
+  border-color: var(--card-glass-edge-active);
+}

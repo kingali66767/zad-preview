@@ -119,7 +119,7 @@
       const date = saudiDate(today);
       requestedDay = date;
       const cityAndDate = city.textContent + " · " + displayDateFormat.format(today);
-      const caption = compact ? cityAndDate : [
+      const caption = compact ? city.textContent : [
         cityAndDate, prayerMessage("method", "أم القرى"), prayerMessage("school", "العصر وفق حساب الجمهور")
       ].join(" · ");
       status.textContent = prayerMessage("loading", "جارٍ تحميل المواقيت") + " · " + caption;
@@ -151,7 +151,9 @@
             loadTimes();
             return;
           }
-          status.textContent = prayerMessage("failed", "تعذر تحميل مواقيت مطابقة للطلب. حاول مجددًا أو راجع التقويم المحلي.") + " · " + caption;
+          const message = compact ? widget.dataset.prayerFailure :
+            prayerMessage("failed", "تعذر تحميل مواقيت مطابقة للطلب. حاول مجددًا أو راجع التقويم المحلي.");
+          status.textContent = message + " · " + caption;
           if (retry) retry.hidden = false;
         }
       } finally {
