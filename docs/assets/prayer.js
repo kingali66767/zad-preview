@@ -61,7 +61,7 @@
   }
 
   function searchableCityName(name) {
-    return name.normalize("NFKD").replace(/\p{M}|ـ/g, "")
+    return name.normalize("NFKD").replace(/\p{M}|ـ/gu, "")
       .replace(/[أإآٱ]/g, "ا").replace(/[ىيی]/g, "ي").replace(/[ةہ]/g, "ه")
       .replace(/[’‘'`-]/g, "").toLowerCase().trim().replace(/\s+/g, " ");
   }

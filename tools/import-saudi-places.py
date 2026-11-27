@@ -14,6 +14,7 @@ EXISTING = {
 }
 POPULATED = re.compile(r"PPL(?:A[2345]?|C|R|L|F)?")
 ARABIC = re.compile(r"^[\u0621-\u063a\u0641-\u065f\u0670\s-]+$")
+ARABIC_NAMES = {"110250": "عفيف", "110325": "الدوادمي", "110619": "أبو عريش"}
 CHINESE = re.compile(r"^[\u3400-\u9fff]+$")
 
 
@@ -25,7 +26,7 @@ def import_places(archive):
             if country != "SA" or kind != "P" or not POPULATED.fullmatch(feature) or ident in EXISTING:
                 continue
             names = aliases.split(",")
-            ar = next((alias for alias in names if ARABIC.fullmatch(alias) and alias.strip()), "")
+            ar = ARABIC_NAMES.get(ident) or next((alias for alias in names if ARABIC.fullmatch(alias) and alias.strip()), "")
             zh = next((alias for alias in reversed(names) if CHINESE.fullmatch(alias)), "")
             populated.append([int(ident), ascii_name or name, ar, zh, float(lat), float(lon), region])
     return sorted(populated, key=lambda place: (place[1].casefold(), place[0]))
