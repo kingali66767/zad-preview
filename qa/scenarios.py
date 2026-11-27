@@ -784,7 +784,7 @@ def local_cases(suite, browser, origin):
 
         city.select_option("jeddah")
         expect(times).to_have_count(0)
-        expect(status).to_contain_text("تعذر تحميل")
+        expect(status).to_contain_text("تحميل مواقيت الصلاة")
         expect(retry).to_be_visible()
         retry.click()
         expect(times).to_have_text(list(jeddah_times.values()))
