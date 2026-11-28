@@ -143,11 +143,11 @@ def verify_homepage(page):
         return style.color === 'rgb(41, 80, 77)' && style.fontFamily.includes('IBM Plex Sans Arabic');
     }""")
     expect(headline).to_have_text("زاد منصة التوعية الدينية")
-    verse = identity.locator(".hero-verse blockquote")
+    verse = hero.locator(".hero-verse blockquote")
     expect(verse).to_have_text("﴿وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم مِّن قُوَّةٍ﴾")
     expect(verse).to_have_attribute("lang", "ar")
     expect(verse).to_have_attribute("dir", "rtl")
-    frame = identity.locator(".hero-verse")
+    frame = hero.locator(".hero-verse")
     expect(frame.locator("figcaption")).to_have_text("سورة الأنفال، الآية ٦٠")
     expect(frame.locator("a, blockquote[cite]")).to_have_count(0)
     assert frame.evaluate("""async frame => {
@@ -161,6 +161,7 @@ def verify_homepage(page):
     }""")
     calendar = page.locator(".home-date-prayer[data-daily-calendar]")
     expect(calendar).to_be_visible()
+    assert identity.bounding_box()["y"] + identity.bounding_box()["height"] <= calendar.bounding_box()["y"]
     expect(calendar.locator("[data-calendar-weekday]")).to_have_text(re.compile(r"\S"))
     gregorian = calendar.locator("[data-calendar-gregorian]")
     hijri = calendar.locator("[data-calendar-hijri]")
